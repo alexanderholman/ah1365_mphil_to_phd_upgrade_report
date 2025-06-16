@@ -1,0 +1,28 @@
+Traceback (most recent call last):
+  File "/home/alexander/anaconda3/lib/python3.12/enum.py", line 302, in __set_name__
+    enum_member = enum_class._value2member_map_[value]
+                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^
+KeyError: True
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/alexander/school/exeter/phd-physics/upgrade_report/case_studies/common/structures/interfaces/380_C308Si72_111_111_a0.090909_b0.128788_c2.188944_interface10shift5/run-mace.py", line 4, in <module>
+    from ase.io import read
+  File "/home/alexander/lib/python3.12/site-packages/ase/__init__.py", line 8, in <module>
+    import ase.parallel  # noqa
+    ^^^^^^^^^^^^^^^^^^^
+  File "/home/alexander/lib/python3.12/site-packages/ase/parallel.py", line 9, in <module>
+    import numpy as np
+  File "/home/alexander/lib/python3.12/site-packages/numpy/__init__.py", line 105, in <module>
+    from ._globals import _NoValue, _CopyMode
+  File "/home/alexander/lib/python3.12/site-packages/numpy/_globals.py", line 66, in <module>
+    class _CopyMode(enum.Enum):
+  File "/home/alexander/anaconda3/lib/python3.12/enum.py", line 596, in __new__
+    enum_class = super().__new__(metacls, cls, bases, classdict, **kwds)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/alexander/anaconda3/lib/python3.12/enum.py", line 315, in __set_name__
+    or not issubclass(enum_class, Flag)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
+Error calling __set_name__ on '_proto_member' instance 'ALWAYS' in '_CopyMode'

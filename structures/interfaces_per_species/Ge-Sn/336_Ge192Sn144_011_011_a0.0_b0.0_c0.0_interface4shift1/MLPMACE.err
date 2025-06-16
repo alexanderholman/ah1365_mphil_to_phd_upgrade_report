@@ -1,0 +1,24 @@
+Traceback (most recent call last):
+  File "/home/alexander/school/exeter/phd-physics/upgrade_report/case_studies/common/structures/interfaces/336_Ge192Sn144_011_011_a0.0_b0.0_c0.0_interface4shift1/run-mace.py", line 4, in <module>
+    from ase.io import read
+  File "/home/alexander/lib/python3.12/site-packages/ase/__init__.py", line 8, in <module>
+    import ase.parallel  # noqa
+    ^^^^^^^^^^^^^^^^^^^
+  File "/home/alexander/lib/python3.12/site-packages/ase/parallel.py", line 4, in <module>
+    import pickle
+  File "/home/alexander/anaconda3/lib/python3.12/pickle.py", line 191, in <module>
+    __all__.extend([x for x in dir() if re.match("[A-Z][A-Z0-9_]+$", x)])
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/alexander/anaconda3/lib/python3.12/re/__init__.py", line 167, in match
+    return _compile(pattern, flags).match(string)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/alexander/anaconda3/lib/python3.12/re/__init__.py", line 300, in _compile
+    if flags & T:
+       ~~~~~~^~~
+  File "/home/alexander/anaconda3/lib/python3.12/enum.py", line 1571, in __and__
+    return self.__class__(value & other_value)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/alexander/anaconda3/lib/python3.12/enum.py", line 726, in __call__
+    def __call__(cls, value, names=_not_given, *values, module=None, qualname=None, type=None, start=1, boundary=None):
+
+KeyboardInterrupt

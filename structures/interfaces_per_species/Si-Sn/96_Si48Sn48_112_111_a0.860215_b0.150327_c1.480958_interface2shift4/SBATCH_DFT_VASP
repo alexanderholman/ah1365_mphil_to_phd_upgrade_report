@@ -1,0 +1,47 @@
+#!/bin/bash
+#SBATCH -p pq
+#SBATCH -A Research_Project-T127870
+### Change for job   ### ### ### ### ###
+#SBATCH --job-name=96_Si48Sn48_112_111_a0.860215_b0.150327_c1.480958_interface2shift4DFTVasp
+#SBATCH --time=24:00:00
+#SBATCH --nodes=4
+### ### ### ### ### ### ### ### ### ###
+#SBATCH --ntasks-per-node=16
+#SBATCH -D .
+#SBATCH --export=ALL
+#SBATCH --mail-user=ah1365@exeter.ac.uk
+#SBATCH --mail-type=END
+#SBATCH --output=DFTVasp.out
+#SBATCH --error=DFTVasp.err
+### ### ### ### ### ### ### ### ### ###
+
+NNODES=$SLURM_JOB_NUM_NODES
+PPN=16
+np=$(($SLURM_JOB_NUM_NODES*16))
+export OMP_NUM_THREADS=1 # changing this breaks paralisation
+
+### ### ### ### ### ### ### ###
+
+
+module purge
+module load intel
+
+export MPI=$(($NNODES*$PPN))
+
+export WORK_DIR=`pwd`
+
+export JOB_HOSTNAME=`hostname`
+
+export JOB_TIME_START=`date -u`
+
+cd ${WORK_DIR}
+
+echo "Si Bulk DFT energetics calculations using VASP\n"
+echo "This script is running on ${JOB_HOSTNAME} in ${WORK_DIR}\n"
+echo "Job started on: ${JOB_TIME_START}\n"
+
+mpirun -genv IMPI_PIN_DOMAIN omp -envall -ppn 16 -np $np vasp_std
+
+export JOB_TIME_END=`date -u`
+
+echo "Job ended on: ${JOB_TIME_END}\n"

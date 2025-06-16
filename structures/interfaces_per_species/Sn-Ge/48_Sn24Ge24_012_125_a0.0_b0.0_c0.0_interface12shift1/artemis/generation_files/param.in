@@ -1,0 +1,49 @@
+SETTINGS
+  TASK        = 1
+  RESTART     = 0
+  STRUC1_FILE = lower.vasp  ! lower structure/interface structure
+  STRUC2_FILE = upper.vasp  ! upper structure (not used if IRESTART > 0)
+  IPRINT = -1
+  TOL_SYM = 1.D-4
+  MASTER_DIR = DINTERFACES_NO_SHIFT ! master directory name
+END SETTINGS
+
+
+INTERFACES
+  LGEN_INTERFACES = T   ! generate interfaces
+  IMATCH =  0           ! interface matching method
+  NINTF = 128          ! max number of interfaces
+  NMATCH = 16           ! max number of lattice matches
+  TOL_VEC = 5.D0        ! max vector tolerance (in percent %)
+  TOL_ANG = 2.D0        ! max angle tolerance (in degrees (°))
+  TOL_AREA = 10.D0      ! max area tolerance (in percent %)
+  TOL_MAXFIND = 16     ! max number of good fits to find per plane
+  TOL_MAXSIZE = 8      ! max increase of any lattice vector
+  NMILLER = 64          ! number of Miller planes to consider
+
+  ! LW_SLAB_THICKNESS = 6 ! thickness of lower material
+  LW_NUM_LAYERS = 6
+  ! UP_SLAB_THICKNESS = 6 ! thickness of upper material
+  UP_NUM_LAYERS = 6
+  NTERM = 32            ! max number of terminations per material per match
+
+  LAYER_SEP = 0.33
+
+  SHIFTDIR =  DSHIFT    ! shift directory name
+  ISHIFT = 0            ! shifting method
+  NSHIFT = 1            ! number of shifts to apply
+  SHIFT = 0 0 0 !(direct, direct, direct) ! shift vector
+  C_SCALE = 1.D0        ! interface-separation scaling factor
+
+  SWAPDIR =  DSWAP      ! swap directory name
+  ISWAP = 2             ! swapping method
+  NSWAP = 8             ! number of swap structures generated per interface
+  SWAP_DENSITY = 5.D-2  ! intermixing area density
+
+  LSURF_GEN      = F      ! generate surfaces of a plane
+  LPRINT_TERMS   = T      ! prints all found terminations
+  LPRINT_MATCHES = T    ! prints all found lattice matches
+
+  LW_USE_PRICEL  = F
+  UP_USE_PRICEL  = F
+END INTERFACES

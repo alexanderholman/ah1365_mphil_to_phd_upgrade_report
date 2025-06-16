@@ -1,0 +1,33 @@
+Traceback (most recent call last):
+  File "/home/alexander/school/exeter/phd-physics/upgrade_report/case_studies/common/structures/interfaces/380_Si72C308_111_111_a0.136364_b0.212121_c2.163935_interface5shift4/run-mace.py", line 4, in <module>
+    from ase.io import read
+  File "/home/alexander/lib/python3.12/site-packages/ase/__init__.py", line 8, in <module>
+    import ase.parallel  # noqa
+    ^^^^^^^^^^^^^^^^^^^
+  File "/home/alexander/lib/python3.12/site-packages/ase/parallel.py", line 4, in <module>
+    import pickle
+  File "/home/alexander/anaconda3/lib/python3.12/pickle.py", line 191, in <module>
+    __all__.extend([x for x in dir() if re.match("[A-Z][A-Z0-9_]+$", x)])
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/alexander/anaconda3/lib/python3.12/re/__init__.py", line 167, in match
+    return _compile(pattern, flags).match(string)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/alexander/anaconda3/lib/python3.12/re/__init__.py", line 307, in _compile
+    p = _compiler.compile(pattern, flags)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/alexander/anaconda3/lib/python3.12/re/_compiler.py", line 745, in compile
+    p = _parser.parse(p, flags)
+        ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/alexander/anaconda3/lib/python3.12/re/_parser.py", line 979, in parse
+    p = _parse_sub(source, state, flags & SRE_FLAG_VERBOSE, 0)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/alexander/anaconda3/lib/python3.12/re/_parser.py", line 460, in _parse_sub
+    itemsappend(_parse(source, state, verbose, nested + 1,
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/alexander/anaconda3/lib/python3.12/re/_parser.py", line 566, in _parse
+    this = sourceget()
+           ^^^^^^^^^^^
+  File "/home/alexander/anaconda3/lib/python3.12/re/_parser.py", line 261, in get
+    def get(self):
+
+KeyboardInterrupt

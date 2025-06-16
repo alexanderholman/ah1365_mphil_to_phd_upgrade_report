@@ -1,0 +1,208 @@
+Si Bulk DFT energetics calculations using VASP\n
+This script is running on comp120.cluster.local in /lustre/home/ah1365/projects/127870/upgrade_report/case_studies/common/structures/interfaces/264_Si156Sn108_001_001_a0.0_b0.0_c0.0_interface1shift1swap2\n
+Job started on: Mon  9 Jun 17:34:56 UTC 2025\n
+ running   64 mpi-ranks, on    4 nodes
+ distrk:  each k-point on   64 cores,    1 groups
+ distr:  one band on   16 cores,    4 groups
+ vasp.6.4.3 19Mar24 (build Oct 22 2024 11:23:12) complex                        
+  
+ POSCAR found type information on POSCAR SiSn
+ POSCAR found :  2 types and     264 ions
+ -----------------------------------------------------------------------------
+|                                                                             |
+|           W    W    AA    RRRRR   N    N  II  N    N   GGGG   !!!           |
+|           W    W   A  A   R    R  NN   N  II  NN   N  G    G  !!!           |
+|           W    W  A    A  R    R  N N  N  II  N N  N  G       !!!           |
+|           W WW W  AAAAAA  RRRRR   N  N N  II  N  N N  G  GGG   !            |
+|           WW  WW  A    A  R   R   N   NN  II  N   NN  G    G                |
+|           W    W  A    A  R    R  N    N  II  N    N   GGGG   !!!           |
+|                                                                             |
+|     You use a magnetic or noncollinear calculation, but did not specify     |
+|     the initial magnetic moment with the MAGMOM tag. Note that a            |
+|     default of 3.788e-3 will be used for all atoms. This ferromagnetic      |
+|     setup may break the symmetry of the crystal, in particular it may       |
+|     rule out finding an antiferromagnetic solution. Thence, we              |
+|     recommend setting the initial magnetic moment manually or verifying     |
+|     carefully that this magnetic setup is desired.                          |
+|                                                                             |
+ -----------------------------------------------------------------------------
+
+ scaLAPACK will be used
+ WARNING: PSMAXN for non-local potential too small
+ LDA part: xc-table for (Slater+PW92), standard interpolation
+ -----------------------------------------------------------------------------
+|                                                                             |
+|           W    W    AA    RRRRR   N    N  II  N    N   GGGG   !!!           |
+|           W    W   A  A   R    R  NN   N  II  NN   N  G    G  !!!           |
+|           W    W  A    A  R    R  N N  N  II  N N  N  G       !!!           |
+|           W WW W  AAAAAA  RRRRR   N  N N  II  N  N N  G  GGG   !            |
+|           WW  WW  A    A  R   R   N   NN  II  N   NN  G    G                |
+|           W    W  A    A  R    R  N    N  II  N    N   GGGG   !!!           |
+|                                                                             |
+|     The distance between some ions is very small. Please check the          |
+|     nearest-neighbor list in the OUTCAR file.                               |
+|     I HOPE YOU KNOW WHAT YOU ARE DOING!                                     |
+|                                                                             |
+ -----------------------------------------------------------------------------
+
+ -----------------------------------------------------------------------------
+|                                                                             |
+|           W    W    AA    RRRRR   N    N  II  N    N   GGGG   !!!           |
+|           W    W   A  A   R    R  NN   N  II  NN   N  G    G  !!!           |
+|           W    W  A    A  R    R  N N  N  II  N N  N  G       !!!           |
+|           W WW W  AAAAAA  RRRRR   N  N N  II  N  N N  G  GGG   !            |
+|           WW  WW  A    A  R   R   N   NN  II  N   NN  G    G                |
+|           W    W  A    A  R    R  N    N  II  N    N   GGGG   !!!           |
+|                                                                             |
+|     The number of bands has been changed from the values supplied in        |
+|     the INCAR file. This is a result of running the parallel version.       |
+|     The orbitals not found in the WAVECAR file will be initialized with     |
+|     random numbers, which is usually adequate. For correlated               |
+|     calculations, however, you should redo the groundstate calculation.     |
+|     I found NBANDS = 634. Now, NBANDS = 636.                                |
+|                                                                             |
+ -----------------------------------------------------------------------------
+
+ POSCAR, INCAR and KPOINTS ok, starting setup
+ FFT: planning ... GRIDC
+ FFT: planning ... GRID_SOFT
+ FFT: planning ... GRID
+ WAVECAR not read
+ entering main loop
+       N       E                     dE             d eps       ncg     rms          rms(c)
+DAV:   1     0.719619517732E+04    0.71962E+04   -0.47338E+05 20352   0.173E+03
+ WARNING: CNORMN: search vector ill defined
+ WARNING: CNORMN: search vector ill defined
+ WARNING: CNORMN: search vector ill defined
+ WARNING: CNORMN: search vector ill defined
+ WARNING: CNORMN: search vector ill defined
+ WARNING: CNORMN: search vector ill defined
+ WARNING: CNORMN: search vector ill defined
+ WARNING: CNORMN: search vector ill defined
+ WARNING: CNORMN: search vector ill defined
+ WARNING: CNORMN: search vector ill defined
+ WARNING: CNORMN: search vector ill defined
+ WARNING: CNORMN: search vector ill defined
+ WARNING: CNORMN: search vector ill defined
+ WARNING: CNORMN: search vector ill defined
+ WARNING: CNORMN: search vector ill defined
+ WARNING: CNORMN: search vector ill defined
+DAV:   2     0.138191908441E+04   -0.58143E+04   -0.55953E+04 24728   0.226E+02
+DAV:   3     0.631456628704E+03   -0.75046E+03   -0.71442E+03 32128   0.701E+01
+DAV:   4     0.550687052084E+03   -0.80770E+02   -0.76876E+02 30600   0.227E+01
+DAV:   5     0.545889286460E+03   -0.47978E+01   -0.46679E+01 32032   0.581E+00    0.186E+03
+DAV:   6     0.517985299964E+03   -0.27904E+02   -0.27203E+03 30840   0.692E+01    0.639E+02
+DAV:   7     0.708545713793E+03    0.19056E+03   -0.10609E+03 30140   0.405E+01    0.479E+02
+DAV:   8     0.712057348226E+03    0.35116E+01   -0.11308E+03 30164   0.610E+01    0.272E+02
+DAV:   9     0.804756426184E+03    0.92699E+02   -0.65424E+02 28952   0.339E+01    0.219E+02
+DAV:  10     0.813367810649E+03    0.86114E+01   -0.22582E+02 26832   0.203E+01    0.177E+02
+DAV:  11     0.810941034277E+03   -0.24268E+01   -0.61745E+01 29968   0.812E+00    0.116E+02
+DAV:  12     0.779357985168E+03   -0.31583E+02   -0.63406E+01 30304   0.128E+01    0.115E+02
+DAV:  13     0.801543386116E+03    0.22185E+02   -0.30340E+01 26528   0.791E+00    0.127E+02
+DAV:  14     0.809786605935E+03    0.82432E+01   -0.10467E+01 31104   0.364E+00    0.109E+02
+DAV:  15     0.810486456519E+03    0.69985E+00   -0.46441E+00 28696   0.208E+00    0.126E+02
+DAV:  16     0.808691743383E+03   -0.17947E+01   -0.31189E+00 27560   0.221E+00    0.138E+02
+DAV:  17     0.813152060214E+03    0.44603E+01   -0.28540E+01 29776   0.770E+00    0.142E+02
+DAV:  18     0.810474114137E+03   -0.26779E+01   -0.51390E+01 27848   0.521E+00    0.211E+02
+DAV:  19     0.812503695589E+03    0.20296E+01   -0.65352E+00 25152   0.276E+00    0.212E+02
+DAV:  20     0.815938442462E+03    0.34347E+01   -0.18121E+00 30232   0.170E+00    0.193E+02
+DAV:  21     0.818339558495E+03    0.24011E+01   -0.48691E+00 28824   0.187E+00    0.160E+02
+DAV:  22     0.819471457678E+03    0.11319E+01   -0.11655E+00 27960   0.119E+00    0.149E+02
+DAV:  23     0.819283635074E+03   -0.18782E+00   -0.33426E-01 26432   0.589E-01    0.137E+02
+DAV:  24     0.818788492941E+03   -0.49514E+00   -0.14744E-01 27496   0.535E-01    0.137E+02
+DAV:  25     0.820349949596E+03    0.15615E+01   -0.22963E+00 28304   0.201E+00    0.141E+02
+DAV:  26     0.822105141687E+03    0.17552E+01   -0.66492E+00 31632   0.235E+00    0.119E+02
+DAV:  27     0.821699344173E+03   -0.40580E+00   -0.31834E+00 24536   0.139E+00    0.804E+01
+DAV:  28     0.822229670744E+03    0.53033E+00   -0.56392E-01 28288   0.750E-01    0.904E+01
+DAV:  29     0.822181972867E+03   -0.47698E-01   -0.23418E-01 25096   0.347E-01    0.949E+01
+DAV:  30     0.822228620175E+03    0.46647E-01   -0.24504E-02 30536   0.157E-01    0.929E+01
+DAV:  31     0.822294712376E+03    0.66092E-01   -0.58653E-02 25784   0.228E-01    0.853E+01
+DAV:  32     0.822156233231E+03   -0.13848E+00   -0.12494E-01 27488   0.401E-01    0.771E+01
+DAV:  33     0.822146145798E+03   -0.10087E-01   -0.90160E-02 25416   0.213E-01    0.714E+01
+DAV:  34     0.821801988027E+03   -0.34416E+00   -0.14111E-01 30944   0.342E-01    0.624E+01
+DAV:  35     0.822055533696E+03    0.25355E+00   -0.67754E-02 24536   0.235E-01    0.623E+01
+DAV:  36     0.822533035513E+03    0.47750E+00   -0.47766E-01 29064   0.468E-01    0.796E+01
+DAV:  37     0.822525832021E+03   -0.72035E-02   -0.93812E-02 25072   0.256E-01    0.825E+01
+DAV:  38     0.822470798910E+03   -0.55033E-01   -0.57439E-02 26880   0.214E-01    0.750E+01
+DAV:  39     0.822566004540E+03    0.95206E-01   -0.23621E-02 24872   0.150E-01    0.749E+01
+DAV:  40     0.822496995781E+03   -0.69009E-01   -0.37495E-02 27408   0.176E-01    0.705E+01
+DAV:  41     0.822423083330E+03   -0.73912E-01   -0.74599E-02 28856   0.215E-01    0.649E+01
+DAV:  42     0.822416746350E+03   -0.63370E-02   -0.15014E-02 26872   0.107E-01    0.639E+01
+DAV:  43     0.822408029268E+03   -0.87171E-02   -0.48032E-02 27192   0.201E-01    0.608E+01
+DAV:  44     0.822481469913E+03    0.73441E-01   -0.26744E-02 27816   0.142E-01    0.634E+01
+DAV:  45     0.822696342837E+03    0.21487E+00   -0.33418E-01 26272   0.533E-01    0.541E+01
+DAV:  46     0.822683929144E+03   -0.12414E-01   -0.17138E-01 25832   0.310E-01    0.539E+01
+DAV:  47     0.822718693240E+03    0.34764E-01   -0.18794E-02 29320   0.133E-01    0.552E+01
+DAV:  48     0.822622134898E+03   -0.96558E-01   -0.40893E-02 27800   0.179E-01    0.515E+01
+DAV:  49     0.822670046839E+03    0.47912E-01   -0.13702E-02 25416   0.113E-01    0.520E+01
+DAV:  50     0.822688772655E+03    0.18726E-01   -0.70168E-03 27800   0.723E-02    0.526E+01
+DAV:  51     0.822270847392E+03   -0.41793E+00   -0.11348E+00 25704   0.103E+00    0.669E+01
+DAV:  52     0.822373904820E+03    0.10306E+00   -0.50435E-01 25192   0.650E-01    0.683E+01
+DAV:  53     0.822735594957E+03    0.36169E+00   -0.52824E-01 29504   0.545E-01    0.736E+01
+DAV:  54     0.822896887932E+03    0.16129E+00   -0.34548E-01 29768   0.437E-01    0.784E+01
+DAV:  55     0.822910839290E+03    0.13951E-01   -0.63554E-02 30464   0.217E-01    0.770E+01
+DAV:  56     0.822913650485E+03    0.28112E-02   -0.41966E-01 24568   0.667E-01    0.721E+01
+DAV:  57     0.822796505869E+03   -0.11714E+00   -0.63917E-01 28736   0.581E-01    0.939E+01
+DAV:  58     0.822753334600E+03   -0.43171E-01   -0.15843E-01 26456   0.346E-01    0.103E+02
+DAV:  59     0.822756163072E+03    0.28285E-02   -0.18634E-02 30672   0.117E-01    0.102E+02
+DAV:  60     0.822725319162E+03   -0.30844E-01   -0.59417E-03 30472   0.631E-02    0.105E+02
+DAV:  61     0.822486553950E+03   -0.23877E+00   -0.51507E-01 27544   0.816E-01    0.119E+02
+DAV:  62     0.822538587015E+03    0.52033E-01   -0.23549E-01 24196   0.570E-01    0.117E+02
+DAV:  63     0.822539994530E+03    0.14075E-02   -0.13161E-01 28296   0.302E-01    0.117E+02
+DAV:  64     0.822549011133E+03    0.90166E-02   -0.45666E-02 29976   0.192E-01    0.119E+02
+DAV:  65     0.822415407288E+03   -0.13360E+00   -0.36564E-02 27104   0.229E-01    0.121E+02
+DAV:  66     0.822851045633E+03    0.43564E+00   -0.50883E-01 28712   0.109E+00    0.106E+02
+DAV:  67     0.822828186308E+03   -0.22859E-01   -0.58700E-01 25184   0.635E-01    0.986E+01
+DAV:  68     0.822821249522E+03   -0.69368E-02   -0.20638E-01 27648   0.413E-01    0.101E+02
+DAV:  69     0.822815020139E+03   -0.62294E-02   -0.75093E-02 28792   0.238E-01    0.101E+02
+DAV:  70     0.822822989092E+03    0.79690E-02   -0.69130E-02 27512   0.257E-01    0.963E+01
+DAV:  71     0.821908141565E+03   -0.91485E+00   -0.46226E+00 25464   0.223E+00    0.102E+02
+DAV:  72     0.822216417039E+03    0.30828E+00   -0.41996E+00 25080   0.176E+00    0.938E+01
+DAV:  73     0.822303631547E+03    0.87215E-01   -0.59957E-01 31048   0.629E-01    0.964E+01
+DAV:  74     0.822119252807E+03   -0.18438E+00   -0.26382E-01 24560   0.486E-01    0.935E+01
+DAV:  75     0.822289295201E+03    0.17004E+00   -0.67634E-01 25616   0.825E-01    0.886E+01
+DAV:  76     0.821587108425E+03   -0.70219E+00   -0.25751E+00 28328   0.148E+00    0.748E+01
+DAV:  77     0.821995346670E+03    0.40824E+00   -0.86910E-01 23888   0.980E-01    0.778E+01
+DAV:  78     0.821990790893E+03   -0.45558E-02   -0.22982E-01 31488   0.403E-01    0.796E+01
+DAV:  79     0.822337520682E+03    0.34673E+00   -0.25392E-01 26264   0.592E-01    0.758E+01
+DAV:  80     0.822543548109E+03    0.20603E+00   -0.93469E-01 26896   0.956E-01    0.744E+01
+DAV:  81     0.822546253330E+03    0.27052E-02   -0.72285E-01 25616   0.909E-01    0.776E+01
+DAV:  82     0.822582277200E+03    0.36024E-01   -0.33457E-01 28120   0.519E-01    0.815E+01
+DAV:  83     0.822691423383E+03    0.10915E+00   -0.20711E-01 24560   0.460E-01    0.789E+01
+DAV:  84     0.822638069817E+03   -0.53354E-01   -0.15303E-01 25152   0.372E-01    0.827E+01
+DAV:  85     0.822624595728E+03   -0.13474E-01   -0.17332E-01 28376   0.374E-01    0.864E+01
+DAV:  86     0.822624816841E+03    0.22111E-03   -0.59554E-01 25984   0.790E-01    0.971E+01
+DAV:  87     0.822604342883E+03   -0.20474E-01   -0.21494E-01 23888   0.427E-01    0.984E+01
+DAV:  88     0.822733291825E+03    0.12895E+00   -0.21235E-01 26240   0.586E-01    0.101E+02
+DAV:  89     0.822827835823E+03    0.94544E-01   -0.29693E-01 26264   0.579E-01    0.105E+02
+DAV:  90     0.822884034141E+03    0.56198E-01   -0.23136E-01 26784   0.512E-01    0.104E+02
+DAV:  91     0.822467411972E+03   -0.41662E+00   -0.19048E+00 25800   0.152E+00    0.816E+01
+DAV:  92     0.822903569323E+03    0.43616E+00   -0.13372E+00 23800   0.135E+00    0.850E+01
+DAV:  93     0.822785552526E+03   -0.11802E+00   -0.74431E-01 28728   0.608E-01    0.883E+01
+DAV:  94     0.822768028477E+03   -0.17524E-01   -0.95980E-02 29720   0.263E-01    0.924E+01
+DAV:  95     0.822795247244E+03    0.27219E-01   -0.14691E-01 25824   0.453E-01    0.889E+01
+DAV:  96     0.822379482472E+03   -0.41576E+00   -0.14800E+00 27032   0.156E+00    0.732E+01
+DAV:  97     0.823053089354E+03    0.67361E+00   -0.11326E+00 25536   0.147E+00    0.682E+01
+DAV:  98     0.822942712893E+03   -0.11038E+00   -0.76425E-01 27584   0.722E-01    0.648E+01
+DAV:  99     0.823008440425E+03    0.65728E-01   -0.19013E-01 29240   0.442E-01    0.625E+01
+DAV: 100     0.822967797999E+03   -0.40642E-01   -0.14856E-01 25760   0.480E-01
+ -----------------------------------------------------------------------------
+|                                                                             |
+|           W    W    AA    RRRRR   N    N  II  N    N   GGGG   !!!           |
+|           W    W   A  A   R    R  NN   N  II  NN   N  G    G  !!!           |
+|           W    W  A    A  R    R  N N  N  II  N N  N  G       !!!           |
+|           W WW W  AAAAAA  RRRRR   N  N N  II  N  N N  G  GGG   !            |
+|           WW  WW  A    A  R   R   N   NN  II  N   NN  G    G                |
+|           W    W  A    A  R    R  N    N  II  N    N   GGGG   !!!           |
+|                                                                             |
+|     The electronic self-consistency was not achieved in the given           |
+|     number of steps (NELM). The forces and other quantities evaluated       |
+|     might not be reliable so examine the results carefully. If you find     |
+|     spurious results, we suggest increasing NELM, if you were close to      |
+|     convergence or switching to a different ALGO or adjusting the           |
+|     density mixing parameters otherwise.                                    |
+|                                                                             |
+ -----------------------------------------------------------------------------
+
+   1 F= 0.82296780E+03 E0= 0.82296987E+03  d E =-.415221E-02  mag=     1.0000
+Job ended on: Mon  9 Jun 23:29:42 UTC 2025\n

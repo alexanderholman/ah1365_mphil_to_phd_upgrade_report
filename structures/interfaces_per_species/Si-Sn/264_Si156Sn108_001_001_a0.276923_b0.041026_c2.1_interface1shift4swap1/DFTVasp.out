@@ -1,0 +1,85 @@
+Si Bulk DFT energetics calculations using VASP\n
+This script is running on comp069.cluster.local in /lustre/home/ah1365/projects/127870/upgrade_report/case_studies/common/structures/interfaces/264_Si156Sn108_001_001_a0.276923_b0.041026_c2.1_interface1shift4swap1\n
+Job started on: Tue 10 Jun 09:41:47 UTC 2025\n
+ running   64 mpi-ranks, on    4 nodes
+ distrk:  each k-point on   64 cores,    1 groups
+ distr:  one band on   16 cores,    4 groups
+ vasp.6.4.3 19Mar24 (build Oct 22 2024 11:23:12) complex                        
+  
+ POSCAR found type information on POSCAR SiSn
+ POSCAR found :  2 types and     264 ions
+ -----------------------------------------------------------------------------
+|                                                                             |
+|           W    W    AA    RRRRR   N    N  II  N    N   GGGG   !!!           |
+|           W    W   A  A   R    R  NN   N  II  NN   N  G    G  !!!           |
+|           W    W  A    A  R    R  N N  N  II  N N  N  G       !!!           |
+|           W WW W  AAAAAA  RRRRR   N  N N  II  N  N N  G  GGG   !            |
+|           WW  WW  A    A  R   R   N   NN  II  N   NN  G    G                |
+|           W    W  A    A  R    R  N    N  II  N    N   GGGG   !!!           |
+|                                                                             |
+|     You use a magnetic or noncollinear calculation, but did not specify     |
+|     the initial magnetic moment with the MAGMOM tag. Note that a            |
+|     default of 3.788e-3 will be used for all atoms. This ferromagnetic      |
+|     setup may break the symmetry of the crystal, in particular it may       |
+|     rule out finding an antiferromagnetic solution. Thence, we              |
+|     recommend setting the initial magnetic moment manually or verifying     |
+|     carefully that this magnetic setup is desired.                          |
+|                                                                             |
+ -----------------------------------------------------------------------------
+
+ scaLAPACK will be used
+ WARNING: PSMAXN for non-local potential too small
+ LDA part: xc-table for (Slater+PW92), standard interpolation
+ -----------------------------------------------------------------------------
+|                                                                             |
+|           W    W    AA    RRRRR   N    N  II  N    N   GGGG   !!!           |
+|           W    W   A  A   R    R  NN   N  II  NN   N  G    G  !!!           |
+|           W    W  A    A  R    R  N N  N  II  N N  N  G       !!!           |
+|           W WW W  AAAAAA  RRRRR   N  N N  II  N  N N  G  GGG   !            |
+|           WW  WW  A    A  R   R   N   NN  II  N   NN  G    G                |
+|           W    W  A    A  R    R  N    N  II  N    N   GGGG   !!!           |
+|                                                                             |
+|     The number of bands has been changed from the values supplied in        |
+|     the INCAR file. This is a result of running the parallel version.       |
+|     The orbitals not found in the WAVECAR file will be initialized with     |
+|     random numbers, which is usually adequate. For correlated               |
+|     calculations, however, you should redo the groundstate calculation.     |
+|     I found NBANDS = 634. Now, NBANDS = 636.                                |
+|                                                                             |
+ -----------------------------------------------------------------------------
+
+ POSCAR, INCAR and KPOINTS ok, starting setup
+ FFT: planning ... GRIDC
+ FFT: planning ... GRID_SOFT
+ FFT: planning ... GRID
+ WAVECAR not read
+ entering main loop
+       N       E                     dE             d eps       ncg     rms          rms(c)
+DAV:   1     0.467691724038E+04    0.46769E+04   -0.44326E+05 20352   0.167E+03
+DAV:   2    -0.573778290170E+03   -0.52507E+04   -0.50709E+04 23968   0.202E+02
+DAV:   3    -0.110573175609E+04   -0.53195E+03   -0.51382E+03 25984   0.588E+01
+DAV:   4    -0.112780992411E+04   -0.22078E+02   -0.21626E+02 24672   0.128E+01
+DAV:   5    -0.112881291812E+04   -0.10030E+01   -0.99414E+00 28784   0.272E+00    0.481E+01
+DAV:   6    -0.109837366563E+04    0.30439E+02   -0.98374E+01 31016   0.130E+01    0.223E+01
+DAV:   7    -0.109687005052E+04    0.15036E+01   -0.66370E+01 25952   0.110E+01    0.155E+01
+DAV:   8    -0.109358781672E+04    0.32822E+01   -0.14643E+01 24488   0.509E+00    0.334E+00
+DAV:   9    -0.109370785731E+04   -0.12004E+00   -0.45985E+00 25352   0.246E+00    0.275E+00
+DAV:  10    -0.109346160281E+04    0.24625E+00   -0.14227E+00 24896   0.156E+00    0.160E+00
+DAV:  11    -0.109343848127E+04    0.23122E-01   -0.33414E-01 24032   0.660E-01    0.104E+00
+DAV:  12    -0.109343946402E+04   -0.98275E-03   -0.74460E-02 23648   0.301E-01    0.699E-01
+DAV:  13    -0.109344147231E+04   -0.20083E-02   -0.40708E-02 25936   0.244E-01    0.469E-01
+DAV:  14    -0.109343711105E+04    0.43613E-02   -0.21906E-02 26376   0.186E-01    0.242E-01
+DAV:  15    -0.109343659315E+04    0.51790E-03   -0.69322E-03 23904   0.964E-02    0.103E-01
+DAV:  16    -0.109343655706E+04    0.36092E-04   -0.15941E-03 23440   0.457E-02    0.657E-02
+DAV:  17    -0.109343654716E+04    0.98985E-05   -0.41820E-04 22736   0.236E-02    0.446E-02
+DAV:  18    -0.109343656059E+04   -0.13438E-04   -0.14002E-04 23000   0.117E-02    0.210E-02
+DAV:  19    -0.109343655612E+04    0.44775E-05   -0.32776E-05 23440   0.652E-03    0.123E-02
+DAV:  20    -0.109343655596E+04    0.15588E-06   -0.10060E-05 23840   0.348E-03    0.952E-03
+DAV:  21    -0.109343655626E+04   -0.29887E-06   -0.34254E-06 25008   0.234E-03    0.563E-03
+DAV:  22    -0.109343655648E+04   -0.21733E-06   -0.16136E-06 24744   0.160E-03    0.279E-03
+DAV:  23    -0.109343655697E+04   -0.49637E-06   -0.59710E-07 22080   0.848E-04    0.192E-03
+DAV:  24    -0.109343655741E+04   -0.43201E-06   -0.23637E-07 14032   0.490E-04    0.133E-03
+DAV:  25    -0.109343655785E+04   -0.44243E-06   -0.23575E-07 15448   0.439E-04    0.105E-03
+DAV:  26    -0.109343655794E+04   -0.91684E-07   -0.98225E-08 12096   0.319E-04
+   1 F= -.10934366E+04 E0= -.10934339E+04  d E =-.538197E-02  mag=     1.0000
+Job ended on: Tue 10 Jun 11:39:11 UTC 2025\n

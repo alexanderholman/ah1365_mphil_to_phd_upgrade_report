@@ -1,0 +1,48 @@
+Failed checking if argv[0] is an import path entry
+Traceback (most recent call last):
+  File "<frozen zipimport>", line 92, in __init__
+KeyError: '/home/alexander/school/exeter/phd-physics/upgrade_report/case_studies/common/structures/interfaces/380_Si72C308_111_111_a0.098485_b0.151515_c2.163935_interface6shift6/run-mace.py'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "<frozen zipimport>", line 94, in __init__
+  File "<frozen zipimport>", line 358, in _read_directory
+KeyboardInterrupt
+Traceback (most recent call last):
+  File "/home/alexander/school/exeter/phd-physics/upgrade_report/case_studies/common/structures/interfaces/380_Si72C308_111_111_a0.098485_b0.151515_c2.163935_interface6shift6/run-mace.py", line 4, in <module>
+    from ase.io import read
+  File "/home/alexander/lib/python3.12/site-packages/ase/__init__.py", line 8, in <module>
+    import ase.parallel  # noqa
+    ^^^^^^^^^^^^^^^^^^^
+  File "/home/alexander/lib/python3.12/site-packages/ase/parallel.py", line 9, in <module>
+    import numpy as np
+  File "/home/alexander/lib/python3.12/site-packages/numpy/__init__.py", line 149, in <module>
+    from . import lib
+  File "/home/alexander/lib/python3.12/site-packages/numpy/lib/__init__.py", line 23, in <module>
+    from . import index_tricks
+  File "/home/alexander/lib/python3.12/site-packages/numpy/lib/index_tricks.py", line 12, in <module>
+    import numpy.matrixlib as matrixlib
+  File "/home/alexander/lib/python3.12/site-packages/numpy/matrixlib/__init__.py", line 4, in <module>
+    from . import defmatrix
+  File "/home/alexander/lib/python3.12/site-packages/numpy/matrixlib/defmatrix.py", line 12, in <module>
+    from numpy.linalg import matrix_power
+  File "/home/alexander/lib/python3.12/site-packages/numpy/linalg/__init__.py", line 73, in <module>
+    from . import linalg
+  File "/home/alexander/lib/python3.12/site-packages/numpy/linalg/linalg.py", line 37, in <module>
+    from numpy._typing import NDArray
+  File "/home/alexander/lib/python3.12/site-packages/numpy/_typing/__init__.py", line 164, in <module>
+    from ._dtype_like import (
+  File "/home/alexander/lib/python3.12/site-packages/numpy/_typing/_dtype_like.py", line 96, in <module>
+    _VoidDTypeLike = Union[
+                     ^^^^^^
+  File "/home/alexander/anaconda3/lib/python3.12/typing.py", line 395, in inner
+    return _caches[func](*args, **kwds)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/alexander/anaconda3/lib/python3.12/typing.py", line 517, in __getitem__
+    return self._getitem(self, parameters)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/alexander/anaconda3/lib/python3.12/typing.py", line 730, in Union
+    parameters = tuple(_type_check(p, msg) for p in parameters)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt

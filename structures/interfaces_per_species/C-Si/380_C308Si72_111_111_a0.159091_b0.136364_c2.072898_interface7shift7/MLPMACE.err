@@ -1,0 +1,31 @@
+Failed checking if argv[0] is an import path entry
+Traceback (most recent call last):
+  File "<frozen zipimport>", line 92, in __init__
+KeyError: '/home/alexander/school/exeter/phd-physics/upgrade_report/case_studies/common/structures/interfaces/380_C308Si72_111_111_a0.159091_b0.136364_c2.072898_interface7shift7/run-mace.py'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "<frozen zipimport>", line 94, in __init__
+  File "<frozen zipimport>", line 358, in _read_directory
+KeyboardInterrupt
+Traceback (most recent call last):
+  File "/home/alexander/school/exeter/phd-physics/upgrade_report/case_studies/common/structures/interfaces/380_C308Si72_111_111_a0.159091_b0.136364_c2.072898_interface7shift7/run-mace.py", line 4, in <module>
+    from ase.io import read
+  File "/home/alexander/lib/python3.12/site-packages/ase/__init__.py", line 8, in <module>
+    import ase.parallel  # noqa
+    ^^^^^^^^^^^^^^^^^^^
+  File "/home/alexander/lib/python3.12/site-packages/ase/parallel.py", line 9, in <module>
+    import numpy as np
+  File "/home/alexander/lib/python3.12/site-packages/numpy/__init__.py", line 130, in <module>
+    from numpy.__config__ import show as show_config
+  File "/home/alexander/lib/python3.12/site-packages/numpy/__config__.py", line 4, in <module>
+    from numpy.core._multiarray_umath import (
+  File "/home/alexander/lib/python3.12/site-packages/numpy/core/__init__.py", line 100, in <module>
+    from . import _add_newdocs
+  File "/home/alexander/lib/python3.12/site-packages/numpy/core/_add_newdocs.py", line 6791, in <module>
+    add_newdoc('numpy.core.numerictypes', 'generic', ('ndim',
+  File "/home/alexander/lib/python3.12/site-packages/numpy/core/function_base.py", line 543, in add_newdoc
+    new = getattr(__import__(place, globals(), {}, [obj]), obj)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt

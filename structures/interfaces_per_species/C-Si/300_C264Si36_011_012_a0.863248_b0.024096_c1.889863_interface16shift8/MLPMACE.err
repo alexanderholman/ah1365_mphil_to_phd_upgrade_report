@@ -1,0 +1,28 @@
+Traceback (most recent call last):
+  File "/home/alexander/school/exeter/phd-physics/upgrade_report/case_studies/common/structures/interfaces/300_C264Si36_011_012_a0.863248_b0.024096_c1.889863_interface16shift8/run-mace.py", line 4, in <module>
+    from ase.io import read
+  File "/home/alexander/lib/python3.12/site-packages/ase/__init__.py", line 8, in <module>
+    import ase.parallel  # noqa
+    ^^^^^^^^^^^^^^^^^^^
+  File "/home/alexander/lib/python3.12/site-packages/ase/parallel.py", line 9, in <module>
+    import numpy as np
+  File "/home/alexander/lib/python3.12/site-packages/numpy/__init__.py", line 130, in <module>
+    from numpy.__config__ import show as show_config
+  File "/home/alexander/lib/python3.12/site-packages/numpy/__config__.py", line 4, in <module>
+    from numpy.core._multiarray_umath import (
+  File "/home/alexander/lib/python3.12/site-packages/numpy/core/__init__.py", line 74, in <module>
+    from . import numeric
+  File "/home/alexander/lib/python3.12/site-packages/numpy/core/numeric.py", line 26, in <module>
+    from . import shape_base
+  File "/home/alexander/lib/python3.12/site-packages/numpy/core/shape_base.py", line 12, in <module>
+    from . import fromnumeric as _from_nx
+  File "/home/alexander/lib/python3.12/site-packages/numpy/core/fromnumeric.py", line 95, in <module>
+    @array_function_dispatch(_take_dispatcher)
+     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/alexander/lib/python3.12/site-packages/numpy/core/overrides.py", line 145, in decorator
+    verify_matching_signatures(implementation, dispatcher)
+  File "/home/alexander/lib/python3.12/site-packages/numpy/core/overrides.py", line 86, in verify_matching_signatures
+    dispatcher_spec = ArgSpec(*getargspec(dispatcher))
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<string>", line 1, in <lambda>
+KeyboardInterrupt

@@ -1,0 +1,31 @@
+Exception ignored in: <function _WeakValueDictionary.__init__.<locals>.KeyedRef.remove at 0x7fcf391ec7c0>
+Traceback (most recent call last):
+  File "<frozen importlib._bootstrap>", line 82, in remove
+KeyboardInterrupt: 
+Traceback (most recent call last):
+  File "/home/alexander/school/exeter/phd-physics/upgrade_report/case_studies/common/structures/interfaces/120_Ge48Si72_001_011_a0.0_b0.0_c0.0_interface7shift1swap4/run-mace.py", line 4, in <module>
+    from ase.io import read
+  File "/home/alexander/lib/python3.12/site-packages/ase/__init__.py", line 8, in <module>
+    import ase.parallel  # noqa
+    ^^^^^^^^^^^^^^^^^^^
+  File "/home/alexander/lib/python3.12/site-packages/ase/parallel.py", line 9, in <module>
+    import numpy as np
+  File "/home/alexander/lib/python3.12/site-packages/numpy/__init__.py", line 149, in <module>
+    from . import lib
+  File "/home/alexander/lib/python3.12/site-packages/numpy/lib/__init__.py", line 18, in <module>
+    from . import scimath as emath
+  File "/home/alexander/lib/python3.12/site-packages/numpy/lib/scimath.py", line 486, in <module>
+    @array_function_dispatch(_unary_dispatcher)
+     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/alexander/lib/python3.12/site-packages/numpy/core/overrides.py", line 145, in decorator
+    verify_matching_signatures(implementation, dispatcher)
+  File "/home/alexander/lib/python3.12/site-packages/numpy/core/overrides.py", line 86, in verify_matching_signatures
+    dispatcher_spec = ArgSpec(*getargspec(dispatcher))
+                               ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/alexander/lib/python3.12/site-packages/numpy/_utils/_inspect.py", line 108, in getargspec
+    if not isfunction(func):
+           ^^^^^^^^^^^^^^^^
+  File "/home/alexander/lib/python3.12/site-packages/numpy/_utils/_inspect.py", line 26, in isfunction
+    def isfunction(object):
+    
+KeyboardInterrupt
