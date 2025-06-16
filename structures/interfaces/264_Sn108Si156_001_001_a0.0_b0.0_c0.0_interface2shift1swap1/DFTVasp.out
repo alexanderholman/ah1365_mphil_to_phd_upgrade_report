@@ -1,0 +1,233 @@
+Si Bulk DFT energetics calculations using VASP\n
+This script is running on comp030.cluster.local in /lustre/home/ah1365/projects/127870/upgrade_report/case_studies/common/structures/interfaces/264_Sn108Si156_001_001_a0.0_b0.0_c0.0_interface2shift1swap1\n
+Job started on: Wed 11 Jun 04:41:26 UTC 2025\n
+ running   64 mpi-ranks, on    4 nodes
+ distrk:  each k-point on   64 cores,    1 groups
+ distr:  one band on   16 cores,    4 groups
+ vasp.6.4.3 19Mar24 (build Oct 22 2024 11:23:12) complex                        
+  
+ POSCAR found type information on POSCAR SnSi
+ POSCAR found :  2 types and     264 ions
+ -----------------------------------------------------------------------------
+|                                                                             |
+|           W    W    AA    RRRRR   N    N  II  N    N   GGGG   !!!           |
+|           W    W   A  A   R    R  NN   N  II  NN   N  G    G  !!!           |
+|           W    W  A    A  R    R  N N  N  II  N N  N  G       !!!           |
+|           W WW W  AAAAAA  RRRRR   N  N N  II  N  N N  G  GGG   !            |
+|           WW  WW  A    A  R   R   N   NN  II  N   NN  G    G                |
+|           W    W  A    A  R    R  N    N  II  N    N   GGGG   !!!           |
+|                                                                             |
+|     You use a magnetic or noncollinear calculation, but did not specify     |
+|     the initial magnetic moment with the MAGMOM tag. Note that a            |
+|     default of 3.788e-3 will be used for all atoms. This ferromagnetic      |
+|     setup may break the symmetry of the crystal, in particular it may       |
+|     rule out finding an antiferromagnetic solution. Thence, we              |
+|     recommend setting the initial magnetic moment manually or verifying     |
+|     carefully that this magnetic setup is desired.                          |
+|                                                                             |
+ -----------------------------------------------------------------------------
+
+ scaLAPACK will be used
+ WARNING: PSMAXN for non-local potential too small
+ LDA part: xc-table for (Slater+PW92), standard interpolation
+ -----------------------------------------------------------------------------
+|                                                                             |
+|           W    W    AA    RRRRR   N    N  II  N    N   GGGG   !!!           |
+|           W    W   A  A   R    R  NN   N  II  NN   N  G    G  !!!           |
+|           W    W  A    A  R    R  N N  N  II  N N  N  G       !!!           |
+|           W WW W  AAAAAA  RRRRR   N  N N  II  N  N N  G  GGG   !            |
+|           WW  WW  A    A  R   R   N   NN  II  N   NN  G    G                |
+|           W    W  A    A  R    R  N    N  II  N    N   GGGG   !!!           |
+|                                                                             |
+|     The distance between some ions is very small. Please check the          |
+|     nearest-neighbor list in the OUTCAR file.                               |
+|     I HOPE YOU KNOW WHAT YOU ARE DOING!                                     |
+|                                                                             |
+ -----------------------------------------------------------------------------
+
+ -----------------------------------------------------------------------------
+|                                                                             |
+|           W    W    AA    RRRRR   N    N  II  N    N   GGGG   !!!           |
+|           W    W   A  A   R    R  NN   N  II  NN   N  G    G  !!!           |
+|           W    W  A    A  R    R  N N  N  II  N N  N  G       !!!           |
+|           W WW W  AAAAAA  RRRRR   N  N N  II  N  N N  G  GGG   !            |
+|           WW  WW  A    A  R   R   N   NN  II  N   NN  G    G                |
+|           W    W  A    A  R    R  N    N  II  N    N   GGGG   !!!           |
+|                                                                             |
+|     The number of bands has been changed from the values supplied in        |
+|     the INCAR file. This is a result of running the parallel version.       |
+|     The orbitals not found in the WAVECAR file will be initialized with     |
+|     random numbers, which is usually adequate. For correlated               |
+|     calculations, however, you should redo the groundstate calculation.     |
+|     I found NBANDS = 634. Now, NBANDS = 636.                                |
+|                                                                             |
+ -----------------------------------------------------------------------------
+
+ POSCAR, INCAR and KPOINTS ok, starting setup
+ FFT: planning ... GRIDC
+ FFT: planning ... GRID_SOFT
+ FFT: planning ... GRID
+ WAVECAR not read
+ entering main loop
+       N       E                     dE             d eps       ncg     rms          rms(c)
+DAV:   1     0.638495065500E+04    0.63850E+04   -0.47377E+05 20352   0.173E+03
+ WARNING: CNORMN: search vector ill defined
+ WARNING: CNORMN: search vector ill defined
+ WARNING: CNORMN: search vector ill defined
+ WARNING: CNORMN: search vector ill defined
+ WARNING: CNORMN: search vector ill defined
+ WARNING: CNORMN: search vector ill defined
+ WARNING: CNORMN: search vector ill defined
+ WARNING: CNORMN: search vector ill defined
+ WARNING: CNORMN: search vector ill defined
+ WARNING: CNORMN: search vector ill defined
+ WARNING: CNORMN: search vector ill defined
+ WARNING: CNORMN: search vector ill defined
+ WARNING: CNORMN: search vector ill defined
+ WARNING: CNORMN: search vector ill defined
+ WARNING: CNORMN: search vector ill defined
+ WARNING: CNORMN: search vector ill defined
+ WARNING: CNORMN: search vector ill defined
+ WARNING: CNORMN: search vector ill defined
+ WARNING: CNORMN: search vector ill defined
+ WARNING: CNORMN: search vector ill defined
+ WARNING: CNORMN: search vector ill defined
+ WARNING: CNORMN: search vector ill defined
+ WARNING: CNORMN: search vector ill defined
+ WARNING: CNORMN: search vector ill defined
+ WARNING: CNORMN: search vector ill defined
+ WARNING: CNORMN: search vector ill defined
+ WARNING: CNORMN: search vector ill defined
+ WARNING: CNORMN: search vector ill defined
+ WARNING: CNORMN: search vector ill defined
+ WARNING: CNORMN: search vector ill defined
+ WARNING: CNORMN: search vector ill defined
+ WARNING: CNORMN: search vector ill defined
+ WARNING: CNORMN: search vector ill defined
+ WARNING: CNORMN: search vector ill defined
+ WARNING: CNORMN: search vector ill defined
+ WARNING: CNORMN: search vector ill defined
+ WARNING: CNORMN: search vector ill defined
+ WARNING: CNORMN: search vector ill defined
+DAV:   2     0.675113459707E+03   -0.57098E+04   -0.54672E+04 24864   0.225E+02
+DAV:   3    -0.164787886628E+03   -0.83990E+03   -0.79499E+03 33168   0.720E+01
+DAV:   4    -0.285428350703E+03   -0.12064E+03   -0.11449E+03 32056   0.255E+01
+DAV:   5    -0.292662502877E+03   -0.72342E+01   -0.69917E+01 31824   0.694E+00    0.202E+03
+DAV:   6    -0.691951350762E+03   -0.39929E+03   -0.82845E+03 30544   0.939E+01    0.909E+02
+ WARNING: CNORMN: search vector ill defined
+DAV:   7     0.348301376680E+01    0.69543E+03   -0.13958E+03 29132   0.455E+01    0.229E+02
+DAV:   8    -0.844784502511E+03   -0.84827E+03   -0.61389E+03 32692   0.966E+01    0.505E+02
+DAV:   9     0.142082283100E+03    0.98687E+03   -0.20238E+03 28728   0.685E+01    0.286E+02
+DAV:  10     0.868841685430E+02   -0.55198E+02   -0.10282E+03 29568   0.250E+01    0.221E+02
+DAV:  11     0.474389255459E+02   -0.39445E+02   -0.16750E+02 32184   0.133E+01    0.181E+02
+DAV:  12     0.327145663737E+02   -0.14724E+02   -0.75270E+01 29584   0.606E+00    0.293E+02
+DAV:  13     0.503202285888E+02    0.17606E+02   -0.54544E+01 30712   0.668E+00    0.245E+02
+DAV:  14     0.648509863594E+02    0.14531E+02   -0.34556E+01 26752   0.826E+00    0.227E+02
+DAV:  15     0.707741046998E+02    0.59231E+01   -0.66852E+01 31136   0.103E+01    0.187E+02
+DAV:  16     0.817023523664E+02    0.10928E+02   -0.40767E+01 25844   0.659E+00    0.179E+02
+DAV:  17     0.803864450869E+02   -0.13159E+01   -0.15984E+01 24216   0.539E+00    0.165E+02
+DAV:  18     0.782838577073E+02   -0.21026E+01   -0.15209E+01 24920   0.387E+00    0.187E+02
+DAV:  19     0.678301156061E+02   -0.10454E+02   -0.98487E+00 27552   0.432E+00    0.163E+02
+DAV:  20     0.419394662860E+02   -0.25891E+02   -0.65257E+01 32504   0.904E+00    0.189E+02
+DAV:  21     0.610807058759E+02    0.19141E+02   -0.42846E+01 27304   0.840E+00    0.311E+02
+DAV:  22     0.661330443639E+02    0.50523E+01   -0.20552E+01 29764   0.360E+00    0.316E+02
+DAV:  23     0.652293292010E+02   -0.90372E+00   -0.56545E+00 30272   0.169E+00    0.348E+02
+DAV:  24     0.662440518306E+02    0.10147E+01   -0.76321E-01 28344   0.819E-01    0.343E+02
+DAV:  25     0.659575919648E+02   -0.28646E+00   -0.44606E-01 26680   0.425E-01    0.341E+02
+DAV:  26     0.701285203115E+02    0.41709E+01   -0.34465E+00 31272   0.160E+00    0.330E+02
+DAV:  27     0.785050604605E+02    0.83765E+01   -0.45717E+00 29008   0.287E+00    0.289E+02
+DAV:  28     0.744867389600E+02   -0.40183E+01   -0.72402E+00 25880   0.183E+00    0.240E+02
+DAV:  29     0.837348941186E+02    0.92482E+01   -0.76164E+00 32736   0.340E+00    0.201E+02
+DAV:  30     0.918915333791E+02    0.81566E+01   -0.24154E+01 30136   0.383E+00    0.141E+02
+DAV:  31     0.875576042423E+02   -0.43339E+01   -0.22091E+01 32112   0.479E+00    0.966E+01
+DAV:  32     0.877596047491E+02    0.20200E+00   -0.12664E+01 24096   0.385E+00    0.135E+02
+DAV:  33     0.816631169736E+02   -0.60965E+01   -0.14218E+01 31384   0.238E+00    0.126E+02
+DAV:  34     0.793173653360E+02   -0.23458E+01   -0.60863E+00 28040   0.178E+00    0.931E+01
+DAV:  35     0.791728592401E+02   -0.14451E+00   -0.85661E-01 29088   0.755E-01    0.911E+01
+DAV:  36     0.780167930742E+02   -0.11561E+01   -0.69595E-01 29432   0.846E-01    0.971E+01
+DAV:  37     0.773693025364E+02   -0.64749E+00   -0.10152E+00 31504   0.725E-01    0.933E+01
+DAV:  38     0.748585179845E+02   -0.25108E+01   -0.54171E-01 33712   0.752E-01    0.855E+01
+DAV:  39     0.790622797363E+02    0.42038E+01   -0.41016E-01 30648   0.897E-01    0.895E+01
+DAV:  40     0.828444565165E+02    0.37822E+01   -0.31910E+00 32576   0.130E+00    0.128E+02
+DAV:  41     0.829002305291E+02    0.55774E-01   -0.19695E+00 29384   0.115E+00    0.160E+02
+DAV:  42     0.840480889559E+02    0.11479E+01   -0.59617E-01 29872   0.636E-01    0.169E+02
+DAV:  43     0.841556878115E+02    0.10760E+00   -0.33320E-01 26720   0.530E-01    0.174E+02
+DAV:  44     0.839354875617E+02   -0.22020E+00   -0.15463E-01 28956   0.336E-01    0.177E+02
+DAV:  45     0.835919428131E+02   -0.34354E+00   -0.12495E-01 31256   0.309E-01    0.175E+02
+DAV:  46     0.839604904788E+02    0.36855E+00   -0.49897E-01 28328   0.659E-01    0.177E+02
+DAV:  47     0.860063282271E+02    0.20458E+01   -0.49212E-01 28808   0.671E-01    0.185E+02
+DAV:  48     0.854545519297E+02   -0.55178E+00   -0.21193E-01 26792   0.376E-01    0.189E+02
+DAV:  49     0.869197234453E+02    0.14652E+01   -0.27853E-01 28344   0.502E-01    0.207E+02
+DAV:  50     0.884951097037E+02    0.15754E+01   -0.72138E-01 32336   0.583E-01    0.243E+02
+DAV:  51     0.991558230263E+02    0.10661E+02   -0.22794E+02 27380   0.143E+01    0.643E+02
+DAV:  52     0.873836281689E+02   -0.11772E+02   -0.74347E+01 26904   0.717E+00    0.874E+02
+ WARNING: CNORMN: search vector ill defined
+DAV:  53     0.864333995459E+02   -0.95023E+00   -0.74051E+00 34280   0.220E+00    0.888E+02
+DAV:  54     0.860948929760E+02   -0.33851E+00   -0.38174E-01 30824   0.531E-01    0.891E+02
+DAV:  55     0.864815545804E+02    0.38666E+00   -0.31980E-01 29944   0.585E-01    0.890E+02
+DAV:  56     0.174142344883E+02   -0.69067E+02   -0.66456E+01 27872   0.695E+00    0.104E+03
+DAV:  57    -0.604457168088E+01   -0.23459E+02   -0.19074E+01 23760   0.459E+00    0.116E+03
+DAV:  58    -0.128856184879E+02   -0.68410E+01   -0.47861E+00 30864   0.191E+00    0.120E+03
+DAV:  59    -0.211497413659E+02   -0.82641E+01   -0.14932E+00 24928   0.131E+00    0.121E+03
+DAV:  60    -0.315697576148E+02   -0.10420E+02   -0.35530E+00 25888   0.204E+00    0.118E+03
+DAV:  61    -0.485351961618E+02   -0.16965E+02   -0.79700E+00 27624   0.281E+00    0.111E+03
+DAV:  62    -0.541662437022E+02   -0.56310E+01   -0.37443E+00 27360   0.174E+00    0.111E+03
+DAV:  63    -0.480992780041E+02    0.60670E+01   -0.14418E+00 29200   0.114E+00    0.109E+03
+DAV:  64    -0.463052981077E+02    0.17940E+01   -0.69540E-01 25664   0.903E-01    0.109E+03
+DAV:  65    -0.419234974047E+02    0.43818E+01   -0.50416E-01 28328   0.725E-01    0.108E+03
+DAV:  66     0.982750102800E+02    0.14020E+03   -0.20566E+02 31088   0.116E+01    0.380E+02
+DAV:  67     0.970220285478E+02   -0.12530E+01   -0.24362E+02 30944   0.106E+01    0.349E+02
+DAV:  68     0.449529174790E+02   -0.52069E+02   -0.36435E+02 31940   0.163E+01    0.461E+02
+DAV:  69     0.246335421588E+02   -0.20319E+02   -0.12945E+02 31472   0.932E+00    0.711E+02
+DAV:  70     0.204518116627E+02   -0.41817E+01   -0.13975E+01 31872   0.316E+00    0.801E+02
+DAV:  71     0.966373699041E+01   -0.10788E+02   -0.33767E+01 27056   0.813E+00    0.921E+02
+DAV:  72    -0.301131810063E+01   -0.12675E+02   -0.25096E+01 27584   0.491E+00    0.988E+02
+DAV:  73     0.131762881791E+02    0.16188E+02   -0.20670E+01 27248   0.750E+00    0.946E+02
+DAV:  74     0.210699856458E+02    0.78937E+01   -0.24865E+01 24880   0.452E+00    0.971E+02
+DAV:  75     0.206767281317E+02   -0.39326E+00   -0.67299E+00 28208   0.230E+00    0.946E+02
+DAV:  76     0.556116970804E+02    0.34935E+02   -0.99210E+01 26872   0.104E+01    0.799E+02
+DAV:  77     0.626854781159E+02    0.70738E+01   -0.28818E+01 22308   0.691E+00    0.579E+02
+DAV:  78     0.666939432867E+02    0.40085E+01   -0.25793E+01 27904   0.526E+00    0.570E+02
+DAV:  79     0.690116757984E+02    0.23177E+01   -0.19017E+01 30976   0.376E+00    0.460E+02
+DAV:  80     0.688835409028E+02   -0.12813E+00   -0.34642E+00 30200   0.176E+00    0.436E+02
+DAV:  81     0.346056400402E+02   -0.34278E+02   -0.41725E+01 27880   0.808E+00    0.353E+02
+DAV:  82     0.288444871792E+02   -0.57612E+01   -0.32301E+01 25936   0.489E+00    0.412E+02
+DAV:  83     0.142058018537E+00   -0.28702E+02   -0.95398E+00 28536   0.479E+00    0.465E+02
+DAV:  84    -0.846176329532E+01   -0.86038E+01   -0.11067E+01 28984   0.313E+00    0.535E+02
+DAV:  85     0.151712121473E+02    0.23633E+02   -0.61564E+00 29232   0.321E+00    0.547E+02
+DAV:  86     0.548709659382E+02    0.39700E+02   -0.49423E+01 28224   0.754E+00    0.501E+02
+DAV:  87     0.636101170406E+02    0.87392E+01   -0.37585E+01 26976   0.692E+00    0.478E+02
+DAV:  88     0.627757198158E+02   -0.83440E+00   -0.15990E+01 26496   0.375E+00    0.419E+02
+DAV:  89     0.712587353514E+02    0.84830E+01   -0.15541E+01 29200   0.401E+00    0.388E+02
+DAV:  90     0.852134178650E+02    0.13955E+02   -0.25441E+01 29288   0.528E+00    0.347E+02
+DAV:  91     0.874571512744E+02    0.22437E+01   -0.31428E+01 29720   0.520E+00    0.366E+02
+DAV:  92     0.954386325580E+02    0.79815E+01   -0.26111E+01 27496   0.593E+00    0.390E+02
+DAV:  93     0.990337059632E+02    0.35951E+01   -0.17379E+01 28616   0.363E+00    0.400E+02
+DAV:  94     0.992677554065E+02    0.23405E+00   -0.32404E+00 31824   0.150E+00    0.412E+02
+DAV:  95     0.992618677011E+02   -0.58877E-02   -0.25455E-01 34432   0.438E-01    0.410E+02
+DAV:  96     0.357713982379E+02   -0.63490E+02   -0.18907E+02 31752   0.127E+01    0.337E+02
+DAV:  97     0.321899081729E+02   -0.35815E+01   -0.93887E+01 26804   0.818E+00    0.359E+02
+ WARNING: CNORMN: search vector ill defined
+DAV:  98     0.340411846336E+02    0.18513E+01   -0.16919E+01 31160   0.345E+00    0.392E+02
+DAV:  99     0.419267157344E+02    0.78855E+01   -0.12988E+01 27248   0.438E+00    0.360E+02
+DAV: 100     0.471856056194E+02    0.52589E+01   -0.18242E+01 24200   0.453E+00
+ -----------------------------------------------------------------------------
+|                                                                             |
+|           W    W    AA    RRRRR   N    N  II  N    N   GGGG   !!!           |
+|           W    W   A  A   R    R  NN   N  II  NN   N  G    G  !!!           |
+|           W    W  A    A  R    R  N N  N  II  N N  N  G       !!!           |
+|           W WW W  AAAAAA  RRRRR   N  N N  II  N  N N  G  GGG   !            |
+|           WW  WW  A    A  R   R   N   NN  II  N   NN  G    G                |
+|           W    W  A    A  R    R  N    N  II  N    N   GGGG   !!!           |
+|                                                                             |
+|     The electronic self-consistency was not achieved in the given           |
+|     number of steps (NELM). The forces and other quantities evaluated       |
+|     might not be reliable so examine the results carefully. If you find     |
+|     spurious results, we suggest increasing NELM, if you were close to      |
+|     convergence or switching to a different ALGO or adjusting the           |
+|     density mixing parameters otherwise.                                    |
+|                                                                             |
+ -----------------------------------------------------------------------------
+
+   1 F= 0.47185606E+02 E0= 0.47187311E+02  d E =-.341081E-02  mag=     1.0000
+Job ended on: Wed 11 Jun 10:50:45 UTC 2025\n

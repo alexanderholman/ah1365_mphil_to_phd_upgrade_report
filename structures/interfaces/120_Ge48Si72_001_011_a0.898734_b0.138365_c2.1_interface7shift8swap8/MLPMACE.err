@@ -1,0 +1,32 @@
+Traceback (most recent call last):
+  File "<frozen importlib._bootstrap_external>", line 1485, in _path_importer_cache
+KeyError: '/home/alexander/lib/python3.12/site-packages/numpy/core'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/alexander/school/exeter/phd-physics/upgrade_report/case_studies/common/structures/interfaces/120_Ge48Si72_001_011_a0.898734_b0.138365_c2.1_interface7shift8swap8/run-mace.py", line 4, in <module>
+    from ase.io import read
+  File "/home/alexander/lib/python3.12/site-packages/ase/__init__.py", line 8, in <module>
+    import ase.parallel  # noqa
+    ^^^^^^^^^^^^^^^^^^^
+  File "/home/alexander/lib/python3.12/site-packages/ase/parallel.py", line 9, in <module>
+    import numpy as np
+  File "/home/alexander/lib/python3.12/site-packages/numpy/__init__.py", line 130, in <module>
+    from numpy.__config__ import show as show_config
+  File "/home/alexander/lib/python3.12/site-packages/numpy/__config__.py", line 4, in <module>
+    from numpy.core._multiarray_umath import (
+  File "/home/alexander/lib/python3.12/site-packages/numpy/core/__init__.py", line 24, in <module>
+    from . import multiarray
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1322, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 1262, in _find_spec
+  File "<frozen importlib._bootstrap_external>", line 1528, in find_spec
+  File "<frozen importlib._bootstrap_external>", line 1500, in _get_spec
+  File "<frozen importlib._bootstrap_external>", line 1487, in _path_importer_cache
+  File "<frozen importlib._bootstrap_external>", line 1463, in _path_hooks
+  File "<frozen importlib._bootstrap_external>", line 1687, in path_hook_for_FileFinder
+  File "<frozen importlib._bootstrap_external>", line 168, in _path_isdir
+  File "<frozen importlib._bootstrap_external>", line 153, in _path_is_mode_type
+  File "<frozen importlib._bootstrap_external>", line 147, in _path_stat
+KeyboardInterrupt

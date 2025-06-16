@@ -1,0 +1,57 @@
+Si Bulk DFT energetics calculations using VASP\n
+This script is running on comp022.cluster.local in /lustre/home/ah1365/projects/127870/upgrade_report/case_studies/common/structures/interfaces/48_Ge48_001_122_a0.325397_b0.238095_c1.190223_interface6shift8\n
+Job started on: Tue  3 Jun 23:08:18 UTC 2025\n
+ running   64 mpi-ranks, on    4 nodes
+ distrk:  each k-point on   64 cores,    1 groups
+ distr:  one band on   16 cores,    4 groups
+ vasp.6.4.3 19Mar24 (build Oct 22 2024 11:23:12) complex                        
+  
+ POSCAR found type information on POSCAR Ge
+ POSCAR found :  1 types and      48 ions
+ -----------------------------------------------------------------------------
+|                                                                             |
+|           W    W    AA    RRRRR   N    N  II  N    N   GGGG   !!!           |
+|           W    W   A  A   R    R  NN   N  II  NN   N  G    G  !!!           |
+|           W    W  A    A  R    R  N N  N  II  N N  N  G       !!!           |
+|           W WW W  AAAAAA  RRRRR   N  N N  II  N  N N  G  GGG   !            |
+|           WW  WW  A    A  R   R   N   NN  II  N   NN  G    G                |
+|           W    W  A    A  R    R  N    N  II  N    N   GGGG   !!!           |
+|                                                                             |
+|     You use a magnetic or noncollinear calculation, but did not specify     |
+|     the initial magnetic moment with the MAGMOM tag. Note that a            |
+|     default of 0.021 will be used for all atoms. This ferromagnetic         |
+|     setup may break the symmetry of the crystal, in particular it may       |
+|     rule out finding an antiferromagnetic solution. Thence, we              |
+|     recommend setting the initial magnetic moment manually or verifying     |
+|     carefully that this magnetic setup is desired.                          |
+|                                                                             |
+ -----------------------------------------------------------------------------
+
+ scaLAPACK will be used
+ LDA part: xc-table for (Slater+PW92), standard interpolation
+ POSCAR, INCAR and KPOINTS ok, starting setup
+ FFT: planning ... GRIDC
+ FFT: planning ... GRID_SOFT
+ FFT: planning ... GRID
+ WAVECAR not read
+ entering main loop
+       N       E                     dE             d eps       ncg     rms          rms(c)
+DAV:   1     0.967811520885E+03    0.96781E+03   -0.83656E+04 12064   0.170E+03
+DAV:   2    -0.792723560833E+02   -0.10471E+04   -0.10134E+04 14100   0.208E+02
+DAV:   3    -0.186755117377E+03   -0.10748E+03   -0.10374E+03 14888   0.634E+01
+DAV:   4    -0.190913824988E+03   -0.41587E+01   -0.40565E+01 14496   0.120E+01
+DAV:   5    -0.191069029757E+03   -0.15520E+00   -0.15425E+00 15528   0.204E+00    0.144E+01
+DAV:   6    -0.188736406600E+03    0.23326E+01   -0.54078E+00 14232   0.476E+00    0.670E+00
+DAV:   7    -0.188599107871E+03    0.13730E+00   -0.26540E+00 14376   0.421E+00    0.259E+00
+DAV:   8    -0.188474823338E+03    0.12428E+00   -0.81796E-01 14360   0.243E+00    0.849E-01
+DAV:   9    -0.188483021506E+03   -0.81982E-02   -0.14263E-01 14136   0.883E-01    0.520E-01
+DAV:  10    -0.188485422440E+03   -0.24009E-02   -0.28860E-02 13616   0.451E-01    0.247E-01
+DAV:  11    -0.188486063736E+03   -0.64130E-03   -0.74961E-03 13984   0.208E-01    0.140E-01
+DAV:  12    -0.188486487389E+03   -0.42365E-03   -0.19393E-03 13576   0.128E-01    0.412E-02
+DAV:  13    -0.188486505831E+03   -0.18442E-04   -0.34012E-04 14192   0.446E-02    0.205E-02
+DAV:  14    -0.188486517800E+03   -0.11969E-04   -0.65384E-05 13784   0.218E-02    0.105E-02
+DAV:  15    -0.188486522568E+03   -0.47684E-05   -0.12218E-05 13888   0.963E-03    0.464E-03
+DAV:  16    -0.188486523370E+03   -0.80221E-06   -0.25165E-06 14376   0.429E-03    0.202E-03
+DAV:  17    -0.188486523281E+03    0.89662E-07   -0.73280E-07 13360   0.234E-03
+   1 F= -.18848652E+03 E0= -.18848585E+03  d E =-.134099E-02  mag=     1.0000
+Job ended on: Tue  3 Jun 23:15:18 UTC 2025\n

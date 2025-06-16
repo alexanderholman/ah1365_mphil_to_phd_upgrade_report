@@ -1,0 +1,36 @@
+Traceback (most recent call last):
+  File "/home/alexander/school/exeter/phd-physics/upgrade_report/case_studies/common/structures/interfaces/120_C84Si36_012_012_a0.160494_b0.092593_c1.680068_interface13shift7/run-mace.py", line 7, in <module>
+    from mace.calculators import mace_mp
+  File "/home/alexander/lib/python3.12/site-packages/mace/calculators/__init__.py", line 1, in <module>
+    from .foundations_models import mace_anicc, mace_mp, mace_off
+  File "/home/alexander/lib/python3.12/site-packages/mace/calculators/foundations_models.py", line 6, in <module>
+    import torch
+  File "/home/alexander/lib/python3.12/site-packages/torch/__init__.py", line 1755, in <module>
+    from .functional import *  # noqa: F403
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/alexander/lib/python3.12/site-packages/torch/functional.py", line 10, in <module>
+    import torch.nn.functional as F
+  File "/home/alexander/lib/python3.12/site-packages/torch/nn/__init__.py", line 2, in <module>
+    from .modules import *  # noqa: F403
+    ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/alexander/lib/python3.12/site-packages/torch/nn/modules/__init__.py", line 1, in <module>
+    from .module import Module
+  File "/home/alexander/lib/python3.12/site-packages/torch/nn/modules/module.py", line 17, in <module>
+    from torch.utils._python_dispatch import is_traceable_wrapper_subclass
+  File "/home/alexander/lib/python3.12/site-packages/torch/utils/_python_dispatch.py", line 10, in <module>
+    import torchgen.model
+  File "/home/alexander/lib/python3.12/site-packages/torchgen/model.py", line 1364, in <module>
+    @dataclass(frozen=True)
+     ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/alexander/anaconda3/lib/python3.12/dataclasses.py", line 1265, in wrap
+    return _process_class(cls, init, repr, eq, order, unsafe_hash,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/alexander/anaconda3/lib/python3.12/dataclasses.py", line 1063, in _process_class
+    _init_fn(all_init_fields,
+  File "/home/alexander/anaconda3/lib/python3.12/dataclasses.py", line 619, in _init_fn
+    return _create_fn('__init__',
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/alexander/anaconda3/lib/python3.12/dataclasses.py", line 449, in _create_fn
+    def _create_fn(name, args, body, *, globals=None, locals=None,
+    
+KeyboardInterrupt

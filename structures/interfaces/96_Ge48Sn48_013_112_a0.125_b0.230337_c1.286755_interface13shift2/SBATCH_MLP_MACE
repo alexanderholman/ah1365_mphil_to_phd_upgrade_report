@@ -1,0 +1,37 @@
+#!/bin/bash
+#SBATCH -p pq
+#SBATCH -A Research_Project-T127870
+#SBATCH --job-name=96_Ge48Sn48_013_112_a0.125_b0.230337_c1.286755_interface13shift2MLPMAACE
+#SBATCH --time=02:00:00
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=16
+#SBATCH -D .
+#SBATCH --export=ALL
+#SBATCH --mail-user=ah1365@exeter.ac.uk
+#SBATCH --mail-type=END
+#SBATCH --output=MLPMACE.out
+#SBATCH --error=MLPMACE.err
+
+NNODES=$SLURM_JOB_NUM_NODES
+PPN=16
+np=$((NNODES*PPN))
+export OMP_NUM_THREADS=1
+
+module purge
+module load intel/2023a
+
+export MPI=$((NNODES*PPN))
+export WORK_DIR=`pwd`
+export JOB_TIME_START=`date -u`
+
+cd ${WORK_DIR}
+
+echo "Si Bulk DFT energetics calculations using VASP"
+echo "Running on host: ${HOSTNAME}"
+echo "Working directory: ${WORK_DIR}"
+echo "Job started on: ${JOB_TIME_START}"
+
+python run-mace.py
+
+export JOB_TIME_END=`date -u`
+echo "Job ended on: ${JOB_TIME_END}"

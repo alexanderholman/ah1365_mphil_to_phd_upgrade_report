@@ -1,0 +1,98 @@
+Si Bulk DFT energetics calculations using VASP\n
+This script is running on comp043.cluster.local in /lustre/home/ah1365/projects/127870/upgrade_report/case_studies/common/structures/interfaces/48_Sn48_001_122_a0.0_b0.0_c0.0_interface10shift1\n
+Job started on: Tue  3 Jun 23:58:09 UTC 2025\n
+ running   64 mpi-ranks, on    4 nodes
+ distrk:  each k-point on   64 cores,    1 groups
+ distr:  one band on   16 cores,    4 groups
+ vasp.6.4.3 19Mar24 (build Oct 22 2024 11:23:12) complex                        
+  
+ POSCAR found type information on POSCAR Sn
+ POSCAR found :  1 types and      48 ions
+ -----------------------------------------------------------------------------
+|                                                                             |
+|           W    W    AA    RRRRR   N    N  II  N    N   GGGG   !!!           |
+|           W    W   A  A   R    R  NN   N  II  NN   N  G    G  !!!           |
+|           W    W  A    A  R    R  N N  N  II  N N  N  G       !!!           |
+|           W WW W  AAAAAA  RRRRR   N  N N  II  N  N N  G  GGG   !            |
+|           WW  WW  A    A  R   R   N   NN  II  N   NN  G    G                |
+|           W    W  A    A  R    R  N    N  II  N    N   GGGG   !!!           |
+|                                                                             |
+|     You use a magnetic or noncollinear calculation, but did not specify     |
+|     the initial magnetic moment with the MAGMOM tag. Note that a            |
+|     default of 0.021 will be used for all atoms. This ferromagnetic         |
+|     setup may break the symmetry of the crystal, in particular it may       |
+|     rule out finding an antiferromagnetic solution. Thence, we              |
+|     recommend setting the initial magnetic moment manually or verifying     |
+|     carefully that this magnetic setup is desired.                          |
+|                                                                             |
+ -----------------------------------------------------------------------------
+
+ scaLAPACK will be used
+ WARNING: PSMAXN for non-local potential too small
+ LDA part: xc-table for (Slater+PW92), standard interpolation
+ -----------------------------------------------------------------------------
+|                                                                             |
+|           W    W    AA    RRRRR   N    N  II  N    N   GGGG   !!!           |
+|           W    W   A  A   R    R  NN   N  II  NN   N  G    G  !!!           |
+|           W    W  A    A  R    R  N N  N  II  N N  N  G       !!!           |
+|           W WW W  AAAAAA  RRRRR   N  N N  II  N  N N  G  GGG   !            |
+|           WW  WW  A    A  R   R   N   NN  II  N   NN  G    G                |
+|           W    W  A    A  R    R  N    N  II  N    N   GGGG   !!!           |
+|                                                                             |
+|     The distance between some ions is very small. Please check the          |
+|     nearest-neighbor list in the OUTCAR file.                               |
+|     I HOPE YOU KNOW WHAT YOU ARE DOING!                                     |
+|                                                                             |
+ -----------------------------------------------------------------------------
+
+ -----------------------------------------------------------------------------
+|                                                                             |
+|           W    W    AA    RRRRR   N    N  II  N    N   GGGG   !!!           |
+|           W    W   A  A   R    R  NN   N  II  NN   N  G    G  !!!           |
+|           W    W  A    A  R    R  N N  N  II  N N  N  G       !!!           |
+|           W WW W  AAAAAA  RRRRR   N  N N  II  N  N N  G  GGG   !            |
+|           WW  WW  A    A  R   R   N   NN  II  N   NN  G    G                |
+|           W    W  A    A  R    R  N    N  II  N    N   GGGG   !!!           |
+|                                                                             |
+|     Your reciprocal lattice and k-lattice belong to different lattice       |
+|     classes:                                                                |
+|                                                                             |
+|        The reciprocal lattice is base centered orthorhombic,                |
+|        whereas your k-lattice is simple monoclinic.                         |
+|                                                                             |
+|     Results are often still useful ...                                      |
+|                                                                             |
+ -----------------------------------------------------------------------------
+
+ POSCAR, INCAR and KPOINTS ok, starting setup
+ FFT: planning ... GRIDC
+ FFT: planning ... GRID_SOFT
+ FFT: planning ... GRID
+ WAVECAR not read
+ entering main loop
+       N       E                     dE             d eps       ncg     rms          rms(c)
+DAV:   1     0.148698271733E+04    0.14870E+04   -0.78828E+04  6496   0.165E+03
+DAV:   2     0.416797712621E+03   -0.10702E+04   -0.10372E+04  7700   0.187E+02
+DAV:   3     0.296795298890E+03   -0.12000E+03   -0.11534E+03  8432   0.618E+01
+DAV:   4     0.291286072415E+03   -0.55092E+01   -0.52883E+01  8096   0.127E+01
+DAV:   5     0.291044419565E+03   -0.24165E+00   -0.23760E+00  8616   0.247E+00    0.395E+01
+DAV:   6     0.324986126401E+03    0.33942E+02   -0.59885E+01  7672   0.129E+01    0.245E+01
+DAV:   7     0.331037245868E+03    0.60511E+01   -0.27838E+01  7664   0.120E+01    0.883E+00
+DAV:   8     0.332188776051E+03    0.11515E+01   -0.59656E+00  8088   0.628E+00    0.259E+00
+DAV:   9     0.332409159827E+03    0.22038E+00   -0.20535E+00  8256   0.362E+00    0.184E+00
+DAV:  10     0.332468380661E+03    0.59221E-01   -0.48863E-01  7688   0.164E+00    0.905E-01
+DAV:  11     0.332474422742E+03    0.60421E-02   -0.97406E-02  7824   0.748E-01    0.402E-01
+DAV:  12     0.332475649881E+03    0.12271E-02   -0.22498E-02  7984   0.336E-01    0.156E-01
+DAV:  13     0.332475696882E+03    0.47001E-04   -0.48870E-03  7472   0.148E-01    0.670E-02
+DAV:  14     0.332475717623E+03    0.20741E-04   -0.69747E-04  8496   0.595E-02    0.402E-02
+DAV:  15     0.332475715290E+03   -0.23325E-05   -0.10829E-04  7936   0.272E-02    0.207E-02
+DAV:  16     0.332475719644E+03    0.43541E-05   -0.27216E-05  8304   0.122E-02    0.872E-03
+DAV:  17     0.332475721911E+03    0.22672E-05   -0.57974E-06  7920   0.691E-03    0.436E-03
+DAV:  18     0.332475721450E+03   -0.46148E-06   -0.16202E-06  7776   0.356E-03    0.217E-03
+DAV:  19     0.332475721204E+03   -0.24591E-06   -0.27131E-07  5120   0.150E-03    0.118E-03
+DAV:  20     0.332475721037E+03   -0.16729E-06   -0.12893E-07  4312   0.975E-04    0.727E-04
+DAV:  21     0.332475720874E+03   -0.16290E-06   -0.64457E-08  4304   0.654E-04    0.344E-04
+DAV:  22     0.332475720772E+03   -0.10147E-06   -0.26191E-08  4256   0.378E-04    0.186E-04
+DAV:  23     0.332475720742E+03   -0.30444E-07   -0.14831E-08  4232   0.268E-04
+   1 F= 0.33247572E+03 E0= 0.33247666E+03  d E =-.187492E-02  mag=     1.0000
+Job ended on: Wed  4 Jun 00:02:45 UTC 2025\n

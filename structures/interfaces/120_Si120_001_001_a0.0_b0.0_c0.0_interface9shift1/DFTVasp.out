@@ -1,0 +1,100 @@
+Si Bulk DFT energetics calculations using VASP\n
+This script is running on comp019.cluster.local in /lustre/home/ah1365/projects/127870/upgrade_report/case_studies/common/structures/interfaces/120_Si120_001_001_a0.0_b0.0_c0.0_interface9shift1\n
+Job started on: Sun  8 Jun 15:20:46 UTC 2025\n
+ running   64 mpi-ranks, on    4 nodes
+ distrk:  each k-point on   64 cores,    1 groups
+ distr:  one band on   16 cores,    4 groups
+ vasp.6.4.3 19Mar24 (build Oct 22 2024 11:23:12) complex                        
+  
+ POSCAR found type information on POSCAR Si
+ POSCAR found :  1 types and     120 ions
+ -----------------------------------------------------------------------------
+|                                                                             |
+|           W    W    AA    RRRRR   N    N  II  N    N   GGGG   !!!           |
+|           W    W   A  A   R    R  NN   N  II  NN   N  G    G  !!!           |
+|           W    W  A    A  R    R  N N  N  II  N N  N  G       !!!           |
+|           W WW W  AAAAAA  RRRRR   N  N N  II  N  N N  G  GGG   !            |
+|           WW  WW  A    A  R   R   N   NN  II  N   NN  G    G                |
+|           W    W  A    A  R    R  N    N  II  N    N   GGGG   !!!           |
+|                                                                             |
+|     You use a magnetic or noncollinear calculation, but did not specify     |
+|     the initial magnetic moment with the MAGMOM tag. Note that a            |
+|     default of 8.333e-3 will be used for all atoms. This ferromagnetic      |
+|     setup may break the symmetry of the crystal, in particular it may       |
+|     rule out finding an antiferromagnetic solution. Thence, we              |
+|     recommend setting the initial magnetic moment manually or verifying     |
+|     carefully that this magnetic setup is desired.                          |
+|                                                                             |
+ -----------------------------------------------------------------------------
+
+ scaLAPACK will be used
+ LDA part: xc-table for (Slater+PW92), standard interpolation
+ -----------------------------------------------------------------------------
+|                                                                             |
+|           W    W    AA    RRRRR   N    N  II  N    N   GGGG   !!!           |
+|           W    W   A  A   R    R  NN   N  II  NN   N  G    G  !!!           |
+|           W    W  A    A  R    R  N N  N  II  N N  N  G       !!!           |
+|           W WW W  AAAAAA  RRRRR   N  N N  II  N  N N  G  GGG   !            |
+|           WW  WW  A    A  R   R   N   NN  II  N   NN  G    G                |
+|           W    W  A    A  R    R  N    N  II  N    N   GGGG   !!!           |
+|                                                                             |
+|     The distance between some ions is very small. Please check the          |
+|     nearest-neighbor list in the OUTCAR file.                               |
+|     I HOPE YOU KNOW WHAT YOU ARE DOING!                                     |
+|                                                                             |
+ -----------------------------------------------------------------------------
+
+ -----------------------------------------------------------------------------
+|                                                                             |
+|           W    W    AA    RRRRR   N    N  II  N    N   GGGG   !!!           |
+|           W    W   A  A   R    R  NN   N  II  NN   N  G    G  !!!           |
+|           W    W  A    A  R    R  N N  N  II  N N  N  G       !!!           |
+|           W WW W  AAAAAA  RRRRR   N  N N  II  N  N N  G  GGG   !            |
+|           WW  WW  A    A  R   R   N   NN  II  N   NN  G    G                |
+|           W    W  A    A  R    R  N    N  II  N    N   GGGG   !!!           |
+|                                                                             |
+|     Your reciprocal lattice and k-lattice belong to different lattice       |
+|     classes:                                                                |
+|                                                                             |
+|        The reciprocal lattice is simple tetragonal,                         |
+|        whereas your k-lattice is simple monoclinic.                         |
+|                                                                             |
+|     Results are often still useful ...                                      |
+|                                                                             |
+ -----------------------------------------------------------------------------
+
+ POSCAR, INCAR and KPOINTS ok, starting setup
+ FFT: planning ... GRIDC
+ FFT: planning ... GRID_SOFT
+ FFT: planning ... GRID
+ WAVECAR not read
+ entering main loop
+       N       E                     dE             d eps       ncg     rms          rms(c)
+DAV:   1     0.282945368873E+04    0.28295E+04   -0.23133E+05 16128   0.179E+03
+DAV:   2     0.445136069125E+03   -0.23843E+04   -0.23023E+04 19176   0.241E+02
+DAV:   3     0.195224226069E+03   -0.24991E+03   -0.23961E+03 22264   0.654E+01
+DAV:   4     0.177336497789E+03   -0.17888E+02   -0.17417E+02 24240   0.189E+01
+DAV:   5     0.176711924896E+03   -0.62457E+00   -0.61301E+00 21952   0.330E+00    0.441E+02
+DAV:   6     0.265166828289E+03    0.88455E+02   -0.59291E+02 20832   0.455E+01    0.180E+02
+DAV:   7     0.232018796443E+03   -0.33148E+02   -0.48589E+02 18584   0.435E+01    0.420E+01
+DAV:   8     0.269932798834E+03    0.37914E+02   -0.16922E+02 19328   0.275E+01    0.248E+01
+DAV:   9     0.266096593225E+03   -0.38362E+01   -0.59473E+01 19528   0.994E+00    0.431E+01
+DAV:  10     0.266582919732E+03    0.48633E+00   -0.48456E+00 19072   0.396E+00    0.156E+01
+DAV:  11     0.266485036209E+03   -0.97884E-01   -0.29172E+00 21208   0.223E+00    0.130E+01
+DAV:  12     0.266531686260E+03    0.46650E-01   -0.49893E-01 19144   0.121E+00    0.298E+00
+DAV:  13     0.266550895008E+03    0.19209E-01   -0.34174E-01 20352   0.929E-01    0.575E+00
+DAV:  14     0.266553590672E+03    0.26957E-02   -0.57864E-02 18776   0.489E-01    0.273E+00
+DAV:  15     0.266555906335E+03    0.23157E-02   -0.26700E-02 21376   0.217E-01    0.747E-01
+DAV:  16     0.266556741097E+03    0.83476E-03   -0.61949E-03 21720   0.121E-01    0.443E-01
+DAV:  17     0.266557018851E+03    0.27775E-03   -0.20059E-03 20224   0.737E-02    0.215E-01
+DAV:  18     0.266556992767E+03   -0.26084E-04   -0.83162E-04 19952   0.422E-02    0.443E-01
+DAV:  19     0.266557068959E+03    0.76192E-04   -0.29594E-04 19224   0.299E-02    0.240E-01
+DAV:  20     0.266557065473E+03   -0.34857E-05   -0.17103E-04 20344   0.196E-02    0.497E-02
+DAV:  21     0.266557067523E+03    0.20495E-05   -0.73992E-05 19960   0.134E-02    0.881E-02
+DAV:  22     0.266557067204E+03   -0.31812E-06   -0.67552E-06 19040   0.507E-03    0.477E-02
+DAV:  23     0.266557067029E+03   -0.17577E-06   -0.11371E-06 19992   0.185E-03    0.307E-02
+DAV:  24     0.266557067288E+03    0.25883E-06   -0.11934E-06 20832   0.207E-03    0.943E-03
+DAV:  25     0.266557067129E+03   -0.15848E-06   -0.38424E-07 13168   0.165E-03    0.342E-03
+DAV:  26     0.266557067044E+03   -0.84758E-07   -0.65222E-08  9432   0.765E-04
+   1 F= 0.26655707E+03 E0= 0.26655799E+03  d E =-.184411E-02  mag=     1.0000
+Job ended on: Sun  8 Jun 15:42:53 UTC 2025\n

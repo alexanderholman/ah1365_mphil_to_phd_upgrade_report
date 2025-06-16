@@ -1,0 +1,65 @@
+/home/alexander/lib/python3.12/site-packages/e3nn/o3/_wigner.py:10: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  _Jd, _W3j_flat, _W3j_indices = torch.load(os.path.join(os.path.dirname(__file__), 'constants.pt'))
+/home/alexander/lib/python3.12/site-packages/mace/calculators/mace.py:139: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  torch.load(f=model_path, map_location=device)
+/home/alexander/lib/python3.12/site-packages/torch_dftd/torch_dftd3_calculator.py:98: UserWarning: Creating a tensor from a list of numpy.ndarrays is extremely slow. Please consider converting the list to a single numpy.ndarray with numpy.array() before converting to a tensor. (Triggered internally at ../torch/csrc/utils/tensor_new.cpp:278.)
+  cell: Optional[Tensor] = torch.tensor(
+Traceback (most recent call last):
+  File "/home/alexander/school/exeter/phd-physics/upgrade_report/case_studies/common/structures/interfaces/120_C84Si36_012_012_a0.154321_b0.697531_c1.482413_interface3shift2/run-mace.py", line 37, in <module>
+    energy = run_mace_calculation(poscar_file)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/alexander/school/exeter/phd-physics/upgrade_report/case_studies/common/structures/interfaces/120_C84Si36_012_012_a0.154321_b0.697531_c1.482413_interface3shift2/run-mace.py", line 22, in run_mace_calculation
+    opt.run(fmax=0.01)
+  File "/home/alexander/lib/python3.12/site-packages/ase/optimize/optimize.py", line 430, in run
+    return Dynamics.run(self, steps=steps)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/alexander/lib/python3.12/site-packages/ase/optimize/optimize.py", line 275, in run
+    for converged in Dynamics.irun(self, steps=steps):
+  File "/home/alexander/lib/python3.12/site-packages/ase/optimize/optimize.py", line 250, in irun
+    self.log()
+  File "/home/alexander/lib/python3.12/site-packages/ase/optimize/optimize.py", line 440, in log
+    forces = self.optimizable.get_forces()
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/alexander/lib/python3.12/site-packages/ase/optimize/optimize.py", line 34, in get_forces
+    return self.atoms.get_forces()
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/alexander/lib/python3.12/site-packages/ase/atoms.py", line 812, in get_forces
+    forces = self._calc.get_forces(self)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/alexander/lib/python3.12/site-packages/ase/calculators/abc.py", line 30, in get_forces
+    return self.get_property('forces', atoms)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/alexander/lib/python3.12/site-packages/ase/calculators/calculator.py", line 538, in get_property
+    self.calculate(atoms, [name], system_changes)
+  File "/home/alexander/lib/python3.12/site-packages/ase/calculators/mixing.py", line 100, in calculate
+    self.results = self.mixer.get_properties(properties, atoms)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/alexander/lib/python3.12/site-packages/ase/calculators/mixing.py", line 55, in get_properties
+    get_property(prop)
+  File "/home/alexander/lib/python3.12/site-packages/ase/calculators/mixing.py", line 36, in get_property
+    contribs = [calc.get_property(prop, atoms) for calc in self.calcs]
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/alexander/lib/python3.12/site-packages/torch_dftd/torch_dftd3_calculator.py", line 145, in get_property
+    dftd3_result = Calculator.get_property(self, name, atoms, allow_calculation)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/alexander/lib/python3.12/site-packages/ase/calculators/calculator.py", line 538, in get_property
+    self.calculate(atoms, [name], system_changes)
+  File "/home/alexander/lib/python3.12/site-packages/torch_dftd/torch_dftd3_calculator.py", line 116, in calculate
+    input_dicts = self._preprocess_atoms(atoms)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/alexander/lib/python3.12/site-packages/torch_dftd/torch_dftd3_calculator.py", line 104, in _preprocess_atoms
+    edge_index, S = self._calc_edge_index(pos, cell, pbc)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/alexander/lib/python3.12/site-packages/torch_dftd/torch_dftd3_calculator.py", line 90, in _calc_edge_index
+    return calc_edge_index(
+           ^^^^^^^^^^^^^^^^
+  File "/home/alexander/lib/python3.12/site-packages/torch_dftd/functions/edge_extraction.py", line 110, in calc_edge_index
+    edge_index, S = calc_neighbor_by_pymatgen(pos, cell, pbc, cutoff)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/alexander/lib/python3.12/site-packages/torch_dftd/functions/edge_extraction.py", line 60, in calc_neighbor_by_pymatgen
+    np.stack([c_index, n_index], axis=0), dtype=torch.long, device=pos.device
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/alexander/lib/python3.12/site-packages/numpy/core/shape_base.py", line 362, in _stack_dispatcher
+    def _stack_dispatcher(arrays, axis=None, out=None, *,
+    
+KeyboardInterrupt

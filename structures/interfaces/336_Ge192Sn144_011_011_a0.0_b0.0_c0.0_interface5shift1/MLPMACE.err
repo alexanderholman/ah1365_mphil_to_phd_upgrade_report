@@ -1,0 +1,46 @@
+Failed checking if argv[0] is an import path entry
+Traceback (most recent call last):
+  File "<frozen zipimport>", line 92, in __init__
+KeyError: '/home/alexander/school/exeter/phd-physics/upgrade_report/case_studies/common/structures/interfaces/336_Ge192Sn144_011_011_a0.0_b0.0_c0.0_interface5shift1/run-mace.py'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "<frozen zipimport>", line 94, in __init__
+  File "<frozen zipimport>", line 358, in _read_directory
+KeyboardInterrupt
+Traceback (most recent call last):
+  File "/home/alexander/school/exeter/phd-physics/upgrade_report/case_studies/common/structures/interfaces/336_Ge192Sn144_011_011_a0.0_b0.0_c0.0_interface5shift1/run-mace.py", line 4, in <module>
+    from ase.io import read
+  File "/home/alexander/lib/python3.12/site-packages/ase/__init__.py", line 8, in <module>
+    import ase.parallel  # noqa
+    ^^^^^^^^^^^^^^^^^^^
+  File "/home/alexander/lib/python3.12/site-packages/ase/parallel.py", line 9, in <module>
+    import numpy as np
+  File "/home/alexander/lib/python3.12/site-packages/numpy/__init__.py", line 130, in <module>
+    from numpy.__config__ import show as show_config
+  File "/home/alexander/lib/python3.12/site-packages/numpy/__config__.py", line 4, in <module>
+    from numpy.core._multiarray_umath import (
+  File "/home/alexander/lib/python3.12/site-packages/numpy/core/__init__.py", line 104, in <module>
+    from . import _internal
+  File "/home/alexander/lib/python3.12/site-packages/numpy/core/_internal.py", line 146, in <module>
+    format_re = re.compile(r'(?P<order1>[<>|=]?)'
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/alexander/anaconda3/lib/python3.12/re/__init__.py", line 228, in compile
+    return _compile(pattern, flags)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/alexander/anaconda3/lib/python3.12/re/__init__.py", line 307, in _compile
+    p = _compiler.compile(pattern, flags)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/alexander/anaconda3/lib/python3.12/re/_compiler.py", line 749, in compile
+    code = _code(p, flags)
+           ^^^^^^^^^^^^^^^
+  File "/home/alexander/anaconda3/lib/python3.12/re/_compiler.py", line 582, in _code
+    _compile(code, p.data, flags)
+  File "/home/alexander/anaconda3/lib/python3.12/re/_compiler.py", line 128, in _compile
+    _compile(code, p, _combine_flags(flags, add_flags, del_flags))
+  File "/home/alexander/anaconda3/lib/python3.12/re/_compiler.py", line 111, in _compile
+    _compile(code, av[2], flags)
+  File "/home/alexander/anaconda3/lib/python3.12/re/_compiler.py", line 90, in _compile
+    emit(IN)
+KeyboardInterrupt

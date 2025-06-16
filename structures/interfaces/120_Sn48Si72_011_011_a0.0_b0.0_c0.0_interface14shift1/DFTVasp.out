@@ -1,0 +1,110 @@
+Si Bulk DFT energetics calculations using VASP\n
+This script is running on comp120.cluster.local in /lustre/home/ah1365/projects/127870/upgrade_report/case_studies/common/structures/interfaces/120_Sn48Si72_011_011_a0.0_b0.0_c0.0_interface14shift1\n
+Job started on: Sun  8 Jun 15:30:40 UTC 2025\n
+ running   64 mpi-ranks, on    4 nodes
+ distrk:  each k-point on   64 cores,    1 groups
+ distr:  one band on   16 cores,    4 groups
+ vasp.6.4.3 19Mar24 (build Oct 22 2024 11:23:12) complex                        
+  
+ POSCAR found type information on POSCAR SnSi
+ POSCAR found :  2 types and     120 ions
+ -----------------------------------------------------------------------------
+|                                                                             |
+|           W    W    AA    RRRRR   N    N  II  N    N   GGGG   !!!           |
+|           W    W   A  A   R    R  NN   N  II  NN   N  G    G  !!!           |
+|           W    W  A    A  R    R  N N  N  II  N N  N  G       !!!           |
+|           W WW W  AAAAAA  RRRRR   N  N N  II  N  N N  G  GGG   !            |
+|           WW  WW  A    A  R   R   N   NN  II  N   NN  G    G                |
+|           W    W  A    A  R    R  N    N  II  N    N   GGGG   !!!           |
+|                                                                             |
+|     You use a magnetic or noncollinear calculation, but did not specify     |
+|     the initial magnetic moment with the MAGMOM tag. Note that a            |
+|     default of 8.333e-3 will be used for all atoms. This ferromagnetic      |
+|     setup may break the symmetry of the crystal, in particular it may       |
+|     rule out finding an antiferromagnetic solution. Thence, we              |
+|     recommend setting the initial magnetic moment manually or verifying     |
+|     carefully that this magnetic setup is desired.                          |
+|                                                                             |
+ -----------------------------------------------------------------------------
+
+ scaLAPACK will be used
+ WARNING: PSMAXN for non-local potential too small
+ LDA part: xc-table for (Slater+PW92), standard interpolation
+ -----------------------------------------------------------------------------
+|                                                                             |
+|           W    W    AA    RRRRR   N    N  II  N    N   GGGG   !!!           |
+|           W    W   A  A   R    R  NN   N  II  NN   N  G    G  !!!           |
+|           W    W  A    A  R    R  N N  N  II  N N  N  G       !!!           |
+|           W WW W  AAAAAA  RRRRR   N  N N  II  N  N N  G  GGG   !            |
+|           WW  WW  A    A  R   R   N   NN  II  N   NN  G    G                |
+|           W    W  A    A  R    R  N    N  II  N    N   GGGG   !!!           |
+|                                                                             |
+|     The distance between some ions is very small. Please check the          |
+|     nearest-neighbor list in the OUTCAR file.                               |
+|     I HOPE YOU KNOW WHAT YOU ARE DOING!                                     |
+|                                                                             |
+ -----------------------------------------------------------------------------
+
+ POSCAR, INCAR and KPOINTS ok, starting setup
+ FFT: planning ... GRIDC
+ FFT: planning ... GRID_SOFT
+ FFT: planning ... GRID
+ WAVECAR not read
+ entering main loop
+       N       E                     dE             d eps       ncg     rms          rms(c)
+DAV:   1     0.375196754082E+04    0.37520E+04   -0.21735E+05  6912   0.174E+03
+DAV:   2     0.112079921058E+04   -0.26312E+04   -0.25364E+04  8224   0.226E+02
+DAV:   3     0.826953195790E+03   -0.29385E+03   -0.28077E+03  9448   0.663E+01
+DAV:   4     0.806152165159E+03   -0.20801E+02   -0.20128E+02 10936   0.181E+01
+DAV:   5     0.805276691455E+03   -0.87547E+00   -0.85975E+00 10648   0.344E+00    0.779E+02
+DAV:   6     0.823803460513E+03    0.18527E+02   -0.53403E+02  9936   0.445E+01    0.210E+02
+DAV:   7     0.637334424330E+03   -0.18647E+03   -0.13961E+03 11160   0.683E+01    0.260E+02
+DAV:   8     0.875195808213E+03    0.23786E+03   -0.89094E+02 10440   0.611E+01    0.169E+02
+DAV:   9     0.884616666018E+03    0.94209E+01   -0.37291E+02  9424   0.360E+01    0.508E+01
+DAV:  10     0.888330946668E+03    0.37143E+01   -0.11804E+02  8560   0.190E+01    0.547E+01
+DAV:  11     0.886754495735E+03   -0.15765E+01   -0.29428E+01  8464   0.807E+00    0.422E+01
+DAV:  12     0.886732138258E+03   -0.22357E-01   -0.67327E+00  9520   0.376E+00    0.483E+01
+DAV:  13     0.887713648808E+03    0.98151E+00   -0.63721E+00  8720   0.457E+00    0.300E+01
+DAV:  14     0.888515607280E+03    0.80196E+00   -0.30897E+00  8088   0.275E+00    0.176E+01
+DAV:  15     0.888730657458E+03    0.21505E+00   -0.15599E+00  8784   0.180E+00    0.165E+01
+DAV:  16     0.888922813949E+03    0.19216E+00   -0.51267E-01  8176   0.106E+00    0.238E+01
+DAV:  17     0.888932474183E+03    0.96602E-02   -0.10049E-01  9416   0.436E-01    0.193E+01
+DAV:  18     0.888948836892E+03    0.16363E-01   -0.34533E-02  8688   0.306E-01    0.195E+01
+DAV:  19     0.888989953848E+03    0.41117E-01   -0.39278E-01  9096   0.101E+00    0.174E+01
+DAV:  20     0.889174300891E+03    0.18435E+00   -0.36983E-01  8392   0.108E+00    0.105E+01
+DAV:  21     0.889166173610E+03   -0.81273E-02   -0.22759E-01  8992   0.548E-01    0.591E+00
+DAV:  22     0.889166729357E+03    0.55575E-03   -0.20781E-02  8720   0.212E-01    0.466E+00
+DAV:  23     0.889163678036E+03   -0.30513E-02   -0.43607E-03 10976   0.855E-02    0.415E+00
+DAV:  24     0.889169561780E+03    0.58837E-02   -0.10257E-02  8888   0.138E-01    0.309E+00
+DAV:  25     0.889173446477E+03    0.38847E-02   -0.22188E-02  8864   0.223E-01    0.154E+00
+DAV:  26     0.889175407128E+03    0.19607E-02   -0.84702E-03  7880   0.153E-01    0.111E+00
+DAV:  27     0.889175756929E+03    0.34980E-03   -0.32153E-03  9136   0.712E-02    0.107E+00
+DAV:  28     0.889175734927E+03   -0.22002E-04   -0.37962E-04 10488   0.268E-02    0.119E+00
+DAV:  29     0.889176933918E+03    0.11990E-02   -0.20011E-03  9000   0.731E-02    0.126E+00
+DAV:  30     0.889177188918E+03    0.25500E-03   -0.19104E-03  8968   0.550E-02    0.161E+00
+DAV:  31     0.889177286802E+03    0.97884E-04   -0.41060E-04  8112   0.308E-02    0.155E+00
+DAV:  32     0.889177320217E+03    0.33415E-04   -0.21619E-04  8064   0.221E-02    0.137E+00
+DAV:  33     0.889177316404E+03   -0.38126E-05   -0.10176E-04  9456   0.133E-02    0.135E+00
+DAV:  34     0.889177331244E+03    0.14840E-04   -0.60632E-05  8624   0.106E-02    0.133E+00
+DAV:  35     0.889177291476E+03   -0.39769E-04   -0.12081E-04  9168   0.142E-02    0.135E+00
+DAV:  36     0.889177266916E+03   -0.24560E-04   -0.40708E-05 10560   0.821E-03    0.140E+00
+DAV:  37     0.889177267213E+03    0.29655E-06   -0.20593E-06  9408   0.215E-03    0.139E+00
+DAV:  38     0.889177263888E+03   -0.33241E-05   -0.13087E-06  8232   0.172E-03    0.141E+00
+DAV:  39     0.889177307584E+03    0.43695E-04   -0.19300E-05  8608   0.578E-03    0.131E+00
+DAV:  40     0.889177341236E+03    0.33652E-04   -0.24625E-05 10160   0.604E-03    0.124E+00
+DAV:  41     0.889177358904E+03    0.17668E-04   -0.13861E-05 10632   0.448E-03    0.117E+00
+DAV:  42     0.889177375432E+03    0.16528E-04   -0.94678E-06  9952   0.367E-03    0.112E+00
+DAV:  43     0.889177402576E+03    0.27144E-04   -0.28911E-05  9248   0.640E-03    0.966E-01
+DAV:  44     0.889177451609E+03    0.49033E-04   -0.13503E-04  9240   0.157E-02    0.620E-01
+DAV:  45     0.889177455174E+03    0.35654E-05   -0.95058E-05 10584   0.128E-02    0.488E-01
+DAV:  46     0.889177460049E+03    0.48745E-05   -0.27021E-05  9856   0.685E-03    0.446E-01
+DAV:  47     0.889177460765E+03    0.71588E-06   -0.67346E-06 10392   0.324E-03    0.409E-01
+DAV:  48     0.889177464651E+03    0.38861E-05   -0.33953E-06  9000   0.240E-03    0.339E-01
+DAV:  49     0.889177471510E+03    0.68588E-05   -0.65212E-06  9104   0.338E-03    0.225E-01
+DAV:  50     0.889177474744E+03    0.32346E-05   -0.38740E-06 10000   0.267E-03    0.167E-01
+DAV:  51     0.889177477978E+03    0.32334E-05   -0.15969E-05  8792   0.563E-03    0.115E-01
+DAV:  52     0.889177478899E+03    0.92099E-06   -0.62304E-06  8544   0.346E-03    0.809E-02
+DAV:  53     0.889177479012E+03    0.11377E-06   -0.10793E-06  8848   0.137E-03    0.791E-02
+DAV:  54     0.889177479092E+03    0.79384E-07   -0.15001E-07  4872   0.610E-04
+   1 F= 0.88917748E+03 E0= 0.88917895E+03  d E =-.293249E-02  mag=     1.0000
+Job ended on: Sun  8 Jun 15:58:10 UTC 2025\n
