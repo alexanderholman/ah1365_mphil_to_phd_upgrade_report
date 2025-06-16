@@ -1,0 +1,83 @@
+Si Bulk DFT energetics calculations using VASP\n
+This script is running on comp124.cluster.local in /lustre/projects/Research_Project-T127870/ah1365/task/investigate_artimus/SiGe/20250404210804/DRUN_DFT_VASP/20250428152536/D29/DSHIFT/D01/DSWAP/D03\n
+Job started on: Wed 30 Apr 06:34:23 UTC 2025\n
+ running   16 mpi-ranks, on    1 nodes
+ distrk:  each k-point on   16 cores,    1 groups
+ distr:  one band on   16 cores,    1 groups
+ vasp.6.4.3 19Mar24 (build Oct 22 2024 11:23:12) complex                        
+  
+ POSCAR found type information on POSCAR SiGe
+ POSCAR found :  2 types and     144 ions
+ -----------------------------------------------------------------------------
+|                                                                             |
+|           W    W    AA    RRRRR   N    N  II  N    N   GGGG   !!!           |
+|           W    W   A  A   R    R  NN   N  II  NN   N  G    G  !!!           |
+|           W    W  A    A  R    R  N N  N  II  N N  N  G       !!!           |
+|           W WW W  AAAAAA  RRRRR   N  N N  II  N  N N  G  GGG   !            |
+|           WW  WW  A    A  R   R   N   NN  II  N   NN  G    G                |
+|           W    W  A    A  R    R  N    N  II  N    N   GGGG   !!!           |
+|                                                                             |
+|     You use a magnetic or noncollinear calculation, but did not specify     |
+|     the initial magnetic moment with the MAGMOM tag. Note that a            |
+|     default of 6.944e-3 will be used for all atoms. This ferromagnetic      |
+|     setup may break the symmetry of the crystal, in particular it may       |
+|     rule out finding an antiferromagnetic solution. Thence, we              |
+|     recommend setting the initial magnetic moment manually or verifying     |
+|     carefully that this magnetic setup is desired.                          |
+|                                                                             |
+ -----------------------------------------------------------------------------
+
+ scaLAPACK will be used
+ -----------------------------------------------------------------------------
+|                                                                             |
+|           W    W    AA    RRRRR   N    N  II  N    N   GGGG   !!!           |
+|           W    W   A  A   R    R  NN   N  II  NN   N  G    G  !!!           |
+|           W    W  A    A  R    R  N N  N  II  N N  N  G       !!!           |
+|           W WW W  AAAAAA  RRRRR   N  N N  II  N  N N  G  GGG   !            |
+|           WW  WW  A    A  R   R   N   NN  II  N   NN  G    G                |
+|           W    W  A    A  R    R  N    N  II  N    N   GGGG   !!!           |
+|                                                                             |
+|     For optimal performance we recommend to set                             |
+|       NCORE = 2 up to number-of-cores-per-socket                            |
+|     NCORE specifies how many cores store one orbital (NPAR=cpu/NCORE).      |
+|     This setting can greatly improve the performance of VASP for DFT.       |
+|     The default, NCORE=1 might be grossly inefficient on modern             |
+|     multi-core architectures or massively parallel machines. Do your        |
+|     own testing! More info at https://www.vasp.at/wiki/index.php/NCORE      |
+|     Unfortunately you need to use the default for GW and RPA                |
+|     calculations (for HF NCORE is supported but not extensively tested      |
+|     yet).                                                                   |
+|                                                                             |
+ -----------------------------------------------------------------------------
+
+ LDA part: xc-table for (Slater+PW92), standard interpolation
+ POSCAR, INCAR and KPOINTS ok, starting setup
+ FFT: planning ... GRIDC
+ FFT: planning ... GRID_SOFT
+ FFT: planning ... GRID
+ WAVECAR not read
+ entering main loop
+       N       E                     dE             d eps       ncg     rms          rms(c)
+DAV:   1     0.245494539285E+04    0.24549E+04   -0.25812E+05  5536   0.174E+03
+DAV:   2    -0.416848738844E+03   -0.28718E+04   -0.27670E+04  6464   0.216E+02
+DAV:   3    -0.689533454481E+03   -0.27268E+03   -0.26590E+03  6760   0.588E+01
+DAV:   4    -0.698846355092E+03   -0.93129E+01   -0.91985E+01  6496   0.117E+01
+DAV:   5    -0.699208922024E+03   -0.36257E+00   -0.36136E+00  7376   0.218E+00    0.337E+01
+DAV:   6    -0.689521664818E+03    0.96873E+01   -0.13102E+01  6488   0.541E+00    0.155E+01
+DAV:   7    -0.688832897609E+03    0.68877E+00   -0.79268E+00  6456   0.431E+00    0.391E+00
+DAV:   8    -0.688822500904E+03    0.10397E-01   -0.12383E+00  6536   0.219E+00    0.146E+00
+DAV:   9    -0.688810999860E+03    0.11501E-01   -0.22516E-01  6328   0.727E-01    0.837E-01
+DAV:  10    -0.688814191040E+03   -0.31912E-02   -0.76141E-02  6384   0.447E-01    0.439E-01
+DAV:  11    -0.688816477237E+03   -0.22862E-02   -0.15642E-02  6304   0.213E-01    0.224E-01
+DAV:  12    -0.688816578977E+03   -0.10174E-03   -0.47036E-03  6736   0.945E-02    0.148E-01
+DAV:  13    -0.688816761389E+03   -0.18241E-03   -0.23299E-03  6728   0.782E-02    0.918E-02
+DAV:  14    -0.688816776049E+03   -0.14660E-04   -0.15419E-03  6952   0.734E-02    0.474E-02
+DAV:  15    -0.688816788541E+03   -0.12492E-04   -0.23097E-04  6720   0.329E-02    0.179E-02
+DAV:  16    -0.688816794696E+03   -0.61547E-05   -0.15978E-04  6824   0.137E-02    0.149E-02
+DAV:  17    -0.688816793351E+03    0.13452E-05   -0.47912E-05  6792   0.103E-02    0.920E-03
+DAV:  18    -0.688816793340E+03    0.10521E-07   -0.89470E-06  6456   0.421E-03    0.497E-03
+DAV:  19    -0.688816792912E+03    0.42889E-06   -0.13544E-06  6696   0.218E-03    0.269E-03
+DAV:  20    -0.688816792656E+03    0.25590E-06   -0.73596E-07  6112   0.122E-03    0.139E-03
+DAV:  21    -0.688816792707E+03   -0.51175E-07   -0.14988E-07  3472   0.672E-04
+   1 F= -.68881679E+03 E0= -.68881617E+03  d E =-.124186E-02  mag=     1.0000
+Job ended on: Wed 30 Apr 07:03:46 UTC 2025\n

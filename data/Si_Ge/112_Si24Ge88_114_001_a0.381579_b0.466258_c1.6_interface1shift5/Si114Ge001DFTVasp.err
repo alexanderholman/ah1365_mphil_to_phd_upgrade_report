@@ -1,0 +1,300 @@
+The following modules were not unloaded:
+  (Use "module --force purge" to unload all):
+
+  1) slurm/23.02.6
+[comp146:135621:0:135621] Caught signal 11 (Segmentation fault: address not mapped to object at address 0x7ffe9a93afb8)
+[comp146:135622:0:135622] Caught signal 11 (Segmentation fault: address not mapped to object at address 0x7fffafd597f8)
+[comp146:135623:0:135623] Caught signal 11 (Segmentation fault: address not mapped to object at address 0x7ffe6e162bf8)
+[comp146:135625:0:135625] Caught signal 11 (Segmentation fault: address not mapped to object at address 0x7fff4b566338)
+[comp146:135626:0:135626] Caught signal 11 (Segmentation fault: address not mapped to object at address 0x7ffca564a318)
+[comp146:135624:0:135624] Caught signal 11 (Segmentation fault: address not mapped to object at address 0x7ffc099c2c80)
+[comp146:135620:0:135620] Caught signal 11 (Segmentation fault: address not mapped to object at address 0x7ffde6336578)
+[comp146:135613:0:135613] Caught signal 11 (Segmentation fault: address not mapped to object at address 0x7ffd8a78b8b0)
+[comp146:135615:0:135615] Caught signal 11 (Segmentation fault: address not mapped to object at address 0x7fff2f73fa30)
+[comp146:135617:0:135617] Caught signal 11 (Segmentation fault: address not mapped to object at address 0x7ffe5bad4bb8)
+[comp146:135619:0:135619] Caught signal 11 (Segmentation fault: address not mapped to object at address 0x7ffebd0dcf80)
+[comp146:135614:0:135614] Caught signal 11 (Segmentation fault: address not mapped to object at address 0x7ffefbdcbaf0)
+[comp146:135616:0:135616] Caught signal 11 (Segmentation fault: address not mapped to object at address 0x7ffe6da10938)
+[comp146:135618:0:135618] Caught signal 11 (Segmentation fault: address not mapped to object at address 0x7ffdbc42da58)
+[comp146:135612:0:135612] Caught signal 11 (Segmentation fault: address not mapped to object at address 0x7ffe1dcc7ff8)
+[comp146:135611:0:135611] Caught signal 11 (Segmentation fault: address not mapped to object at address 0x7ffdf1aa1218)
+==== backtrace (tid: 135616) ====
+==== backtrace (tid: 135618) ====
+ 0 0x000000000003e6f0 __GI___sigaction()  :0
+ 1 0x00000000009a4d6b racc0mu_()  ???:0
+ 2 0x00000000009a6da3 nonlr_mp_raccmu__()  ???:0
+ 3 0x00000000009df646 hamil_mp_hamiltmu_()  ???:0
+ 4 0x000000000119090e david_mp_eddav_()  ???:0
+ 5 0x00000000012534d5 elmin_()  ???:0
+ 6 0x0000000001e67467 vamp_IP_electronic_optimization_()  main.f90:0
+ 7 0x0000000001e40413 MAIN__()  ???:0
+ 8 0x000000000040963d main()  ???:0
+ 9 0x0000000000029590 __libc_start_call_main()  ???:0
+10 0x0000000000029640 __libc_start_main_alias_2()  :0
+11 0x0000000000409555 _start()  ???:0
+=================================
+ 0 0x000000000003e6f0 __GI___sigaction()  :0
+ 1 0x00000000009a4d6b racc0mu_()  ???:0
+ 2 0x00000000009a6da3 nonlr_mp_raccmu__()  ???:0
+==== backtrace (tid: 135611) ====
+ 0 0x000000000003e6f0 __GI___sigaction()  :0
+ 1 0x00000000009a4d6b racc0mu_()  ???:0
+ 2 0x00000000009a6da3 nonlr_mp_raccmu__()  ???:0
+ 3 0x00000000009df646 hamil_mp_hamiltmu_()  ???:0
+ 4 0x000000000119090e david_mp_eddav_()  ???:0
+ 5 0x00000000012534d5 elmin_()  ???:0
+ 6 0x0000000001e67467 vamp_IP_electronic_optimization_()  main.f90:0
+ 7 0x0000000001e40413 MAIN__()  ???:0
+ 8 0x000000000040963d main()  ???:0
+ 9 0x0000000000029590 __libc_start_call_main()  ???:0
+10 0x0000000000029640 __libc_start_main_alias_2()  :0
+11 0x0000000000409555 _start()  ???:0
+=================================
+ 3 0x00000000009df646 hamil_mp_hamiltmu_()  ???:0
+ 4 0x000000000119090e david_mp_eddav_()  ???:0
+ 5 0x00000000012534d5 elmin_()  ???:0
+ 6 0x0000000001e67467 vamp_IP_electronic_optimization_()  main.f90:0
+ 7 0x0000000001e40413 MAIN__()  ???:0
+ 8 0x000000000040963d main()  ???:0
+ 9 0x0000000000029590 __libc_start_call_main()  ???:0
+==== backtrace (tid: 135625) ====
+ 0 0x000000000003e6f0 __GI___sigaction()  :0
+ 1 0x00000000009a4d6b racc0mu_()  ???:0
+ 2 0x00000000009a6da3 nonlr_mp_raccmu__()  ???:0
+ 3 0x00000000009df646 hamil_mp_hamiltmu_()  ???:0
+ 4 0x000000000119090e david_mp_eddav_()  ???:0
+ 5 0x00000000012534d5 elmin_()  ???:0
+ 6 0x0000000001e67467 vamp_IP_electronic_optimization_()  main.f90:0
+ 7 0x0000000001e40413 MAIN__()  ???:0
+ 8 0x000000000040963d main()  ???:0
+ 9 0x0000000000029590 __libc_start_call_main()  ???:0
+10 0x0000000000029640 __libc_start_main_alias_2()  :0
+11 0x0000000000409555 _start()  ???:0
+=================================
+==== backtrace (tid: 135626) ====
+ 0 0x000000000003e6f0 __GI___sigaction()  :0
+ 1 0x00000000009a4d6b racc0mu_()  ???:0
+ 2 0x00000000009a6da3 nonlr_mp_raccmu__()  ???:0
+ 3 0x00000000009df646 hamil_mp_hamiltmu_()  ???:0
+ 4 0x000000000119090e david_mp_eddav_()  ???:0
+ 5 0x00000000012534d5 elmin_()  ???:0
+ 6 0x0000000001e67467 vamp_IP_electronic_optimization_()  main.f90:0
+ 7 0x0000000001e40413 MAIN__()  ???:0
+ 8 0x000000000040963d main()  ???:0
+ 9 0x0000000000029590 __libc_start_call_main()  ???:0
+10 0x0000000000029640 __libc_start_main_alias_2()  :0
+11 0x0000000000409555 _start()  ???:0
+=================================
+==== backtrace (tid: 135623) ====
+ 0 0x000000000003e6f0 __GI___sigaction()  :0
+ 1 0x00000000009a4d6b racc0mu_()  ???:0
+ 2 0x00000000009a6da3 nonlr_mp_raccmu__()  ???:0
+ 3 0x00000000009df646 hamil_mp_hamiltmu_()  ???:0
+ 4 0x000000000119090e david_mp_eddav_()  ???:0
+ 5 0x00000000012534d5 elmin_()  ???:0
+ 6 0x0000000001e67467 vamp_IP_electronic_optimization_()  main.f90:0
+ 7 0x0000000001e40413 MAIN__()  ???:0
+ 8 0x000000000040963d main()  ???:0
+ 9 0x0000000000029590 __libc_start_call_main()  ???:0
+10 0x0000000000029640 __libc_start_main_alias_2()  :0
+11 0x0000000000409555 _start()  ???:0
+=================================
+==== backtrace (tid: 135621) ====
+ 0 0x000000000003e6f0 __GI___sigaction()  :0
+ 1 0x00000000009a4d6b racc0mu_()  ???:0
+ 2 0x00000000009a6da3 nonlr_mp_raccmu__()  ???:0
+ 3 0x00000000009df646 hamil_mp_hamiltmu_()  ???:0
+ 4 0x000000000119090e david_mp_eddav_()  ???:0
+ 5 0x00000000012534d5 elmin_()  ???:0
+ 6 0x0000000001e67467 vamp_IP_electronic_optimization_()  main.f90:0
+ 7 0x0000000001e40413 MAIN__()  ???:0
+ 8 0x000000000040963d main()  ???:0
+ 9 0x0000000000029590 __libc_start_call_main()  ???:0
+10 0x0000000000029640 __libc_start_main_alias_2()  :0
+11 0x0000000000409555 _start()  ???:0
+=================================
+==== backtrace (tid: 135622) ====
+ 0 0x000000000003e6f0 __GI___sigaction()  :0
+ 1 0x00000000009a4d6b racc0mu_()  ???:0
+ 2 0x00000000009a6da3 nonlr_mp_raccmu__()  ???:0
+ 3 0x00000000009df646 hamil_mp_hamiltmu_()  ???:0
+ 4 0x000000000119090e david_mp_eddav_()  ???:0
+ 5 0x00000000012534d5 elmin_()  ???:0
+ 6 0x0000000001e67467 vamp_IP_electronic_optimization_()  main.f90:0
+ 7 0x0000000001e40413 MAIN__()  ???:0
+ 8 0x000000000040963d main()  ???:0
+ 9 0x0000000000029590 __libc_start_call_main()  ???:0
+10 0x0000000000029640 __libc_start_main_alias_2()  :0
+11 0x0000000000409555 _start()  ???:0
+=================================
+==== backtrace (tid: 135620) ====
+ 0 0x000000000003e6f0 __GI___sigaction()  :0
+ 1 0x00000000009a4d6b racc0mu_()  ???:0
+ 2 0x00000000009a6da3 nonlr_mp_raccmu__()  ???:0
+ 3 0x00000000009df646 hamil_mp_hamiltmu_()  ???:0
+ 4 0x000000000119090e david_mp_eddav_()  ???:0
+ 5 0x00000000012534d5 elmin_()  ???:0
+ 6 0x0000000001e67467 vamp_IP_electronic_optimization_()  main.f90:0
+ 7 0x0000000001e40413 MAIN__()  ???:0
+ 8 0x000000000040963d main()  ???:0
+ 9 0x0000000000029590 __libc_start_call_main()  ???:0
+10 0x0000000000029640 __libc_start_main_alias_2()  :0
+11 0x0000000000409555 _start()  ???:0
+=================================
+10 0x0000000000029640 __libc_start_main_alias_2()  :0
+11 0x0000000000409555 _start()  ???:0
+=================================
+==== backtrace (tid: 135617) ====
+ 0 0x000000000003e6f0 __GI___sigaction()  :0
+ 1 0x00000000009a4d6b racc0mu_()  ???:0
+ 2 0x00000000009a6da3 nonlr_mp_raccmu__()  ???:0
+ 3 0x00000000009df646 hamil_mp_hamiltmu_()  ???:0
+ 4 0x000000000119090e david_mp_eddav_()  ???:0
+ 5 0x00000000012534d5 elmin_()  ???:0
+ 6 0x0000000001e67467 vamp_IP_electronic_optimization_()  main.f90:0
+ 7 0x0000000001e40413 MAIN__()  ???:0
+ 8 0x000000000040963d main()  ???:0
+ 9 0x0000000000029590 __libc_start_call_main()  ???:0
+10 0x0000000000029640 __libc_start_main_alias_2()  :0
+11 0x0000000000409555 _start()  ???:0
+=================================
+forrtl: severe (174): SIGSEGV, segmentation fault occurred
+Image              PC                Routine            Line        Source             
+libc.so.6          00007FAF2B43E6F0  Unknown               Unknown  Unknown
+vasp_std           00000000009A4D6B  Unknown               Unknown  Unknown
+vasp_std           00000000009A6DA3  Unknown               Unknown  Unknown
+vasp_std           00000000009DF646  Unknown               Unknown  Unknown
+vasp_std           000000000119090E  Unknown               Unknown  Unknown
+vasp_std           00000000012534D5  Unknown               Unknown  Unknown
+vasp_std           0000000001E67467  Unknown               Unknown  Unknown
+vasp_std           0000000001E40413  Unknown               Unknown  Unknown
+vasp_std           000000000040963D  Unknown               Unknown  Unknown
+libc.so.6          00007FAF2B429590  Unknown               Unknown  Unknown
+libc.so.6          00007FAF2B429640  __libc_start_main     Unknown  Unknown
+vasp_std           0000000000409555  Unknown               Unknown  Unknown
+forrtl: severe (174): SIGSEGV, segmentation fault occurred
+Image              PC                Routine            Line        Source             
+libc.so.6          00007F48E263E6F0  Unknown               Unknown  Unknown
+vasp_std           00000000009A4D6B  Unknown               Unknown  Unknown
+vasp_std           00000000009A6DA3  Unknown               Unknown  Unknown
+vasp_std           00000000009DF646  Unknown               Unknown  Unknown
+vasp_std           000000000119090E  Unknown               Unknown  Unknown
+vasp_std           00000000012534D5  Unknown               Unknown  Unknown
+vasp_std           0000000001E67467  Unknown               Unknown  Unknown
+vasp_std           0000000001E40413  Unknown               Unknown  Unknown
+vasp_std           000000000040963D  Unknown               Unknown  Unknown
+libc.so.6          00007F48E2629590  Unknown               Unknown  Unknown
+libc.so.6          00007F48E2629640  __libc_start_main     Unknown  Unknown
+vasp_std           0000000000409555  Unknown               Unknown  Unknown
+forrtl: severe (174): SIGSEGV, segmentation fault occurred
+Image              PC                Routine            Line        Source             
+libc.so.6          00007FE6F063E6F0  Unknown               Unknown  Unknown
+vasp_std           00000000009A4D6B  Unknown               Unknown  Unknown
+vasp_std           00000000009A6DA3  Unknown               Unknown  Unknown
+vasp_std           00000000009DF646  Unknown               Unknown  Unknown
+vasp_std           000000000119090E  Unknown               Unknown  Unknown
+vasp_std           00000000012534D5  Unknown               Unknown  Unknown
+vasp_std           0000000001E67467  Unknown               Unknown  Unknown
+vasp_std           0000000001E40413  Unknown               Unknown  Unknown
+vasp_std           000000000040963D  Unknown               Unknown  Unknown
+libc.so.6          00007FE6F0629590  Unknown               Unknown  Unknown
+libc.so.6          00007FE6F0629640  __libc_start_main     Unknown  Unknown
+vasp_std           0000000000409555  Unknown               Unknown  Unknown
+forrtl: severe (174): SIGSEGV, segmentation fault occurred
+Image              PC                Routine            Line        Source             
+libc.so.6          00007F7D5B63E6F0  Unknown               Unknown  Unknown
+vasp_std           00000000009A4D6B  Unknown               Unknown  Unknown
+vasp_std           00000000009A6DA3  Unknown               Unknown  Unknown
+vasp_std           00000000009DF646  Unknown               Unknown  Unknown
+vasp_std           000000000119090E  Unknown               Unknown  Unknown
+vasp_std           00000000012534D5  Unknown               Unknown  Unknown
+vasp_std           0000000001E67467  Unknown               Unknown  Unknown
+vasp_std           0000000001E40413  Unknown               Unknown  Unknown
+vasp_std           000000000040963D  Unknown               Unknown  Unknown
+libc.so.6          00007F7D5B629590  Unknown               Unknown  Unknown
+libc.so.6          00007F7D5B629640  __libc_start_main     Unknown  Unknown
+vasp_std           0000000000409555  Unknown               Unknown  Unknown
+forrtl: severe (174): SIGSEGV, segmentation fault occurred
+Image              PC                Routine            Line        Source             
+libc.so.6          00007F1BBEE3E6F0  Unknown               Unknown  Unknown
+vasp_std           00000000009A4D6B  Unknown               Unknown  Unknown
+vasp_std           00000000009A6DA3  Unknown               Unknown  Unknown
+vasp_std           00000000009DF646  Unknown               Unknown  Unknown
+vasp_std           000000000119090E  Unknown               Unknown  Unknown
+vasp_std           00000000012534D5  Unknown               Unknown  Unknown
+vasp_std           0000000001E67467  Unknown               Unknown  Unknown
+vasp_std           0000000001E40413  Unknown               Unknown  Unknown
+vasp_std           000000000040963D  Unknown               Unknown  Unknown
+libc.so.6          00007F1BBEE29590  Unknown               Unknown  Unknown
+libc.so.6          00007F1BBEE29640  __libc_start_main     Unknown  Unknown
+vasp_std           0000000000409555  Unknown               Unknown  Unknown
+forrtl: severe (174): SIGSEGV, segmentation fault occurred
+Image              PC                Routine            Line        Source             
+libc.so.6          00007F73D343E6F0  Unknown               Unknown  Unknown
+vasp_std           00000000009A4D6B  Unknown               Unknown  Unknown
+vasp_std           00000000009A6DA3  Unknown               Unknown  Unknown
+vasp_std           00000000009DF646  Unknown               Unknown  Unknown
+vasp_std           000000000119090E  Unknown               Unknown  Unknown
+vasp_std           00000000012534D5  Unknown               Unknown  Unknown
+vasp_std           0000000001E67467  Unknown               Unknown  Unknown
+vasp_std           0000000001E40413  Unknown               Unknown  Unknown
+vasp_std           000000000040963D  Unknown               Unknown  Unknown
+libc.so.6          00007F73D3429590  Unknown               Unknown  Unknown
+libc.so.6          00007F73D3429640  __libc_start_main     Unknown  Unknown
+vasp_std           0000000000409555  Unknown               Unknown  Unknown
+forrtl: severe (174): SIGSEGV, segmentation fault occurred
+Image              PC                Routine            Line        Source             
+libc.so.6          00007F618903E6F0  Unknown               Unknown  Unknown
+vasp_std           00000000009A4D6B  Unknown               Unknown  Unknown
+vasp_std           00000000009A6DA3  Unknown               Unknown  Unknown
+vasp_std           00000000009DF646  Unknown               Unknown  Unknown
+vasp_std           000000000119090E  Unknown               Unknown  Unknown
+vasp_std           00000000012534D5  Unknown               Unknown  Unknown
+vasp_std           0000000001E67467  Unknown               Unknown  Unknown
+vasp_std           0000000001E40413  Unknown               Unknown  Unknown
+vasp_std           000000000040963D  Unknown               Unknown  Unknown
+libc.so.6          00007F6189029590  Unknown               Unknown  Unknown
+libc.so.6          00007F6189029640  __libc_start_main     Unknown  Unknown
+vasp_std           0000000000409555  Unknown               Unknown  Unknown
+forrtl: severe (174): SIGSEGV, segmentation fault occurred
+Image              PC                Routine            Line        Source             
+libc.so.6          00007F7484E3E6F0  Unknown               Unknown  Unknown
+vasp_std           00000000009A4D6B  Unknown               Unknown  Unknown
+vasp_std           00000000009A6DA3  Unknown               Unknown  Unknown
+vasp_std           00000000009DF646  Unknown               Unknown  Unknown
+vasp_std           000000000119090E  Unknown               Unknown  Unknown
+vasp_std           00000000012534D5  Unknown               Unknown  Unknown
+vasp_std           0000000001E67467  Unknown               Unknown  Unknown
+vasp_std           0000000001E40413  Unknown               Unknown  Unknown
+vasp_std           000000000040963D  Unknown               Unknown  Unknown
+libc.so.6          00007F7484E29590  Unknown               Unknown  Unknown
+libc.so.6          00007F7484E29640  __libc_start_main     Unknown  Unknown
+vasp_std           0000000000409555  Unknown               Unknown  Unknown
+forrtl: severe (174): SIGSEGV, segmentation fault occurred
+Image              PC                Routine            Line        Source             
+libc.so.6          00007F5978A3E6F0  Unknown               Unknown  Unknown
+vasp_std           00000000009A4D6B  Unknown               Unknown  Unknown
+vasp_std           00000000009A6DA3  Unknown               Unknown  Unknown
+vasp_std           00000000009DF646  Unknown               Unknown  Unknown
+vasp_std           000000000119090E  Unknown               Unknown  Unknown
+vasp_std           00000000012534D5  Unknown               Unknown  Unknown
+vasp_std           0000000001E67467  Unknown               Unknown  Unknown
+vasp_std           0000000001E40413  Unknown               Unknown  Unknown
+vasp_std           000000000040963D  Unknown               Unknown  Unknown
+libc.so.6          00007F5978A29590  Unknown               Unknown  Unknown
+libc.so.6          00007F5978A29640  __libc_start_main     Unknown  Unknown
+vasp_std           0000000000409555  Unknown               Unknown  Unknown
+forrtl: severe (174): SIGSEGV, segmentation fault occurred
+Image              PC                Routine            Line        Source             
+libc.so.6          00007F487D63E6F0  Unknown               Unknown  Unknown
+vasp_std           00000000009A4D6B  Unknown               Unknown  Unknown
+vasp_std           00000000009A6DA3  Unknown               Unknown  Unknown
+vasp_std           00000000009DF646  Unknown               Unknown  Unknown
+vasp_std           000000000119090E  Unknown               Unknown  Unknown
+vasp_std           00000000012534D5  Unknown               Unknown  Unknown
+vasp_std           0000000001E67467  Unknown               Unknown  Unknown
+vasp_std           0000000001E40413  Unknown               Unknown  Unknown
+vasp_std           000000000040963D  Unknown               Unknown  Unknown
+libc.so.6          00007F487D629590  Unknown               Unknown  Unknown
+libc.so.6          00007F487D629640  __libc_start_main     Unknown  Unknown
+vasp_std           0000000000409555  Unknown               Unknown  Unknown

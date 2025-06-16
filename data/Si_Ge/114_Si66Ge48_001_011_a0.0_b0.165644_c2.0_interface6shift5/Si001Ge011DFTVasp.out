@@ -1,0 +1,90 @@
+Si Bulk DFT energetics calculations using VASP\n
+This script is running on comp200.cluster.local in /lustre/projects/Research_Project-T127870/ah1365/task/investigate_artimus/SiGe/20250404210804/DRUN_DFT_VASP/20250428152536/D06/DSHIFT/D05\n
+Job started on: Wed 30 Apr 07:54:14 UTC 2025\n
+ running   16 mpi-ranks, on    1 nodes
+ distrk:  each k-point on   16 cores,    1 groups
+ distr:  one band on   16 cores,    1 groups
+ vasp.6.4.3 19Mar24 (build Oct 22 2024 11:23:12) complex                        
+  
+ POSCAR found type information on POSCAR SiGe
+ POSCAR found :  2 types and     114 ions
+ -----------------------------------------------------------------------------
+|                                                                             |
+|           W    W    AA    RRRRR   N    N  II  N    N   GGGG   !!!           |
+|           W    W   A  A   R    R  NN   N  II  NN   N  G    G  !!!           |
+|           W    W  A    A  R    R  N N  N  II  N N  N  G       !!!           |
+|           W WW W  AAAAAA  RRRRR   N  N N  II  N  N N  G  GGG   !            |
+|           WW  WW  A    A  R   R   N   NN  II  N   NN  G    G                |
+|           W    W  A    A  R    R  N    N  II  N    N   GGGG   !!!           |
+|                                                                             |
+|     You use a magnetic or noncollinear calculation, but did not specify     |
+|     the initial magnetic moment with the MAGMOM tag. Note that a            |
+|     default of 8.772e-3 will be used for all atoms. This ferromagnetic      |
+|     setup may break the symmetry of the crystal, in particular it may       |
+|     rule out finding an antiferromagnetic solution. Thence, we              |
+|     recommend setting the initial magnetic moment manually or verifying     |
+|     carefully that this magnetic setup is desired.                          |
+|                                                                             |
+ -----------------------------------------------------------------------------
+
+ scaLAPACK will be used
+ -----------------------------------------------------------------------------
+|                                                                             |
+|           W    W    AA    RRRRR   N    N  II  N    N   GGGG   !!!           |
+|           W    W   A  A   R    R  NN   N  II  NN   N  G    G  !!!           |
+|           W    W  A    A  R    R  N N  N  II  N N  N  G       !!!           |
+|           W WW W  AAAAAA  RRRRR   N  N N  II  N  N N  G  GGG   !            |
+|           WW  WW  A    A  R   R   N   NN  II  N   NN  G    G                |
+|           W    W  A    A  R    R  N    N  II  N    N   GGGG   !!!           |
+|                                                                             |
+|     For optimal performance we recommend to set                             |
+|       NCORE = 2 up to number-of-cores-per-socket                            |
+|     NCORE specifies how many cores store one orbital (NPAR=cpu/NCORE).      |
+|     This setting can greatly improve the performance of VASP for DFT.       |
+|     The default, NCORE=1 might be grossly inefficient on modern             |
+|     multi-core architectures or massively parallel machines. Do your        |
+|     own testing! More info at https://www.vasp.at/wiki/index.php/NCORE      |
+|     Unfortunately you need to use the default for GW and RPA                |
+|     calculations (for HF NCORE is supported but not extensively tested      |
+|     yet).                                                                   |
+|                                                                             |
+ -----------------------------------------------------------------------------
+
+ LDA part: xc-table for (Slater+PW92), standard interpolation
+ POSCAR, INCAR and KPOINTS ok, starting setup
+ FFT: planning ... GRIDC
+ FFT: planning ... GRID_SOFT
+ FFT: planning ... GRID
+ WAVECAR not read
+ entering main loop
+       N       E                     dE             d eps       ncg     rms          rms(c)
+DAV:   1     0.186252993222E+04    0.18625E+04   -0.20321E+05  8768   0.173E+03
+DAV:   2    -0.344503717521E+03   -0.22070E+04   -0.21305E+04 10256   0.214E+02
+DAV:   3    -0.550853423884E+03   -0.20635E+03   -0.20098E+03 10848   0.573E+01
+DAV:   4    -0.557978231658E+03   -0.71248E+01   -0.70348E+01 10328   0.114E+01
+DAV:   5    -0.558235045271E+03   -0.25681E+00   -0.25573E+00 11592   0.214E+00    0.301E+01
+DAV:   6    -0.550746654782E+03    0.74884E+01   -0.10524E+01 10808   0.814E+00    0.137E+01
+DAV:   7    -0.552262478146E+03   -0.15158E+01   -0.21270E+01 11248   0.113E+01    0.618E+00
+DAV:   8    -0.550107901909E+03    0.21546E+01   -0.10737E+01 11776   0.888E+00    0.225E+00
+DAV:   9    -0.550360391627E+03   -0.25249E+00   -0.73023E+00 11336   0.388E+00    0.260E+00
+DAV:  10    -0.550101050804E+03    0.25934E+00   -0.25940E+00 11112   0.251E+00    0.135E+00
+DAV:  11    -0.550085466794E+03    0.15584E-01   -0.35723E-01 10368   0.888E-01    0.612E-01
+DAV:  12    -0.550080890299E+03    0.45765E-02   -0.83941E-02 10760   0.606E-01    0.399E-01
+DAV:  13    -0.550081042374E+03   -0.15207E-03   -0.29322E-02 10336   0.254E-01    0.291E-01
+DAV:  14    -0.550081183520E+03   -0.14115E-03   -0.57597E-03 10112   0.120E-01    0.168E-01
+DAV:  15    -0.550081216559E+03   -0.33040E-04   -0.16469E-03 10160   0.689E-02    0.639E-02
+DAV:  16    -0.550081195653E+03    0.20906E-04   -0.80639E-04 10344   0.441E-02    0.368E-02
+DAV:  17    -0.550081219116E+03   -0.23463E-04   -0.16664E-04 10016   0.207E-02    0.314E-02
+DAV:  18    -0.550081230771E+03   -0.11655E-04   -0.33700E-05 10328   0.915E-03    0.221E-02
+DAV:  19    -0.550081238918E+03   -0.81466E-05   -0.15288E-05 10336   0.669E-03    0.151E-02
+DAV:  20    -0.550081243859E+03   -0.49420E-05   -0.60667E-06 10360   0.375E-03    0.120E-02
+DAV:  21    -0.550081252086E+03   -0.82268E-05   -0.55580E-06 10288   0.370E-03    0.103E-02
+DAV:  22    -0.550081260294E+03   -0.82081E-05   -0.69621E-06 10240   0.368E-03    0.103E-02
+DAV:  23    -0.550081262420E+03   -0.21260E-05   -0.30740E-06 10544   0.277E-03    0.723E-03
+DAV:  24    -0.550081261555E+03    0.86529E-06   -0.12306E-06 10328   0.188E-03    0.460E-03
+DAV:  25    -0.550081260642E+03    0.91335E-06   -0.68382E-07  9912   0.129E-03    0.317E-03
+DAV:  26    -0.550081260331E+03    0.31075E-06   -0.18345E-07  5472   0.728E-04    0.202E-03
+DAV:  27    -0.550081259777E+03    0.55420E-06   -0.15979E-07  5632   0.563E-04    0.990E-04
+DAV:  28    -0.550081259693E+03    0.83577E-07   -0.67535E-08  5104   0.407E-04
+   1 F= -.55008126E+03 E0= -.55008099E+03  d E =-.539174E-03  mag=     1.0000
+Job ended on: Wed 30 Apr 08:38:51 UTC 2025\n
