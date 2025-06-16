@@ -1,0 +1,88 @@
+Si Bulk DFT energetics calculations using VASP\n
+This script is running on comp041.cluster.local in /lustre/home/ah1365/projects/127870/upgrade_report/case_studies/common/structures/perfect_alloys/Si-Ge\n
+Job started on: Sat 14 Jun 12:27:30 UTC 2025\n
+ running   64 mpi-ranks, on    4 nodes
+ distrk:  each k-point on   64 cores,    1 groups
+ distr:  one band on   16 cores,    4 groups
+ vasp.6.4.3 19Mar24 (build Oct 22 2024 11:23:12) complex                        
+  
+ POSCAR found type information on POSCAR SiGeSiGeSiGeSiGe
+ POSCAR found :  8 types and       8 ions
+ -----------------------------------------------------------------------------
+|                                                                             |
+|           W    W    AA    RRRRR   N    N  II  N    N   GGGG   !!!           |
+|           W    W   A  A   R    R  NN   N  II  NN   N  G    G  !!!           |
+|           W    W  A    A  R    R  N N  N  II  N N  N  G       !!!           |
+|           W WW W  AAAAAA  RRRRR   N  N N  II  N  N N  G  GGG   !            |
+|           WW  WW  A    A  R   R   N   NN  II  N   NN  G    G                |
+|           W    W  A    A  R    R  N    N  II  N    N   GGGG   !!!           |
+|                                                                             |
+|     You use a magnetic or noncollinear calculation, but did not specify     |
+|     the initial magnetic moment with the MAGMOM tag. Note that a            |
+|     default of 0.125 will be used for all atoms. This ferromagnetic         |
+|     setup may break the symmetry of the crystal, in particular it may       |
+|     rule out finding an antiferromagnetic solution. Thence, we              |
+|     recommend setting the initial magnetic moment manually or verifying     |
+|     carefully that this magnetic setup is desired.                          |
+|                                                                             |
+ -----------------------------------------------------------------------------
+
+ scaLAPACK will be used
+ -----------------------------------------------------------------------------
+|                                                                             |
+|               ----> ADVICE to this user running VASP <----                  |
+|                                                                             |
+|     You have a (more or less) 'small supercell' and for smaller cells       |
+|     it is recommended to use the reciprocal-space projection scheme!        |
+|     The real-space optimization is not efficient for small cells and it     |
+|     is also less accurate ...                                               |
+|     Therefore, set LREAL=.FALSE. in the INCAR file.                         |
+|                                                                             |
+ -----------------------------------------------------------------------------
+
+ LDA part: xc-table for (Slater+PW92), standard interpolation
+ POSCAR, INCAR and KPOINTS ok, starting setup
+ FFT: planning ... GRIDC
+ FFT: planning ... GRID_SOFT
+ FFT: planning ... GRID
+ WAVECAR not read
+ entering main loop
+       N       E                     dE             d eps       ncg     rms          rms(c)
+DAV:   1     0.123915977261E+03    0.12392E+03   -0.14069E+04  8960   0.161E+03
+DAV:   2    -0.291526636007E+02   -0.15307E+03   -0.14741E+03 11836   0.196E+02
+DAV:   3    -0.387319730477E+02   -0.95793E+01   -0.94026E+01 11424   0.480E+01
+DAV:   4    -0.389532235085E+02   -0.22125E+00   -0.21436E+00 11100   0.733E+00
+DAV:   5    -0.389625036655E+02   -0.92802E-02   -0.92097E-02 10584   0.115E+00    0.756E+00
+DAV:   6    -0.385954892034E+02    0.36701E+00   -0.35677E-01 10280   0.279E+00    0.361E+00
+DAV:   7    -0.385428376782E+02    0.52652E-01   -0.16915E-01 10104   0.216E+00    0.612E-01
+DAV:   8    -0.385469410482E+02   -0.41034E-02   -0.34789E-02  9996   0.113E+00    0.387E-01
+DAV:   9    -0.385503081433E+02   -0.33671E-02   -0.67080E-03 10084   0.547E-01    0.129E-01
+DAV:  10    -0.385505667601E+02   -0.25862E-03   -0.58881E-04 10176   0.182E-01    0.658E-02
+DAV:  11    -0.385506039893E+02   -0.37229E-04   -0.12397E-04 10480   0.628E-02    0.225E-02
+DAV:  12    -0.385506218814E+02   -0.17892E-04   -0.59982E-05  9604   0.465E-02    0.750E-03
+DAV:  13    -0.385506225354E+02   -0.65398E-06   -0.81583E-06 10840   0.144E-02    0.356E-03
+DAV:  14    -0.385506230075E+02   -0.47214E-06   -0.18595E-06  9952   0.798E-03    0.131E-03
+DAV:  15    -0.385506231060E+02   -0.98463E-07   -0.29292E-07  6104   0.238E-03
+ -----------------------------------------------------------------------------
+|                                                                             |
+|           W    W    AA    RRRRR   N    N  II  N    N   GGGG   !!!           |
+|           W    W   A  A   R    R  NN   N  II  NN   N  G    G  !!!           |
+|           W    W  A    A  R    R  N N  N  II  N N  N  G       !!!           |
+|           W WW W  AAAAAA  RRRRR   N  N N  II  N  N N  G  GGG   !            |
+|           WW  WW  A    A  R   R   N   NN  II  N   NN  G    G                |
+|           W    W  A    A  R    R  N    N  II  N    N   GGGG   !!!           |
+|                                                                             |
+|     Your highest band is occupied at some k-points! Unless you are          |
+|     performing a calculation for an insulator or semiconductor, without     |
+|     unoccupied bands, you have included TOO FEW BANDS!! Please increase     |
+|     the parameter NBANDS in file INCAR to ensure that the highest band      |
+|     is unoccupied at all k-points. It is always recommended to include      |
+|     a few unoccupied bands to accelerate the convergence of                 |
+|     molecular-dynamics runs (even for insulators or semiconductors),        |
+|     since the presence of unoccupied bands improves wavefunction            |
+|     prediction and helps to suppress 'band-crossings'.                      |
+|                                                                             |
+ -----------------------------------------------------------------------------
+
+   1 F= -.38550623E+02 E0= -.38550511E+02  d E =-.224698E-03  mag=     1.0000
+Job ended on: Sat 14 Jun 12:28:21 UTC 2025\n
