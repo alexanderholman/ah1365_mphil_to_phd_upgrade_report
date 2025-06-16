@@ -1,0 +1,86 @@
+Job started on: Tue Jun  3 10:58:46 AM UTC 2025
+ running    1 mpi-ranks, with   20 threads/rank, on    1 nodes
+ distrk:  each k-point on    1 cores,    1 groups
+ distr:  one band on    1 cores,    1 groups
+ vasp.6.4.3 19Mar24 (build Nov 20 2024 16:33:01) complex                         
+ POSCAR found type information on POSCAR Ge
+ POSCAR found :  1 types and       8 ions
+ Reading from existing POTCAR
+ -----------------------------------------------------------------------------
+|                                                                             |
+|           W    W    AA    RRRRR   N    N  II  N    N   GGGG   !!!           |
+|           W    W   A  A   R    R  NN   N  II  NN   N  G    G  !!!           |
+|           W    W  A    A  R    R  N N  N  II  N N  N  G       !!!           |
+|           W WW W  AAAAAA  RRRRR   N  N N  II  N  N N  G  GGG   !            |
+|           WW  WW  A    A  R   R   N   NN  II  N   NN  G    G                |
+|           W    W  A    A  R    R  N    N  II  N    N   GGGG   !!!           |
+|                                                                             |
+|     You use a magnetic or noncollinear calculation, but did not specify     |
+|     the initial magnetic moment with the MAGMOM tag. Note that a            |
+|     default of 0.125 will be used for all atoms. This ferromagnetic         |
+|     setup may break the symmetry of the crystal, in particular it may       |
+|     rule out finding an antiferromagnetic solution. Thence, we              |
+|     recommend setting the initial magnetic moment manually or verifying     |
+|     carefully that this magnetic setup is desired.                          |
+|                                                                             |
+ -----------------------------------------------------------------------------
+
+ scaLAPACK will be used
+ Reading from existing POTCAR
+ -----------------------------------------------------------------------------
+|                                                                             |
+|               ----> ADVICE to this user running VASP <----                  |
+|                                                                             |
+|     You have a (more or less) 'small supercell' and for smaller cells       |
+|     it is recommended to use the reciprocal-space projection scheme!        |
+|     The real-space optimization is not efficient for small cells and it     |
+|     is also less accurate ...                                               |
+|     Therefore, set LREAL=.FALSE. in the INCAR file.                         |
+|                                                                             |
+ -----------------------------------------------------------------------------
+
+ LDA part: xc-table for (Slater+PW92), standard interpolation
+ POSCAR, INCAR and KPOINTS ok, starting setup
+ FFT: planning ... GRIDC
+ FFT: planning ... GRID_SOFT
+ FFT: planning ... GRID
+ WAVECAR not read
+ entering main loop
+       N       E                     dE             d eps       ncg     rms          rms(c)
+DAV:   1     0.146855910322E+03    0.14686E+03   -0.14205E+04  1600   0.165E+03
+DAV:   2    -0.231225172266E+02   -0.16998E+03   -0.16434E+03  2084   0.196E+02
+DAV:   3    -0.351207574843E+02   -0.11998E+02   -0.11734E+02  2044   0.534E+01
+DAV:   4    -0.353867989113E+02   -0.26604E+00   -0.25420E+00  1976   0.729E+00
+DAV:   5    -0.353967957547E+02   -0.99968E-02   -0.99387E-02  1852   0.931E-01    0.589E+00
+DAV:   6    -0.351150575974E+02    0.28174E+00   -0.22525E-01  1816   0.236E+00    0.278E+00
+DAV:   7    -0.350805096452E+02    0.34548E-01   -0.11467E-01  1812   0.184E+00    0.521E-01
+DAV:   8    -0.350830672135E+02   -0.25576E-02   -0.14417E-02  1816   0.807E-01    0.346E-01
+DAV:   9    -0.350850937378E+02   -0.20265E-02   -0.30527E-03  1760   0.412E-01    0.116E-01
+DAV:  10    -0.350852521661E+02   -0.15843E-03   -0.20777E-04  1848   0.131E-01    0.147E-02
+DAV:  11    -0.350852608250E+02   -0.86589E-05   -0.24580E-05  1868   0.319E-02    0.850E-03
+DAV:  12    -0.350852650747E+02   -0.42497E-05   -0.10864E-05  1760   0.265E-02    0.293E-03
+DAV:  13    -0.350852655029E+02   -0.42817E-06   -0.65552E-07  1612   0.616E-03    0.846E-04
+DAV:  14    -0.350852654078E+02    0.95045E-07   -0.10175E-07  1040   0.261E-03
+ -----------------------------------------------------------------------------
+|                                                                             |
+|           W    W    AA    RRRRR   N    N  II  N    N   GGGG   !!!           |
+|           W    W   A  A   R    R  NN   N  II  NN   N  G    G  !!!           |
+|           W    W  A    A  R    R  N N  N  II  N N  N  G       !!!           |
+|           W WW W  AAAAAA  RRRRR   N  N N  II  N  N N  G  GGG   !            |
+|           WW  WW  A    A  R   R   N   NN  II  N   NN  G    G                |
+|           W    W  A    A  R    R  N    N  II  N    N   GGGG   !!!           |
+|                                                                             |
+|     Your highest band is occupied at some k-points! Unless you are          |
+|     performing a calculation for an insulator or semiconductor, without     |
+|     unoccupied bands, you have included TOO FEW BANDS!! Please increase     |
+|     the parameter NBANDS in file INCAR to ensure that the highest band      |
+|     is unoccupied at all k-points. It is always recommended to include      |
+|     a few unoccupied bands to accelerate the convergence of                 |
+|     molecular-dynamics runs (even for insulators or semiconductors),        |
+|     since the presence of unoccupied bands improves wavefunction            |
+|     prediction and helps to suppress 'band-crossings'.                      |
+|                                                                             |
+ -----------------------------------------------------------------------------
+
+   1 F= -.35085265E+02 E0= -.35085062E+02  d E =-.405893E-03  mag=     1.0000
+Job ended on: Tue Jun  3 11:28:23 AM UTC 2025
