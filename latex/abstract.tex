@@ -1,0 +1,22 @@
+\begin{abstract}
+Material interfaces underpin the performance of a wide range of functional devices, from microelectronic transistors to
+catalytic systems. Their properties often emerge from interfacial effects not captured by bulk characterisation, making
+the prediction of interface stability a critical and computationally demanding task. While Density Functional Theory
+(DFT) provides accurate energetics, its high cost limits its applicability to large-scale screening. This study
+investigates whether machine-learned interatomic potentials (MLPs), specifically the MACE framework, can replicate
+DFT-derived rankings of interface favourability across a diverse set of semiconductor heterostructures.
+
+Interfaces were generated using the ARTEMIS toolkit across three compositional stages: initial Si|Ge binaries, expanded Si|Ge
+binaries, and a broader C-Si-Ge-Sn set. Each interface structure was independently relaxed using both DFT and MACE.
+Energies were compared using rank correlation metrics (Spearman $\rho$, Kendall $\tau$), absolute error measures (RMSE, MAE),
+and Top-$N$ overlap to assess rank preservation.
+
+Results indicate that MACE\rqs predictive performance is system-dependent. Rank correlation was weak for silicon-only
+interfaces but improved markedly for chemically ordered alloy systems, such as SiGe. Cross-method evaluations suggested
+that structural relaxation, rather than energy evaluation, is the primary source of deviation between DFT and MLP
+predictions.
+
+Future work will focus on training delta-learning models to correct systematic MLP errors using DFT data and on
+developing a predictive machine-learning interface (MLI) model based on slab features. The role of surface orientation
+and structural features in determining interface stability will also be examined.
+\end{abstract}

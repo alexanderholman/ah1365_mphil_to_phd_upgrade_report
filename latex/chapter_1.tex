@@ -1,0 +1,182 @@
+\chapter{Introduction}
+\label{chapter:introduction}
+
+Material interfaces are critical to the function and design of advanced solid-state systems. In semiconductors, they
+govern charge transport, carrier confinement, defect formation, and phase stability. In energy devices, they regulate
+ion exchange, chemical compatibility, and thermal response. In emerging heterostructures, interfaces can even induce
+novel behaviours not present in the constituent materials; such as encapsulated metastable phases or engineered Dirac
+cones. As device dimensions shrink and surface-to-volume ratios rise, the influence of interfaces grows, placing
+renewed emphasis on their accurate prediction and control.
+
+Yet despite their importance, predicting which interfaces are energetically favourable remains a significant challenge.
+Interface stability is not solely determined by bulk lattice matching, but also by local bonding, chemical
+inhomogeneity, and atomic-scale reconstruction. The structural space is vast: each pair of surfaces can be stacked with
+arbitrary lateral shifts, terminations, and alignments, resulting in a combinatorial explosion of configurations.
+Strain relaxation, interlayer interactions, and charge transfer further complicate the energy landscape. Accurately
+assessing favourability across this space demands a balance between resolution and scale that conventional methods
+struggle to achieve.
+
+First-principles techniques such as Density Functional Theory (DFT) remain the standard for computing accurate
+interfacial energies and relaxations. However, their high computational cost, scaling cubically with system size,
+renders exhaustive sampling intractable for realistic supercells, which often comprise hundreds of atoms. This
+bottleneck precludes broad screening efforts, especially when exploring multiple chemistries, orientations, and
+stacking arrangements. As such, DFT is best suited to final validation rather than initial discovery.
+
+To address this, the present project explores the use of machine-learned interatomic potentials (MLPs) for scalable
+interface screening. MLPs are data-driven models trained to reproduce DFT-level energies and forces, but at orders of
+magnitude lower cost. In particular, this work focuses on the MACE framework; an equivariant message-passing
+architecture that preserves rotational symmetries and captures local atomic interactions with high fidelity. By using
+MACE to rapidly evaluate large numbers of candidate interfaces, it becomes possible to rank structures by predicted
+stability and prioritise high-value configurations for subsequent DFT refinement.
+
+This approach supports a hierarchical modelling workflow in which DFT and MLPs are used in tandem: MLPs for breadth,
+and DFT for depth. It enables rigorous testing of whether MLPs can replicate DFT-derived favourability rankings across
+a diverse set of semiconductor systems, including homostructures (e.g. Si|Si) and heterostructures(e.g. Si|Ge, Ge|C).
+Moreover, it lays the foundation for further improvements through techniques such as delta-learning, structure-based
+prediction models, and surface-to-interface generalisation.
+
+The remainder of this report is structured as follows:
+
+\begin{itemize}
+    \item \textbf{Chapter~\ref{chapter:background}} introduces the theoretical foundations and relevant literature,
+    covering interface energetics, DFT formalism, and the development of MLPs.
+    \item \textbf{Chapter~\ref{chapter:computational_investigation}} presents a benchmarking study comparing MLP and
+    DFT predictions of interface favourability, including statistical correlation analysis and system-specific case
+    studies.
+    \item \textbf{Chapter~\ref{chapter:next_steps}} outlines planned extensions to the current methodology, including
+    the development of delta-corrected potentials and predictive models linking surface properties to interface
+    behaviour.
+    \item \textbf{Chapter~\ref{chapter:conclusions}} concludes with a discussion of findings, limitations, and broader
+    implications for autonomous materials modelling and the design of functional heterostructures.
+\end{itemize}
+
+Through this integrated modelling framework, the project seeks to reduce the cost and uncertainty of interface
+prediction while preserving the fidelity needed for scientific insight and technological relevance.
+
+\section{Motivation for the Research}
+\label{section:motivation}
+
+Interfaces rarely form under ideal conditions. Instead, they emerge through complex, often non-equilibrium processes
+such as high-temperature annealing, epitaxial growth, and chemically driven surface reconstructions. These dynamics
+frequently trap systems in metastable configurations or generate local disorder, resulting in atomic arrangements that
+deviate significantly from those predicted by ideal lattice-matching rules. Such complexity challenges efforts to model
+interface behaviour using conventional approaches alone.
+
+While Density Functional Theory (DFT) provides a reliable route to total energy prediction and structural relaxation,
+its unfavourable scaling with system size ($\mathcal{O}(N^3)$ in electron count) severely limits its use in
+high-throughput workflows. In particular, DFT becomes prohibitive when applied to interface supercells exceeding a few
+hundred atoms, as required to capture long-range strain, multi-layer reconstruction, or compositional variation.
+Moreover, standard DFT approximations, such as semi-local exchange-correlation functionals, may fail to capture
+interfacial band alignments, polarisation effects, or weak van der Waals interactions critical to layered systems.
+
+Machine-learned interatomic potentials (MLPs) offer a promising route to overcoming these limitations. By learning to
+emulate DFT-level energies and forces, MLPs like MACE provide a means to conduct large-scale structure relaxations and
+energy evaluations at dramatically reduced cost. This enables exploration of broader configurational spaces, including
+low-symmetry systems and extended defects, that would otherwise remain intractable. However, this advantage is only
+realised if the models generalise well across diverse interfacial environments.
+
+The core motivation of this work, therefore, is to assess whether MLPs can replicate the DFT-derived ordering of
+interface favourability, defined here in terms of relaxed formation energy, across a wide range of semiconductor
+heterostructures. The benchmarking in Chapter~\ref{chapter:computational_investigation} demonstrates that MLPs can
+often preserve the relative rankings of DFT energies, especially in chemically similar systems. However, notable
+discrepancies arise in cases such as pure-Si interfaces, where model performance degrades, prompting the need for
+refinement or retraining. These results motivate the delta-learning strategies explored in
+Chapter~\ref{chapter:next_steps}, which aim to correct systematic MLP-DFT residuals through supervised learning on
+interface-specific error distributions.
+
+In addition to correcting prediction accuracy, this research investigates whether interface favourability can be
+inferred directly from structural or surface-level features. Chapter~\ref{chapter:next_steps} proposes the use of
+learned models that map surface properties to interfacial energies, potentially bypassing the need for full supercell
+construction. This complements the structure-generation pipelines, based on ARTEMIS, that systematically enumerate
+viable interface candidates across various stacking shifts and Miller plane pairings.
+
+Ultimately, this project is motivated by the need for more efficient and predictive tools to accelerate the design of
+functional heterostructures. By embedding MLPs within automated screening workflows and augmenting them with
+delta-learning corrections and structure-based heuristics, it becomes possible to bridge the gap between physical
+realism and computational tractability. In doing so, this research contributes to the broader aim of enabling scalable,
+data-driven exploration of complex interfacial systems; particularly in regimes where conventional symmetry-based rules
+or bulk-derived heuristics break down.
+
+\section{Research Objectives}
+\label{section:research_objectives}
+
+This project aims to evaluate and enhance the use of machine-learned interatomic potentials (MLPs) for predicting the
+relative stability of material interfaces. By replacing expensive density functional theory (DFT) calculations in the
+early stages of interface screening, MLPs offer a route to scalable evaluation across diverse chemical systems and
+stacking configurations.
+
+Interfaces govern the functional behaviour of materials in microelectronics, energy storage, and optoelectronics,
+mediating phenomena such as band alignment, carrier confinement, and local defect formation. However, the
+configurational landscape of interface structures is combinatorially large. Even for lattice-matched systems,
+variations in Miller planes, interfacial shifts, and terminations can lead to significant changes in formation energy
+and electronic response. Traditional DFT methods, while accurate, are computationally prohibitive when applied to
+hundreds or thousands of such configurations.
+
+This work builds on the integration of MLPs, particularly the MACE model, into high-throughput interface generation and
+evaluation pipelines. It focuses not only on energy prediction, but also on favourability ranking, robustness to
+system-specific errors, and hybrid workflows where MLPs are used as a pre-screening stage ahead of final DFT validation.
+
+\paragraph{The research addresses the following core objectives:}
+
+\begin{enumerate}
+    \item \textbf{Benchmark MLP-predicted rankings against DFT across diverse interfaces.} Using MACE-evaluated
+    relaxations and energies, this study quantifies how well MLPs preserve the DFT ordering of interface favourability
+    across multiple group-IV homostructures and heterostructures.
+
+    \item \textbf{Diagnose system-specific discrepancies and explore delta-learning corrections.} Particular attention
+    is given to cases, such as pure-Si systems, where MLP rank fidelity degrades. Chapter~\ref{chapter:next_steps}
+    proposes training delta models to correct these systematic energy errors.
+
+    \item \textbf{Develop structure-based predictors of interface energy.} Surface and slab-level features (e.g.
+    orientation, element type, symmetry, strain) will be used to train models capable of predicting favourability
+    prior to full interface assembly, reducing reliance on supercell enumeration.
+
+    \item \textbf{Integrate MLPs and predictors into automated workflows.} Tools such as ARTEMIS and RAFFLE will be
+    extended to incorporate MLP-based scoring or filtering, enabling efficient identification of favourable
+    configurations before expensive DFT refinement.
+\end{enumerate}
+
+In the long term, this approach supports scalable interface screening, facilitates the design of functional
+heterostructures, and lays groundwork for autonomous modelling pipelines. It targets regimes where standard coherence
+rules or bulk-derived heuristics fail, providing a data-driven alternative grounded in atomic-level energetics.
+
+\section{Scientific and Practical Significance}
+\label{section:scientific_and_practical_significance}
+
+Material interfaces are central to the behaviour of functional solids, especially at the nanoscale where surface and
+interfacial effects dominate bulk properties. In semiconductors, they define charge transport pathways by setting
+potential barriers and band offsets. In batteries, they regulate ionic conductivity, chemical stability, and
+degradation kinetics. In photovoltaics and quantum devices, interfacial dipoles, tunnelling channels, and confinement
+effects underpin key device operations.
+
+Subtle differences in stacking, registry, or atomic reconstruction can shift critical electronic properties by several
+electronvolts; altering conductivity, carrier lifetimes, or activation barriers. These shifts emerge from a complex
+interplay of interfacial strain, chemical bonding, and electronic redistribution, and are sensitive to both global
+structure and local environment. As such, predicting interface stability and functionality from atomic configuration
+alone remains a demanding task.
+
+While Density Functional Theory (DFT) offers a robust ab initio framework for computing interfacial energies and
+electronic properties, its computational cost scales poorly with system size. Realistic supercells, often comprising
+hundreds of atoms, are therefore difficult to study in large numbers. DFT is well-suited to final validation, but
+ill-suited to exhaustive exploration across configurational space.
+
+Machine learning (ML) models, particularly machine-learned interatomic potentials (MLPs), provide a way forward. When
+trained on DFT data, MLPs can reproduce formation energies and atomic forces at orders-of-magnitude lower cost, making
+them suitable for broad screening applications. Their integration into automated workflows, using tools such as ARTEMIS
+and RAFFLE, enables systematic generation and evaluation of interface candidates across crystallographic orientations,
+stacking shifts, and chemical combinations.
+
+Importantly, the utility of ML does not stop at static energetics. Many applications require insight into how
+interfaces behave under external stimuli; electric fields, temperature gradients, or chemical exposure. Emerging
+interfacial phases, such as field-tunable dielectric layers or metastable heterostructures, challenge traditional
+heuristics and call for more adaptive and scalable modelling approaches.
+
+This project contributes to that broader effort. It assesses the ability of MLPs, specifically MACE, to recover
+DFT-derived favourability rankings, identifies where discrepancies arise, and proposes delta-learning corrections to
+address them. It also lays groundwork for predictive models that estimate interface properties from top and bottom
+slabs, enabling pre-screening before full interface construction. By focusing on group-IV semiconductor systems and
+both homostructure and heterostructure cases, this work targets a class of technologically relevant interfaces where
+modelling uncertainty remains high and conventional rules often fail.
+
+Ultimately, this research supports the advancement of data-driven, scalable methods for interface discovery; bridging
+the gap between computational feasibility and the physical fidelity required for next-generation materials design.
