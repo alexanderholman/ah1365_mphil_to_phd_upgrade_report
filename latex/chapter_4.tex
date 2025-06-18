@@ -1,161 +1,153 @@
-\chapter{Next Steps}
-\label{chapter:next_steps}
+\chapter{Next Steps} \label{chapter:next_steps}
 
-\section{Further Steps Towards Rank Preservation}
-\label{section:rank_preservation}
+\section{Further Steps Towards Rank Preservation} \label{section:rank_preservation}
 
 \subsection{Motivation: Why Rank Preservation Is Central}
-The ability to preserve DFT-calculated interface rankings is critical for efficient high-throughput screening of
-material systems. Absolute interface energies are less relevant in isolation if the relative favourability of competing
-configurations is misrepresented. This motivates the need for improving rank fidelity in machine-learned models such as
-MACE.
+
+The ability to preserve DFT-calculated interface rankings is critical for efficient high-throughput screening of material systems. Absolute interface energies are less relevant in isolation if the relative favourability of competing configurations is misrepresented. This motivates the need for improving rank fidelity in machine-learned models such as MACE.
 
 \subsection{Comparison of Training Strategies}
+
 Future work will systematically compare three training paradigms to address limitations identified in Chapter 3:
 
 \subsubsection{General MACE model (baseline)}
-This baseline model is trained on broad-spectrum, bulk-focused data. While it demonstrates some transferability, its
-limitations are apparent in systems with interfacial complexity; especially silicon-rich or structurally diverse cases.
+
+This baseline model is trained on broad-spectrum, bulk-focused data. While it demonstrates some transferability, its limitations are apparent in systems with interfacial complexity; especially silicon-rich or structurally diverse cases.
 
 \subsubsection{Interface-specific fine-tuning}
-Here, the same model is refined using additional interface-representative configurations, tailored to improve accuracy
-in the interfacial regime. This targets data-domain mismatch as a key source of ranking degradation.
+
+Here, the same model is refined using additional interface-representative configurations, tailored to improve accuracy in the interfacial regime. This targets data-domain mismatch as a key source of ranking degradation.
 
 \subsubsection{Delta-learning (ΔE = E\_DFT − E\_MLP; Pitfield 2024-inspired)}
-This strategy applies a correction to existing MLP predictions by learning residuals between MLP and DFT energies. It
-allows the reuse of baseline MLPs while introducing physics-informed calibration, improving ranking accuracy without
-fully retraining the model.
+
+This strategy applies a correction to existing MLP predictions by learning residuals between MLP and DFT energies. It allows the reuse of baseline MLPs while introducing physics-informed calibration, improving ranking accuracy without fully retraining the model.
 
 % TODO: Add equation here for ΔE = E_DFT − E_MLP
 
 \subsection{Planned Benchmarking Criteria}
 
 \subsubsection{Spearman ρ, Kendall τ, Top-N overlap}
-Performance will be assessed using statistical correlation coefficients and overlap in Top-N rankings between DFT and
-MLP predictions. These metrics will provide fine-grained diagnostics of rank preservation.
+
+Performance will be assessed using statistical correlation coefficients and overlap in Top-N rankings between DFT and MLP predictions. These metrics will provide fine-grained diagnostics of rank preservation.
 
 % TODO: Insert table summarising benchmarking metrics (Spearman, Kendall, Top-N) and their interpretations
 
 \subsubsection{Domain robustness (Si, Ge, hetero-interfaces)}
-Benchmarks will be applied across chemically diverse systems (C, Si, Ge, Sn), crystallographic orientations, and
-stacking shifts. Key figures include \texttt{results\_upper\_Si\_spearman\_dft\_dft\_vs\_dft\_mlp\_valid.png} and
-\texttt{results\_lower\_Ge\_kendall\_dft@dft\_vs\_dft@mlp\_invalid.png}. Reference datasets include
-\texttt{results.csv} and \texttt{stats.csv} (1381 interfaces; no train/test partition defined).
+
+Benchmarks will be applied across chemically diverse systems (C, Si, Ge, Sn), crystallographic orientations, and stacking shifts. Key figures include \texttt{results\_upper\_Si\_spearman\_dft\_dft\_vs\_dft\_mlp\_valid.png} and \texttt{results\_lower\_Ge\_kendall\_dft@dft\_vs\_dft@mlp\_invalid.png}. Reference datasets include \texttt{results.csv} and \texttt{stats.csv} (1381 interfaces; no train/test partition defined).
 
 \paragraph{Additional Limitation:}
-No explicit mechanism yet exists to identify and flag phase boundary rank inversions, though these could be extracted
-from \texttt{\_rank\_distance} fields. Future work may focus on visualising such transitions as indicators of model
-degradation.
+
+No explicit mechanism yet exists to identify and flag phase boundary rank inversions, though these could be extracted from \texttt{\_rank\_distance} fields. Future work may focus on visualising such transitions as indicators of model degradation.
 
 % TODO: Add proposed figure example or sketch of phase boundary inversion analysis
 
 \paragraph{Additional Limitation:}
-Error magnitude may scale with system size, particularly in Sn-rich systems. However, no current analysis addresses
-this dependency. A robustness study is recommended.
+
+Error magnitude may scale with system size, particularly in Sn-rich systems. However, no current analysis addresses this dependency. A robustness study is recommended.
 
 % TODO: Add figure showing error vs. system size if/when analysis is complete
 
 \paragraph{Additional Limitation:}
-Missing or failed calculations are marked via \texttt{is\_broken}, but no summary or completeness tracker has been
-implemented. Future iterations may benefit from such a tool for data transparency.
+
+Missing or failed calculations are marked via \texttt{is\_broken}, but no summary or completeness tracker has been implemented. Future iterations may benefit from such a tool for data transparency.
 
 \section{Surface Effects on Interface Favourability}
+
 \label{section:surface_effects}
 
 \subsection{Surface Energy as a Proxy for Interface Stability}
-There is a plausible hypothesis that lower-energy surfaces form more stable interfaces. Preliminary evidence supports
-this, particularly where interface terminations closely resemble bulk facets.
+
+There is a plausible hypothesis that lower-energy surfaces form more stable interfaces. Preliminary evidence supports this, particularly where interface terminations closely resemble bulk facets.
 
 \subsection{Systematic Correlation Studies}
 
 \subsubsection{Analysis of surface-vs-interface rank correlations}
-Using \texttt{surface\_energy\_matrix.csv}, future work will map surface energies to corresponding interface
-$\Delta E_\mathrm{IF}$ values, quantifying the predictive power of slab properties. No current figure exists for this
-correlation, but it is planned for generation and inclusion in subsequent updates.
+
+Using \texttt{surface\_energy\_matrix.csv}, future work will map surface energies to corresponding interface $\Delta E_\mathrm{IF}$ values, quantifying the predictive power of slab properties. No current figure exists for this correlation, but it is planned for generation and inclusion in subsequent updates.
 
 % TODO: Add figure showing surface energy vs ΔE_IF correlation
 
 \subsection{Implications for Interface Screening}
 
 \subsubsection{Can we pre-screen interfaces based on top/bottom slab surfaces?}
-If consistent correlations are confirmed, surface energies could act as lightweight proxies in early screening
-pipelines, reducing the need for full interface enumeration.
+
+If consistent correlations are confirmed, surface energies could act as lightweight proxies in early screening pipelines, reducing the need for full interface enumeration.
 
 \section{Crystallographic Structure and Interface Behaviour}
 
 \subsection{Symmetry and Orientation Effects}
-Parent symmetry (e.g. fcc vs diamond) and interface orientation (e.g. \{100\}|\{111\}) influence ranking fidelity. This
-necessitates a structural audit of prediction robustness.
+
+Parent symmetry (e.g. fcc vs diamond) and interface orientation (e.g. \{100\}|\{111\}) influence ranking fidelity. This necessitates a structural audit of prediction robustness.
 
 \subsection{Structure-Resolved Performance Analysis}
-The impact of Miller indices and lattice symmetry on rank preservation will be explored using grouped evaluations, with
-examples from \texttt{results\_lower\_Ge\_upper\_Sn\_kendall\_dft@dft\_vs\_mlp@mlp\_valid.png}.
+
+The impact of Miller indices and lattice symmetry on rank preservation will be explored using grouped evaluations, with examples from \texttt{results\_lower\_Ge\_upper\_Sn\_kendall\_dft@dft\_vs\_mlp@mlp\_valid.png}.
 
 % TODO: Add figure grouping ranking performance by crystal type and orientation
 
 \subsection{Extension to Broader Crystal Families}
-If resources allow, extension to bcc and hcp systems could test the generality of the findings, though this lies beyond
-the scope of current data.
+
+If resources allow, extension to bcc and hcp systems could test the generality of the findings, though this lies beyond the scope of current data.
 
 \section{Integration of RAFFLE into Structure Generation}
 
 \subsection{Motivation for RAFFLE Use: Enhanced Interface Diversity}
-ARTEMIS-generated stacks, though consistent, impose alignment constraints. RAFFLE offers a mechanism to interpolate
-interfacial zones, increase disorder, or induce registry shifts.
+
+ARTEMIS-generated stacks, though consistent, impose alignment constraints. RAFFLE offers a mechanism to interpolate interfacial zones, increase disorder, or induce registry shifts.
 
 \subsection{Current ARTEMIS-Only Pipeline: Limitations}
-Aligned stacking methods limit structural exploration and may fail to capture intermediate configurations present in
-experimental systems.
+
+Aligned stacking methods limit structural exploration and may fail to capture intermediate configurations present in experimental systems.
 
 \subsection{RAFFLE Capabilities: Refill Methods, Semi-Coherent Boundaries}
-Using the \texttt{raffle\_generator} framework and reference energies from MACE, RAFFLE allows stochastic structural
-sampling within bounded interface zones. Visuals such as \texttt{upper\_a45\_b45\_c45.png} and
-\texttt{lower\_a45\_b45\_c45.png} represent generic orientation snapshots and are not RAFFLE-specific.
+
+Using the \texttt{raffle\_generator} framework and reference energies from MACE, RAFFLE allows stochastic structural sampling within bounded interface zones. Visuals such as \texttt{upper\_a45\_b45\_c45.png} and \texttt{lower\_a45\_b45\_c45.png} represent generic orientation snapshots and are not RAFFLE-specific.
 
 \subsection{Planned Integration Workflow}
 
 \subsubsection{Combine ARTEMIS for stacking + RAFFLE for region refinement}
-Initial slabs and orientations will be generated via ARTEMIS, while RAFFLE will introduce configurational variation
-within interfacial volumes.
+
+Initial slabs and orientations will be generated via ARTEMIS, while RAFFLE will introduce configurational variation within interfacial volumes.
 
 \subsubsection{Target systems: strained, incoherent, or alloyed interfaces}
-This approach is especially relevant to Si|Sn and Ge|Sn systems where lattice mismatch or registry discontinuity poses
-challenges for baseline methods.
+
+This approach is especially relevant to Si|Sn and Ge|Sn systems where lattice mismatch or registry discontinuity poses challenges for baseline methods.
 
 \subsection{Validation and Comparison with ARTEMIS-Only Structures}
-Relaxation comparisons will be made using both DFT and MLP pipelines to quantify RAFFLE\rqs impact on interface energy
-diversity and ranking stability.
+
+Relaxation comparisons will be made using both DFT and MLP pipelines to quantify RAFFLE\rqs impact on interface energy diversity and ranking stability.
 
 % TODO: Add schematic or figure comparing ARTEMIS-only and RAFFLE-refined structure sets
 
 \section{Towards a Machine-Learned Interface (MLI) Predictor}
 
 \subsection{Objective: Predict Likely Interface Configurations from Material Pairs}
-The longer-term aim is to develop a model that, given a pair of slab surfaces, can predict the favourability of
-resulting interfaces without full relaxation or enumeration.
+
+The longer-term aim is to develop a model that, given a pair of slab surfaces, can predict the favourability of resulting interfaces without full relaxation or enumeration.
 
 \subsection{Feature and Descriptor Design}
 
 \subsubsection{Surface energies, Miller planes, atomic densities}
-Descriptor sets will include known surface energetics and crystallographic identifiers, all extractable from existing
-data (\texttt{surface\_energy\_matrix.csv}).
+
+Descriptor sets will include known surface energetics and crystallographic identifiers, all extractable from existing data (\texttt{surface\_energy\_matrix.csv}).
 
 \subsubsection{Composition vectors, stacking vectors, registry, strain metrics}
-Additional features will quantify interfacial registry, stoichiometry, mismatch, and coordination at the interface
-centre. These will be extracted from POSCAR data and relaxation outputs.
+
+Additional features will quantify interfacial registry, stoichiometry, mismatch, and coordination at the interface centre. These will be extracted from POSCAR data and relaxation outputs.
 
 \subsection{Model Development Roadmap}
 
 \subsubsection{Classification vs regression}
-Early models may predict favourable/unfavourable (binary), or regress $\Delta E_\mathrm{IF}$ directly. Shallow decision
-trees or SVMs will be trialled before advancing to graph-based models.
+
+Early models may predict favourable/unfavourable (binary), or regress $\Delta E_\mathrm{IF}$ directly. Shallow decision trees or SVMs will be trialled before advancing to graph-based models.
 
 \subsubsection{Feasibility for rapid interface suggestion and ranking}
-The MLI predictor is envisioned as a low-cost filter to prioritise candidates before full relaxation, possibly
-integrating with ARTEMIS + RAFFLE pipelines.
+
+The MLI predictor is envisioned as a low-cost filter to prioritise candidates before full relaxation, possibly integrating with ARTEMIS + RAFFLE pipelines.
 
 \subsection{Outlook: Integrating MLI into Structure Generation Pipelines}
-If effective, MLI-driven suggestions will serve as inputs to stacked structure generation, enabling a fully
-machine-learning-driven discovery workflow.
+
+If effective, MLI-driven suggestions will serve as inputs to stacked structure generation, enabling a fully machine-learning-driven discovery workflow.
 
 % TODO: Add schematic of full MLI + ARTEMIS + RAFFLE pipeline (conceptual workflow diagram)

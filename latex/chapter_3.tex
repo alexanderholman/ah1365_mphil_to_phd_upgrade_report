@@ -1,24 +1,10 @@
-\chapter{Computational Investigation of Interface Favourability}
-\label{chapter:computational_investigation}
+\chapter{Computational Investigation of Interface Favourability} \label{chapter:computational_investigation}
 
-Understanding which interfaces are most thermodynamically favourable is a prerequisite for structure prediction and
-materials discovery. However, the computational cost of evaluating thousands of possible interface configurations via
-density functional theory (DFT) makes such exploration prohibitively expensive. This chapter investigates whether
-machine-learned interatomic potentials (MLPs), specifically MACE, can be used to predict interface favourability
-rankings with sufficient accuracy to serve as a pre-screening tool. A systematic comparison is conducted across
-elemental and binary semiconductor systems, assessing how closely MLP-derived rankings reproduce DFT-based ground
-truth. The chapter is divided into a methodology section, which outlines the iterative dataset construction and
-evaluation pipeline, and a results section, which analyses the performance of MLPs in reproducing DFT-derived orderings.
+Understanding which interfaces are most thermodynamically favourable is a prerequisite for structure prediction and materials discovery. However, the computational cost of evaluating thousands of possible interface configurations via density functional theory (DFT) makes such exploration prohibitively expensive. This chapter investigates whether machine-learned interatomic potentials (MLPs), specifically MACE, can be used to predict interface favourability rankings with sufficient accuracy to serve as a pre-screening tool. A systematic comparison is conducted across elemental and binary semiconductor systems, assessing how closely MLP-derived rankings reproduce DFT-based ground truth. The chapter is divided into a methodology section, which outlines the iterative dataset construction and evaluation pipeline, and a results section, which analyses the performance of MLPs in reproducing DFT-derived orderings.
 
-\section{Methodology}
-\label{section:methodology}
+\section{Methodology} \label{section:methodology}
 
-The overarching objective of the methodology described in this section is to evaluate whether machine-learned
-interatomic potentials (MLPs), particularly the MACE model, can accurately replicate interface favourability rankings
-obtained from density functional theory (DFT) calculations. This assessment emphasises establishing scalable,
-computationally efficient workflows suitable for high-throughput screening of semiconductor interfaces. The methodology
-utilises automated structure generation tools, rigorous multi-stage relaxation and evaluation protocols, and explicitly
-defined reproducible ranking metrics to ensure transparency and precision.
+The overarching objective of the methodology described in this section is to evaluate whether machine-learned interatomic potentials (MLPs), particularly the MACE model, can accurately replicate interface favourability rankings obtained from density functional theory (DFT) calculations. This assessment emphasises establishing scalable, computationally efficient workflows suitable for high-throughput screening of semiconductor interfaces. The methodology utilises automated structure generation tools, rigorous multi-stage relaxation and evaluation protocols, and explicitly defined reproducible ranking metrics to ensure transparency and precision.
 
 \subsection{Iterative Scope and Dataset Composition}
 
@@ -26,34 +12,27 @@ The methodological framework evolved through three iterative stages, progressive
 
 \subsubsection{Stage 1: Initial Si|Ge binary systems}
 
-A small-scale, semi-manually curated dataset of approximately ten silicon-germanium (Si|Ge) interfaces was constructed
-to prototype the methodology.
+A small-scale, semi-manually curated dataset of approximately ten silicon-germanium (Si|Ge) interfaces was constructed to prototype the methodology.
 
 \subsubsection{Stage 2: Expanded Si|Ge binary systems}
 
-An automated extension of the Si|Ge interface dataset was generated using ARTEMIS software to ensure broader
-configurational coverage and scalability.
+An automated extension of the Si|Ge interface dataset was generated using ARTEMIS software to ensure broader configurational coverage and scalability.
 
 \subsubsection{Stage 3: Broader set (C, Si, Ge, Sn)}
 
-A comprehensive dataset including carbon (C), silicon (Si), germanium (Ge), and tin (Sn) was created, leveraging
-enhanced automation, extensive interface shifts, and stringent filtering criteria.
+A comprehensive dataset including carbon (C), silicon (Si), germanium (Ge), and tin (Sn) was created, leveraging enhanced automation, extensive interface shifts, and stringent filtering criteria.
 
 Each iteration is version-controlled in Git repositories.
 
-% TODO: Insert table here summarising iterations and Git tags
-% e.g. \input{tables/iteration_summary.tex}
+% TODO: Insert table here summarising iterations and Git tags % e.g. \input{tables/iteration_summary.tex}
 
 \subsection{Interface Generation Protocol}
 
-Interface structures were generated using ARTEMIS, systematically selecting and filtering Miller planes, sampling
-stacking vectors, and applying termination logic to ensure physical plausibility. Notably, configurations with zero
-stacking shift (\texttt{shift = 0}) were deliberately excluded to avoid non-physical direct atomic overlaps.
+Interface structures were generated using ARTEMIS, systematically selecting and filtering Miller planes, sampling stacking vectors, and applying termination logic to ensure physical plausibility. Notably, configurations with zero stacking shift (\texttt{shift = 0}) were deliberately excluded to avoid non-physical direct atomic overlaps.
 
 \subsubsection{ARTEMIS plane selection and shift sampling}
 
-% TODO: Insert schematic figure of slab stacking and alignment using ARTEMIS
-% e.g. \includegraphics{figures/artemis_schematic.png}
+% TODO: Insert schematic figure of slab stacking and alignment using ARTEMIS % e.g. \includegraphics{figures/artemis_schematic.png}
 
 \subsubsection{Structure pruning and validation (e.g. removal of shift = 0 cases)}
 
@@ -67,30 +46,23 @@ Interfaces were generated by stacking slabs in commensurate supercells, maintain
 
 \subsubsection{DFT Relaxation (VASP)}
 
-Structures underwent relaxation using DFT as implemented in VASP. Standard INCAR and KPOINTS files optimised for both
-accuracy and efficiency were employed. Gamma-point sampling was used exclusively for large cells. Each job was
-constrained by a 24-hour walltime, and failed completions were systematically managed.
+Structures underwent relaxation using DFT as implemented in VASP. Standard INCAR and KPOINTS files optimised for both accuracy and efficiency were employed. Gamma-point sampling was used exclusively for large cells. Each job was constrained by a 24-hour walltime, and failed completions were systematically managed.
 
 \paragraph{INCAR settings (e.g. energy/force convergence)}
 
 Defined in: \texttt{surface\_energy\_matrix.csv}
 
-% TODO: Insert table of INCAR settings
-% e.g. \input{tables/incar_settings.tex}
+% TODO: Insert table of INCAR settings % e.g. \input{tables/incar_settings.tex}
 
 \paragraph{KPOINTS mesh, pseudopotentials, runtime limits}
 
 All DFT relaxations were constrained by a 24-hour walltime and executed with Gamma-point-only meshes.
 
-% TODO: Insert figure showing walltime vs. electron count
-% e.g. \includegraphics{figures/walltime_vs_electrons.png}
+% TODO: Insert figure showing walltime vs. electron count % e.g. \includegraphics{figures/walltime_vs_electrons.png}
 
 \subsubsection{MLP Relaxation (MACE)}
 
-MLP relaxation employed the \textbf{MACE-MP-0 large model} (5,725,072 parameters), using the model file
-\texttt{2024-01-07-mace-128-L2\_epoch-199.model} from the \texttt{mace\_mp_0} branch on GitHub. A level-2 equivariant
-graph neural network architecture was used with ASE-based force relaxation. Delta-learning was \emph{not} applied at
-this stage.
+MLP relaxation employed the \textbf{MACE-MP-0 large model} (5,725,072 parameters), using the model file \texttt{2024-01-07-mace-128-L2\_epoch-199.model} from the \texttt{mace\_mp_0} branch on GitHub. A level-2 equivariant graph neural network architecture was used with ASE-based force relaxation. Delta-learning was \emph{not} applied at this stage.
 
 \paragraph{Model type}
 
@@ -100,8 +72,7 @@ MACE, Level-2 equivariant GNN, trained on Materials Project.
 
 Relaxation was performed using force minimisation via ASE without delta-corrections.
 
-% TODO: Insert figure comparing MLP- and DFT-relaxed structures
-% e.g. \includegraphics{figures/relaxed_structure_comparison.png}
+% TODO: Insert figure comparing MLP- and DFT-relaxed structures % e.g. \includegraphics{figures/relaxed_structure_comparison.png}
 
 \subsection{Energy Evaluation Scheme}
 
@@ -123,8 +94,7 @@ Cross-evaluation modes enabled the decoupling of structural and energetic predic
 
 A Python-based automation pipeline enabled reproducible structure generation, job submission, and parsing.
 
-% TODO: Insert figure showing automation pipeline
-% e.g. \includegraphics{figures/automation_pipeline.png}
+% TODO: Insert figure showing automation pipeline % e.g. \includegraphics{figures/automation_pipeline.png}
 
 \subsubsection{Job array handling, broken file filtering}
 
@@ -140,73 +110,47 @@ Parsed energies and rankings were compiled into structured CSVs.
 
 \paragraph{Spearman ρ}
 
-A non-parametric measure of monotonic correlation:
-\[
-\rho = 1 - \frac{6 \sum d_i^2}{n(n^2 - 1)}
-\]
-where \(d_i\) is the rank difference for the \(i^{th}\) entry and \(n\) is the total number of entries.
+A non-parametric measure of monotonic correlation: \[ \rho = 1 - \frac{6 \sum d_i^2}{n(n^2 - 1)} \] where \(d_i\) is the rank difference for the \(i^{th}\) entry and \(n\) is the total number of entries.
 
 \paragraph{Kendall τ}
 
-An ordinal association metric based on concordant and discordant pairs:
-\[
-\tau = \frac{(\text{Number of concordant pairs}) - (\text{Number of discordant pairs})}{\frac{1}{2}n(n-1)}
-\]
+An ordinal association metric based on concordant and discordant pairs: \[ \tau = \frac{(\text{Number of concordant pairs}) - (\text{Number of discordant pairs})}{\frac{1}{2}n(n-1)} \]
 
 \subsubsection{Error magnitude: RMSE, MAE}
 
 \paragraph{RMSE}
 
-Root Mean Square Error quantifies energy prediction accuracy, giving weight to large errors:
-\[
-\text{RMSE} = \sqrt{\frac{1}{n} \sum_{i=1}^{n} (y_i - \hat{y}_i)^2}
-\]
+Root Mean Square Error quantifies energy prediction accuracy, giving weight to large errors: \[ \text{RMSE} = \sqrt{\frac{1}{n} \sum_{i=1}^{n} (y_i - \hat{y}_i)^2} \]
 
 \paragraph{MAE}
 
-Mean Absolute Error provides an intuitive measure of deviation:
-\[
-\text{MAE} = \frac{1}{n} \sum_{i=1}^{n} |y_i - \hat{y}_i|
-\]
+Mean Absolute Error provides an intuitive measure of deviation: \[ \text{MAE} = \frac{1}{n} \sum_{i=1}^{n} |y_i - \hat{y}_i| \]
 
 \subsubsection{Top-N overlap analysis (e.g. Top-5, Top-10)}
 
 Top-N overlap measures the agreement in highest-ranked structures between DFT and MLP.
 
-% TODO: Insert figure showing Top-N overlap
-% e.g. \includegraphics{figures/topn_overlap.png}
+% TODO: Insert figure showing Top-N overlap % e.g. \includegraphics{figures/topn_overlap.png}
 
-\section{Results and Analysis}
-\label{section:results_and_analysis}
+\section{Results and Analysis} \label{section:results_and_analysis}
 
-This section presents the results of the DFT vs MLP interface ranking comparison across 1,381 interfaces evaluated
-during Iteration 3. The goal is to determine whether MACE, a large machine-learned interatomic potential, preserves
-favourability rankings obtained via DFT across a wide range of material systems and interface types.
+This section presents the results of the DFT vs MLP interface ranking comparison across 1,381 interfaces evaluated during Iteration 3. The goal is to determine whether MACE, a large machine-learned interatomic potential, preserves favourability rankings obtained via DFT across a wide range of material systems and interface types.
 
 \subsection{Overview of Rank Agreement}
 
 \subsubsection{Summary trends in DFT vs. MLP agreement}
 
-Ranking consistency between DFT and MLP was assessed using Spearman's $\rho$ and Kendall's $\tau$. Overall correlation
-was strong: $\rho$ ranged from 0.75 to 0.95 and $\tau$ from 0.70 to 0.90 across the majority of interface types.
-Metrics were extracted from \texttt{stats.csv}, which aggregates statistics across the full dataset. Perfect rank
-preservation (i.e. $\rho = 1$) was observed in a subset of alloy systems, while degraded consistency was evident in
-Silicon interfaces.
+Ranking consistency between DFT and MLP was assessed using Spearman's $\rho$ and Kendall's $\tau$. Overall correlation was strong: $\rho$ ranged from 0.75 to 0.95 and $\tau$ from 0.70 to 0.90 across the majority of interface types. Metrics were extracted from \texttt{stats.csv}, which aggregates statistics across the full dataset. Perfect rank preservation (i.e. $\rho = 1$) was observed in a subset of alloy systems, while degraded consistency was evident in Silicon interfaces.
 
 \subsubsection{Visual and tabular representation of metric distributions}
 
-A scatter plot comparing DFT and MLP rankings across all interfaces is shown in Figure~\ref{fig:rank-scatter}, with
-supporting metric distributions detailed in Table~\ref{tab:global-metrics}. Top-N overlap scores (e.g. Top-10) were 5
-for DFT@DFT vs MLP@MLP and 8 for DFT@DFT vs DFT@MLP, indicating modest agreement in identifying favourable structures.
+A scatter plot comparing DFT and MLP rankings across all interfaces is shown in Figure~\ref{fig:rank-scatter}, with supporting metric distributions detailed in Table~\ref{tab:global-metrics}. Top-N overlap scores (e.g. Top-10) were 5 for DFT@DFT vs MLP@MLP and 8 for DFT@DFT vs DFT@MLP, indicating modest agreement in identifying favourable structures.
 
 \subsection{Cross-Method Evaluation}
 
 \subsubsection{Comparison of MLP-relaxed vs. DFT-evaluated structures}
 
-Due to computational constraints, MLP-relaxed structures evaluated with DFT (MLP@DFT) were omitted from this study. The
-cross-method comparison therefore focuses on DFT-relaxed structures evaluated with MLP (DFT@MLP). These exhibited
-higher agreement with DFT@DFT than MLP@MLP, indicating that relaxation geometry plays a dominant role in ranking
-discrepancies. This suggests a degree of structure-energy decoupling.
+Due to computational constraints, MLP-relaxed structures evaluated with DFT (MLP@DFT) were omitted from this study. The cross-method comparison therefore focuses on DFT-relaxed structures evaluated with MLP (DFT@MLP). These exhibited higher agreement with DFT@DFT than MLP@MLP, indicating that relaxation geometry plays a dominant role in ranking discrepancies. This suggests a degree of structure-energy decoupling.
 
 \subsection{System-Specific Observations}
 
@@ -214,59 +158,44 @@ discrepancies. This suggests a degree of structure-energy decoupling.
 
 \paragraph{Note on incomplete data due to ISCA job failures}
 
-Carbon-rich systems were underrepresented due to DFT job failures and high compute cost. As a result, only preliminary
-statistics could be extracted from \texttt{stats\_lower\_C.csv}, with limited rank correlation insight. These data
-points are not sufficient to draw conclusions but are retained for completeness.
+Carbon-rich systems were underrepresented due to DFT job failures and high compute cost. As a result, only preliminary statistics could be extracted from \texttt{stats\_lower\_C.csv}, with limited rank correlation insight. These data points are not sufficient to draw conclusions but are retained for completeness.
 
 \subsubsection{Silicon Interfaces}
 
 \paragraph{Poor MLP rank preservation}
 
-Silicon interfaces showed the weakest performance overall. Rank correlations were lower than for other systems, with
-$\rho < 0.70$ and $\tau < 0.65$ in many Si|Si and Si|X comparisons (see \texttt{stats\_lower\_Si.csv}). Errors tended to
-cluster in the lower half of the ranking, indicating failures in correctly identifying unfavourable interfaces.
+Silicon interfaces showed the weakest performance overall. Rank correlations were lower than for other systems, with $\rho < 0.70$ and $\tau < 0.65$ in many Si|Si and Si|X comparisons (see \texttt{stats\_lower\_Si.csv}). Errors tended to cluster in the lower half of the ranking, indicating failures in correctly identifying unfavourable interfaces.
 
 \paragraph{Potential reason}
 
-This poor agreement may stem from limited model generalisability across strained or undercoordinated Si environments.
-The MACE model was not explicitly fine-tuned for such systems, suggesting underfitting or domain mismatch.
+This poor agreement may stem from limited model generalisability across strained or undercoordinated Si environments. The MACE model was not explicitly fine-tuned for such systems, suggesting underfitting or domain mismatch.
 
 \subsubsection{Germanium and Tin Interfaces}
 
 \paragraph{Stronger correlation and better Top-N recovery}
 
-Ge and Sn-containing systems yielded improved correlation metrics and Top-N recovery compared to Si. While Tin
-interfaces (\texttt{stats\_lower\_Sn.csv}) showed larger absolute energy errors, the rank preservation was generally
-robust. No catastrophic rank inversions were observed.
+Ge and Sn-containing systems yielded improved correlation metrics and Top-N recovery compared to Si. While Tin interfaces (\texttt{stats\_lower\_Sn.csv}) showed larger absolute energy errors, the rank preservation was generally robust. No catastrophic rank inversions were observed.
 
 \subsubsection{Phase boundaries}
 
 \paragraph{Overall poorer rank preservation}
 
-Interfaces near the transition from favourable to unfavourable status (i.e. phase boundaries) were more susceptible to
-ranking shifts. While many transitions were preserved, files such as \texttt{stats\_lower\_Si\_upper\_Sn.csv} and
-\texttt{stats\_lower\_Ge\_upper\_Sn.csv} show increased rank distance near critical cutoffs.
+Interfaces near the transition from favourable to unfavourable status (i.e. phase boundaries) were more susceptible to ranking shifts. While many transitions were preserved, files such as \texttt{stats\_lower\_Si\_upper\_Sn.csv} and \texttt{stats\_lower\_Ge\_upper\_Sn.csv} show increased rank distance near critical cutoffs.
 
 \paragraph{Potential Reason}
 
-These marginal cases are sensitive to small energy differences, which may be within the error tolerance of the MLP.
-This underscores the challenge of using MLPs for binary decision-making near phase boundaries.
+These marginal cases are sensitive to small energy differences, which may be within the error tolerance of the MLP. This underscores the challenge of using MLPs for binary decision-making near phase boundaries.
 
 \subsubsection{Perfect Alloys}
 
 \paragraph{Perfect rank preservation}
 
-Si|Ge alloy systems exhibited near-perfect rank alignment between DFT and MLP evaluations. Both $\rho$ and $\tau$ approached
-1.0 across the board, as seen in \texttt{stats\_perfect\_alloys.csv}.
+Si|Ge alloy systems exhibited near-perfect rank alignment between DFT and MLP evaluations. Both $\rho$ and $\tau$ approached 1.0 across the board, as seen in \texttt{stats\_perfect\_alloys.csv}.
 
 \paragraph{Potential Reason}
 
-These systems feature uniform chemical environments with little interfacial disruption, meaning the atomic
-configurations fall well within the trained domain of the MACE model. The result is highly stable rank preservation.
+These systems feature uniform chemical environments with little interfacial disruption, meaning the atomic configurations fall well within the trained domain of the MACE model. The result is highly stable rank preservation.
 
 \subsection{DFT vs MLP: Computational Cost Analysis}
 
-MLP evaluations offered orders-of-magnitude speedups over DFT while retaining acceptable accuracy in most ranking
-tasks. However, the quality of this speedup is system-dependent and less reliable for Silicon-rich or
-mixed-coordination interfaces. These observations motivate a need for improved domain coverage, possibly via
-delta-learning or retraining on interfacial datasets.
+MLP evaluations offered orders-of-magnitude speedups over DFT while retaining acceptable accuracy in most ranking tasks. However, the quality of this speedup is system-dependent and less reliable for Silicon-rich or mixed-coordination interfaces. These observations motivate a need for improved domain coverage, possibly via delta-learning or retraining on interfacial datasets. 
