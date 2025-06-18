@@ -4,7 +4,7 @@
 
 \subsection{Overview of the study objectives and what was undertaken}
 
-This study investigated the extent to which machine-learned interatomic potentials (MLPs), specifically the MACE framework, can replicate interface favourability rankings computed via density functional theory (DFT) across various group-IV semiconductor systems, including carbon (C), silicon (Si), germanium (Ge), and tin (Sn). The project involved automated structure generation with ARTEMIS, interface relaxation via both DFT and MLP, and evaluation of rank preservation using statistical metrics including Spearman and Kendall correlations, as well as Top-N overlap.
+This study investigated the extent to which machine-learned interatomic potentials (MLPs), specifically the MACE framework, can replicate interface favourability rankings computed via density functional theory (DFT) across various group-IV semiconductor systems, including carbon (C), silicon (Si), germanium (Ge), and tin (Sn). The project involved automated structure generation with ARTEMIS, interface relaxation via both DFT and MLP, and evaluation of rank preservation using statistical metrics including Spearman and Kendall correlations, as well as Top-N overlap. \cite{Batatia2022-xz}
 
 \subsection{Recap of major results:}
 
@@ -62,7 +62,7 @@ Top-N overlap and Spearman/Kendall rank statistics highlighted the utility of ML
 
 \subsection{Strengths vs weaknesses}
 
-MLPs offer clear advantages in computational speed and can safely be used for preliminary screening in certain systems. However, their generalisation is inconsistent, especially in covalently bonded systems like Si. Without targeted retraining, MLPs may mislead in these cases.
+MLPs offer clear advantages in computational speed and can safely be used for preliminary screening in certain systems. However, their generalisation is inconsistent, especially in covalently bonded systems like Si. Without targeted retraining, MLPs may mislead in these cases. \cite{Batatia2022-xz}
 
 % Equation suggestion: O(n) comparison of DFT vs MLP computational cost per electron.
 
@@ -76,7 +76,7 @@ The carbon dataset remains incomplete and cannot yet support definitive conclusi
 
 \subsubsection{Silicon (Si) – persistent poor rank correlation}
 
-Across all iterations, Si consistently exhibited poor MLP--DFT agreement. This suggests intrinsic modelling difficulties rather than statistical noise. The failures appear systematic, reinforcing the need for targeted improvements.
+Across all iterations, Si consistently exhibited poor MLP--DFT agreement. This suggests intrinsic modelling difficulties rather than statistical noise. The failures appear systematic, reinforcing the need for targeted improvements. \cite{Batatia2022-xz}
 
 \subsubsection{Germanium (Ge) and Tin (Sn) – favourable MLP--DFT agreement}
 
@@ -107,7 +107,7 @@ MLPs may struggle with the directional covalent bonding and short bond lengths c
 
 \subsubsection{Underrepresented environments in training?}
 
-It is likely that the MACE training set lacks sufficient coverage of interfacial Si environments, especially those with reconstructed surfaces and strained bonds.
+It is likely that the MACE training set lacks sufficient coverage of interfacial Si environments, especially those with reconstructed surfaces and strained bonds. \cite{Batatia2022-xz}
 
 \subsection{Open questions}
 
@@ -123,7 +123,7 @@ MLPs appear trustworthy when used to rank candidates in systems whose bonding an
 
 \subsection{Necessity of retraining, delta-correction, or hybrid workflows}
 
-The results support the need for delta-correction approaches, particularly for challenging systems like Si. Hybrid workflows that combine MLP-based pre-screening with DFT confirmation for top candidates offer a balanced path forward.
+The results support the need for delta-correction approaches, particularly for challenging systems like Si. Hybrid workflows that combine MLP-based pre-screening with DFT confirmation for top candidates offer a balanced path forward. \cite{Batatia2022-xz}
 
 % Placeholder for conceptual diagram of hybrid MLP–DFT workflow.
 
@@ -139,6 +139,6 @@ This work demonstrates that while current general-purpose MLPs like MACE can pre
 
 \subsection{Final note on significance for device and materials design}
 
-By enabling rapid, large-scale screening of interfacial configurations in certain systems, this work lays the groundwork for accelerated discovery of novel interfaces. Continued refinement of MLPs and integrated hybrid workflows will be essential to extend this capability to the full range of materials relevant for device engineering.
+By enabling rapid, large-scale screening of interfacial configurations in certain systems, this work lays the groundwork for accelerated discovery of novel interfaces. Continued refinement of MLPs and integrated hybrid workflows will be essential to extend this capability to the full range of materials relevant for device engineering. \cite{Batatia2022-xz}
 
 % Final figure suggestion: Summary infographic showing findings, limitations, and future directions. 
