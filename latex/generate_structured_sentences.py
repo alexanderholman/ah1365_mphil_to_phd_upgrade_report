@@ -5,6 +5,9 @@ from pathlib import Path
 import nltk
 nltk.download('punkt')
 from nltk.tokenize.punkt import PunktSentenceTokenizer, PunktParameters
+from bibtexparser.bparser import BibTexParser
+from bibtexparser.customization import homogenize_latex_encoding
+import bibtexparser
 
 # === CONFIG ===
 input_dir = './'  # Set this to the path where your .tex files live
@@ -115,13 +118,20 @@ for filename in chapter_files:
             }
             output_rows.append(row)
 
-# === OPTIONAL: ADD EMPTY COLUMNS FOR EACH PDF IN ../articles ===
-articles_dir = Path('../articles')
-if articles_dir.exists():
-    pdf_stems = [pdf.stem for pdf in articles_dir.glob('*.pdf') if pdf.is_file()]
-    for row in output_rows:
-        for stem in pdf_stems:
-            row[stem] = None
+# === ADD EMPTY COLUMNS FOR EACH CITATION IN references.bib ===
+bib_path = Path('references.bib')
+if bib_path.exists():
+    with open(bib_path, encoding='utf-8') as bibfile:
+        parser = BibTexParser()
+        parser.customization = homogenize_latex_encoding
+        bib_database = bibtexparser.load(bibfile, parser=parser)
+        cite_keys = [entry['ID'] for entry in bib_database.entries]
+
+        for row in output_rows:
+            for key in cite_keys:
+                row[key] = None
+else:
+    print("⚠️ references.bib not found.")
 
 # === WRITE TO CSV ===
 fieldnames = list(output_rows[0].keys())
