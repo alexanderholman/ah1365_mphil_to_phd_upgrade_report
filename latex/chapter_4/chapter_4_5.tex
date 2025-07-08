@@ -1,0 +1,31 @@
+\section{Towards a Machine-Learned Interface (MLI) Predictor}
+
+\subsection{Objective: Predict Likely Interface Configurations from Material Pairs}
+
+The longer-term aim is to develop a model that, given a pair of slab surfaces, can predict the favourability of resulting interfaces without full relaxation or enumeration.
+
+\subsection{Feature and Descriptor Design}
+
+\subsubsection{Surface energies, Miller planes, atomic densities}
+
+Descriptor sets will include known surface energetics and crystallographic identifiers, all extractable from existing data (\texttt{surface\_energy\_matrix.csv}).
+
+\subsubsection{Composition vectors, stacking vectors, registry, strain metrics}
+
+Additional features will quantify interfacial registry, stoichiometry, mismatch, and coordination at the interface centre. These will be extracted from POSCAR data and relaxation outputs.
+
+\subsection{Model Development Roadmap}
+
+\subsubsection{Classification vs regression}
+
+Early models may predict favourable/unfavourable (binary), or regress $\Delta E_\mathrm{IF}$ directly. Shallow decision trees or SVMs will be trialled before advancing to graph-based models.
+
+\subsubsection{Feasibility for rapid interface suggestion and ranking}
+
+The MLI predictor is envisioned as a low-cost filter to prioritise candidates before full relaxation, possibly integrating with ARTEMIS + RAFFLE pipelines.
+
+\subsection{Outlook: Integrating MLI into Structure Generation Pipelines}
+
+If effective, MLI-driven suggestions will serve as inputs to stacked structure generation, enabling a fully machine-learning-driven discovery workflow.
+
+% TODO: Add schematic of full MLI + ARTEMIS + RAFFLE pipeline (conceptual workflow diagram)

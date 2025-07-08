@@ -1,0 +1,7 @@
+\chapter{Computational Investigation of Interface Favourability} \label{chapter:computational_investigation}
+
+A key step in training a Machine-Learned Interface (MLI) model is building a dataset of physically plausible and energetically reasonable heterostructures. Ideally, such a dataset would be generated entirely using density functional theory (DFT), but the cost of relaxing and evaluating thousands of configurations makes this impractical. Instead, this chapter investigates whether a machine-learned potential (MLP), specifically the MACE model, can assist in rapidly generating and assessing interface structures before applying DFT.
+
+The focus here is not to validate MLPs as a replacement for DFT, but to test their usefulness as part of a larger data-generation pipeline. If MACE is able to help identify realistic and favourable structures, it can reduce the number of expensive DFT calculations needed and enable faster construction of training data for the MLI model.
+
+The chapter is structured as follows: Section 1 describes the generation of the dataset, the chemical systems considered, and the use of ARTEMIS for constructing candidate interfaces. Section 2 analyses how well the MACE model reproduces trends in DFT-calculated interface energetics. Section 3 discusses the implications for automated workflows and the future expansion of the dataset.

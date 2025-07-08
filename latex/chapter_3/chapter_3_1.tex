@@ -1,0 +1,119 @@
+\section{Methodology} \label{section:methodology}
+
+The goal of this study is to support the development of a Machine-Learned Interface (MLI) model that can predict which heterostructures are likely to be realistic and favourable. To train this model, we need a large dataset of physical interfaces that are not only valid in terms of their atomic arrangement but also low enough in energy to be found in real materials. Relaxing and evaluating all possible interfaces using Density Functional Theory (DFT) would be too expensive, so we explore whether a Machine-Learned Potential (MLP), specifically MACE, can help us identify good candidates more efficiently.
+
+Rather than replacing DFT, MACE is tested here as a screening tool: if MACE can roughly preserve the order of interface favourability that DFT gives, it could help us pick which interfaces to relax with DFT. These comparisons are a means to an end—providing the MLI model with useful training data.
+
+\subsection{Dataset Evolution and Study Scope}
+
+This work uses an iterative approach to building the dataset. At each step, the number of materials, structures, and configurations is increased to explore broader behaviours and to identify issues in the workflow before scaling further. Each iteration reflects what was possible with available computing resources and analysis at the time.
+
+\textbf{Iteration 1} focused on a small number of Si|Ge interfaces generated and relaxed manually to test early code and analysis scripts.
+
+\textbf{Iteration 2} expanded this to a much larger Si|Ge dataset using automated tools like ARTEMIS, introducing slab shifting and filtering steps.
+
+\textbf{Iteration 3}, which forms the main dataset used in this chapter, includes materials from group 14: carbon (C), silicon (Si), germanium (Ge), and tin (Sn). These elements were chosen because they are widely used in electronics and all have four valence electrons, which avoids problems with charge imbalance when making interfaces. Elements heavier than atomic number 89 are excluded to avoid needing relativistic corrections.
+
+This third dataset uses a consistent generation workflow based on Miller plane selection, surface matching, and stacking with registry-aware shifts. It avoids configurations with overlapping atoms and stores each system in a reproducible format for later energy evaluation.
+
+The dataset continues to evolve. Planned future versions (described in Chapter 4) will include improved treatment of shift-zero structures, additional relaxed geometries, and further structural diversity using RAFFLE.
+
+\subsection{Interface Generation Protocol}
+
+Interfaces were generated using the ARTEMIS toolkit. For each pair of materials, up to 64 surface orientations (Miller planes) were explored to find possible ways the two materials could be stacked together. ARTEMIS searched for matching supercells by expanding the unit cells of both materials up to 8 times along the in-plane directions, looking for configurations with similar lattice vectors and angles. This helps distribute mismatch over more atoms and reduce the per-cell strain.
+
+A key goal in finding physically favourable interfaces is to minimise the energy penalties introduced by strain and unbonded valence electrons. Interfaces with large lattice mismatch or poor atomic registry often exhibit elevated formation energies due to elastic distortions or chemically unstable bonding environments. By contrast, coherent interfaces that exhibit low strain and high atomic registry are more likely to be energetically stable and experimentally realisable.
+
+One strategy for achieving this is through supercell scaling: we try to match lattice constants $a$ and $a'$ of two materials by finding integers $n$ and $m$ such that $n \cdot a \approx m \cdot a'$, distributing the residual mismatch over multiple unit cells. For example, silicon and germanium have lattice constants of 5.45\,\AA{} and 5.66\,\AA{}, respectively. Matching 22 unit cells of Si to 21 of Ge gives:
+\[
+|22 \cdot 5.45 - 21 \cdot 5.66| = 1.04~\text{\AA}
+\]
+which corresponds to a mismatch of approximately 0.047\,\AA{} per unit cell. Scaling up to 2201 Si and 2119 Ge cells reduces this to:
+\[
+|2201 \cdot 5.45 - 2119 \cdot 5.66| = 1.91~\text{\AA} \quad \Rightarrow \quad \sim 0.0009~\text{\AA}~\text{mismatch per cell}
+\]
+Each increase in supercell size decreases the mismatch per unit cell by roughly an order of magnitude.
+
+In addition to supercell scaling, the choice of interface orientation—described by Miller indices—can significantly influence atomic registry across the interface. Each Miller plane represents a unique slice through the crystal lattice that exposes a specific atomic arrangement. By rotating, stacking, and aligning these planes between two different materials, one can search for surface combinations where atoms naturally align into coherent patterns. ARTEMIS uses these surface alignments to explore many candidate configurations, seeking high registry where bonding across the interface is maximised and valence electrons are not left unpaired.
+
+Each matched interface was constructed from two slabs, each 6 atomic layers thick, separated by a small vacuum gap. ARTEMIS then applied systematic shifts in the $a$ and $b$ directions to explore stacking offsets between the slabs. Initially, zero-shift configurations were allowed, but these sometimes produced unphysical atomic overlaps along the $c$-axis. These cases were filtered out during data cleaning. Future datasets will attempt to reintroduce shift-zero configurations in $a$ and $b$ while borrowing $c$-axis separations from nearby stable interfaces.
+
+Although ARTEMIS supports atomic swaps at the interface to explore alloy-like or disordered bonding environments, this feature was not available in the version used for this study. Such configurations will be generated in future iterations using the RAFFLE tool.
+
+While ARTEMIS considered many potential surface combinations, only 29 unique surfaces were ultimately included in the final dataset. This reflects both the geometric constraints of lattice matching and the filtering applied to ensure physical plausibility of the generated structures.
+
+\subsection{Automation and Data Handling}
+
+All parts of the workflow—from building interfaces to reading the results—were automated using Python scripts. This made it easier to run large numbers of calculations and keep track of everything.
+
+\paragraph{Structure generation and job submission}
+
+Interfaces were generated and prepared for calculation using scripts that could run in bulk. Each job was submitted to the compute cluster automatically.
+
+\paragraph{Error checking and filtering}
+
+Some calculations failed or gave broken outputs (like NaN energies). These were filtered out automatically so they didn’t affect the results.
+
+\paragraph{Parsing results and saving data}
+
+The energy values from both MLP and DFT were read and stored in CSV files. These files were used to calculate rankings and compare the methods.
+
+\subsection{Ranking and Error Metrics}
+
+To check how well the MLP results agree with DFT, we used a few simple measures.
+
+\paragraph{Spearman \( \rho \)}
+
+This checks if the overall order of interface energies is preserved between methods. It compares the rankings and gives a score between -1 (completely reversed) and 1 (perfect match):
+
+\[
+\rho = 1 - \frac{6 \sum d_i^2}{n(n^2 - 1)}
+\]
+
+Here, \( d_i \) is the difference in rank for the \( i^\text{th} \) structure, and \( n \) is the total number of structures.
+
+\paragraph{Kendall \( \tau \)}
+
+This checks whether pairs of structures are ranked in the same order between methods. It also ranges from -1 to 1:
+
+\[
+\tau = \frac{(\text{concordant pairs}) - (\text{discordant pairs})}{\frac{1}{2}n(n-1)}
+\]
+
+\paragraph{Top-N Overlap}
+
+This looks at how many of the best-ranked structures under DFT also appear in the top group under MLP. For example, how many of the top 5 or top 10 are shared.
+
+\paragraph{Mean Absolute Error (MAE)}
+
+This shows the average difference in energy between MLP and DFT:
+
+\[
+\text{MAE} = \frac{1}{n} \sum_{i=1}^{n} |y_i - \hat{y}_i|
+\]
+
+\paragraph{Root Mean Square Error (RMSE)}
+
+This is another way of showing how different the energies are, giving more weight to large differences:
+
+\[
+\text{RMSE} = \sqrt{\frac{1}{n} \sum_{i=1}^{n} (y_i - \hat{y}_i)^2}
+\]
+
+These metrics help us judge whether the MLP is giving similar energy rankings and values to DFT, so we can decide whether it is useful for selecting structures for further study.
+
+\subsection{Relaxation and Energy Evaluation}
+
+In this study, we did not relax the interface structures before comparing energies. Instead, the same unrelaxed geometries were evaluated using both DFT and MLP to keep the comparison fair. This helps isolate differences in energy prediction from differences caused by structural relaxation.
+
+\paragraph{DFT evaluation}
+
+DFT calculations were carried out using the VASP software. Gamma-point sampling was used for simplicity and speed. Calculations were limited to a 24-hour walltime. Structures that failed to complete were excluded from analysis.
+
+\paragraph{MLP evaluation}
+
+The MACE model used here was the most recent release available at the time (downloaded in April 2025). It was applied using the ASE library to compute total energies on the same unrelaxed structures as used for DFT. No fine-tuning or delta-correction was applied.
+
+\paragraph{Note on relaxation}
+
+While MLP-based relaxation was tested on some structures later in the workflow, those results were not used for ranking comparison in this section. The goal here is to test how well MLP can predict relative stability based on geometry alone. DFT relaxations are planned for future datasets.
