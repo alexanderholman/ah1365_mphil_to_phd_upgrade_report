@@ -16,8 +16,6 @@ This work uses an iterative approach to building the dataset. At each step, the 
 
 This third dataset uses a consistent generation workflow based on Miller plane selection, surface matching, and stacking with registry-aware shifts. It avoids configurations with overlapping atoms and stores each system in a reproducible format for later energy evaluation.
 
-The dataset continues to evolve. Planned future versions (described in Chapter 4) will include improved treatment of shift-zero structures, additional relaxed geometries, and further structural diversity using RAFFLE.
-
 \subsection{Interface Generation Protocol}
 
 Interfaces were generated using the ARTEMIS toolkit. For each pair of materials, up to 64 surface orientations (Miller planes) were explored to find possible ways the two materials could be stacked together. ARTEMIS searched for matching supercells by expanding the unit cells of both materials up to 8 times along the in-plane directions, looking for configurations with similar lattice vectors and angles. This helps distribute mismatch over more atoms and reduce the per-cell strain.
@@ -46,15 +44,9 @@ While ARTEMIS considered many potential surface combinations, only 29 unique sur
 
 All parts of the workflow—from building interfaces to reading the results—were automated using Python scripts. This made it easier to run large numbers of calculations and keep track of everything.
 
-\paragraph{Structure generation and job submission}
-
 Interfaces were generated and prepared for calculation using scripts that could run in bulk. Each job was submitted to the compute cluster automatically.
 
-\paragraph{Error checking and filtering}
-
 Some calculations failed or gave broken outputs (like NaN energies). These were filtered out automatically so they didn’t affect the results.
-
-\paragraph{Parsing results and saving data}
 
 The energy values from both MLP and DFT were read and stored in CSV files. These files were used to calculate rankings and compare the methods.
 
@@ -106,14 +98,8 @@ These metrics help us judge whether the MLP is giving similar energy rankings an
 
 In this study, we did not relax the interface structures before comparing energies. Instead, the same unrelaxed geometries were evaluated using both DFT and MLP to keep the comparison fair. This helps isolate differences in energy prediction from differences caused by structural relaxation.
 
-\paragraph{DFT evaluation}
-
 DFT calculations were carried out using the VASP software. Gamma-point sampling was used for simplicity and speed. Calculations were limited to a 24-hour walltime. Structures that failed to complete were excluded from analysis.
 
-\paragraph{MLP evaluation}
-
 The MACE model used here was the most recent release available at the time (downloaded in April 2025). It was applied using the ASE library to compute total energies on the same unrelaxed structures as used for DFT. No fine-tuning or delta-correction was applied.
-
-\paragraph{Note on relaxation}
 
 While MLP-based relaxation was tested on some structures later in the workflow, those results were not used for ranking comparison in this section. The goal here is to test how well MLP can predict relative stability based on geometry alone. DFT relaxations are planned for future datasets.
