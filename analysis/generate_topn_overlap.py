@@ -5,9 +5,9 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 COMPARISONS = [
-    {'comparison': 'dft@dft_vs_mlp@mlp', 'dft': 'dft@dft_vs_mlp@mlp_rank_dft', 'mlp': 'dft@dft_vs_mlp@mlp_rank_mlp'},
+    # {'comparison': 'dft@dft_vs_mlp@mlp', 'dft': 'dft@dft_vs_mlp@mlp_rank_dft', 'mlp': 'dft@dft_vs_mlp@mlp_rank_mlp'},
     {'comparison': 'dft@dft_vs_dft@mlp', 'dft': 'dft@dft_vs_dft@mlp_rank_dft', 'mlp': 'dft@dft_vs_dft@mlp_rank_mlp'},
-    {'comparison': 'mlp@dft_vs_mlp@mlp', 'dft': 'mlp@dft_vs_mlp@mlp_rank_dft', 'mlp': 'mlp@dft_vs_mlp@mlp_rank_mlp'},
+    # {'comparison': 'mlp@dft_vs_mlp@mlp', 'dft': 'mlp@dft_vs_mlp@mlp_rank_dft', 'mlp': 'mlp@dft_vs_mlp@mlp_rank_mlp'},
 ]
 
 def compute_topn_overlap(df, dft_col, mlp_col, n):

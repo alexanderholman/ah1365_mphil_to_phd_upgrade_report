@@ -129,7 +129,6 @@ def extract_is_primitive_cell_from_struc_data(filename):
         print(f"Error reading primitive cell data from {filename}: {e}")
     return material_lower_primitive_cell, material_upper_primitive_cell
 
-
 def lower_to_rgb(material_lower_percent):
     if material_lower_percent is None:
         return 0, 0, 0
@@ -207,6 +206,8 @@ def main():
     parser.add_argument('-r', '--read', type=str, required=False, default='SBATCH_DFT_VASP.tpl', help='Input tpl file to read from')
     parser.add_argument('-l', '--lower', type=str, required=False, default=None, help='Filter results by lower material (e.g. Si, Ge, Sn)')
     parser.add_argument('-u', '--upper', type=str, required=False, default=None, help='Filter results by upper material (e.g. Si, Ge, Sn)')
+    parser.add_argument('--lower-miller', type=str, required=False, default=None, help='Filter results by lower miller index (e.g. 001)')
+    parser.add_argument('--upper-miller', type=str, required=False, default=None, help='Filter results by upper miller index (e.g. 001)')
     args = parser.parse_args()
 
     data_dir = Path("../structures/interfaces/")
