@@ -1,0 +1,60 @@
+\section{Research Objectives} \label{section:research_objectives}
+
+\label{para:mlp_interface_aims} % ---------- %
+
+This project aims to evaluate and enhance the use of machine-learned interatomic potentials (MLPs) for predicting the
+relative stability of material interfaces.
+
+By replacing expensive density functional theory (DFT) calculations in the early stages of interface screening, MLPs
+offer a route to scalable evaluation across diverse chemical systems and stacking configurations.
+
+\label{para:interface_config_space} % ---------- %
+
+The configurational landscape of interface structures is combinatorially large.
+
+Even for lattice-matched systems, variations in Miller planes, interfacial shifts, and terminations can lead to
+significant changes in formation energy and electronic response.
+
+Traditional DFT methods, while accurate, are computationally prohibitive when applied to hundreds or thousands of such
+configurations.
+
+\label{para:mlp_pipeline_integration} % ---------- %
+
+This work builds on the integration of MLPs, particularly the MACE model, into high-throughput interface generation and
+evaluation pipelines.
+
+It focuses not only on energy prediction, but also on favourability ranking, robustness to system-specific errors, and
+hybrid workflows where MLPs are used as a pre-screening stage ahead of final DFT validation.
+
+\label{para:core_objectives} % ---------- %
+
+\paragraph{The research addresses the following core objectives:}
+
+\begin{enumerate}
+
+    \item \textbf{Benchmark MLP-predicted rankings against DFT across diverse interfaces.}
+    Using MACE-evaluated relaxations and energies, this study quantifies how well MLPs preserve the DFT ordering of
+    interface favourability across multiple group-IV homostructures and heterostructures.
+
+    \item \textbf{Diagnose system-specific discrepancies and explore delta-learning corrections.}
+    Particular attention is given to cases, such as pure-Si systems, where MLP rank fidelity degrades.
+
+    Chapter~\ref{chapter:next_steps} proposes training delta models to correct these systematic energy errors.
+
+    \item \textbf{Develop structure-based predictors of interface energy.}
+    Surface and slab-level features (e.g. orientation, element type, symmetry, strain) will be used to train models
+    capable of predicting favourability prior to full interface assembly, reducing reliance on supercell enumeration.
+
+    \item \textbf{Integrate MLPs and predictors into automated workflows.}
+    Tools such as ARTEMIS and RAFFLE will be extended to incorporate MLP-based scoring or filtering, enabling efficient
+    identification of favourable configurations before expensive DFT refinement.
+
+\item \end{enumerate}
+
+\label{para:scalable_screening_implications} % ---------- %
+
+In the context of this report, the MLP‐driven workflow enables rapid, scalable screening of interface configurations and
+informs the design of functional heterostructures by ranking candidates according to atomic‐level energetics.
+
+By focusing on regimes, such as mismatched or metastable reconstructions, where traditional coherence rules or
+bulk‐derived heuristics break down, this approach hopes to uncover non‐intuitive structures that would otherwise be overlooked.

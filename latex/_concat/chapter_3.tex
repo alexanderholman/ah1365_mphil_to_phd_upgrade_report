@@ -110,61 +110,69 @@ DFT calculations were carried out using the VASP software. Gamma-point sampling 
 
 The MACE model used here was the most recent release available at the time (downloaded in April 2025). It was applied using the ASE library to compute total energies on the same unrelaxed structures as used for DFT. No fine-tuning or delta-correction was applied.
 
-While MLP-based relaxation was tested on some structures later in the workflow, those results were not used for ranking comparison in this section. The goal here is to test how well MLP can predict relative stability based on geometry alone. DFT relaxations are planned for future datasets.
-
 \section{Results and Analysis} \label{section:results_and_analysis}
 
-This section presents the results of the DFT vs MLP interface ranking comparison across 1,381 interfaces evaluated during Iteration 3. The goal is to determine whether MACE, a large machine-learned interatomic potential, preserves favourability rankings obtained via DFT across a wide range of material systems and interface types.
+This section presents the results of comparing unrelaxed DFT and MLP (MACE) energy rankings across 680 valid heterostructures, grain boundaries, and alloyed systems involving the group 14 elements (C, Si, Ge, Sn). The goal is to determine whether MACE, a machine-learned interatomic potential, can replicate DFT-derived rankings on unrelaxed geometries closely enough to serve as a pre-screening tool in the MLI data pipeline.
 
-\subsection{Overview of Rank Agreement}
+\subsection{Overall Ranking Consistency}
 
-\subsubsection{Summary trends in DFT vs. MLP agreement}
+Across all evaluated systems, Spearman’s rank correlation coefficient was extremely high:
+\[
+\rho = 0.9954, \qquad \tau = 0.9568
+\]
+This near-perfect alignment demonstrates that MACE preserves the order of interface favourability remarkably well—even without relaxation—suggesting strong potential as a filtering method for DFT candidate selection.
 
-Ranking consistency between DFT and MLP was assessed using Spearman's $\rho$ and Kendall's $\tau$. Overall correlation was strong: $\rho$ ranged from 0.75 to 0.95 and $\tau$ from 0.70 to 0.90 across the majority of interface types. Metrics were extracted from \texttt{stats.csv}, which aggregates statistics across the full dataset. Perfect rank preservation (i.e. $\rho = 1$) was observed in a subset of alloy systems, while degraded consistency was evident in Silicon interfaces.
+However, absolute energy agreement was poor:
+\[
+\text{RMSE} = 188.89~\text{eV}, \qquad \text{MAE} = 30.87~\text{eV}
+\]
+These large discrepancies reflect the fact that while MACE captures relative stability, its raw energy outputs are not quantitatively reliable without further training. Despite this, the Top-10 overlap between DFT and MLP was 8/10, indicating strong alignment in identifying favourable structures.
 
-\subsubsection{Visual and tabular representation of metric distributions}
+\subsection{Interface Type Performance}
 
-A scatter plot comparing DFT and MLP rankings across all interfaces is shown in Figure~\ref{fig:rank-scatter}, with supporting metric distributions detailed in Table~\ref{tab:global-metrics}. Top-N overlap scores (e.g. Top-10) were 5 for DFT@DFT vs MLP@MLP and 8 for DFT@DFT vs DFT@MLP, indicating modest agreement in identifying favourable structures.
+To understand how interface geometry impacts ranking fidelity, we grouped results into three categories: upper-slab heterostructures, lower-slab heterostructures, and homostructures (grain boundaries). Average metrics across these categories are summarised in Table~\ref{tab:interface-type-stats}.
 
-\subsection{Cross-Method Evaluation}
+\begin{itemize}
+  \item \textbf{Upper interfaces}: MACE achieved the best performance here with $\rho \approx 0.98$ and Top-10 overlap of 8.5/10. Although RMSE remained high (≈120 eV), the rankings were highly reliable.
+  \item \textbf{Lower interfaces}: Rank correlation dropped to $\rho \approx 0.62$, suggesting geometry-related artefacts when certain species (e.g., carbon) appeared in the lower layer.
+  \item \textbf{Grain boundaries}: Strong correlation was retained ($\rho \approx 0.94$, $\tau \approx 0.83$), and energy error was much lower (RMSE ≈ 7.69 eV), making this group especially reliable.
+\end{itemize}
 
-\subsubsection{Comparison of MLP-relaxed vs. DFT-evaluated structures}
+\subsection{System-Specific Performance}
 
-Due to computational constraints, MLP-relaxed structures evaluated with DFT (MLP@DFT) were omitted from this study. The cross-method comparison therefore focuses on DFT-relaxed structures evaluated with MLP (DFT@MLP). These exhibited higher agreement with DFT@DFT than MLP@MLP, indicating that relaxation geometry plays a dominant role in ranking discrepancies. This suggests a degree of structure-energy decoupling.
+\paragraph{Carbon Systems (C|X)}
+Only three C|Si interfaces were successfully processed with carbon in the lower layer. These results were unreliable, with negative rank correlation ($\rho = -0.5$), and are omitted from conclusions. In contrast, C in the upper slab yielded 79 usable structures with excellent results:
+\[
+\rho = 0.9491, \qquad \tau = 0.8182, \qquad \text{MAE} \approx 0.58~\text{eV}, \qquad \text{Top-10 overlap} = 8
+\]
+This demonstrates that MACE performs well on carbon-containing systems, provided the geometry is physically reasonable.
 
-\subsection{System-Specific Observations}
+\paragraph{Silicon Systems (Si|X)}
+Silicon-rich systems showed consistently weaker performance, especially when Si was in the lower slab. For example, Si|Ge interfaces produced:
+\[
+\rho = 0.9082, \qquad \tau = 0.8360, \qquad \text{MAE} = 104.74~\text{eV}
+\]
+This indicates good rank alignment but extremely poor energy agreement. In contrast, the reversed Ge|Si systems showed better correlation and lower error:
+\[
+\rho = 0.9664, \qquad \tau = 0.8996, \qquad \text{MAE} = 40.37~\text{eV}
+\]
+The asymmetry suggests that silicon's role in defining interfacial bonding may contribute to poor generalisation by MACE, particularly under strain or poor coordination.
 
-\subsubsection{Carbon Systems (C|X)}
+\paragraph{Germanium and Tin Systems}
+Both Ge and Sn systems showed strong agreement across metrics:
+\[
+\text{Ge: } \rho = 0.9739, \quad \text{Sn: } \rho = 0.9744, \quad \text{Top-10 overlap} \approx 8
+\]
+Sn exhibited slightly higher variability in absolute energy values but did not suffer catastrophic rank inversions. These systems appear well-represented in the MACE training distribution.
 
-\paragraph{Note on incomplete data due to ISCA job failures}
-
-Carbon-rich systems were underrepresented due to DFT job failures and high compute cost. As a result, only preliminary statistics could be extracted from \texttt{stats\_lower\_C.csv}, with limited rank correlation insight. These data points are not sufficient to draw conclusions but are retained for completeness.
-
-\subsubsection{Silicon Interfaces}
-
-\paragraph{Poor MLP rank preservation}
-
-Silicon interfaces showed the weakest performance overall. Rank correlations were lower than for other systems, with $\rho < 0.70$ and $\tau < 0.65$ in many Si|Si and Si|X comparisons (see \texttt{stats\_lower\_Si.csv}). Errors tended to cluster in the lower half of the ranking, indicating failures in correctly identifying unfavourable interfaces.
-
-\paragraph{Potential reason}
-
-This poor agreement may stem from limited model generalisability across strained or undercoordinated Si environments. The MACE model was not explicitly fine-tuned for such systems, suggesting underfitting or domain mismatch.
-
-\subsubsection{Germanium and Tin Interfaces}
-
-\paragraph{Stronger correlation and better Top-N recovery}
-
-Ge and Sn-containing systems yielded improved correlation metrics and Top-N recovery compared to Si. While Tin interfaces (\texttt{stats\_lower\_Sn.csv}) showed larger absolute energy errors, the rank preservation was generally robust. No catastrophic rank inversions were observed.
-
-\subsubsection{Phase boundaries}
-
-\paragraph{Overall poorer rank preservation}
-
-Interfaces near the transition from favourable to unfavourable status (i.e. phase boundaries) were more susceptible to ranking shifts. While many transitions were preserved, files such as \texttt{stats\_lower\_Si\_upper\_Sn.csv} and \texttt{stats\_lower\_Ge\_upper\_Sn.csv} show increased rank distance near critical cutoffs.
-
-\paragraph{Potential Reason}
-
-These marginal cases are sensitive to small energy differences, which may be within the error tolerance of the MLP. This underscores the challenge of using MLPs for binary decision-making near phase boundaries.
+\paragraph{Grain Boundaries (Homostructures)}
+Grain boundary results were strong overall but showed species-specific variation:
+\begin{itemize}
+  \item Ge|Ge: $\rho = 0.9818$, but with higher error (MAE ≈ 3.36 eV)
+  \item Si|Si: $\rho = 0.9557$
+  \item Sn|Sn: $\rho = 0.8779$
+\end{itemize}
+Grain boundaries had the best Top-10 overlap at 9.67/10, and much lower RMSE than heterostructures (≈7.7 eV). Their structural symmetry and stoichiometric balance likely contribute to better predictive consistency.
 
 \subsubsection{Perfect Alloys}
 
@@ -179,3 +187,7 @@ These systems feature uniform chemical environments with little interfacial disr
 \subsection{DFT vs MLP: Computational Cost Analysis}
 
 MLP evaluations offered orders-of-magnitude speedups over DFT while retaining acceptable accuracy in most ranking tasks. However, the quality of this speedup is system-dependent and less reliable for Silicon-rich or mixed-coordination interfaces. These observations motivate a need for improved domain coverage, possibly via delta-learning or retraining on interfacial datasets.
+
+\subsection{Summary and Implications}
+
+These results support the use of MACE as a high-throughput screening tool to rank heterostructures prior to DFT evaluation. While energy values are not trustworthy in absolute terms, the consistent rank ordering—especially in systems with low strain and high registry—makes MACE valuable for filtering large structure sets. Poorer results in Si-rich systems highlight the need for retraining or domain-specific correction, which is a core focus of future work (Chapter~\ref{chapter:next_steps}).

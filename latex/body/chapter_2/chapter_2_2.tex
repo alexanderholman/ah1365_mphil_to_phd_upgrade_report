@@ -1,3 +1,37 @@
+\section{Conventional Prediction Methods} \label{section:conventional_methods}
+
+Understanding and predicting the behaviour of material interfaces requires a firm foundation in computational methods that are rooted in quantum and statistical mechanics. This section introduces the core approaches historically used to model interfaces at the atomic and mesoscale level, focusing primarily on first-principles methods and classical simulation techniques. Although each of these methods offers powerful insights, their accuracy, computational cost, and suitability for interface modelling vary substantially.
+
+A primary tool in this field is \textit{Density Functional Theory} (DFT), a quantum-mechanical framework capable of describing electronic structure with high precision. DFT is well-suited to calculating key interfacial properties such as formation ene.g. charge redistribution, and band alignment, making it an essential component of most modern interface studies. Within this domain, software packages such as \textsc{VASP} have become widely adopted for their efficient implementations of the Kohn-Sham formalism.
+
+However, DFT's cubic scaling with system size makes it computationally prohibitive for large or disordered interface models. As a result, researchers also turn to \textit{classical methods}, such as \textit{Molecular Dynamics} (MD) and \textit{Kinetic Monte Carlo} (KMC). MD enables the simulation of dynamic processes and thermal fluctuations over nanosecond timescales, whereas KMC offers access to much longer time evolution by modelling stochastic transitions between states. Each method has its own niche---MD is adept at capturing thermal effects and atomic rearrangements, while KMC is particularly valuable for studying diffusion and growth kinetics over experimental timescales.
+
+These conventional approaches provide the groundwork for predicting critical interfacial properties---including adhesion ene.g. charge transfer behaviour, and electron or phonon transport. They remain indispensable despite their limitations, particularly when used in tandem. This section surveys these methods in turn, addressing their theoretical underpinnings, practical implementations, and their relative advantages and constraints in the context of interface science.
+
+\subsection{What are traditional computational approaches to modelling interfaces?}
+
+Traditional computational approaches to modelling interfaces have historically focused on atomistic methods grounded in quantum mechanics or statistical physics. The most widely adopted of these are \textit{first-principles} or \textit{ab initio} methods, particularly Density Functional Theory (DFT), as well as Molecular Dynamics (MD) and Kinetic Monte Carlo (KMC). Each offers a different perspective on interfacial structure, energetics, and evolution.
+
+\subsubsection{Lattice Matching and Geometry-Driven Construction}
+
+A foundational step in many interface modelling workflows is lattice matching between two crystalline materials. This involves aligning compatible Miller planes to minimise strain and identify viable supercell geometries. The method introduced by Zur et al.~(1984) laid the groundwork for many subsequent algorithms used in tools such as \textsc{METADISE} and \textsc{ARTEMIS}, which systematically enumerate low-strain combinations, slips, terminations, and atomic registries. These approaches assume idealised surfaces and often neglect more complex processes such as surface reconstructions, chemical interdiffusion, or local disorder.
+
+\subsubsection{Density Functional Theory (DFT)}
+
+DFT remains the most accurate and widely used quantum mechanical method for predicting interfacial properties. It solves the Kohn--Sham equations to determine the electronic ground state, providing access to total energies, charge densities, and band edge positions. DFT can reliably predict key quantities such as adhesion ene.g. charge transfer, and local band alignment. However, it scales cubically with system size ($\mathcal{O}(N^3)$), limiting its application to relatively small supercells and coherent interfaces. For disordered systems or long-range relaxations, DFT becomes prohibitively expensive.
+
+\subsubsection{Molecular Dynamics (MD)}
+
+MD simulates the atomic trajectories under classical Newtonian mechanics, governed by interatomic potentials. Classical MD is well-suited to studying thermal processes such as diffusion, defect migration, and strain relaxation on picosecond to nanosecond timescales. It can handle much larger system sizes than DFT but sacrifices electronic accuracy, particularly in capturing bond rearrangements or charge redistribution. Reactive MD and ab initio MD (e.g. Car-Parrinello) offer improved fidelity at increased computational cost.
+
+\subsubsection{Kinetic Monte Carlo (KMC)}
+
+KMC provides a probabilistic approach to simulate rare events and long-term evolution, such as grain growth, interdiffusion, or defect clustering. It models a system as a sequence of stochastic transitions between predefined states, with rates typically derived from DFT or MD simulations. KMC can simulate processes on experimentally relevant timescales (up to seconds), but lacks atomic-resolution trajectories and requires a comprehensive catalogue of rate-limiting events.
+
+\subsubsection{Summary}
+
+Together, these methods form the traditional computational toolkit for interface modelling. DFT provides high-accuracy predictions of interfacial energies and electronic structure; MD captures time-resolved atomistic behaviour; and KMC enables long-timescale simulations of kinetic evolution. While powerful individually, these methods are increasingly applied in tandem to span multiple length and time scales.
+
 \subsection{Density Functional Theory (DFT)}
 
 Density Functional Theory (DFT) is a first-principles quantum mechanical method used extensively to model the electronic structure of condensed matter systems, including molecules, solids, and, critically, material interfaces. It provides a variational framework in which the ground-state properties of a many-electron system can be obtained from a functional of the electron density $\rho(\mathbf{r})$, rather than from the many-body wavefunction $\Psi(\mathbf{r}_1, \dots, \mathbf{r}_N)$. This simplification, formalised through the Hohenberg-Kohn theorems, underpins the modern implementation of DFT via the Kohn-Sham approach, where the interacting system is replaced by an auxiliary system of non-interacting electrons subject to an effective potential that captures Coulomb, exchange, and correlation interactions.
