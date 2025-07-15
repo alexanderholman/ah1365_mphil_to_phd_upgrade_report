@@ -1,22 +1,12 @@
 \section{Further Steps Towards Rank Preservation} \label{section:rank_preservation}
 
-\subsection{Motivation: Why Rank Preservation Is Central}
-
 The ability to preserve DFT-calculated interface rankings is critical for efficient high-throughput screening of material systems. Absolute interface energies are less relevant in isolation if the relative favourability of competing configurations is misrepresented. This motivates the need for improving rank fidelity in machine-learned models such as MACE.
-
-\subsection{Comparison of Training Strategies}
 
 Future work will systematically compare three training paradigms to address limitations identified in Chapter 3 :
 
-\subsubsection{General MACE model (baseline)}
-
 This baseline model is trained on broad-spectrum, bulk-focused data. While it demonstrates some transferability, its limitations are apparent in systems with interfacial complexity; especially silicon-rich or structurally diverse cases.
 
-\subsubsection{Interface-specific fine-tuning}
-
 Here, the same model is refined using additional interface-representative configurations, tailored to improve accuracy in the interfacial regime. This targets data-domain mismatch as a key source of ranking degradation.
-
-\subsubsection{Delta-learning (ΔE = E\_DFT − E\_MLP; Pitfield 2024-inspired)}
 
 This strategy applies a correction to existing MLP predictions by learning residuals between MLP and DFT energies. It allows the reuse of baseline MLPs while introducing physics-informed calibration, improving ranking accuracy without fully retraining the model.
 
@@ -24,17 +14,11 @@ This strategy applies a correction to existing MLP predictions by learning resid
 
 \subsection{Planned Benchmarking Criteria}
 
-\subsubsection{Spearman ρ, Kendall τ, Top-N overlap}
-
 Performance will be assessed using statistical correlation coefficients and overlap in Top-N rankings between DFT and MLP predictions. These metrics will provide fine-grained diagnostics of rank preservation.
 
 % TODO: Insert table summarising benchmarking metrics (Spearman, Kendall, Top-N) and their interpretations
 
-\subsubsection{Domain robustness (Si, Ge, hetero-interfaces)}
-
 Benchmarks will be applied across chemically diverse systems (C, Si, Ge, Sn), crystallographic orientations, and stacking shifts. Key figures include \texttt{results\_upper\_Si\_spearman\_dft\_dft\_vs\_dft\_mlp\_valid.png} and \texttt{results\_lower\_Ge\_kendall\_dft@dft\_vs\_dft@mlp\_invalid.png}. Reference datasets include \texttt{results.csv} and \texttt{stats.csv} (1381 interfaces; no train/test partition defined).
-
-\paragraph{Additional Limitation:}
 
 No explicit mechanism yet exists to identify and flag phase boundary rank inversions, though these could be extracted from \texttt{\_rank\_distance} fields. Future work may focus on visualising such transitions as indicators of model degradation.
 

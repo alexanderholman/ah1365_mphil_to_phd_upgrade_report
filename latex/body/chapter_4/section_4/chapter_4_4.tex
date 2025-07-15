@@ -1,28 +1,14 @@
 \section{Integration of RAFFLE into Structure Generation}
 
-\subsection{Motivation for RAFFLE Use: Enhanced Interface Diversity}
-
 ARTEMIS-generated stacks, though consistent, impose alignment constraints. RAFFLE offers a mechanism to interpolate interfacial zones, increase disorder, or induce registry shifts.
-
-\subsection{Current ARTEMIS-Only Pipeline: Limitations}
 
 Aligned stacking methods limit structural exploration and may fail to capture intermediate configurations present in experimental systems.
 
-\subsection{RAFFLE Capabilities: Refill Methods, Semi-Coherent Boundaries}
-
 Using the \texttt{raffle\_generator} framework and reference energies from MACE, RAFFLE allows stochastic structural sampling within bounded interface zones. Visuals such as \texttt{upper\_a45\_b45\_c45.png} and \texttt{lower\_a45\_b45\_c45.png} represent generic orientation snapshots and are not RAFFLE-specific.
-
-\subsection{Planned Integration Workflow}
-
-\subsubsection{Combine ARTEMIS for stacking + RAFFLE for region refinement}
 
 Initial slabs and orientations will be generated via ARTEMIS, while RAFFLE will introduce configurational variation within interfacial volumes.
 
-\subsubsection{Target systems: strained, incoherent, or alloyed interfaces}
-
 This approach is especially relevant to Si|Sn and Ge|Sn systems where lattice mismatch or registry discontinuity poses challenges for baseline methods.
-
-\subsection{Validation and Comparison with ARTEMIS-Only Structures}
 
 Relaxation comparisons will be made using both DFT and MLP pipelines to quantify RAFFLE's impact on interface energy diversity and ranking stability.
 
