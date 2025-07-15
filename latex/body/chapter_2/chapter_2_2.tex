@@ -1,107 +1,292 @@
 \section{Conventional Prediction Methods} \label{section:conventional_methods}
 
-Understanding and predicting the behaviour of material interfaces requires a firm foundation in computational methods that are rooted in quantum and statistical mechanics. This section introduces the core approaches historically used to model interfaces at the atomic and mesoscale level, focusing primarily on first-principles methods and classical simulation techniques. Although each of these methods offers powerful insights, their accuracy, computational cost, and suitability for interface modelling vary substantially.
+% ---------- %
 
-A primary tool in this field is \textit{Density Functional Theory} (DFT), a quantum-mechanical framework capable of describing electronic structure with high precision. DFT is well-suited to calculating key interfacial properties such as formation ene.g. charge redistribution, and band alignment, making it an essential component of most modern interface studies. Within this domain, software packages such as \textsc{VASP} have become widely adopted for their efficient implementations of the Kohn-Sham formalism.
+Understanding and predicting the behaviour of material interfaces requires a firm foundation in computational methods
+that are rooted in quantum and statistical mechanics.
 
-However, DFT's cubic scaling with system size makes it computationally prohibitive for large or disordered interface models. As a result, researchers also turn to \textit{classical methods}, such as \textit{Molecular Dynamics} (MD) and \textit{Kinetic Monte Carlo} (KMC). MD enables the simulation of dynamic processes and thermal fluctuations over nanosecond timescales, whereas KMC offers access to much longer time evolution by modelling stochastic transitions between states. Each method has its own niche---MD is adept at capturing thermal effects and atomic rearrangements, while KMC is particularly valuable for studying diffusion and growth kinetics over experimental timescales.
+This section introduces the core approaches historically used to model interfaces at the atomic and mesoscale level,
+focusing primarily on first-principles methods and classical simulation techniques.
 
-These conventional approaches provide the groundwork for predicting critical interfacial properties---including adhesion ene.g. charge transfer behaviour, and electron or phonon transport. They remain indispensable despite their limitations, particularly when used in tandem. This section surveys these methods in turn, addressing their theoretical underpinnings, practical implementations, and their relative advantages and constraints in the context of interface science.
+Although each of these methods offers powerful insights, their accuracy, computational cost, and suitability for
+interface modelling vary substantially.
 
-\subsection{What are traditional computational approaches to modelling interfaces?}
+% ---------- %
 
-Traditional computational approaches to modelling interfaces have historically focused on atomistic methods grounded in quantum mechanics or statistical physics. The most widely adopted of these are \textit{first-principles} or \textit{ab initio} methods, particularly Density Functional Theory (DFT), as well as Molecular Dynamics (MD) and Kinetic Monte Carlo (KMC). Each offers a different perspective on interfacial structure, energetics, and evolution.
+A primary tool in this field is \textit{Density Functional Theory} (DFT), a quantum-mechanical framework capable of
+describing electronic structure with high precision.
 
-\subsubsection{Lattice Matching and Geometry-Driven Construction}
+DFT is well-suited to calculating key interfacial properties such as formation energy, charge redistribution, and band
+alignment, making it an essential component of most modern interface studies.
 
-A foundational step in many interface modelling workflows is lattice matching between two crystalline materials. This involves aligning compatible Miller planes to minimise strain and identify viable supercell geometries. The method introduced by Zur et al.~(1984) laid the groundwork for many subsequent algorithms used in tools such as \textsc{METADISE} and \textsc{ARTEMIS}, which systematically enumerate low-strain combinations, slips, terminations, and atomic registries. These approaches assume idealised surfaces and often neglect more complex processes such as surface reconstructions, chemical interdiffusion, or local disorder.
+Within this domain, software packages such as \textsc{VASP} have become widely adopted for their efficient
+implementations of the Kohn-Sham formalism.
 
-\subsubsection{Density Functional Theory (DFT)}
+% ---------- %
 
-DFT remains the most accurate and widely used quantum mechanical method for predicting interfacial properties. It solves the Kohn--Sham equations to determine the electronic ground state, providing access to total energies, charge densities, and band edge positions. DFT can reliably predict key quantities such as adhesion ene.g. charge transfer, and local band alignment. However, it scales cubically with system size ($\mathcal{O}(N^3)$), limiting its application to relatively small supercells and coherent interfaces. For disordered systems or long-range relaxations, DFT becomes prohibitively expensive.
+However, DFT has limits. Computationally, DFT's cubic scaling with system size makes it computationally prohibitive for
+large or disordered interface models.
 
-\subsubsection{Molecular Dynamics (MD)}
+As a result, researchers also turn to \textit{classical methods}, such as \textit{Molecular Dynamics} (MD).
 
-MD simulates the atomic trajectories under classical Newtonian mechanics, governed by interatomic potentials. Classical MD is well-suited to studying thermal processes such as diffusion, defect migration, and strain relaxation on picosecond to nanosecond timescales. It can handle much larger system sizes than DFT but sacrifices electronic accuracy, particularly in capturing bond rearrangements or charge redistribution. Reactive MD and ab initio MD (e.g. Car-Parrinello) offer improved fidelity at increased computational cost.
+MD enables the simulation of dynamic processes and thermal fluctuations over nanosecond timescales.
 
-\subsubsection{Kinetic Monte Carlo (KMC)}
+It is also adept at capturing thermal effects and atomic rearrangements.
 
-KMC provides a probabilistic approach to simulate rare events and long-term evolution, such as grain growth, interdiffusion, or defect clustering. It models a system as a sequence of stochastic transitions between predefined states, with rates typically derived from DFT or MD simulations. KMC can simulate processes on experimentally relevant timescales (up to seconds), but lacks atomic-resolution trajectories and requires a comprehensive catalogue of rate-limiting events.
+% ---------- %
 
-\subsubsection{Summary}
+These conventional approaches provide the groundwork for predicting critical interfacial properties, including adhesion
+energy, charge transfer behaviour, and electron or phonon transport.
 
-Together, these methods form the traditional computational toolkit for interface modelling. DFT provides high-accuracy predictions of interfacial energies and electronic structure; MD captures time-resolved atomistic behaviour; and KMC enables long-timescale simulations of kinetic evolution. While powerful individually, these methods are increasingly applied in tandem to span multiple length and time scales.
+They remain indispensable despite their limitations, particularly when used in tandem.
+
+This section surveys these methods in turn, addressing their theoretical underpinnings, practical implementations, and
+their relative advantages and constraints in the context of interface science.
+
+% ---------- %
+
+A foundational step in many interface modelling workflows is lattice matching between two crystalline materials.
+
+This involves aligning compatible Miller planes to minimise strain and identify viable supercell geometries.
+
+The method introduced by Zur et al.~(1984) laid the groundwork for many subsequent algorithms used in tools such as
+\textsc{METADISE} and \textsc{ARTEMIS}, which systematically enumerate low-strain combinations, slips, terminations, and
+atomic registries.
+
+These approaches assume idealised surfaces and often neglect more complex processes such as surface reconstructions,
+chemical interdiffusion, or local disorder.
+
+% todo: Describe it (lattice matching / geometry-driven interface generation)
+% don't just reference.
+
+% ---------- %
+
+DFT remains the most accurate and widely used quantum mechanical method for predicting interfacial properties.
+
+It solves the Kohn--Sham equations to determine the electronic ground state, providing access to total energies, charge
+densities, and band edge positions.
+
+% ---------- %
+
+MD simulates the atomic trajectories under classical Newtonian mechanics, governed by interatomic potentials.
+
+Classical MD is well-suited to studying thermal processes such as diffusion, defect migration, and strain relaxation on
+picosecond to nanosecond timescales.
+
+% ---------- %
 
 \subsection{Density Functional Theory (DFT)}
 
-Density Functional Theory (DFT) is a first-principles quantum mechanical method used extensively to model the electronic structure of condensed matter systems, including molecules, solids, and, critically, material interfaces. It provides a variational framework in which the ground-state properties of a many-electron system can be obtained from a functional of the electron density $\rho(\mathbf{r})$, rather than from the many-body wavefunction $\Psi(\mathbf{r}_1, \dots, \mathbf{r}_N)$. This simplification, formalised through the Hohenberg-Kohn theorems, underpins the modern implementation of DFT via the Kohn-Sham approach, where the interacting system is replaced by an auxiliary system of non-interacting electrons subject to an effective potential that captures Coulomb, exchange, and correlation interactions.
+% ---------- %
 
-The total Kohn-Sham energy is given by: \begin{equation} E_{\mathrm{KS}}[\rho] = T_s[\rho] + \int V_{\mathrm{ext}}(\mathbf{r}) \rho(\mathbf{r}) \, \mathrm{d}\mathbf{r} + \frac{1}{2} \int \int \frac{\rho(\mathbf{r}) \rho(\mathbf{r'})}{|\mathbf{r} - \mathbf{r'}|} \, \mathrm{d}\mathbf{r} \, \mathrm{d}\mathbf{r'} + E_{\mathrm{xc}}[\rho], \end{equation} where $T_s[\rho]$ is the kinetic energy of the non-interacting electrons, $V_{\mathrm{ext}}$ is the external (ionic) potential, and $E_{\mathrm{xc}}[\rho]$ is the exchange-correlation functional, the exact form of which remains unknown.
+Density Functional Theory (DFT) is a first-principles quantum mechanical method used extensively to model the electronic
+structure of condensed matter systems, including molecules, solids, and, critically, material interfaces.
 
-Common approximations include the Local Density Approximation (LDA), Generalised Gradient Approximation (GGA), and hybrid functionals. While LDA assumes a locally uniform electron gas and often leads to overbinding, GGA incorporates density gradients and improves accuracy for molecular and inhomogeneous systems. Hybrid functionals, such as HSE06, incorporate a portion of exact exchange and offer improved bandgap and localisation predictions at significantly greater computational cost.
+It provides a variational framework in which the ground-state properties of a many-electron system can be obtained from
+a functional of the electron density $\rho(\mathbf{r})$, rather than from the many-body wavefunction
+$\Psi(\mathbf{r}_1, \dots, \mathbf{r}_N)$.
 
-DFT has become foundational in materials modelling due to its ability to predict not only total energies and optimised geometries, but also derived properties including electronic band structures, charge densities, dielectric responses, phonon spectra, and interfacial energetics. Its applications to interface modelling, however, are computationally constrained. Systems containing hundreds of atoms, often required to model misfit dislocations, strain relief, and interfacial disorder, can become prohibitively expensive, with computational scaling on the order of $\mathcal{O}(N^3)$ with system size.
+This simplification, formalised through the Hohenberg-Kohn theorems, underpins the modern implementation of DFT via the
+Kohn-Sham approach, where the interacting system is replaced by an auxiliary system of non-interacting electrons subject
+to an effective potential that captures Coulomb, exchange, and correlation interactions.
 
-\subsubsection{VASP and Practical Implementations}
+% ---------- %
 
-All DFT simulations in this project are conducted using the Vienna Ab initio Simulation Package (VASP), a widely used plane-wave-based implementation of Kohn-Sham DFT. VASP employs the projector-augmented wave (PAW) method to model core-valence interactions, and supports a variety of exchange-correlation functionals including GGA-PBE and hybrid HSE06. Structural relaxations are typically performed with conjugate gradient algorithms until residual forces fall below a chosen threshold (e.g. 0.01 eV/\AA).
+The total Kohn-Sham energy is given by:
 
-Periodic boundary conditions are employed in all three spatial directions, necessitating the introduction of vacuum regions for slab models and sufficient supercell dimensions to minimise image-image interactions in interface simulations. For phonon and dielectric property calculations, VASP supports both finite displacement and Density Functional Perturbation Theory (DFPT) approaches, though care must be taken when treating low-symmetry systems or low-frequency modes.
+\begin{equation} E_{\mathrm{KS}}[\rho] = T_s[\rho] + \int V_{\mathrm{ext}}(\mathbf{r}) \rho(\mathbf{r}) \, \mathrm{d}\mathbf{r} + \frac{1}{2} \int \int \frac{\rho(\mathbf{r}) \rho(\mathbf{r'})}{|\mathbf{r} - \mathbf{r'}|} \, \mathrm{d}\mathbf{r} \, \mathrm{d}\mathbf{r'} + E_{\mathrm{xc}}[\rho], \end{equation} where $T_s[\rho]$ is the kinetic energy of the non-interacting electrons, $V_{\mathrm{ext}}$ is the external (ionic) potential, and $E_{\mathrm{xc}}[\rho]$ is the exchange-correlation functional, the exact form of which remains unknown.
 
-The simulation input is controlled via the INCAR, POSCAR, KPOINTS, and POTCAR files, with convergence typically assessed by k-point density and energy cutoff tests. Pulay and Broyden mixing schemes are used for charge density convergence, and dipole corrections may be employed for asymmetric slab geometries.
+% ---------- %
 
-While VASP provides accurate and robust results for interfacial modelling, it remains computationally intensive. For extended or complex interfacial systems, this motivates the introduction of machine-learned potentials (MLPs), which aim to reproduce DFT accuracy at substantially lower cost; enabling exploration of larger supercells, disordered motifs, and thermodynamic ensembles that are otherwise intractable.
+Common approximations include the Local Density Approximation (LDA), Generalised Gradient Approximation (GGA), and
+hybrid functionals.
 
-\subsection{Other Methods}
+While LDA assumes a locally uniform electron gas and often leads to overbinding, GGA incorporates density gradients and
+improves accuracy for molecular and inhomogeneous systems.
 
-In addition to Density Functional Theory (DFT), two other classes of atomistic modelling, Molecular Dynamics (MD) and Kinetic Monte Carlo (KMC), have proven valuable for exploring material interfaces, particularly when temporal evolution or thermal effects are of interest.
+Hybrid functionals, such as HSE06, incorporate a portion of exact exchange and offer improved bandgap and localisation
+predictions at significantly greater computational cost.
 
-\subsubsection{Molecular Dynamics}
+% ---------- %
 
-Molecular Dynamics is a time-resolved simulation method in which the trajectories of atoms are computed by numerically integrating Newton's equations of motion. Forces on each atom are derived either from empirical interatomic potentials (classical MD) or quantum-mechanical calculations (ab initio MD, e.g. Car-Parrinello or Born-Oppenheimer approaches). In interface science, MD is used to study thermal stability, strain relaxation, diffusion, and defect evolution at finite temperatures.
+DFT has become foundational in materials modelling due to its ability to predict not only total energies and optimised
+geometries, but also derived properties including electronic band structures, charge densities, dielectric responses,
+phonon spectra, and interfacial energetics.
 
-One advantage of MD is its capacity to resolve dynamic processes at the atomic level, such as dislocation glide, grain boundary motion, or interfacial melting. However, timescales are severely limited: typical simulations span nanoseconds, far shorter than the seconds to minutes often relevant in experiments. Classical MD can scale to millions of atoms but sacrifices accuracy; ab initio MD is more accurate but typically limited to fewer than 1,000 atoms and short timescales due to computational cost.
+Its applications to interface modelling, however, are computationally constrained.
 
-For interface modelling, MD is particularly useful when studying thermally activated restructuring, interdiffusion, and local vibrational behaviour, especially under conditions such as annealing or irradiation. It also serves as a preliminary stage in workflows involving machine-learned potentials, providing dynamical data for training.
+% ---------- %
 
-\subsubsection{Kinetic Monte Carlo (KMC)}
+All DFT simulations in this project are conducted using the Vienna Ab initio Simulation Package (VASP), a widely used
+plane-wave-based implementation of Kohn-Sham DFT.
 
-Kinetic Monte Carlo methods simulate the time evolution of materials by selecting thermally activated events (such as diffusion, adsorption, or defect migration) based on their rates, derived from either experimental data or calculated energy barriers. Rather than resolving individual atomic vibrations, KMC focuses on probabilistic transitions between states, making it well-suited to model slow processes over long timescales, up to seconds or beyond.
+VASP employs the projector-augmented wave (PAW) method to model core-valence interactions, and supports a variety of
+exchange-correlation functionals including GGA-PBE and hybrid HSE06.
 
-KMC has found particular utility in modelling interface evolution under conditions of growth, ion exchange, oxidation, and defect diffusion. In grain boundary studies, for example, KMC can capture the gradual restructuring of interfaces under chemical potential gradients or during irradiation recovery.
+Structural relaxations are typically performed with conjugate gradient algorithms until residual forces fall below a
+chosen threshold (e.g. 0.01 eV/\AA).
 
-Its main limitation is the requirement for a comprehensive event catalogue with well-characterised energy barriers and transition rates. These are often obtained from DFT or empirical fitting, and inaccuracies in this input can compromise the reliability of the predictions. Furthermore, KMC lacks atomic-resolution trajectories and cannot directly model phonon-mediated transport or structural vibrations.
+% ---------- %
 
-\subsubsection{Summary}
+Periodic boundary conditions are employed in all three spatial directions, necessitating the introduction of vacuum
+regions for slab models and sufficient supercell dimensions to minimise image-image interactions in interface
+simulations.
 
-Both MD and KMC complement DFT in the modelling of interfaces. While DFT offers high-fidelity energetics and electronic structure, MD enables atomistic dynamics over nanoseconds, and KMC extends the accessible timescale to macroscopic phenomena. As such, hybrid approaches are increasingly common, with DFT used to parameterise MD or KMC models, or machine learning techniques introduced to accelerate sampling across scales.
+% ---------- %
 
-\subsection{What are the advantages and limitations of DFT, MD, and KMC?}
+The simulation input is controlled via the INCAR, POSCAR, KPOINTS, and POTCAR files, with convergence typically assessed
+by k-point density and energy cutoff tests. Pulay and Broyden mixing schemes are used for charge density convergence,
+and dipole corrections may be employed for asymmetric slab geometries.
 
-Each computational method traditionally employed in the modelling of interfaces, Density Functional Theory (DFT), Molecular Dynamics (MD), and Kinetic Monte Carlo (KMC), offers a distinct balance between accuracy, computational efficiency, and physical scale. While often applied in isolation, their complementary regimes suggest the need for hybrid or hierarchical approaches in the study of real interfaces.
+% ---------- %
 
-\textbf{Density Functional Theory (DFT)} is the most widely used \textit{ab initio} method for predicting atomic-scale properties at interfaces. It provides access to ground-state energies, relaxed geometries, charge densities, and band alignments with a strong quantum mechanical foundation. Crucially, DFT is capable of modelling materials across the periodic table and is the backbone of modern electronic structure prediction. Its limitations, however, are twofold. Firstly, the method scales poorly with system size, typically as $\mathcal{O}(N^3)$ with respect to the number of electrons or basis functions, making simulations involving more than a few hundred atoms prohibitively expensive. Secondly, conventional exchange-correlation functionals (e.g. GGA) systematically underestimate band gaps and cannot capture excited-state dynamics without costly extensions such as GW or time-dependent DFT.
+While VASP provides accurate and robust results for interfacial modelling, it remains computationally intensive.
 
-\textbf{Molecular Dynamics (MD)} offers time-resolved access to thermally activated processes and interfacial dynamics. Classical MD, using empirical or machine-learned interatomic potentials, enables simulation of thousands to millions of atoms over nanosecond to microsecond timescales. It is well-suited to studying lattice relaxation, phonon scattering, or diffusion across interfaces. However, MD inherits limitations from its force field or potential model: empirical potentials may not transfer well across bonding environments, while high-fidelity machine-learned potentials require extensive and chemically diverse training data. Furthermore, standard MD remains constrained to accessible timescales, making it ill-suited for capturing rare events such as defect migration, reconstruction, or long-term phase evolution.
+For extended or complex interfacial systems, this motivates the introduction of machine-learned potentials (MLPs), which
+aim to reproduce DFT accuracy.
 
-\textbf{Kinetic Monte Carlo (KMC)} bridges the gap between atomistic fidelity and long-timescale evolution by explicitly simulating stochastic processes with predefined transition rates. It is particularly useful for modelling diffusion, growth, or reaction networks at interfaces. The method can span experimental timescales (seconds to hours), offering a unique perspective on kinetic stability and metastability. The key limitation lies in its dependency on an accurate catalogue of possible events and associated rates. These must be either calculated from first principles or parametrised experimentally, introducing significant uncertainty and limiting transferability to novel systems.
+% ---------- %
 
-\paragraph{In summary} DFT is unrivalled in electronic accuracy but severely limited in scale. MD extends spatial and temporal reach at the cost of potential fidelity, while KMC pushes further still into kinetic regimes but demands well-characterised reaction landscapes. The combined use of these methods, e.g. DFT-informed MD or KMC parametrised by \textit{ab initio} barriers, has emerged as a powerful paradigm for interface modelling across scales.
+\subsection{Other Modelling Methods}
+
+% ---------- %
+
+In addition to DFT, other classes of atomistic modelling, such as MD, has proven valuable for exploring material
+interfaces, particularly when temporal evolution or thermal effects are of interest.
+
+% ---------- %
+
+Molecular Dynamics is a time-resolved simulation method in which the trajectories of atoms are computed by numerically
+integrating Newton's equations of motion.
+
+Forces on each atom are derived either from empirical interatomic potentials (classical MD) or quantum-mechanical
+calculations (ab initio MD, e.g. Car-Parrinello or Born-Oppenheimer approaches).
+
+In interface science, MD is used to study thermal stability, strain relaxation, diffusion, and defect evolution at
+finite temperatures.
+
+% ---------- %
+
+One advantage of MD is its capacity to resolve dynamic processes at the atomic level, such as dislocation glide, grain
+boundary motion, or interfacial melting.
+
+However, timescales are severely limited: typical simulations span nanoseconds, far shorter than the seconds to minutes
+often relevant in experiments.
+
+Classical MD can scale to millions of atoms but sacrifices accuracy; ab initio MD is more accurate but typically limited
+to fewer than 1,000 atoms and short timescales due to computational cost.
+
+% ---------- %
+
+For interface modelling, MD is particularly useful when studying thermally activated restructuring, interdiffusion, and
+local vibrational behaviour, especially under conditions such as annealing or irradiation.
+
+It also serves as a preliminary stage in workflows involving machine-learned potentials, providing dynamical data for
+training.
+
+% ---------- %
+
+MD complements DFT in the modelling of interfaces.
+
+While DFT offers high-fidelity energetics and electronic structure, MD enables atomistic dynamics over nanoseconds.
+
+As such, hybrid approaches are increasingly common, with DFT used to parameterise MD models, or machine learning
+techniques introduced to accelerate sampling across scales.
+
+% ---------- %
+
+\subsection{What are the advantages and limitations of DFT and MD?}
+
+% ---------- %
+
+Each computational method traditionally employed in the modelling of interfaces, DFT and MD, offers a distinct balance
+between accuracy, computational efficiency, and physical scale.
+
+While often applied in isolation, their complementary regimes suggest the need for hybrid or hierarchical approaches in
+the study of real interfaces.
+
+% ---------- %
+
+\textbf{Density Functional Theory (DFT)} is the most widely used \textit{ab initio} method for predicting atomic-scale
+properties at interfaces.
+
+Crucially, DFT is capable of modelling materials across the periodic table and is the backbone of modern electronic
+structure prediction.
+
+Its limitations include conventional exchange-correlation functionals (e.g. GGA) systematically underestimate band gaps
+and cannot capture excited-state dynamics without costly extensions such as GW or time-dependent DFT.
+
+% ---------- %
+
+\textbf{Molecular Dynamics (MD)} offers time-resolved access to thermally activated processes and interfacial dynamics.
+
+Classical MD, using empirical or machine-learned interatomic potentials, enables simulation of thousands to millions of
+atoms over nanosecond to microsecond timescales.
+
+However, MD inherits limitations from its force field or potential model: empirical potentials may not transfer well
+across bonding environments, while high-fidelity machine-learned potentials require extensive and chemically diverse
+training data.
+
+Furthermore, standard MD remains constrained to accessible timescales, making it ill-suited for capturing rare events
+such as defect migration, reconstruction, or long-term phase evolution.
+
+% ---------- %
 
 \subsection{How are properties like adhesion energy or electron transport predicted?}
 
-The accurate prediction of interfacial properties, such as adhesion energy and electron transport, is central to understanding and designing functional materials. These properties emerge from complex interplays of bonding, charge distribution, and band alignment at the interface, and are typically predicted through first-principles simulations based on density functional theory (DFT). Increasingly, these predictions are augmented or accelerated using machine-learned interatomic potentials (MLPs).
+% ---------- %
 
-\textbf{Adhesion energy} is a thermodynamic quantity describing the work required to separate two materials at their interface. It is commonly computed from the total energies of the isolated constituents and the relaxed interface configuration. Within DFT, the adhesion energy $E_\mathrm{adh}$ is given by:
+\textbf{Adhesion energy} is a thermodynamic quantity describing the work required to separate two materials at their
+interface.
+
+It is commonly computed from the total energies of the isolated constituents and the relaxed interface configuration.
+
+Within DFT, the adhesion energy $E_\mathrm{adh}$ is given by:
 
 \[ E_\mathrm{adh} = \frac{1}{A} \left( E_\mathrm{slab1} + E_\mathrm{slab2} - E_\mathrm{interface} \right), \]
 
-where $A$ is the interface area, and the energies refer to fully relaxed geometries of the individual slabs and the interface supercell. For 2D|2D lateral heterostructures, where the interface is line-like rather than planar, a line energy formulation in eV/\AA is typically used to account for the dimensionality of bonding.
+where $A$ is the interface area, and the energies refer to fully relaxed geometries of the individual slabs and the
+interface supercell.
 
-\textbf{Electron transport} across interfaces is more nuanced and often requires evaluation of both band alignment and carrier mobility. Band alignment can be predicted via several approaches. The simplest, Anderson's rule, aligns vacuum levels to estimate offsets from electron affinities or ionisation potentials. However, this often fails to capture interface-specific effects such as charge transfer, built-in fields, or hybridisation. More accurate predictions therefore rely on self-consistent DFT calculations that extract the local electrostatic potential across the heterostructure to determine band offsets directly.
+% ---------- %
 
-For example, the offset between conduction or valence band edges across an interface can be obtained by aligning the macroscopic average electrostatic potentials of the constituent slabs with that of the full interface. This method accounts for relaxation, dipole formation, and interfacial reconstruction. In cases where electronic coupling is strong, or the valence states are spatially delocalised across layers (as in type-II or type-III band alignment), transport characteristics such as charge separation, carrier confinement, or tunnelling probability can change significantly.
+% todo: add interface energy
+% todo: add surface energy
+% todo: add strain energy
+% todo: add strain: tension, compression, shear
+% todo: add formation energy
 
-Additionally, charge transport properties such as electrical conductivity, Seebeck coefficient, or mobility may be approximated from the band dispersion near the Fermi level using Boltzmann transport theory, or more rigorously via non-equilibrium Green's function (NEGF) methods, especially for low-dimensional or nanoscale interfaces.
+% ---------- %
 
-Overall, both adhesion and electronic transport predictions depend on the level of theory and the nature of the interface. While DFT remains the most widely used method for accuracy, its computational cost limits system size. For larger systems or rapid screening, surrogate models such as machine-learned potentials or analytical approximations may be employed, with the understanding that they must be carefully validated against reference calculations.
+\textbf{Electron transport} across interfaces is more nuanced and often requires evaluation of both band alignment and
+carrier mobility.
+
+Band alignment can be predicted via several approaches.
+
+The simplest, Anderson's rule aligns vacuum levels to estimate offsets from electron affinities or ionisation
+potentials.
+
+However, this often fails to capture interface-specific effects such as charge transfer, built-in fields, or
+hybridisation.
+
+More accurate predictions therefore rely on self-consistent DFT calculations that extract the local electrostatic
+potential across the heterostructure to determine band offsets directly.
+
+% ---------- %
+
+For example, the offset between conduction or valence band edges across an interface can be obtained by aligning the
+macroscopic average electrostatic potentials of the constituent slabs with that of the full interface.
+
+This method accounts for relaxation, dipole formation, and interfacial reconstruction.
+
+In cases where electronic coupling is strong, or the valence states are spatially delocalised across layers (as in
+type-II or type-III band alignment), transport characteristics such as charge separation, carrier confinement, or
+tunnelling probability can change significantly.
+
+% ---------- %
+
+Charge transport properties such as electrical conductivity, Seebeck coefficient, or mobility may be
+approximated from the band dispersion near the Fermi level using Boltzmann transport theory, or more rigorously via
+non-equilibrium Green's function (NEGF) methods, especially for low-dimensional or nanoscale interfaces.
+
+% ^^^ note: Intro

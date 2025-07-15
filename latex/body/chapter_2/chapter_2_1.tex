@@ -36,11 +36,8 @@ of transistors, diodes, and capacitors.
 Localised changes in atomic registry, roughness, or defect density at the interface can significantly alter tunnelling
 behaviour, barrier heights, and mobility.
 
-This is especially true in 2D|3D systems, where interfacial dipoles, charge redistribution, and electrostatic
-reconstruction result in complex electronic responses not captured by bulk models.
-
-As devices shrink to the nanometre scale, quantum confinement and interfacial electrostatics become dominant factors,
-necessitating atomically precise interface control.
+Where interfacial dipoles, charge redistribution, and electrostatic reconstruction result in complex electronic
+responses not captured by bulk models.
 
 \label{para:energy_interfaces} % ---------- %
 
@@ -49,9 +46,9 @@ Energy systems are similarly interface-dominated.
 In lithium-ion batteries, for example, the solid-electrolyte interphase (SEI) acts as a metastable interfacial layer
 that dictates both stability and charge transport.
 
-The performance and longevity of solid-state batteries, fuel cells, and thermoelectric devices depend on the engineered
-properties of interfaces, which affect ionic conductivity, catalytic activity, thermal transport, and electronic
-insulation.
+The performance and longevity of solid-state batteries, fuel cells, and thermoelectric devices can depend on the
+engineered properties of interfaces, which affect ionic conductivity, catalytic activity, thermal transport, and
+electronic insulation.
 
 In photovoltaics, interfacial band offsets between donor and acceptor layers, or between absorber materials and charge
 transport layers, govern charge separation efficiency and open-circuit voltage.
@@ -67,19 +64,13 @@ As such, mastering interfacial science is a gateway to developing high-performan
 
 \label{para:interface_definition} % ---------- %
 
-Material interfaces are regions where two or more distinct phases meet, and their atomic-level structure plays a
-critical role in determining the physical, electronic, and thermal properties of the overall system.
-
-These interfaces are not merely passive boundaries; rather, they are active regions that can be engineered for specific
-functionality, particularly in devices involving electronic, optoelectronic, and energy materials.
-
 The structural features that influence interface behaviour include crystallographic orientation, the nature of the phase
 boundary, and the presence of defects.
 
 \label{para:orientation_effects} % ---------- %
 
-The relative orientation of crystals on either side of an interface can significantly affect the atomic registry, bond
-continuity, and symmetry breaking across the interface.
+The relative orientation of crystals on either side of an interface can significantly affect the atomic coordination,
+bond continuity, and symmetry properties across the interface.
 
 Epitaxial alignment, where lattice planes across the interface maintain a well-defined relationship, typically results
 in low-strain, coherent interfaces.
@@ -125,12 +116,6 @@ void-filling and local bonding environments, enabling more realistic models of d
 
 \label{para:interface_applications} % ---------- %
 
-Material interfaces, where two distinct phases or materials meet, play a pivotal role in determining the performance and
-function of a wide array of modern technologies.
-
-These regions often exhibit structural, electronic, or thermal properties that differ markedly from those of the bulk
-constituents.
-
 Depending on their nature, interfaces may enhance or impede material performance.
 
 This subsection surveys several application domains in which understanding and engineering interfacial properties is
@@ -138,15 +123,18 @@ essential.
 
 \label{para:gate_dielectric_interface} % ---------- %
 
-In semiconductor devices, the interface between the gate dielectric and the semiconducting channel is a critical design
-parameter.
+In semiconductor transistor devices, the interface between the gate dielectric and the semiconducting channel is a
+critical design parameter.
+
+% ---------- %
 
 As traditional \ce{SiO2} dielectrics are replaced by high-$\kappa$ materials such as \ce{HfO2} to meet miniaturisation
 demands, understanding charge transfer and band alignment across interfaces like \ce{HfS2}| \ce{HfO2} becomes essential
 for ensuring device reliability and performance.
 
 Notably, in such 2D|3D heterostructures, the type and strength of bonding (e.g. van der Waals vs. chemical) directly
-influences charge redistribution and can cause significant deviation from band alignments predicted by Anderson's rule.
+influences charge redistribution and can cause significant deviation from band alignments predicted by Anderson's rule,
+the vacuum levels of the two materials must be aligned.
 
 \label{para:tmdc_interface_band_alignment} % ---------- %
 
@@ -155,8 +143,10 @@ orientation, and interfacial disorder all strongly influence the band alignment.
 
 These factors affect carrier dynamics, optical transitions, and switching behaviour.
 
-Traditional models such as Anderson'\rqs's rule have proven insufficient; corrections using terms such as $\Delta E_\Gamma$ and
+Traditional models such as Anderson's rule have proven insufficient; corrections using terms such as $\Delta E_\Gamma$ and
 $\Delta E_{\text{IF}}$ have been developed to capture hybridisation and interface dipole contributions more accurately.
+
+% todo: add formula for detla E_\Gamma and delta E_IF
 
 These corrections allow for predictive modelling of heterostructure behaviour and support targeted band offset
 engineering.
@@ -181,17 +171,6 @@ Interface-induced phonon scattering suppresses thermal conductivity while preser
 the thermoelectric figure of merit, $ZT$.
 
 Layered TMDCs and heterostructures with nanostructured interfaces exploit this mechanism to improve thermal management.
-
-\label{para:optoelectronics_interfaces} % ---------- %
-
-Finally, in optoelectronics and photovoltaics, interfaces play a central role in determining band bending, exciton
-dissociation, and charge carrier collection.
-
-In oxide-based devices, such as proposed all-oxide solar cells (e.g. \ce{CaO}|(\ce{Sn}:\ce{Ca})$_{7:1}$\ce{O}|\ce{TiO2}),
-interface energetics must be carefully tuned to support efficient charge separation and transport.
-
-The formation of intermediate phases or interfacial dipoles can critically affect performance, necessitating
-first-principles modelling for reliable device design.
 
 \label{para:interfaces_active_modelling_challenge} % ---------- %
 
