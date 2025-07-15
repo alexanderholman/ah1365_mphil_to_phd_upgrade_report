@@ -60,12 +60,6 @@ interfacial systems.
 
 % ---------- %
 
-Despite considerable advances in computational materials science, reliable prediction of interface structures remains a
-fundamental bottleneck.
-
-This difficulty stems from the intrinsic complexity of real interfaces, which are often chemically heterogeneous,
-strain-mediated, and structurally disordered.
-
 The configurational degrees of freedom, ranging from slip vectors, surface terminations, and intermixing patterns to
 stacking sequences and misfit accommodation, create a vast structural landscape that resists exhaustive exploration via
 conventional methods.
@@ -82,70 +76,10 @@ This renders brute-force density functional theory (DFT) calculations infeasible
 
 % ---------- %
 
-\paragraph{Computational Cost.} DFT, while accurately and chemically grounded, exhibits cubic scaling with respect to
-the number of electrons or basis functions, making simulations of interfaces with hundreds to thousands of atoms
-prohibitively expensive.
-
-Moreover, structural relaxations in such systems often converge poorly due to shallow energy gradients and multiple
-metastable minima.
-
-These numerical instabilities pose a challenge even for single configuration evaluations.
-
-% ---------- %
-
-\paragraph{Lack of Generalisable Descriptors.} Unlike bulk systems, for which symmetry and stoichiometry often impose
-constraints, interfaces exhibit broken symmetries, compositional gradients, and non-uniform electrostatics.
-
-There is no broadly applicable analogue to Anderson’s rule for predicting interfacial band alignment, necessitating
-ad-hoc corrections such as $\Delta E_\Gamma$ and $\Delta E_{\mathrm{IF}}$ that work only for narrow material classes.
-
-% ---------- %
-
-\paragraph{Limitations of Current Structure Generation Tools.} Automated interface builders like ARTEMIS and RAFFLE
-enable systematic generation of interface candidates but are typically restricted to heuristic approaches such as rigid
-lattice matching or void-filling.
-
-These tools often fail to account for elastic mismatch, surface reconstructions, or stacking instabilities.
-
-Furthermore, the lack of integration with energetic feedback loops results in large pools of candidates requiring
-expensive post-hoc evaluation.
-
-% ---------- %
-
 \paragraph{Transferability of Machine-Learned Potentials.} Machine-learned interatomic potentials (MLPs), such as MACE
 and ChgNet, offer pathways to accelerate structural screening at near-DFT accuracy.
 
 However, their performance is contingent upon the representativeness of the training data.
-
-Interfacial environments frequently exhibit local chemistries and coordination motifs absent from bulk-derived datasets.
-
-As such, model extrapolation can lead to large errors, particularly in strained, defected, or reactive regimes.
-
-% ---------- %
-
-\paragraph{Summary of Bottlenecks.}
-
-\begin{itemize}
-
-  \item The combinatorial complexity of plausible interface configurations.
-
-  \item High computational cost and poor scaling of DFT-based relaxations.
-
-  \item Absence of generalised physical descriptors for predicting interfacial properties.
-
-  \item Limited adaptability of current structure generation frameworks.
-
-  \item Transferability limitations of MLPs in interfacial chemical environments.
-
-\end{itemize}
-
-% ---------- %
-
-Overcoming these bottlenecks likely requires hybrid workflows that combine MLP-based structural exploration with
-targeted DFT refinements, supported by uncertainty quantification and descriptor-led screening.
-
-Such frameworks are increasingly positioned as a pathway to scalable, realistic, and physics-informed interface
-prediction.
 
 % ---------- %
 
@@ -162,19 +96,12 @@ interfacial complexity and the assumptions underpinning current models.
 % ---------- %
 
 Physics-based methods, most notably Density Functional Theory (DFT), provide high accuracy for local bonding
-environments and band structure prediction. However, the computational scaling of standard Kohn-Sham DFT, typically
-$\mathcal{O}(N^3)$ with respect to system size, renders large or disordered interface simulations intractable without
-approximation.
+environments and band structure prediction.
 
 Even when feasible, DFT struggles to capture extended features such as long-range strain relaxation, misfit
 dislocations, and spatially diffuse defect states that dominate realistic interface behaviour.
 
 % ---------- %
-
-Machine learning potentials (MLPs), such as those based on graph neural networks or equivariant message passing
-architectures, have emerged as promising tools to extend predictive power to larger systems at near-DFT accuracy.
-
-Nonetheless, they too face structural limitations.
 
 MLPs require extensive, representative training datasets, typically derived from DFT calculations, and their performance
 deteriorates when applied to configurations involving unseen chemistries, surface reconstructions, or high strain
@@ -185,34 +112,7 @@ out-of-distribution predictions.
 
 % ---------- %
 
-Both DFT and ML approaches also fall short in capturing emergent interfacial phenomena such as charge transfer,
-interface-induced dipoles, or the formation of new interfacial phases.
-
-These effects are often strongly dependent on the local atomic registry and chemical heterogeneity, and cannot be
-inferred from the properties of the isolated constituents alone.
-
-Notably, simple models like Anderson's rule have been shown to systematically fail in 2D and 2D|3D heterostructures,
-necessitating corrections such as $\Delta E_\Gamma$ and $\Delta E_\mathrm{IF}$ that explicitly depend on the
-atomic-scale interface structure and electrostatics.
-
-% ---------- %
-
-While ML and physics-based models have complementary strengths, neither is sufficient in isolation for the reliable
-prediction of interfacial behaviour.
-
-Their limitations motivate the development of hybrid workflows, such as embedding physical constraints into ML
-architectures, or coupling MLP-based screening with selective DFT refinement.
-
-These approaches aim to achieve a balance between scalability, accuracy, and generalisability, a balance that remains at
-the forefront of interface modelling challenges.
-
-% ---------- %
-
 \subsection{Are there data or generalisation issues?}
-
-% ---------- %
-
-\subsubsection{Data scarcity and imbalance}
 
 % ---------- %
 
@@ -256,26 +156,6 @@ and comprehensive interfaces databases.
 
 % ---------- %
 
-\subsubsection{Transferability and chemical diversity}
-
-% ---------- %
-
-Machine-learned potentials (MLPs) such as MACE and ChgNet often fail to extrapolate to configurations that deviate from
-the training distribution; particularly at strained, chemically heterogeneous, or electronically reconstructed
-interfaces.
-
-The emergence of site-specific hybridisation, localised charge transfer, and dipole formation presents physics not
-typically encountered in bulk datasets.
-
-Without explicit exposure to such environments during training, even state-of-the-art equivariant models exhibit
-elevated uncertainty and reduced fidelity in these regimes.
-
-% ---------- %
-
-\subsubsection{Descriptor and representation limitations}
-
-% ---------- %
-
 Generalisation error is further amplified by suboptimal representation of interface-specific physics.
 
 Many descriptor schemes, such as SOAP vectors or radial symmetry functions, are optimised for bulk periodicity and fail
@@ -283,13 +163,6 @@ to capture interfacial asymmetry, vacuum discontinuities, or broken symmetry.
 
 Representations that do not enforce scale-invariance or rotational equivariance can also hinder model transferability to
 supercells or faceted configurations.
-
-Physically meaningful descriptors, such as interfacial dipoles, local charge density, or cleavage energy remain
-underused, though they show promise for enhancing predictive robustness.
-
-% ---------- %
-
-\subsubsection{Label quality and training signal noise}
 
 % ---------- %
 
