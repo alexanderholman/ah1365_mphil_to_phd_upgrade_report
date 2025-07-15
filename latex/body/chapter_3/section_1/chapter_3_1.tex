@@ -2,9 +2,7 @@
 
 The goal of this study is to support the development of a Machine-Learned Interface (MLI) model that can predict which heterostructures are likely to be realistic and favourable. To train this model, we need a large dataset of physical interfaces that are not only valid in terms of their atomic arrangement but also low enough in energy to be found in real materials. Relaxing and evaluating all possible interfaces using Density Functional Theory (DFT) would be too expensive, so we explore whether a Machine-Learned Potential (MLP), specifically MACE, can help us identify good candidates more efficiently.
 
-Rather than replacing DFT, MACE is tested here as a screening tool: if MACE can roughly preserve the order of interface favourability that DFT gives, it could help us pick which interfaces to relax with DFT. These comparisons are a means to an end—providing the MLI model with useful training data.
-
-\subsection{Dataset Evolution and Study Scope}
+Rather than replacing DFT, MACE is tested here as a screening tool: if MACE can roughly preserve the order of interface favourability that DFT gives, it could help us pick which interfaces to relax with DFT. These comparisons are a means to an end, providing the MLI model with useful training data.
 
 This work uses an iterative approach to building the dataset. At each step, the number of materials, structures, and configurations is increased to explore broader behaviours and to identify issues in the workflow before scaling further. Each iteration reflects what was possible with available computing resources and analysis at the time.
 
@@ -32,7 +30,7 @@ which corresponds to a mismatch of approximately 0.047\,\AA{} per unit cell. Sca
 \]
 Each increase in supercell size decreases the mismatch per unit cell by roughly an order of magnitude.
 
-In addition to supercell scaling, the choice of interface orientation—described by Miller indices—can significantly influence atomic registry across the interface. Each Miller plane represents a unique slice through the crystal lattice that exposes a specific atomic arrangement. By rotating, stacking, and aligning these planes between two different materials, one can search for surface combinations where atoms naturally align into coherent patterns. ARTEMIS uses these surface alignments to explore many candidate configurations, seeking high registry where bonding across the interface is maximised and valence electrons are not left unpaired.
+In addition to supercell scaling, the choice of interface orientation, described by Miller indices, can significantly influence atomic registry across the interface. Each Miller plane represents a unique slice through the crystal lattice that exposes a specific atomic arrangement. By rotating, stacking, and aligning these planes between two different materials, one can search for surface combinations where atoms naturally align into coherent patterns. ARTEMIS uses these surface alignments to explore many candidate configurations, seeking high registry where bonding across the interface is maximised and valence electrons are not left unpaired.
 
 Each matched interface was constructed from two slabs, each 6 atomic layers thick, separated by a small vacuum gap. ARTEMIS then applied systematic shifts in the $a$ and $b$ directions to explore stacking offsets between the slabs. Initially, zero-shift configurations were allowed, but these sometimes produced unphysical atomic overlaps along the $c$-axis. These cases were filtered out during data cleaning. Future datasets will attempt to reintroduce shift-zero configurations in $a$ and $b$ while borrowing $c$-axis separations from nearby stable interfaces.
 
@@ -40,13 +38,11 @@ Although ARTEMIS supports atomic swaps at the interface to explore alloy-like or
 
 While ARTEMIS considered many potential surface combinations, only 29 unique surfaces were ultimately included in the final dataset. This reflects both the geometric constraints of lattice matching and the filtering applied to ensure physical plausibility of the generated structures.
 
-\subsection{Automation and Data Handling}
-
-All parts of the workflow—from building interfaces to reading the results—were automated using Python scripts. This made it easier to run large numbers of calculations and keep track of everything.
+All parts of the workflow, from building interfaces to reading the results, were automated using Python scripts. This made it easier to run large numbers of calculations and keep track of everything.
 
 Interfaces were generated and prepared for calculation using scripts that could run in bulk. Each job was submitted to the compute cluster automatically.
 
-Some calculations failed or gave broken outputs (like NaN energies). These were filtered out automatically so they didn’t affect the results.
+Some calculations failed or gave broken outputs (like NaN energies). These were filtered out automatically so they didn't affect the results.
 
 The energy values from both MLP and DFT were read and stored in CSV files. These files were used to calculate rankings and compare the methods.
 

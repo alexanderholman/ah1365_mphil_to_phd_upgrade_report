@@ -1,18 +1,16 @@
 \chapter{Investigation of Interface Favourability} \label{chapter:computational_investigation}
-      
-A key step in training a Machine-Learned Interface (MLI) model is building a dataset of physically plausible and energetically reasonable heterostructures. Ideally, such a dataset would be generated entirely using density functional theory (DFT), but the cost of relaxing and evaluating thousands of configurations makes this impractical. Instead, this chapter investigates whether a machine-learned potential (MLP), specifically the MACE model, can assist in rapidly generating and assessing interface structures before applying DFT.      
-      
-The focus here is not to validate MLPs as a replacement for DFT, but to test their usefulness as part of a larger data-generation pipeline. If MACE is able to help identify realistic and favourable structures, it can reduce the number of expensive DFT calculations needed and enable faster construction of training data for the MLI model.      
-      
-The chapter is structured as follows: Section 1 describes the generation of the dataset, the chemical systems considered, and the use of ARTEMIS for constructing candidate interfaces. Section 2 analyses how well the MACE model reproduces trends in DFT-calculated interface energetics. Section 3 discusses the implications for automated workflows and the future expansion of the dataset.      
-      
+
+A key step in training a Machine-Learned Interface (MLI) model is building a dataset of physically plausible and energetically reasonable heterostructures. Ideally, such a dataset would be generated entirely using density functional theory (DFT), but the cost of relaxing and evaluating thousands of configurations makes this impractical. Instead, this chapter investigates whether a machine-learned potential (MLP), specifically the MACE model, can assist in rapidly generating and assessing interface structures before applying DFT.
+
+The focus here is not to validate MLPs as a replacement for DFT, but to test their usefulness as part of a larger data-generation pipeline. If MACE is able to help identify realistic and favourable structures, it can reduce the number of expensive DFT calculations needed and enable faster construction of training data for the MLI model.
+
+The chapter is structured as follows: Section 1 describes the generation of the dataset, the chemical systems considered, and the use of ARTEMIS for constructing candidate interfaces. Section 2 analyses how well the MACE model reproduces trends in DFT-calculated interface energetics. Section 3 discusses the implications for automated workflows and the future expansion of the dataset.
+
 \section{Methodology} \label{section:methodology}
 
 The goal of this study is to support the development of a Machine-Learned Interface (MLI) model that can predict which heterostructures are likely to be realistic and favourable. To train this model, we need a large dataset of physical interfaces that are not only valid in terms of their atomic arrangement but also low enough in energy to be found in real materials. Relaxing and evaluating all possible interfaces using Density Functional Theory (DFT) would be too expensive, so we explore whether a Machine-Learned Potential (MLP), specifically MACE, can help us identify good candidates more efficiently.
 
-Rather than replacing DFT, MACE is tested here as a screening tool: if MACE can roughly preserve the order of interface favourability that DFT gives, it could help us pick which interfaces to relax with DFT. These comparisons are a means to an end—providing the MLI model with useful training data.
-
-\subsection{Dataset Evolution and Study Scope}
+Rather than replacing DFT, MACE is tested here as a screening tool: if MACE can roughly preserve the order of interface favourability that DFT gives, it could help us pick which interfaces to relax with DFT. These comparisons are a means to an end, providing the MLI model with useful training data.
 
 This work uses an iterative approach to building the dataset. At each step, the number of materials, structures, and configurations is increased to explore broader behaviours and to identify issues in the workflow before scaling further. Each iteration reflects what was possible with available computing resources and analysis at the time.
 
@@ -40,7 +38,7 @@ which corresponds to a mismatch of approximately 0.047\,\AA{} per unit cell. Sca
 \]
 Each increase in supercell size decreases the mismatch per unit cell by roughly an order of magnitude.
 
-In addition to supercell scaling, the choice of interface orientation—described by Miller indices—can significantly influence atomic registry across the interface. Each Miller plane represents a unique slice through the crystal lattice that exposes a specific atomic arrangement. By rotating, stacking, and aligning these planes between two different materials, one can search for surface combinations where atoms naturally align into coherent patterns. ARTEMIS uses these surface alignments to explore many candidate configurations, seeking high registry where bonding across the interface is maximised and valence electrons are not left unpaired.
+In addition to supercell scaling, the choice of interface orientation, described by Miller indices, can significantly influence atomic registry across the interface. Each Miller plane represents a unique slice through the crystal lattice that exposes a specific atomic arrangement. By rotating, stacking, and aligning these planes between two different materials, one can search for surface combinations where atoms naturally align into coherent patterns. ARTEMIS uses these surface alignments to explore many candidate configurations, seeking high registry where bonding across the interface is maximised and valence electrons are not left unpaired.
 
 Each matched interface was constructed from two slabs, each 6 atomic layers thick, separated by a small vacuum gap. ARTEMIS then applied systematic shifts in the $a$ and $b$ directions to explore stacking offsets between the slabs. Initially, zero-shift configurations were allowed, but these sometimes produced unphysical atomic overlaps along the $c$-axis. These cases were filtered out during data cleaning. Future datasets will attempt to reintroduce shift-zero configurations in $a$ and $b$ while borrowing $c$-axis separations from nearby stable interfaces.
 
@@ -48,13 +46,11 @@ Although ARTEMIS supports atomic swaps at the interface to explore alloy-like or
 
 While ARTEMIS considered many potential surface combinations, only 29 unique surfaces were ultimately included in the final dataset. This reflects both the geometric constraints of lattice matching and the filtering applied to ensure physical plausibility of the generated structures.
 
-\subsection{Automation and Data Handling}
-
-All parts of the workflow—from building interfaces to reading the results—were automated using Python scripts. This made it easier to run large numbers of calculations and keep track of everything.
+All parts of the workflow, from building interfaces to reading the results, were automated using Python scripts. This made it easier to run large numbers of calculations and keep track of everything.
 
 Interfaces were generated and prepared for calculation using scripts that could run in bulk. Each job was submitted to the compute cluster automatically.
 
-Some calculations failed or gave broken outputs (like NaN energies). These were filtered out automatically so they didn’t affect the results.
+Some calculations failed or gave broken outputs (like NaN energies). These were filtered out automatically so they didn't affect the results.
 
 The energy values from both MLP and DFT were read and stored in CSV files. These files were used to calculate rankings and compare the methods.
 
@@ -110,25 +106,23 @@ DFT calculations were carried out using the VASP software. Gamma-point sampling 
 
 The MACE model used here was the most recent release available at the time (downloaded in April 2025). It was applied using the ASE library to compute total energies on the same unrelaxed structures as used for DFT. No fine-tuning or delta-correction was applied.
 
+While MLP-based relaxation was tested on some structures later in the workflow, those results were not used for ranking comparison in this section. The goal here is to test how well MLP can predict relative stability based on geometry alone. DFT relaxations are planned for future datasets.
+
 \section{Results and Analysis} \label{section:results_and_analysis}
 
 This section presents the results of comparing unrelaxed DFT and MLP (MACE) energy rankings across 680 valid heterostructures, grain boundaries, and alloyed systems involving the group 14 elements (C, Si, Ge, Sn). The goal is to determine whether MACE, a machine-learned interatomic potential, can replicate DFT-derived rankings on unrelaxed geometries closely enough to serve as a pre-screening tool in the MLI data pipeline.
-
-\subsection{Overall Ranking Consistency}
 
 Across all evaluated systems, Spearman’s rank correlation coefficient was extremely high:
 \[
 \rho = 0.9954, \qquad \tau = 0.9568
 \]
-This near-perfect alignment demonstrates that MACE preserves the order of interface favourability remarkably well—even without relaxation—suggesting strong potential as a filtering method for DFT candidate selection.
+This near-perfect alignment demonstrates that MACE preserves the order of interface favourability remarkably well, even without relaxation, suggesting strong potential as a filtering method for DFT candidate selection.
 
 However, absolute energy agreement was poor:
 \[
 \text{RMSE} = 188.89~\text{eV}, \qquad \text{MAE} = 30.87~\text{eV}
 \]
 These large discrepancies reflect the fact that while MACE captures relative stability, its raw energy outputs are not quantitatively reliable without further training. Despite this, the Top-10 overlap between DFT and MLP was 8/10, indicating strong alignment in identifying favourable structures.
-
-\subsection{Interface Type Performance}
 
 To understand how interface geometry impacts ranking fidelity, we grouped results into three categories: upper-slab heterostructures, lower-slab heterostructures, and homostructures (grain boundaries). Average metrics across these categories are summarised in Table~\ref{tab:interface-type-stats}.
 
@@ -137,8 +131,6 @@ To understand how interface geometry impacts ranking fidelity, we grouped result
   \item \textbf{Lower interfaces}: Rank correlation dropped to $\rho \approx 0.62$, suggesting geometry-related artefacts when certain species (e.g., carbon) appeared in the lower layer.
   \item \textbf{Grain boundaries}: Strong correlation was retained ($\rho \approx 0.94$, $\tau \approx 0.83$), and energy error was much lower (RMSE ≈ 7.69 eV), making this group especially reliable.
 \end{itemize}
-
-\subsection{System-Specific Performance}
 
 \paragraph{Carbon Systems (C|X)}
 Only three C|Si interfaces were successfully processed with carbon in the lower layer. These results were unreliable, with negative rank correlation ($\rho = -0.5$), and are omitted from conclusions. In contrast, C in the upper slab yielded 79 usable structures with excellent results:
@@ -174,8 +166,6 @@ Grain boundary results were strong overall but showed species-specific variation
 \end{itemize}
 Grain boundaries had the best Top-10 overlap at 9.67/10, and much lower RMSE than heterostructures (≈7.7 eV). Their structural symmetry and stoichiometric balance likely contribute to better predictive consistency.
 
-\subsubsection{Perfect Alloys}
-
 \paragraph{Perfect rank preservation}
 
 Si|Ge alloy systems exhibited near-perfect rank alignment between DFT and MLP evaluations. Both $\rho$ and $\tau$ approached 1.0 across the board, as seen in \texttt{stats\_perfect\_alloys.csv}.
@@ -184,10 +174,6 @@ Si|Ge alloy systems exhibited near-perfect rank alignment between DFT and MLP ev
 
 These systems feature uniform chemical environments with little interfacial disruption, meaning the atomic configurations fall well within the trained domain of the MACE model. The result is highly stable rank preservation.
 
-\subsection{DFT vs MLP: Computational Cost Analysis}
-
 MLP evaluations offered orders-of-magnitude speedups over DFT while retaining acceptable accuracy in most ranking tasks. However, the quality of this speedup is system-dependent and less reliable for Silicon-rich or mixed-coordination interfaces. These observations motivate a need for improved domain coverage, possibly via delta-learning or retraining on interfacial datasets.
 
-\subsection{Summary and Implications}
-
-These results support the use of MACE as a high-throughput screening tool to rank heterostructures prior to DFT evaluation. While energy values are not trustworthy in absolute terms, the consistent rank ordering—especially in systems with low strain and high registry—makes MACE valuable for filtering large structure sets. Poorer results in Si-rich systems highlight the need for retraining or domain-specific correction, which is a core focus of future work (Chapter~\ref{chapter:next_steps}).
+These results support the use of MACE as a high-throughput screening tool to rank heterostructures prior to DFT evaluation. While energy values are not trustworthy in absolute terms, the consistent rank ordering, especially in systems with low strain and high registry, makes MACE valuable for filtering large structure sets. Poorer results in Si-rich systems highlight the need for retraining or domain-specific correction, which is a core focus of future work (Chapter~\ref{chapter:next_steps}).
