@@ -19,35 +19,35 @@ its unfavourable scaling with system size ($\mathcal{O}(N^3)$ in electron count)
 high-throughput workflows.
 
 In particular, DFT becomes prohibitive when applied to interface structures exceeding a few hundred atoms, as required
-to capture long‐range strain, multi‐layer reconstruction, or compositional variation.
+to capture long-range strain, multi-layer reconstruction, or compositional variation.
 
-Moreover, standard DFT approximations, such as semi‐local exchange–correlation functionals, often struggle to predict key
+Moreover, standard DFT approximations, such as semi-local exchange–correlation functionals, often struggle to predict key
 interfacial phenomena in layered systems.
 
-For example, accurate band‐alignment at a heterojunction determines charge‐injection barriers and device turn‐on
+For example, accurate band-alignment at a heterojunction determines charge-injection barriers and device turn-on
 voltages; polarization effects at oxide or ferroelectric interfaces give rise to internal electric fields and
-screening that strongly modulate carrier densities; and weak van der Waals interactions between two‐dimensional
-layers govern adhesion, interlayer spacing, and moiré‐driven electronic reconstructions.
+screening that strongly modulate carrier densities; and weak van der Waals interactions between two-dimensional
+layers govern adhesion, interlayer spacing, and moiré-driven electronic reconstructions.
 
 Failure to capture these effects can lead to qualitatively incorrect predictions of interface stability and function.
 
 MLP-based approaches can in principle overcome many of these challenges by incorporating
-long‐range interactions and nonlocal correlations learned from data.
+long-range interactions and nonlocal correlations learned from data.
 
 However, since MLPs are trained on DFT outputs, their accuracy is fundamentally limited by the fidelity of the
 underlying DFT dataset: any systematic errors in band alignments, polarization responses, or dispersion forces will be
 inherited by the potential.
 
 Thus, while MLPs enable vastly more efficient sampling of configurational space, their predictive power remains
-contingent on high‐quality reference data.
+contingent on high-quality reference data.
 
 \label{para:mlp_overview} % ---------- %
 
-Machine‐learned interatomic potentials (MLPs) offer a promising route to overcoming these limitations.
+Machine-learned interatomic potentials (MLPs) offer a promising route to overcoming these limitations.
 
-By learning to emulate DFT‐level energies and forces, MLPs like MACE provide a means to conduct large‐scale structure
+By learning to emulate DFT-level energies and forces, MLPs like MACE provide a means to conduct large-scale structure
 relaxations and energy evaluations at dramatically reduced cost. This enables exploration of broader configurational
-spaces, including low‐symmetry systems and extended defects, that would otherwise remain intractable.
+spaces, including low-symmetry systems and extended defects, that would otherwise remain intractable.
 
 However, this advantage is only realised if the models generalise well across diverse interfacial environments.
 
@@ -63,19 +63,19 @@ predictions.
 
 \label{para:motivation_mlp_dft} % ---------- %
 
-The primary aim of this report is to evaluate whether MLPs can reproduce the DFT‐derived ranking of interface
+The primary aim of this report is to evaluate whether MLPs can reproduce the DFT-derived ranking of interface
 favourability, here quantified by formation energy, across a set of group 14 heterostructures.
 
-While the overarching PhD objective is to develop a Machine‐Learned Interface (MLI) model that predicts interface
+While the overarching PhD objective is to develop a Machine-Learned Interface (MLI) model that predicts interface
 energies directly from the constituent slabs (bypassing explicit interface construction), this study focuses on rapid
-MLP‐assisted screening to identify the most promising candidates for eventual full DFT ISIF3 relaxations.
+MLP-assisted screening to identify the most promising candidates for eventual full DFT ISIF3 relaxations.
 
 Chapter~\ref{chapter:computational_investigation} shows that MLPs often preserve relative DFT energy rankings,
-particularly within chemically similar systems, with a few edge cases like pure‐Si interfaces (grain boundaries).
+particularly within chemically similar systems, with a few edge cases like pure-Si interfaces (grain boundaries).
 
-These discrepancies underscore the need for targeted refinement, motivating the delta‐learning approaches presented in
+These discrepancies underscore the need for targeted refinement, motivating the delta-learning approaches presented in
 Chapter~\ref{chapter:next_steps}, which correct systematic MLP–DFT residuals via supervised learning on
-interface‐specific error distributions.
+interface-specific error distributions.
 
 \label{para:feature_based_interface_prediction} % ---------- %
 
