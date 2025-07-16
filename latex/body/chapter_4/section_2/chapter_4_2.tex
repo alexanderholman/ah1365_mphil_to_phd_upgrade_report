@@ -3,26 +3,14 @@
 
 Despite the promising results demonstrated in Chapter~\ref{chapter:computational_investigation}, developing a machine-learned interatomic potential (MLIP) capable of reliably predicting interface stability remains a formidable challenge. Many failure modes arise from limitations in the training data, extrapolation behavior, bonding diversity, DFT reference fidelity, and intrinsic model architecture. This section outlines the key reasons why such models may fail, drawing on current literature and our own experience building and benchmarking MACE-based predictors.
 
-\subsection{Insufficient or Biased Training Data}
-
 A robust MLIP depends critically on the diversity, quantity, and physical relevance of its training set. Our dataset, while spanning 680 heterostructures across four group 14 elements and 29 surfaces, may not fully capture the high-strain, defective, or chemically mixed environments found at real interfaces. Without configurations containing defects, alloy bonds (e.g. Si--Sn), or off-equilibrium geometries, the model risks systematic errors when encountering novel atomic arrangements. Moreover, data imbalance---such as overrepresentation of Si surfaces---can bias the model’s predictions away from accurate generalisation.
-
-\subsection{Extrapolation to Novel Interfaces}
 
 Interfaces are inherently out-of-distribution cases, often involving strain, registry shifts, and mixed bonding environments not present in the training data. Even small extrapolations---such as a Si atom bonded to metallic \(\beta\)-Sn---can cause large errors if the MLIP has not seen similar local environments. Moreover, if multiple interface configurations are close in energy, even minor inaccuracies can lead to rank inversions, undermining screening workflows.
 
-\subsection{Bonding Diversity Across Material Classes}
-
 Extending the model to handle semiconductors, metals, and insulators introduces qualitative differences in bonding: covalent, metallic, ionic, and hybrid regimes. A single MLIP may struggle to capture directional bonding in Si and delocalised metallic bonding in Sn, let alone polar surfaces or long-range interactions in ionic oxides. Many universal potentials underperform when stretched across these regimes, especially in predicting interfacial stability or reconstruction.
-
-\subsection{Limitations of the Reference DFT Method}
 
 MLIPs inherit the limitations of the DFT calculations they are trained on. If hybrid functionals or relativistic corrections are omitted, the MLIP may learn inaccurate bonding energies, phase stabilities, or surface reconstructions---particularly for heavy elements like Pb or Au. Similarly, neglecting van der Waals forces can impair accuracy in weakly bonded or physisorbed interfaces. These issues limit transferability, especially in cross-class systems (e.g., semiconductor/metal or 2D/3D hybrid interfaces).
 
-\subsection{Known Weaknesses in ML Model Architectures}
-
 State-of-the-art models like MACE, M3GNet, and CHGNet have been shown to exhibit systematic underestimation of surface and defect energies---sometimes referred to as ``PES softening.'' This leads to overpredicted interface stability and can mislead ranking. Other known issues include poor uncertainty quantification, overfitting due to high model complexity, and numerical instability for large systems or heavy elements. Without mechanisms to detect extrapolation or assess prediction confidence, the model may silently fail.
-
-\subsection{Conclusion: Anticipating and Addressing Failure Modes}
 
 Each of these failure modes represents a critical risk to model fidelity. Recognising them early provides guidance for mitigating strategies: expanding and diversifying training data, using active learning to discover critical configurations, incorporating physics-based corrections into the reference data, and applying uncertainty-aware predictions. While our current work demonstrates strong ranking performance in many systems, these broader challenges must be addressed before a general-purpose interface prediction model can be considered reliable.

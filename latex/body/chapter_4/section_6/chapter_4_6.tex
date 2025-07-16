@@ -1,4 +1,4 @@
-\section{Towards a Machine-Learned Interface (MLI) Predictor}
+\section{Machine-Learned Interface (MLI) Predictor}
 
 The ultimate goal of this pipeline is to develop a Machine-Learned Interface (MLI) predictor capable of estimating interface favourability directly from slab pair descriptors, without requiring full relaxation or enumeration of stacking shifts. This model will act as an early-stage filter to prioritise promising candidates for structure generation and DFT refinement.
 
@@ -79,7 +79,7 @@ with JSON or HDF5-based metadata systems, ensuring traceability and reproducibil
 Initial experiments may use relatively shallow GNNs with fixed neighbor cutoffs, but later iterations may incorporate
 equivariant tensor representations (e.g. MACE-style angular embeddings) to better capture orientation-dependent effects.
 Training targets will include both regression on \( \Delta E_\mathrm{IF} \) and binary classification
-(favourable/unfavourable), optionally extended with uncertainty quantification.
+(favourable / unfavourable), optionally extended with uncertainty quantification.
 
 Crucially, the MLI is not meant to replace DFT or full relaxation pipelines, but to act as a high-speed prefilter that
 screen candidate structures for further evaluation.

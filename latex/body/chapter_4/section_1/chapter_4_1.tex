@@ -6,23 +6,25 @@ To address the limitations identified in Chapter~\ref{chapter:computational_inve
 
 \begin{enumerate}
 
-    \item \textbf{Baseline MACE model} - Trained primarily on bulk configurations. It offers good rank preservation in many systems but struggles in Si-rich or strained interfaces, where structural features deviate from the training distribution.
+    \item \textbf{Baseline MACE model} Trained primarily on bulk configurations. It offers good rank preservation in many systems but struggles in Si-rich or strained interfaces, where structural features deviate from the training distribution.
 
-    \item \textbf{Interface-specific fine-tuning} - Enhances the baseline model using additional interfacial configurations. This aims to reduce domain mismatch and improve ranking accuracy in challenging cases.
+    \item \textbf{Interface-specific fine-tuning} Enhances the baseline model using additional interfacial configurations. This aims to reduce domain mismatch and improve ranking accuracy in chemically or structurally diverse cases.
 
-    \item \textbf{Delta-learning correction} - Learns the difference between MLP and DFT energy outputs (\Delta E = E_\mathrm{DFT} - E_\mathrm{MLP}). This approach enables low-cost calibration without full retraining, making it attractive for incremental improvements.
+    \item \textbf{Delta-learning correction} Learns the residual difference between MLP and DFT energy outputs (\( \Delta E = E_\mathrm{DFT} - E_\mathrm{MLP} \)). This approach enables low-cost calibration without full retraining, making it attractive for incremental improvements.
 
 \end{enumerate}
-
 
 To quantify the degree of rank preservation between MLP and DFT energy evaluations, we will use the following benchmarking metrics:
 
 \begin{itemize}
 
-    \item \textbf{Spearman's rank correlation coefficient} (\( \rho \)): Measures how well the global ranking of structures is preserved between methods. Chapter~\ref{chapter:computational_investigation} reports near-perfect Spearman values (e.g. \rho = 0.9954) in many systems.
-    \item \textbf{Kendall's} (\( \tau \)): Assesses the proportion of concordant vs. discordant ranking pairs. It is more sensitive to small local swaps in ranking than Spearman's \rho.
-    \item \textbf{Top-N Overlap}: Evaluates how many of the top-ranked structures under DFT are also present in the MLP top-N list. This provides a practical indicator for screening pipelines.
-    \item \textbf{Mean Absolute Error (MAE) and Root Mean Square Error (RMSE)}: These absolute error metrics help assess whether large deviations occur, even if ranking is preserved.
+    \item \textbf{Spearman's rank correlation coefficient} (\( \rho \)): Measures how well the global ranking of structures is preserved between methods. Chapter~\ref{chapter:computational_investigation} reports near-perfect Spearman values (e.g., \( \rho = 0.9954 \)) in many systems.
+
+    \item \textbf{Kendall's rank correlation coefficient} (\( \tau \)): Assesses the proportion of concordant versus discordant ranking pairs. It is more sensitive to small local swaps in ranking than Spearman's \( \rho \).
+
+    \item \textbf{Top-N Overlap}: Evaluates how many of the top-ranked structures under DFT are also present in the MLP top-\( N \) list. This provides a practical indicator for screening performance.
+
+    \item \textbf{Mean Absolute Error (MAE)} and \textbf{Root Mean Square Error (RMSE)}: These absolute error metrics quantify the average and variance-weighted energy deviation, even when rank preservation is strong.
 
 \end{itemize}
 
