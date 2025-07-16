@@ -208,7 +208,7 @@ Although direct MLP-on-DFT-relaxed structure evaluations (MLP@DFT) were not incl
 
 % todo Placeholder for future figure showing relaxation-evaluation matrix comparisons.
 
-\section{Interface Rank Preservation} \label{section:interface_rank_preservation}
+\subsection{Interface Rank Preservation} \label{section:interface_rank_preservation}
 
 While absolute energy errors between MLP and DFT were large (e.g., RMSE ≈ 189 eV), they were secondary to the study's goal of rank preservation. In this context, MLPs effectively captured the energetic hierarchy of Ge and Sn interfaces, with near-perfect Spearman and Kendall correlations. Silicon systems, however, showed frequent ranking disruptions—especially when Si was present in the lower slab—underscoring the influence of bonding asymmetry and strain.
 
@@ -229,24 +229,3 @@ Top-N overlap and rank correlation metrics confirmed that MLPs are useful for sc
 MLPs offer significant computational speed advantages and can be reliably used for preliminary screening in systems with well-represented local bonding environments, such as Ge, Sn, and some C|X combinations. However, their generalisation is limited in strained or covalently dominated systems like Si|X, particularly when poor coordination or stacking asymmetry is present. Without targeted retraining or domain-specific corrections, MLP-based predictions in such cases may be misleading.
 
 % todo Equation suggestion: O(n) comparison of DFT vs MLP computational cost per electron.
-
-section{Insights from Work Undertaken} \label{section:insights_from_work}
-
-The carbon dataset exhibited strong performance when C appeared in the upper slab (C|X), with rank correlation $\rho \approx 0.95$ and low absolute error. However, only three C|Si structures with carbon in the lower slab were usable, and these performed poorly, yielding negative rank correlation. As such, carbon results are informative but limited in generalisability.
-
-Across all iterations, silicon-rich systems consistently showed poor agreement between MLP and DFT, particularly when Si was present in the lower slab. These failures were not isolated cases but appeared systematic, pointing to intrinsic limitations in the current MACE model for accurately representing Si bonding under strain or geometric asymmetry.
-
-Ge and Sn systems, by contrast, showed robust agreement across all ranking metrics. These elements are likely well-covered in the MACE training distribution and may benefit from their more metallic bonding character, which simplifies energy regression.
-
-Notably, Si|Ge alloy systems exhibited near-perfect rank preservation, with both Spearman and Kendall values approaching 1.0. These configurations involved uniform chemical environments and minimal interfacial disruption, suggesting that MLPs perform best when atomic arrangements remain close to their bulk-trained regimes.
-
-\begin{table}[h]
-    \centering
-    \caption{Comparison of MLP performance on perfect alloys and heterostructures.}
-    \begin{tabular}{lccc}
-        System & Spearman & Kendall & Top-10 Overlap \\
-        \hline
-        Perfect Alloys & 1.00 & 1.00 & 6 \\
-        Ge|Si Heterostructure & 0.73 & 0.55 & 6 \\
-    \end{tabular}
-\end{table}
