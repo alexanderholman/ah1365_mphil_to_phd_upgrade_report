@@ -1,15 +1,18 @@
-\section{Integration of RAFFLE into Structure Generation}
+\section{Crystallographic Structure and Interface Behaviour}
 
-ARTEMIS-generated stacks, though consistent, impose alignment constraints. RAFFLE offers a mechanism to interpolate interfacial zones, increase disorder, or induce registry shifts.
+Interface orientation and underlying crystal symmetry strongly influence both the physical plausibility and ranking fidelity of heterostructures. Chapter~\ref{chapter:computational_investigation} demonstrates that coherent interfaces with well-aligned Miller planes tend to exhibit better MLP–DFT rank agreement, particularly in systems with low strain and high registry.
 
-Aligned stacking methods limit structural exploration and may fail to capture intermediate configurations present in experimental systems.
+Future work will group interfaces by:
+\begin{itemize}
+    \item Parent symmetry (e.g., diamond vs. zincblende structures)
+    \item Orientation combinations (e.g., \{100\}|\{100\}, \{100\}|\{111\})
+    \item Slab asymmetry (e.g., Ge over Sn vs. Sn over Ge)
+\end{itemize}
 
-Using the \texttt{raffle\_generator} framework and reference energies from MACE, RAFFLE allows stochastic structural sampling within bounded interface zones. Visuals such as \texttt{upper\_a45\_b45\_c45.png} and \texttt{lower\_a45\_b45\_c45.png} represent generic orientation snapshots and are not RAFFLE-specific.
+Metrics such as \( \rho \), \( \tau \), and Top-N overlap will be aggregated for each group to identify structural contexts that promote or degrade predictive performance. For example, early results suggest that silicon in the lower slab often reduces rank fidelity compared to reversed configurations.
 
-Initial slabs and orientations will be generated via ARTEMIS, while RAFFLE will introduce configurational variation within interfacial volumes.
+A figure is planned to summarise rank correlation across these groups, e.g., from files like \texttt{results\_lower\_Ge\_upper\_Sn\_kendall\_dft@dft\_vs\_mlp@mlp\_valid.png}.
 
-This approach is especially relevant to Si|Sn and Ge|Sn systems where lattice mismatch or registry discontinuity poses challenges for baseline methods.
+If resources permit, this analysis could be extended to other lattice types (e.g., bcc or hcp) to evaluate whether the observed trends generalise beyond diamond-structured group 14 systems.
 
-Relaxation comparisons will be made using both DFT and MLP pipelines to quantify RAFFLE's impact on interface energy diversity and ranking stability.
-
-% TODO: Add schematic or figure comparing ARTEMIS-only and RAFFLE-refined structure sets
+% TODO: Add grouped figure comparing ranking metrics across symmetry and orientation

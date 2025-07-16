@@ -1,15 +1,23 @@
-\section{Towards a Machine-Learned Interface (MLI) Predictor}
+\section{Integration of RAFFLE into Structure Generation}
 
-The longer-term aim is to develop a model that, given a pair of slab surfaces, can predict the favourability of resulting interfaces without full relaxation or enumeration.
+While ARTEMIS enables systematic construction of aligned interface stacks with controlled Miller plane matching and registry shifts, its deterministic approach limits structural diversity. This can lead to overrepresentation of high-symmetry configurations and under-sampling of disordered or experimentally relevant interfaces.
 
-Descriptor sets will include known surface energetics and crystallographic identifiers, all extractable from existing data (\texttt{surface\_energy\_matrix.csv}).
+RAFFLE addresses this limitation by introducing stochastic perturbations within the interfacial zone. Using the \texttt{raffle\_generator} module, RAFFLE will:
+\begin{itemize}
+    \item Vary atomic positions, stacking offsets, and coordination environments
+    \item Generate alloy-like bonding motifs and partial intermixing at the interface
+    \item Sample non-aligned registry patterns to mimic more realistic boundary configurations
+\end{itemize}
 
-Additional features will quantify interfacial registry, stoichiometry, mismatch, and coordination at the interface centre. These will be extracted from POSCAR data and relaxation outputs.
+Initial slab structures and surface orientations will still be defined via ARTEMIS to ensure lattice coherence. RAFFLE will then apply controlled configurational noise or interpolation within the interface region, expanding the training space beyond aligned stacks.
 
-Early models may predict favourable/unfavourable (binary), or regress $\Delta E_\mathrm{IF}$ directly. Shallow decision trees or SVMs will be trialled before advancing to graph-based models.
+This approach is especially useful for challenging systems such as Si|Sn and Ge|Sn, where perfect alignment is hard to achieve due to large lattice mismatch and differing atomic sizes. By broadening the configurational diversity, RAFFLE aims to:
+\begin{itemize}
+    \item Improve generalisation of MLPs trained on interface data
+    \item Reveal edge cases where rank preservation fails due to disorder
+    \item Increase coverage of physically relevant but hard-to-discover interface motifs
+\end{itemize}
 
-The MLI predictor is envisioned as a low-cost filter to prioritise candidates before full relaxation, possibly integrating with ARTEMIS + RAFFLE pipelines.
+Comparative relaxation studies will be conducted using both DFT and MLP pipelines to assess the energetic spread and ranking fidelity introduced by RAFFLE. A schematic comparing ARTEMIS-only versus RAFFLE-augmented structure sets is planned to visualise the expansion of configurational space.
 
-If effective, MLI-driven suggestions will serve as inputs to stacked structure generation, enabling a fully machine-learning-driven discovery workflow.
-
-% TODO: Add schematic of full MLI + ARTEMIS + RAFFLE pipeline (conceptual workflow diagram)
+% TODO: Add schematic or figure comparing ARTEMIS vs. RAFFLE structure sets

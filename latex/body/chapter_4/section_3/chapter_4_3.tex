@@ -1,9 +1,17 @@
-\section{Crystallographic Structure and Interface Behaviour}
+\section{Surface Effects on Interface Favourability}
+\label{section:surface_effects}
 
-Parent symmetry (e.g. fcc vs diamond) and interface orientation (e.g. \{100\}|\{111\}) influence ranking fidelity. This necessitates a structural audit of prediction robustness.
+A key open question is whether the surface energetics of individual slabs can serve as predictors for the favourability of the resulting heterostructure. If a reliable correlation exists between surface energy and interface formation energy \( \Delta E_\mathrm{IF} \), it could significantly reduce the need for exhaustive interface enumeration.
 
-The impact of Miller indices and lattice symmetry on rank preservation will be explored using grouped evaluations, with examples from \texttt{results\_lower\_Ge\_upper\_Sn\_kendall\_dft@dft\_vs\_mlp@mlp\_valid.png}.
+Future work will analyse the data in \texttt{surface\_energy\_matrix.csv} to quantify correlations between:
+\begin{itemize}
+    \item The average surface energy of the two slabs
+    \item The minimum/maximum surface energy of the slab pair
+    \item The resulting interface energy \( \Delta E_\mathrm{IF} \) from DFT and MLP evaluations
+\end{itemize}
 
-% TODO: Add figure grouping ranking performance by crystal type and orientation
+This analysis will help determine whether high-energy surfaces are more reactive—and therefore more likely to form low-energy interfaces—or whether other factors such as registry and orientation dominate.
 
-If resources allow, extension to bcc and hcp systems could test the generality of the findings, though this lies beyond the scope of current data.
+A figure plotting surface energy combinations against interface energies is planned to visualise this correlation. If strong trends are identified, slab energetics could be used as a lightweight proxy feature in the early stages of MLI pipeline screening.
+
+% TODO: Add figure showing surface energy (x-axis) vs. ΔE_IF (y-axis)
