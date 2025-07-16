@@ -1,111 +1,17 @@
-\chapter{Conclusions} \label{chapter:conclusions}
-
-\section{Summary of Findings} \label{section:summary_of_findings}
-
-This study investigated the extent to which machine-learned interatomic potentials (MLPs), specifically the MACE framework, can replicate interface favourability rankings computed via density functional theory (DFT) across various group-IV semiconductor systems, including carbon (C), silicon (Si), germanium (Ge), and tin (Sn). The project involved automated structure generation with ARTEMIS, interface relaxation via both DFT and MLP, and evaluation of rank preservation using statistical metrics including Spearman and Kendall correlations, as well as Top-N overlap.
-
-The agreement between MLP and DFT was found to be system-dependent. MLPs performed well for Ge and Sn systems, achieving high rank correlation and overlap with DFT rankings. For Si, alignment was significantly poorer, with frequent rank reversals and diminished correlation metrics.
-
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=0.7\textwidth]{analysis/plots/results_lower_Si_spearman_all_comparisons_valid.png}
-    \caption{Spearman rank correlation for Si interfaces.}
-\end{figure}
-
-Carbon results remain incomplete and thus inconclusive. Silicon systems exhibited persistent discrepancies between MLP and DFT rankings. Germanium and tin interfaces, by contrast, showed favourable agreement, with strong rank preservation and good Top-N screening utility.
-
-\begin{table}[h]
-    \centering
-    \caption{Performance metrics for Si interfaces from \texttt{analysis/stats_upper_Si.csv}.}
-    \begin{tabular}{lcccccc}
-        Comparison & Spearman & Kendall & RMSE & MAE & Top-10 Overlap \\
-        \hline
-        DFT@DFT vs MLP@MLP & 0.46 & 0.31 & 7.48 & 3.36 & 3 \\
-    \end{tabular}
-\end{table}
-
-Although direct MLP-on-DFT-relaxed structure evaluations (MLP@DFT) were not included due to computational cost, the study revealed that relaxation--evaluation consistency (e.g. MLP@MLP vs DFT@DFT) influences error, and future cross-evaluation may further clarify error sources.
-
-% todo Placeholder for future figure showing relaxation-evaluation matrix comparisons.
-
-\section{Interface Rank Preservation} \label{section:interface_rank_preservation}
-
-Absolute energy discrepancies were evident but secondary to the study goal. More relevant was the preservation of ranking. For Ge and Sn, MLPs captured the energetic hierarchy of interfaces with reasonable fidelity, while for Si, the energetic ordering was often disrupted.
-
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=0.7\textwidth]{analysis/plots/results_lower_Ge_spearman_all_comparisons_valid.png}
-    \caption{Spearman correlation for Ge interfaces.}
-\end{figure}
-
-Top-N overlap and Spearman/Kendall rank statistics highlighted the utility of MLPs in screening contexts. Even where absolute energies were misaligned, the preservation of top candidate rankings proved robust in Ge and Sn systems.
-
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=0.7\textwidth]{analysis/plots/results_lower_Si_topn_overlap.png}
-    \caption{Top-\textit{N} overlap for Si interfaces.}
-\end{figure}
-
-MLPs offer clear advantages in computational speed and can safely be used for preliminary screening in certain systems. However, their generalisation is inconsistent, especially in covalently bonded systems like Si. Without targeted retraining, MLPs may mislead in these cases.
-
-% todo Equation suggestion: O(n) comparison of DFT vs MLP computational cost per electron.
-
-section{Insights from Work Undertaken} \label{section:insights_from_work}
-
-The carbon dataset remains incomplete and cannot yet support definitive conclusions. Preliminary indications suggest that strong bonding and limited configurational diversity may pose challenges analogous to those observed in Si.
-
-Across all iterations, Si consistently exhibited poor MLP--DFT agreement. This suggests intrinsic modelling difficulties rather than statistical noise. The failures appear systematic, reinforcing the need for targeted improvements.
-
-For both Ge and Sn, MLPs reliably preserved DFT-derived rankings. These systems are likely well-represented in the MACE training dataset, and their more metallic bonding character may aid accurate regression of energies.
-
-Perfect alloy systems showed tighter rank correlation and lower error dispersion than heterostructures.
-
-\begin{table}[h]
-    \centering
-    \caption{Comparison of MLP performance on perfect alloys and heterostructures.}
-    \begin{tabular}{lccc}
-        System & Spearman & Kendall & Top-10 Overlap \\
-        \hline
-        Perfect Alloys & 1.00 & 1.00 & 6 \\
-        Ge|Si Heterostructure & 0.73 & 0.55 & 6 \\
-    \end{tabular}
-\end{table}
-
-\section{Insights from Work Undertaken} \label{section:insights_from_work}
-
-The carbon dataset remains incomplete and cannot yet support definitive conclusions. Preliminary indications suggest that strong bonding and limited configurational diversity may pose challenges analogous to those observed in Si.
-
-Across all iterations, Si consistently exhibited poor MLP--DFT agreement. This suggests intrinsic modelling difficulties rather than statistical noise. The failures appear systematic, reinforcing the need for targeted improvements.
-
-For both Ge and Sn, MLPs reliably preserved DFT-derived rankings. These systems are likely well-represented in the MACE training dataset, and their more metallic bonding character may aid accurate regression of energies.
-
-Perfect alloy systems showed tighter rank correlation and lower error dispersion than heterostructures.
-
-\begin{table}[h]
-    \centering
-    \caption{Comparison of MLP performance on perfect alloys and heterostructures.}
-    \begin{tabular}{lccc}
-        System & Spearman & Kendall & Top-10 Overlap \\
-        \hline
-        Perfect Alloys & 1.00 & 1.00 & 6 \\
-        Ge|Si Heterostructure & 0.73 & 0.55 & 6 \\
-    \end{tabular}
-\end{table}
+\chapter{Concluding Thoughts} \label{chapter:conclusions}
 
 \section{Broader Lessons and Limitations} \label{section:broader_lessons_and_limitations}
 
-MLPs appear trustworthy when used to rank candidates in systems whose bonding and local structures are well-represented in the training data. Screening workflows benefit most from MLPs in Ge and Sn contexts.
+MLPs appear reliable for ranking interfacial candidates when the bonding environments and geometries fall within the training domain. Screening workflows benefit most from MLPs in systems involving Ge, Sn, and well-registered C|X structures, where rank preservation is consistently strong. In contrast, strained or covalently dominated systems like Si|Ge or Si|C exhibit erratic performance, especially when interfacial bonding is asymmetric or poorly coordinated.
 
-The results support the need for delta-correction approaches, particularly for challenging systems like Si. Hybrid workflows that combine MLP-based pre-screening with DFT confirmation for top candidates offer a balanced path forward.
+These results highlight the need for delta-correction strategies or domain-specific retraining, particularly for silicon-rich or mixed-interface systems. Hybrid workflows that combine MLP-based pre-screening with selective DFT confirmation offer a scalable and pragmatic approach to large-scale interface discovery.
 
-% todo Placeholder for conceptual diagram of hybrid MLP–DFT workflow.
-
-This study underscores the importance of benchmarking MLPs using rank-based metrics, not just energy errors. Rank preservation aligns more closely with practical use in structure discovery.
+This study reinforces the value of rank-based benchmarking — such as Spearman, Kendall, and Top-N overlap — over absolute energy metrics. In screening contexts, the ability to reliably identify top-performing configurations is more actionable than minimising raw energy error.
 
 \section{Concluding Remarks} \label{section:concluding_remarks}
 
-This work demonstrates that while current general-purpose MLPs like MACE can preserve interface rankings in selected systems, their utility is uneven. The study identifies conditions under which MLPs can be safely used and highlights where caution or additional training is warranted.
+This work demonstrates that while general-purpose MLPs like MACE can successfully preserve interface rankings in selected systems, their predictive utility is highly system- and geometry-dependent. Strong performance was observed in Ge, Sn, and C|X systems with good atomic registry, as well as in chemically uniform Si|Ge alloy configurations. In contrast, Si-rich and poorly coordinated interfaces exhibited systematic rank failures, underscoring the limits of current models in strained or covalently dominated regimes.
 
-By enabling rapid, large-scale screening of interfacial configurations in certain systems, this work lays the groundwork for accelerated discovery of novel interfaces. Continued refinement of MLPs and integrated hybrid workflows will be essential to extend this capability to the full range of materials relevant for device engineering.
+By enabling fast, large-scale screening of interfacial structures in favourable systems, this study lays the foundation for accelerated discovery workflows. However, widespread application across diverse material combinations will require targeted retraining, delta-learning, or integrated MLP-DFT hybrid schemes. Future work should continue to refine these approaches, using rank-preservation metrics as a primary benchmark for practical utility in materials design.
 
-% todo Final figure suggestion: Summary infographic showing findings, limitations, and future directions.
+Despite the promising results in rank preservation for certain systems, this study has also highlighted substantial challenges in building a truly generalisable machine-learned potential for interface prediction. Limitations such as incomplete training coverage, extrapolation to novel configurations, and model underperformance in strained or covalently bonded systems underscore the need for further refinement. These risks are being actively addressed through targeted retraining, delta-learning corrections, and expanded benchmark testing, as outlined in Chapter~\ref{chapter:next_steps}. While strong performance was observed in Ge, Sn, and alloy systems, achieving consistent accuracy across a broader range of interfaces will require careful design of training data and model architecture.
