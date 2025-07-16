@@ -1,185 +1,188 @@
-\section{State-of-the-Art in Interface Prediction} \label{section:state_of_the_art}
+\section{Limitations of Current Approaches}
 
 % ---------- %
 
-Recent years have seen rapid developments in the modelling of interface structures, driven both by methodological
-advances and by the growing technological importance of heterostructured materials.
+Despite notable advances in both physics-based and machine learning (ML) approaches to materials modelling, several
+persistent limitations constrain the predictive fidelity, scalability, and generalisability of current methods,
+particularly when applied to realistic interface systems.
 
-Interface prediction now spans a range of computational approaches, from first-principles calculations and
-high-throughput screening to data-driven and machine learning (ML) methods.
-
-This section provides an overview of the current state-of-the-art, establishing the context for the subsequent
-discussion of recent studies (Section 2.5.1), the positioning of this project's methodology (Section 2.5.2), and
-anticipated emerging directions (Section 2.5.3).
+This section outlines three critical domains in which these limitations manifest, motivating the hybrid methodologies
+explored later in this report:
 
 % ---------- %
 
-A key enabler of recent progress has been the development of automated interface generation tools such as ARTEMIS and
-InterMatch, which systematically enumerate possible lattice matches, terminations, and stacking configurations between
-two crystal structures.
+\begin{itemize}
+  \item \textbf{What are the current bottlenecks in interface prediction?} \\
+  Interface prediction remains an inherently multiscale problem, combining combinatorial complexity at the atomic level
+  with long-range elastic and electrostatic effects.
 
-When integrated with rapid energy evaluation, either via density functional theory (DFT) or machine-learned potentials
-(MLPs), these tools allow the configurational space of interface structures to be sampled more broadly and with greater
-fidelity.
+  First-principles approaches such as density functional theory (DFT) offer high accuracy but scale cubically with
+  system size, making them infeasible for large or disordered systems typical of interfaces.
 
-In parallel, studies have increasingly sought to move beyond idealised, coherent interfaces to include semi-coherent,
-faceted, and amorphous boundaries, reflecting the complexity of real materials under fabrication conditions.
+  Even with machine-learned interatomic potentials (MLPs), exploring configurational space, e.g. over terminations,
+  interlayer slips, and misfit reconstructions, requires extensive sampling and often yields flat energy landscapes with
+  many metastable minima.
 
-% ---------- %
+  \item \textbf{Where do both ML and physics-based methods fall short?} \\
+  DFT underestimates band gaps and struggles to capture emergent interfacial phenomena such as dipole formation, phase
+  reconstruction, or charge transfer without recourse to hybrid functionals or many-body perturbation theory.
 
-Efforts have also been made to improve the prediction of interfacial electronic properties, such as band alignment.
+  Conversely, ML models, especially those trained on bulk or idealised configurations, exhibit limited transferability
+  to chemically complex, strained, or disordered interfaces.
 
-Where traditional rules like Anderson's rule fail, corrective models based on physically grounded terms, such as
-$\Delta E_{\Gamma}$ and $\Delta E_{\mathrm{IF}}$, have been proposed and validated across a range of 2D materials.
+  Without embedded physical constraints or domain-specific descriptors, ML models often fail to resolve interfacial
+  states, misfit dislocations, or partial intermixing.
 
-Such corrections are essential for capturing charge transfer and hybridisation effects at interfaces, and form an
-important bridge between local structure and electronic response.
+  \item \textbf{Are there data or generalisation issues?} \\
+  Interface-specific datasets are significantly less developed than those for bulk crystals, due in part to the vast
+  configurational diversity of junctions and the lack of standardised repositories.
 
-% ---------- %
+  This data sparsity hampers the ability of ML models to generalise across terminations, chemistries, or stacking
+  motifs.
 
-This chapter aims to synthesise these various advances, situating the present work within an evolving landscape of
-interface modelling.
+  Additionally, many early ML workflows lack symmetry-invariant and scale-independent representations, increasing the
+  risk of overfitting to specific atom counts or lattice types.
 
-Particular attention will be given to scalable workflows that combine structural generation, energetic evaluation, and
-property prediction, setting the stage for a more autonomous and predictive framework for materials interface discovery.
-
-% ---------- %
-
-Recent years have witnessed a pronounced expansion in methodologies for predicting interface structures, driven by the
-convergence of first-principles modelling, high-throughput screening, and data-driven inference.
-
-% ---------- %
-
-This evolution reflects a shift from idealised, geometry-constrained models towards scalable frameworks capable of
-capturing configurational complexity, long-range strain, and emergent phenomena at interfaces.
+\end{itemize}
 
 % ---------- %
 
-Hybrid methodologies now dominate the landscape of ab initio interface prediction. Notable among them is the
-\textsc{ARTEMIS} tool developed by Taylor et al., which automates the generation of candidate interface structures by
-identifying lattice-matched slabs, multiple surface terminations, and lateral shifts across a wide range of Miller
-planes.
+These limitations underscore the need for hybrid workflows that integrate ML potentials (e.g., MACE, ChgNet) for
+large-scale screening, DFT for high-fidelity validation, and structure-generation tools such as ARTEMIS or RAFFLE for
+efficient sampling of the configurational landscape.
+
+Such frameworks aim to balance accuracy, efficiency, and transferability in modelling the behaviour of realistic
+interfacial systems.
 
 % ---------- %
 
-Shortly after, Taylor et al.\ introduced the \textsc{RAFFLE}, with Pitfield et al.\ introducing methodology, combining
-empirical void-filling algorithms with iterative statistical descriptors to model metastable and low-symmetry
-reconstructions.
+\subsection{What are the current bottlenecks in interface prediction?}
 
 % ---------- %
 
-Constrained variants of the Minima-Hopping Method (MHM) allow for controlled exploration of grain boundary
-reconstructions by varying atomic densities and introducing geometric constraints.
-
-These approaches yield more realistic reconstructions than fixed-stoichiometry DFT or classical potentials, especially
-in systems like silicon where interface states are sensitive to atomic arrangement and misfit accommodation.
+The configurational degrees of freedom, ranging from slip vectors, surface terminations, and intermixing patterns to
+stacking sequences and misfit accommodation, create a vast structural landscape that resists exhaustive exploration via
+conventional methods.
 
 % ---------- %
 
-Machine learning (ML) is increasingly embedded into the prediction workflow. Gerber et al.\ developed the
-\textsc{InterMatch} framework, which leverages high-throughput DFT databases to train ML models that guide lattice
-matching and stacking predictions in 2D systems. At the electronic level, Davies et al.\ proposed physically motivated
-corrections to band alignment, namely $\Delta E_\Gamma$ and $\Delta E_{\mathrm{IF}}$, to extend Anderson's rule and
-account for hybridisation and interface dipoles in 2D heterostructures.
+\paragraph{Configurational Complexity.} At the atomic scale, even between lattice-matched materials, variations in
+terminations, registry shifts, and interlayer relaxations produce an exponential number of possible configurations.
+
+The search space rapidly becomes unmanageable, especially in systems requiring large supercells to capture long-range
+strain or disorder.
+
+This renders brute-force density functional theory (DFT) calculations infeasible for comprehensive screening.
 
 % ---------- %
 
-Despite these advances, several limitations persist.
+\paragraph{Transferability of Machine-Learned Potentials.} Machine-learned interatomic potentials (MLPs), such as MACE
+and ChgNet, offer pathways to accelerate structural screening at near-DFT accuracy.
 
-Data scarcity for interfacial systems hampers generalisation, and most ML models are trained on bulk-like environments.
-
-Existing descriptors may fail to capture the broken symmetry, local dipoles, and charge redistribution unique to
-interfaces.
-
-Furthermore, many workflows truncate the configurational space prematurely or rely on geometric heuristics alone.
+However, their performance is contingent upon the representativeness of the training data.
 
 % ---------- %
 
-There is increasing recognition that hybrid workflows, combining ML surrogates with tools like \textsc{ARTEMIS} and
-\textsc{RAFFLE}, and validating critical configurations using DFT, offer a scalable route forward.
-
-This multiresolution strategy enables both efficient exploration and physically grounded evaluation of interfacial
-stability across diverse systems.
+\subsection{Where do both ML and physics-based methods fall short?}
 
 % ---------- %
 
-\subsection{How does my proposed approach compare and build upon it?}
+Despite significant progress in both first-principles and machine learning (ML) approaches, key limitations persist in
+the predictive modelling of material interfaces.
+
+These limitations arise not only from computational constraints but also from intrinsic mismatches between real
+interfacial complexity and the assumptions underpinning current models.
 
 % ---------- %
 
-Contemporary approaches to interface structure prediction combine symmetry-based lattice matching, high-throughput
-screening, and density functional theory (DFT) relaxation.
+Physics-based methods, most notably Density Functional Theory (DFT), provide high accuracy for local bonding
+environments and band structure prediction.
 
-Tools such as \textsc{ARTEMIS} enable the systematic generation of interface candidates by identifying lattice
-commensurabilities and constructing multiple terminations and stacking arrangements from parent surfaces.
-
-However, the energetic evaluation of these candidates remains a bottleneck: full relaxation and total energy comparison
-using DFT is prohibitively expensive for systems exceeding a few hundred atoms.
+Even when feasible, DFT struggles to capture extended features such as long-range strain relaxation, misfit
+dislocations, and spatially diffuse defect states that dominate realistic interface behaviour.
 
 % ---------- %
 
-To mitigate this, recent advances have introduced surrogate strategies that bypass exhaustive DFT sampling.
+MLPs require extensive, representative training datasets, typically derived from DFT calculations, and their performance
+deteriorates when applied to configurations involving unseen chemistries, surface reconstructions, or high strain
+regimes.
 
-InterMatch, a high-throughput framework proposed by Gerber \textit{et al.}, guides stacking predictions using
-pre-computed DFT databases and electrostatic heuristics.
-
-Yet such frameworks often lack spatial resolution or generalisability across chemically diverse or defective systems.
-
-% ---------- %
-
-This project builds directly upon these developments, advancing them in three ways:
+Furthermore, many ML models lack rigorous uncertainty quantification, making it difficult to detect failure modes in
+out-of-distribution predictions.
 
 % ---------- %
 
-\begin{enumerate}
-
-   \item \textbf{Descriptor-led generalisation.} Inspired by the success of band-alignment corrections in TMDC
-   heterostructures, this work seeks to identify whether interfacial stability can be inferred from properties
-   computable on isolated surfaces; such as cleavage ene.g. surface dipole, or projected local density of states near
-   the Fermi level.
-
-   If validated, such descriptors would permit extrapolation to unseen terminations or chemistries without requiring
-   full interface models.
-
-   \item \textbf{Feedback into structure-generation pipelines.} In the longer term, this project aims to integrate
-   ML-derived stability metrics into tools like \textsc{ARTEMIS} or \textsc{RAFFLE}, allowing early pruning of
-   unfavourable configurations before computationally costly evaluation.
-
-   This hybrid generation--relaxation loop reflects a broader trend towards data-assisted automation in interfacial
-   materials modelling.
-
-\end{enumerate}
+\subsection{Are there data or generalisation issues?}
 
 % ---------- %
 
-The proposed framework thus combines multi-resolution structure prediction with predictive modelling rooted in
-physically meaningful descriptors.
+In contrast to bulk crystals, where structured repositories like the Materials Project or AFLOW provide extensive
+coverage, interface-specific datasets remain sparse.
 
-Rather than replacing existing DFT-centric approaches, it seeks to augment them; by embedding surrogate models within
-the structure-generation workflow and using them to navigate large configurational spaces.
+This is due to the combinatorial explosion of viable terminations, slip vectors, and orientations across material pairs,
+especially in mixed-dimensional systems.
 
-This enables a shift from retrospective evaluation to prospective design of realistic, energetically favourable
-interfaces.
-
-% ---------- %
-
-\subsection{Emerging trends}
+Existing databases tend to overrepresent a narrow set of lattice-matched, technologically prominent interfaces,
+introducing bias and hindering the model's capacity to generalise across broader chemical or structural classes.
 
 % ---------- %
 
-Recent advances in interface prediction have increasingly centred on integrating data-driven approaches with atomistic
-modelling frameworks.
+Another critical challenge is the lack of standardisation in how interface data is represented.
 
-Machine-learned potentials (MLPs) such as MACE and E(3)-equivariant networks like NequIP are now enabling the efficient
-evaluation of interfacial configurations across large configurational spaces.
+Unlike bulk materials, which can be described relatively easily by a set of structural features such as lattice
+constants and atomic compositions, interfaces require more complex descriptors, including local bond environments,
+atomic coordination numbers, and structural motifs that change drastically depending on orientation, termination, and
+strain.
 
-This shift permits relaxation of structures at near-DFT accuracy, allowing researchers to explore interface separations,
-registry shifts, and metastable motifs that would be prohibitively expensive using standard ab initio methods.
+As a result, the design of robust and transferable machine learning models for interfaces is further complicated by the
+difficulty in developing universally applicable features that capture the intricate nature of interfacial systems.
+
+This problem is compounded by the lack of large, consistent datasets that integrate structural, energetic, and
+electronic data, making it harder for models to learn the subtle interactions that govern interface stability and
+properties.
 
 % ---------- %
 
-Collectively, these approaches suggest a field increasingly focused on scalable, automatable, and physically
-interpretable modelling of interfaces.
+Finally, the sheer diversity of possible interface configurations, especially for systems involving two-dimensional (2D)
+materials, complex oxides, or disordered solids, makes high-throughput DFT calculations or other first-principles
+methods impractical for exhaustive data collection.
 
-The combination of machine learning with established electronic structure theory is opening a path toward predictive
-frameworks that are sensitive to real-world synthesis constraints and device contexts.
+To address these issues, there is a pressing need for hybrid data collection strategies that combine high-fidelity,
+physics-based methods with more scalable, data-driven approaches, such as machine learning potential models that can
+rapidly generate large datasets of interfacial configurations.
+
+Additionally, targeted experimental datasets that validate theoretical predictions are essential for creating reliable
+and comprehensive interfaces databases.
+
+% ---------- %
+
+Generalisation error is further amplified by suboptimal representation of interface-specific physics.
+
+Many descriptor schemes, such as SOAP vectors or radial symmetry functions, are optimised for bulk periodicity and fail
+to capture interfacial asymmetry, vacuum discontinuities, or broken symmetry.
+
+Representations that do not enforce scale-invariance or rotational equivariance can also hinder model transferability to
+supercells or faceted configurations.
+
+% ---------- %
+
+Finally, inconsistencies in training labels present an often-overlooked source of predictive error.
+
+Energies obtained from high-throughput DFT pipelines can vary depending on pseudopotential choice, relaxation
+tolerances, or convergence thresholds.
+
+In interfacial contexts, these uncertainties are magnified by metastability and complex relaxation pathways.
+
+Some datasets rely on static, unrelaxed geometries or surrogate models, further undermining the reliability of ground
+truth energetics.
+
+% ---------- %
+
+While ML offers substantial speed-ups over DFT, its utility in interface prediction is presently constrained by data
+bottlenecks, representational mismatch, and transferability failures.
+
+Addressing these limitations will require a multi-pronged strategy involving broader and more diverse training datasets,
+improved descriptors attuned to interfacial physics, and integration of uncertainty quantification into ML workflows.
+
+Hybrid schemes, where MLPs perform large-scale screening followed by selective DFT refinement, may offer a viable path
+forward.

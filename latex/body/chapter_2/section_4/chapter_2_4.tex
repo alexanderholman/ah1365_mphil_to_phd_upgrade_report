@@ -1,107 +1,288 @@
-\section{Limitations of Current Approaches}
+\section{Emergence of Machine Learning in Materials Science} \label{section:machine_learning}
 
 % ---------- %
 
-Despite notable advances in both physics-based and machine learning (ML) approaches to materials modelling, several
-persistent limitations constrain the predictive fidelity, scalability, and generalisability of current methods,
-particularly when applied to realistic interface systems.
+Over the past decade, machine learning (ML) has emerged as a transformative tool in materials modelling, offering a
+route to accelerate predictions and expand accessible system sizes beyond those tractable by first-principles methods.
 
-This section outlines three critical domains in which these limitations manifest, motivating the hybrid methodologies
-explored later in this report:
+Traditional computational techniques, such as DFT and MD, have established themselves as accurate and rigorous, but they
+often scale poorly with system size or configurational complexity.
 
-% ---------- %
+This limitation becomes particularly acute in the modelling of interfaces, where subtle geometric, chemical, and
+electronic variations can dramatically affect material behaviour.
 
-\begin{itemize}
-  \item \textbf{What are the current bottlenecks in interface prediction?} \\
-  Interface prediction remains an inherently multiscale problem, combining combinatorial complexity at the atomic level
-  with long-range elastic and electrostatic effects.
-
-  First-principles approaches such as density functional theory (DFT) offer high accuracy but scale cubically with
-  system size, making them infeasible for large or disordered systems typical of interfaces.
-
-  Even with machine-learned interatomic potentials (MLPs), exploring configurational space, e.g. over terminations,
-  interlayer slips, and misfit reconstructions, requires extensive sampling and often yields flat energy landscapes with
-  many metastable minima.
-
-  \item \textbf{Where do both ML and physics-based methods fall short?} \\
-  DFT underestimates band gaps and struggles to capture emergent interfacial phenomena such as dipole formation, phase
-  reconstruction, or charge transfer without recourse to hybrid functionals or many-body perturbation theory.
-
-  Conversely, ML models, especially those trained on bulk or idealised configurations, exhibit limited transferability
-  to chemically complex, strained, or disordered interfaces.
-
-  Without embedded physical constraints or domain-specific descriptors, ML models often fail to resolve interfacial
-  states, misfit dislocations, or partial intermixing.
-
-  \item \textbf{Are there data or generalisation issues?} \\
-  Interface-specific datasets are significantly less developed than those for bulk crystals, due in part to the vast
-  configurational diversity of junctions and the lack of standardised repositories.
-
-  This data sparsity hampers the ability of ML models to generalise across terminations, chemistries, or stacking
-  motifs.
-
-  Additionally, many early ML workflows lack symmetry-invariant and scale-independent representations, increasing the
-  risk of overfitting to specific atom counts or lattice types.
-
-\end{itemize}
+ML offers a complementary paradigm, enabling the construction of surrogate models trained on high-fidelity data, which
+can interpolate or even extrapolate to predict key material properties across vast configuration spaces.
 
 % ---------- %
 
-These limitations underscore the need for hybrid workflows that integrate ML potentials (e.g., MACE, ChgNet) for
-large-scale screening, DFT for high-fidelity validation, and structure-generation tools such as ARTEMIS or RAFFLE for
-efficient sampling of the configurational landscape.
+This section introduces the growing role of ML in materials prediction, highlighting its application in interface
+modelling and the broader landscape of data-driven approaches.
 
-Such frameworks aim to balance accuracy, efficiency, and transferability in modelling the behaviour of realistic
-interfacial systems.
+Subsequent subsections will examine the types of models in use, including classical regressors and deep neural
+architectures, alongside the nature of training data, typical input descriptors, and validation strategies.
 
-% ---------- %
+Special attention will be given to machine-learned interatomic potentials (MLPs), particularly those with demonstrated
+success in interfacial contexts such as MACE and ChgNet.
 
-\subsection{What are the current bottlenecks in interface prediction?}
-
-% ---------- %
-
-The configurational degrees of freedom, ranging from slip vectors, surface terminations, and intermixing patterns to
-stacking sequences and misfit accommodation, create a vast structural landscape that resists exhaustive exploration via
-conventional methods.
+Finally, we reflect on the benefits and ongoing limitations of ML methods in materials science, including issues of
+transferability, uncertainty quantification, and integration into automated modelling pipelines.
 
 % ---------- %
 
-\paragraph{Configurational Complexity.} At the atomic scale, even between lattice-matched materials, variations in
-terminations, registry shifts, and interlayer relaxations produce an exponential number of possible configurations.
-
-The search space rapidly becomes unmanageable, especially in systems requiring large supercells to capture long-range
-strain or disorder.
-
-This renders brute-force density functional theory (DFT) calculations infeasible for comprehensive screening.
+\subsection{How has machine learning been introduced into materials prediction?}
 
 % ---------- %
 
-\paragraph{Transferability of Machine-Learned Potentials.} Machine-learned interatomic potentials (MLPs), such as MACE
-and ChgNet, offer pathways to accelerate structural screening at near-DFT accuracy.
+Machine learning (ML) has been introduced into materials prediction as a complementary tool to traditional
+first-principles methods, offering improved scalability, predictive flexibility, and the potential for workflow
+automation.
 
-However, their performance is contingent upon the representativeness of the training data.
-
-% ---------- %
-
-\subsection{Where do both ML and physics-based methods fall short?}
+Its adoption has been driven by limitations in conventional approaches such as Density Functional Theory (DFT),
+particularly in capturing the structural and chemical complexity of real-world systems such as interfaces.
 
 % ---------- %
 
-Despite significant progress in both first-principles and machine learning (ML) approaches, key limitations persist in
-the predictive modelling of material interfaces.
+ML enables efficient exploration of vast configurational landscapes, where brute-force DFT sampling would be infeasible.
 
-These limitations arise not only from computational constraints but also from intrinsic mismatches between real
-interfacial complexity and the assumptions underpinning current models.
+This is particularly important in interface modelling, where multiple stacking orders, terminations, and slip
+configurations can exist.
+
+ML-driven screening allows researchers to rapidly identify promising candidates for further evaluation.
 
 % ---------- %
 
+Early ML applications focused on surrogate models trained to replicate DFT-derived energies, forces, or properties.
+
+Descriptor-based regression models, using quantities such as coordination numbers, Bader charges, or bond lengths, were
+employed to predict interfacial stability or band alignments.
+
+These approaches have evolved toward end-to-end learning frameworks using physically-informed descriptors or graph-based
+representations.
+
+% ---------- %
+
+ML is now embedded into iterative prediction--generation--evaluation cycles.
+
+For example, predicted interface favourability informs structure generation (e.g. stacking vectors or surface
+terminations), which are then evaluated by DFT or ML surrogates.
+
+The results feed back into model training, supporting a self-refining loop.
+
+Tools such as ARTEMIS benefit from such integration.
+
+% ---------- %
+
+More recent work employs graph neural networks (GNNs), such as MACE or NequIP, which are equivariant to Euclidean
+transformations and thus well-suited for atomistic systems.
+
+These models learn directly from atomic positions and species, avoiding the need for handcrafted features while
+preserving symmetry constraints essential for interface modelling.
+
+% ---------- %
+
+Ultimately, ML enables a shift from static modelling pipelines to more autonomous workflows.
+
+When coupled with structure-generation protocols and physical constraints.
+
+% ---------- %
+
+\subsection{What types of models and data are being used?}
+
+% ---------- %
+
+Models can be broadly categorised into classical learning algorithms and deep learning approaches.
+
+Classical methods include random forests, gradient boosting, support vector machines (SVMs), and Gaussian process
+regression (GPR), the latter being particularly valuable for small datasets due to its uncertainty estimation
+capability.
+
+Deep learning architectures include feedforward neural networks and, more notably, graph neural networks (GNNs), which
+are well-suited for materials modelling due to their ability to represent variable-sized atomic graphs with complex
+bonding topologies.
+
+% ---------- %
+
+The input to these models typically consists of numerical representations of atomic configurations known as descriptors.
+
+Geometric descriptors include bond lengths, coordination numbers, angular distributions, $n$-body distribution
+functions, and radial symmetry functions; many of which feature prominently in Behler-Parrinello-type neural networks.
+
+Chemical descriptors such as electronegativity differences and Bader charges capture bonding character and charge
+transfer.
+
+Electronic descriptors like partial density of states (PDOS) and local work functions are relevant for predicting band
+alignment and interfacial transport properties.
+
+Interface-specific features, such as interfacial roughness or vacuum level offsets, are particularly crucial in 2D|3D
+and mixed-dimensional heterostructures.
+
+% ---------- %
+
+To support learning across such heterogeneous and high-dimensional features, symmetry-invariant and scale-independent
+representations have become increasingly important.
+
+These ensure that models generalise across materials with different atom counts or lattice sizes.
+
+Dimensionality reduction methods and learned embeddings (e.g. via autoencoders or message passing) are frequently used
+to compress structural information into a lower-dimensional latent space optimised for prediction.
+
+% todo: handle note "word soup"...
+
+% ---------- %
+
+The datasets used to train such models vary in size and fidelity.
+
+They often derive from high-throughput DFT calculations available in public repositories such as the Materials Project
+or AFLOW.
+
+% ---------- %
+
+\subsection{What are the strengths and limitations of ML in this field?}
+
+% ---------- %
+
+Machine learning (ML) has emerged as a promising strategy for accelerating materials modelling, particularly in the
+context of complex interfacial systems.
+
+Its strengths lie chiefly in efficiency, scalability, and adaptability.
+
+ML models, once trained, can rapidly approximate formation energies, surface reactivities, and stability metrics for
+thousands of configurations, many of which would be prohibitively expensive to assess using first-principles methods
+alone.
+
+This computational efficiency enables exploration of broader configurational and chemical spaces, including systems with
+disorder, stacking faults, or metastable structures that pose challenges for traditional simulations.
+
+% ---------- %
+
+Another key advantage is the capacity of ML to capture subtle, non-linear correlations in high-dimensional datasets.
+
+When used in conjunction with tools such as ARTEMIS or RAFFLE, ML can assist not only in predicting energetics, but also
+in prioritising candidate geometries during structure generation.
+
+% ---------- %
+
+However, ML approaches also exhibit critical limitations.
+
+A foremost concern is their dependence on the training dataset: models typically interpolate well within the domain of
+known examples but generalise poorly to unseen chemistries or extreme geometries.
+
+This limits their reliability when extrapolating to novel material classes or interface types, unless training sets are
+curated with care to ensure coverage of relevant chemical and structural motifs.
+
+% ---------- %
+
+Another limitation is interpretability.
+
+While classical models (e.g. those based on density functional theory) yield physically grounded outputs, such as charge
+densities or band structures, many ML models operate as statistical black boxes.
+
+Though efforts are underway to integrate physically meaningful descriptors (e.g. n-body distribution functions, local
+work function, or Bader charges), ensuring transparency and robustness remains a work in progress.
+
+% ---------- %
+
+Finally, ML alone cannot fully replace physics-based methods.
+
+For systems exhibiting emergent interfacial phases, or electronic reconstructions, high-fidelity methods like DFT or
+many-body perturbation theory remain necessary for validation and refinement.
+
+As such, a hybrid strategy is often advocated; using ML to pre-screen candidate structures and flag configurations for
+further high-accuracy assessment.
+
+% ---------- %
+
+ML constitutes a valuable addition to the materials modelling toolkit, particularly for screening
+and guiding interface prediction.
+
+Yet its performance remains contingent on data quality and physical context, and it is best deployed in tandem with more
+rigorous electronic structure methods.
+
+% ---------- %
+
+\subsection{Machine-Learned Interatomic Potentials (MLPs)}
+
+% ---------- %
+
+\subsubsection{MACE}
+
+% ---------- %
+
+The MACE (Many-body Attention and Correlation Equivariant) model represents a recent advancement in equivariant message
+passing neural networks (MPNNs), tailored for high-accuracy and scalable force field construction.
+
+Unlike earlier MPNNs which rely primarily on two-body invariant messages, MACE employs many-body interactions and
+equivariant tensor contractions to capture angular and chemical complexity with improved expressivity and data
+efficiency.
+
+% ---------- %
+
+One notable strength of MACE is its capacity to reach state-of-the-art accuracy on diverse benchmarks, including rMD17,
+3BPA, and AcAc, while requiring only two message passing iterations, due to its use of high-body-order messages.
+
+For instance, in extrapolation tasks involving out-of-distribution molecular geometries or high-temperature
+trajectories, MACE (particularly with $L=2$) has demonstrated superior performance and robustness relative to competing
+models such as NequIP and BOTNet.
+
+% ---------- %
+
+\subsubsection{ChgNet}
+
+% ---------- %
+
+ChgNet is a neural network potential that incorporates both atomic positions and charge distributions into its
+prediction framework, thereby explicitly learning charge transfer phenomena.
+
+This is particularly relevant for interfaces where electrostatics, dipole formation, and local charge accumulation
+significantly affect electronic properties such as band alignment.
+
+
+% ---------- %
+
+\subsubsection{Use in Interface Modelling}
+
+% ---------- %
+
+In the context of this project, MLPs like MACE and ChgNet offer distinct but synergistic advantages.
+
+MACE, with its speed, high accuracy, and symmetry-respecting architecture, is well-suited for structure relaxation and
+force prediction across multi-material junctions.
+
+ChgNet, on the other hand, may provide more faithful predictions of electronic interface effects arising from local
+charge redistribution.
+
+% ---------- %
+
+Therefore, hybrid workflows that use MLPs for broad structural exploration, followed by targeted DFT recalculations for
+ambiguous configurations, are increasingly being adopted.
+
+% ---------- %
+
+The eventual goal is to integrate MLPs into an active learning pipeline alongside tools like RAFFLE or ARTEMIS,
+facilitating the generation, screening, and optimisation of candidate interface structures at scale.
+
+% todo: address note "should be in intro"
+
+% ---------- %
+
+% ---- where did this come from? ---- %
+% todo find if i want to keep this!
 Physics-based methods, most notably Density Functional Theory (DFT), provide high accuracy for local bonding
 environments and band structure prediction.
+
+However, the computational scaling of standard Kohn-Sham DFT---typically $\mathcal{O}(N^3)$ with respect to system
+size---renders large or disordered interface simulations intractable without approximation.
 
 Even when feasible, DFT struggles to capture extended features such as long-range strain relaxation, misfit
 dislocations, and spatially diffuse defect states that dominate realistic interface behaviour.
 
 % ---------- %
+
+Machine learning potentials (MLPs), such as those based on graph neural networks or equivariant message passing
+architectures, have emerged as promising tools to extend predictive power to larger systems at near-DFT accuracy.
+
+Nonetheless, they too face structural limitations.
 
 MLPs require extensive, representative training datasets, typically derived from DFT calculations, and their performance
 deteriorates when applied to configurations involving unseen chemistries, surface reconstructions, or high strain
@@ -112,77 +293,25 @@ out-of-distribution predictions.
 
 % ---------- %
 
-\subsection{Are there data or generalisation issues?}
+Both DFT and ML approaches also fall short in capturing emergent interfacial phenomena such as charge transfer,
+interface-induced dipoles, or the formation of new interfacial phases.
+
+These effects are often strongly dependent on the local atomic registry and chemical heterogeneity, and cannot be
+inferred from the properties of the isolated constituents alone.
+
+Notably, simple models like Anderson's rule have been shown to systematically fail in 2D and 2D|3D heterostructures,
+necessitating corrections such as $\Delta E_\Gamma$ and $\Delta E_\mathrm{IF}$ that explicitly depend on the atomic-scale interface
+structure and electrostatics.
 
 % ---------- %
 
-In contrast to bulk crystals, where structured repositories like the Materials Project or AFLOW provide extensive
-coverage, interface-specific datasets remain sparse.
+While ML and physics-based models have complementary strengths, neither is sufficient in isolation for the reliable
+prediction of interfacial behaviour.
 
-This is due to the combinatorial explosion of viable terminations, slip vectors, and orientations across material pairs,
-especially in mixed-dimensional systems.
+Their limitations motivate the development of hybrid workflows, such as embedding physical constraints into ML
+architectures, or coupling MLP-based screening with selective DFT refinement.
 
-Existing databases tend to overrepresent a narrow set of lattice-matched, technologically prominent interfaces,
-introducing bias and hindering the model's capacity to generalise across broader chemical or structural classes.
+These approaches aim to achieve a balance between scalability, accuracy, and generalisability---a balance that remains at
+the forefront of interface modelling challenges .
 
-% ---------- %
-
-Another critical challenge is the lack of standardisation in how interface data is represented.
-
-Unlike bulk materials, which can be described relatively easily by a set of structural features such as lattice
-constants and atomic compositions, interfaces require more complex descriptors, including local bond environments,
-atomic coordination numbers, and structural motifs that change drastically depending on orientation, termination, and
-strain.
-
-As a result, the design of robust and transferable machine learning models for interfaces is further complicated by the
-difficulty in developing universally applicable features that capture the intricate nature of interfacial systems.
-
-This problem is compounded by the lack of large, consistent datasets that integrate structural, energetic, and
-electronic data, making it harder for models to learn the subtle interactions that govern interface stability and
-properties.
-
-% ---------- %
-
-Finally, the sheer diversity of possible interface configurations, especially for systems involving two-dimensional (2D)
-materials, complex oxides, or disordered solids, makes high-throughput DFT calculations or other first-principles
-methods impractical for exhaustive data collection.
-
-To address these issues, there is a pressing need for hybrid data collection strategies that combine high-fidelity,
-physics-based methods with more scalable, data-driven approaches, such as machine learning potential models that can
-rapidly generate large datasets of interfacial configurations.
-
-Additionally, targeted experimental datasets that validate theoretical predictions are essential for creating reliable
-and comprehensive interfaces databases.
-
-% ---------- %
-
-Generalisation error is further amplified by suboptimal representation of interface-specific physics.
-
-Many descriptor schemes, such as SOAP vectors or radial symmetry functions, are optimised for bulk periodicity and fail
-to capture interfacial asymmetry, vacuum discontinuities, or broken symmetry.
-
-Representations that do not enforce scale-invariance or rotational equivariance can also hinder model transferability to
-supercells or faceted configurations.
-
-% ---------- %
-
-Finally, inconsistencies in training labels present an often-overlooked source of predictive error.
-
-Energies obtained from high-throughput DFT pipelines can vary depending on pseudopotential choice, relaxation
-tolerances, or convergence thresholds.
-
-In interfacial contexts, these uncertainties are magnified by metastability and complex relaxation pathways.
-
-Some datasets rely on static, unrelaxed geometries or surrogate models, further undermining the reliability of ground
-truth energetics.
-
-% ---------- %
-
-While ML offers substantial speed-ups over DFT, its utility in interface prediction is presently constrained by data
-bottlenecks, representational mismatch, and transferability failures.
-
-Addressing these limitations will require a multi-pronged strategy involving broader and more diverse training datasets,
-improved descriptors attuned to interfacial physics, and integration of uncertainty quantification into ML workflows.
-
-Hybrid schemes, where MLPs perform large-scale screening followed by selective DFT refinement, may offer a viable path
-forward.
+% ---^ where did this come from? ^--- %

@@ -1,317 +1,294 @@
-\section{Emergence of Machine Learning in Materials Science} \label{section:machine_learning}
+\section{Conventional Prediction Methods} \label{section:conventional_methods}
 
 % ---------- %
 
-Over the past decade, machine learning (ML) has emerged as a transformative tool in materials modelling, offering a
-route to accelerate predictions and expand accessible system sizes beyond those tractable by first-principles methods.
+Understanding and predicting the behaviour of material interfaces requires a firm foundation in computational methods
+that are rooted in quantum and statistical mechanics\cite{ARTEMIS}.
 
-Traditional computational techniques, such as DFT and MD, have established themselves as accurate and rigorous, but they
-often scale poorly with system size or configurational complexity.
+This section introduces the core approaches historically used to model interfaces at the atomic and mesoscale level,
+focusing primarily on first-principles methods and classical simulation techniques.
 
-This limitation becomes particularly acute in the modelling of interfaces, where subtle geometric, chemical, and
-electronic variations can dramatically affect material behaviour.
-
-ML offers a complementary paradigm, enabling the construction of surrogate models trained on high-fidelity data, which
-can interpolate or even extrapolate to predict key material properties across vast configuration spaces.
+Although each of these methods offers powerful insights, their accuracy, computational cost, and suitability for
+interface modelling vary substantially.
 
 % ---------- %
 
-This section introduces the growing role of ML in materials prediction, highlighting its application in interface
-modelling and the broader landscape of data-driven approaches.
+A primary tool in this field is \textit{Density Functional Theory} (DFT), a quantum-mechanical framework capable of
+describing electronic structure with high precision.
 
-Subsequent subsections will examine the types of models in use, including classical regressors and deep neural
-architectures, alongside the nature of training data, typical input descriptors, and validation strategies.
+DFT is well-suited to calculating key interfacial properties such as formation energy, charge redistribution, and band
+alignment, making it an essential component of most modern interface studies\cite{Butler2019-ws}.
 
-Special attention will be given to machine-learned interatomic potentials (MLPs), particularly those with demonstrated
-success in interfacial contexts such as MACE and ChgNet.
-
-Finally, we reflect on the benefits and ongoing limitations of ML methods in materials science, including issues of
-transferability, uncertainty quantification, and integration into automated modelling pipelines.
+Within this domain, software packages such as \textsc{VASP} have become widely adopted for their efficient
+implementations of the Kohn-Sham formalism\cite{Chagarov2015-ol, Leung2020-tv}.
 
 % ---------- %
 
-\subsection{How has machine learning been introduced into materials prediction?}
+However, DFT has limits. Computationally, DFT's cubic scaling with system size makes it computationally prohibitive for
+large or disordered interface models\cite{Gerber2023-yd}.
+
+As a result, researchers also turn to \textit{classical methods}, such as \textit{Molecular Dynamics} (MD)\cite{Hepplestone2010-vw, Khot2025-hh}.
+
+MD enables the simulation of dynamic processes and thermal fluctuations over nanosecond timescales.
+
+It is also adept at capturing thermal effects and atomic rearrangements\cite{Khot2025-hh, Schutt2018-xc}.
 
 % ---------- %
 
-Machine learning (ML) has been introduced into materials prediction as a complementary tool to traditional
-first-principles methods, offering improved scalability, predictive flexibility, and the potential for workflow
-automation.
+These conventional approaches provide the groundwork for predicting critical interfacial properties, including adhesion
+energy, charge transfer behaviour, and electron or phonon transport.
 
-Its adoption has been driven by limitations in conventional approaches such as Density Functional Theory (DFT),
-particularly in capturing the structural and chemical complexity of real-world systems such as interfaces.
+They remain indispensable despite their limitations, particularly when used in tandem.
 
-% ---------- %
-
-ML enables efficient exploration of vast configurational landscapes, where brute-force DFT sampling would be infeasible.
-
-This is particularly important in interface modelling, where multiple stacking orders, terminations, and slip
-configurations can exist.
-
-ML-driven screening allows researchers to rapidly identify promising candidates for further evaluation.
+This section surveys these methods in turn, addressing their theoretical underpinnings, practical implementations, and
+their relative advantages and constraints in the context of interface science.
 
 % ---------- %
 
-Early ML applications focused on surrogate models trained to replicate DFT-derived energies, forces, or properties.
+A foundational step in many interface modelling workflows is lattice matching between two crystalline materials\cite{Gerber2023-yd, Di_Liberto2022-gz}.
 
-Descriptor-based regression models, using quantities such as coordination numbers, Bader charges, or bond lengths, were
-employed to predict interfacial stability or band alignments.
+This involves aligning compatible Miller planes to minimise strain and identify viable supercell geometries.
 
-These approaches have evolved toward end-to-end learning frameworks using physically-informed descriptors or graph-based
-representations.
+The method introduced by Zur et al.~(1984) laid the groundwork for many subsequent algorithms used in tools such as
+\textsc{METADISE} and \textsc{ARTEMIS}, which systematically enumerate low-strain combinations, slips, terminations, and
+atomic registries\cite{}.
 
-% ---------- %
+These approaches assume idealised surfaces and often neglect more complex processes such as surface reconstructions,
+chemical interdiffusion, or local disorder.
 
-ML is now embedded into iterative prediction--generation--evaluation cycles.
-
-For example, predicted interface favourability informs structure generation (e.g. stacking vectors or surface
-terminations), which are then evaluated by DFT or ML surrogates.
-
-The results feed back into model training, supporting a self-refining loop.
-
-Tools such as ARTEMIS benefit from such integration.
+% todo: Describe it (lattice matching / geometry-driven interface generation)
+% don't just reference.
 
 % ---------- %
 
-More recent work employs graph neural networks (GNNs), such as MACE or NequIP, which are equivariant to Euclidean
-transformations and thus well-suited for atomistic systems.
+DFT remains the most accurate and widely used quantum mechanical method for predicting interfacial properties.
 
-These models learn directly from atomic positions and species, avoiding the need for handcrafted features while
-preserving symmetry constraints essential for interface modelling.
-
-% ---------- %
-
-Ultimately, ML enables a shift from static modelling pipelines to more autonomous workflows.
-
-When coupled with structure-generation protocols and physical constraints.
+It solves the Kohn--Sham equations to determine the electronic ground state, providing access to total energies, charge
+densities, and band edge positions\cite{}.
 
 % ---------- %
 
-\subsection{What types of models and data are being used?}
+MD simulates the atomic trajectories under classical Newtonian mechanics, governed by interatomic potentials.
+
+Classical MD is well-suited to studying thermal processes such as diffusion, defect migration, and strain relaxation on
+picosecond to nanosecond timescales\cite{Deng2023-tg}.
 
 % ---------- %
 
-Models can be broadly categorised into classical learning algorithms and deep learning approaches.
-
-Classical methods include random forests, gradient boosting, support vector machines (SVMs), and Gaussian process
-regression (GPR), the latter being particularly valuable for small datasets due to its uncertainty estimation
-capability.
-
-Deep learning architectures include feedforward neural networks and, more notably, graph neural networks (GNNs), which
-are well-suited for materials modelling due to their ability to represent variable-sized atomic graphs with complex
-bonding topologies.
+\subsection{Density Functional Theory (DFT)}
 
 % ---------- %
 
-The input to these models typically consists of numerical representations of atomic configurations known as descriptors.
+Density Functional Theory (DFT) is a first-principles quantum mechanical method used extensively to model the electronic
+structure of condensed matter systems, including molecules, solids, and, critically, material interfaces\cite{Arantes2007-ea, Leung2020-tv, Di_Liberto2022-gz}.
 
-Geometric descriptors include bond lengths, coordination numbers, angular distributions, $n$-body distribution
-functions, and radial symmetry functions; many of which feature prominently in Behler-Parrinello-type neural networks.
+It provides a variational framework in which the ground-state properties of a many-electron system can be obtained from
+a functional of the electron density $\rho(\mathbf{r})$, rather than from the many-body wavefunction
+$\Psi(\mathbf{r}_1, \dots, \mathbf{r}_N)$.
 
-Chemical descriptors such as electronegativity differences and Bader charges capture bonding character and charge
-transfer.
-
-Electronic descriptors like partial density of states (PDOS) and local work functions are relevant for predicting band
-alignment and interfacial transport properties.
-
-Interface-specific features, such as interfacial roughness or vacuum level offsets, are particularly crucial in 2D|3D
-and mixed-dimensional heterostructures.
+This simplification, formalised through the Hohenberg-Kohn theorems, underpins the modern implementation of DFT via the
+Kohn-Sham approach, where the interacting system is replaced by an auxiliary system of non-interacting electrons subject
+to an effective potential that captures Coulomb, exchange, and correlation interactions\cite{Leung2020-tv}.
 
 % ---------- %
 
-To support learning across such heterogeneous and high-dimensional features, symmetry-invariant and scale-independent
-representations have become increasingly important.
+The total Kohn-Sham energy is given by:
 
-These ensure that models generalise across materials with different atom counts or lattice sizes.
-
-Dimensionality reduction methods and learned embeddings (e.g. via autoencoders or message passing) are frequently used
-to compress structural information into a lower-dimensional latent space optimised for prediction.
-
-% todo: handle note "word soup"...
+\begin{equation} E_{\mathrm{KS}}[\rho] = T_s[\rho] + \int V_{\mathrm{ext}}(\mathbf{r}) \rho(\mathbf{r}) \, \mathrm{d}\mathbf{r} + \frac{1}{2} \int \int \frac{\rho(\mathbf{r}) \rho(\mathbf{r'})}{|\mathbf{r} - \mathbf{r'}|} \, \mathrm{d}\mathbf{r} \, \mathrm{d}\mathbf{r'} + E_{\mathrm{xc}}[\rho], \end{equation} where $T_s[\rho]$ is the kinetic energy of the non-interacting electrons, $V_{\mathrm{ext}}$ is the external (ionic) potential, and $E_{\mathrm{xc}}[\rho]$ is the exchange-correlation functional, the exact form of which remains unknown.
 
 % ---------- %
 
-The datasets used to train such models vary in size and fidelity.
+Common approximations include the Local Density Approximation (LDA), Generalised Gradient Approximation (GGA), and
+hybrid functionals\cite{Arantes2007-ea}.
 
-They often derive from high-throughput DFT calculations available in public repositories such as the Materials Project
-or AFLOW.
+While LDA assumes a locally uniform electron gas and often leads to overbinding, GGA incorporates density gradients and
+improves accuracy for molecular and inhomogeneous systems\cite{Rosen2022-pw}.
 
-% ---------- %
-
-\subsection{What are the strengths and limitations of ML in this field?}
-
-% ---------- %
-
-Machine learning (ML) has emerged as a promising strategy for accelerating materials modelling, particularly in the
-context of complex interfacial systems.
-
-Its strengths lie chiefly in efficiency, scalability, and adaptability.
-
-ML models, once trained, can rapidly approximate formation energies, surface reactivities, and stability metrics for
-thousands of configurations, many of which would be prohibitively expensive to assess using first-principles methods
-alone.
-
-This computational efficiency enables exploration of broader configurational and chemical spaces, including systems with
-disorder, stacking faults, or metastable structures that pose challenges for traditional simulations.
+Hybrid functionals, such as HSE06, incorporate a portion of exact exchange and offer improved bandgap and localisation
+predictions at significantly greater computational cost\cite{Rosen2022-pw}.
 
 % ---------- %
 
-Another key advantage is the capacity of ML to capture subtle, non-linear correlations in high-dimensional datasets.
+DFT has become foundational in materials modelling due to its ability to predict not only total energies and optimised
+geometries, but also derived properties including electronic band structures, charge densities, dielectric responses,
+phonon spectra, and interfacial energetics.
 
-When used in conjunction with tools such as ARTEMIS or RAFFLE, ML can assist not only in predicting energetics, but also
-in prioritising candidate geometries during structure generation.
-
-% ---------- %
-
-However, ML approaches also exhibit critical limitations.
-
-A foremost concern is their dependence on the training dataset: models typically interpolate well within the domain of
-known examples but generalise poorly to unseen chemistries or extreme geometries.
-
-This limits their reliability when extrapolating to novel material classes or interface types, unless training sets are
-curated with care to ensure coverage of relevant chemical and structural motifs.
+Its applications to interface modelling, however, are computationally constrained\cite{Gerber2023-yd, Leung2020-tv}.
 
 % ---------- %
 
-Another limitation is interpretability.
+All DFT simulations in this project are conducted using the Vienna Ab initio Simulation Package (VASP), a widely used
+plane-wave-based implementation of Kohn-Sham DFT.
 
-While classical models (e.g. those based on density functional theory) yield physically grounded outputs, such as charge
-densities or band structures, many ML models operate as statistical black boxes.
+VASP employs the projector-augmented wave (PAW) method to model core-valence interactions, and supports a variety of
+exchange-correlation functionals including GGA-PBE and hybrid HSE06\cite{Leung2020-tv}.
 
-Though efforts are underway to integrate physically meaningful descriptors (e.g. n-body distribution functions, local
-work function, or Bader charges), ensuring transparency and robustness remains a work in progress.
-
-% ---------- %
-
-Finally, ML alone cannot fully replace physics-based methods.
-
-For systems exhibiting emergent interfacial phases, or electronic reconstructions, high-fidelity methods like DFT or
-many-body perturbation theory remain necessary for validation and refinement.
-
-As such, a hybrid strategy is often advocated; using ML to pre-screen candidate structures and flag configurations for
-further high-accuracy assessment.
+Structural relaxations are typically performed with conjugate gradient algorithms until residual forces fall below a
+chosen threshold (e.g. 0.01 eV/\AA)\cite{}.
 
 % ---------- %
 
-ML constitutes a valuable addition to the materials modelling toolkit, particularly for screening
-and guiding interface prediction.
-
-Yet its performance remains contingent on data quality and physical context, and it is best deployed in tandem with more
-rigorous electronic structure methods.
+Periodic boundary conditions are employed in all three spatial directions, necessitating the introduction of vacuum
+regions for slab models and sufficient supercell dimensions to minimise image-image interactions in interface
+simulations\cite{}.
 
 % ---------- %
 
-\subsection{Machine-Learned Interatomic Potentials (MLPs)}
+The simulation input is controlled via the INCAR, POSCAR, KPOINTS, and POTCAR files, with convergence typically assessed
+by k-point density and energy cutoff tests. Pulay and Broyden mixing schemes are used for charge density convergence,
+and dipole corrections may be employed for asymmetric slab geometries.
+
+% todo: add details on how to set up VASP for interface modelling, e.g. INCAR, POSCAR, KPOINTS, POTCAR files.
+% todo: add details on KPOINTS and how to choose them for interface modelling.
+% ---------- %
+
+While VASP provides accurate and robust results for interfacial modelling, it remains computationally intensive\cite{Butler2019-ws, Leung2020-tv}.
+
+For extended or complex interfacial systems, this motivates the introduction of machine-learned potentials (MLPs), which
+aim to reproduce DFT accuracy\cite{Batzner2022-fd, Owen2024-wp}.
 
 % ---------- %
 
-\subsubsection{MACE}
+\subsection{Other Modelling Methods}
 
 % ---------- %
 
-The MACE (Many-body Attention and Correlation Equivariant) model represents a recent advancement in equivariant message
-passing neural networks (MPNNs), tailored for high-accuracy and scalable force field construction.
-
-Unlike earlier MPNNs which rely primarily on two-body invariant messages, MACE employs many-body interactions and
-equivariant tensor contractions to capture angular and chemical complexity with improved expressivity and data
-efficiency.
+In addition to DFT, other classes of atomistic modelling, such as MD, has proven valuable for exploring material
+interfaces, particularly when temporal evolution or thermal effects are of interest\cite{Khot2025-hh}.
 
 % ---------- %
 
-One notable strength of MACE is its capacity to reach state-of-the-art accuracy on diverse benchmarks, including rMD17,
-3BPA, and AcAc, while requiring only two message passing iterations, due to its use of high-body-order messages.
+Molecular Dynamics is a time-resolved simulation method in which the trajectories of atoms are computed by numerically
+integrating Newton's equations of motion\cite{Batzner2022-fd, Khot2025-hh}.
 
-For instance, in extrapolation tasks involving out-of-distribution molecular geometries or high-temperature
-trajectories, MACE (particularly with $L=2$) has demonstrated superior performance and robustness relative to competing
-models such as NequIP and BOTNet.
+Forces on each atom are derived either from empirical interatomic potentials (classical MD) or quantum-mechanical
+calculations (ab initio MD, e.g. Car-Parrinello or Born-Oppenheimer approaches)\cite{Batzner2022-fd}.
 
-% ---------- %
-
-\subsubsection{ChgNet}
+In interface science, MD is used to study thermal stability, strain relaxation, diffusion, and defect evolution at
+finite temperatures\cite{Khot2025-hh}.
 
 % ---------- %
 
-ChgNet is a neural network potential that incorporates both atomic positions and charge distributions into its
-prediction framework, thereby explicitly learning charge transfer phenomena.
+One advantage of MD is its capacity to resolve dynamic processes at the atomic level, such as dislocation glide, grain
+boundary motion, or interfacial melting\cite{Chagarov2015-ol}.
 
-This is particularly relevant for interfaces where electrostatics, dipole formation, and local charge accumulation
-significantly affect electronic properties such as band alignment.
+However, timescales are severely limited: typical simulations span nanoseconds, far shorter than the seconds to minutes
+often relevant in experiments.
 
-
-% ---------- %
-
-\subsubsection{Use in Interface Modelling}
+Classical MD can scale to millions of atoms but sacrifices accuracy; ab initio MD is more accurate but typically limited
+to fewer than 1,000 atoms and short timescales due to computational cost\cite{Khot2025-hh}.
 
 % ---------- %
 
-In the context of this project, MLPs like MACE and ChgNet offer distinct but synergistic advantages.
+For interface modelling, MD is particularly useful when studying thermally activated restructuring, interdiffusion, and
+local vibrational behaviour, especially under conditions such as annealing or irradiation.
 
-MACE, with its speed, high accuracy, and symmetry-respecting architecture, is well-suited for structure relaxation and
-force prediction across multi-material junctions.
-
-ChgNet, on the other hand, may provide more faithful predictions of electronic interface effects arising from local
-charge redistribution.
+It also serves as a preliminary stage in workflows involving machine-learned potentials, providing dynamical data for
+training\cite{Khot2025-hh}.
 
 % ---------- %
 
-Therefore, hybrid workflows that use MLPs for broad structural exploration, followed by targeted DFT recalculations for
-ambiguous configurations, are increasingly being adopted.
+MD complements DFT in the modelling of interfaces.
+
+While DFT offers high-fidelity energetics and electronic structure, MD enables atomistic dynamics over nanoseconds\cite{Khot2025-hh, Leung2020-tv, Arantes2007-ea}.
+
+As such, hybrid approaches are increasingly common, with DFT used to parameterise MD models, or machine learning
+techniques introduced to accelerate sampling across scales\cite{Schutt2018-xc, Butler2019-ws, Khot2025-hh}.
 
 % ---------- %
 
-The eventual goal is to integrate MLPs into an active learning pipeline alongside tools like RAFFLE or ARTEMIS,
-facilitating the generation, screening, and optimisation of candidate interface structures at scale.
-
-% todo: address note "should be in intro"
+\subsection{What are the advantages and limitations of DFT and MD?}
 
 % ---------- %
 
-% ---- where did this come from? ---- %
-% todo find if i want to keep this!
-Physics-based methods, most notably Density Functional Theory (DFT), provide high accuracy for local bonding
-environments and band structure prediction.
+Each computational method traditionally employed in the modelling of interfaces, DFT and MD, offers a distinct balance
+between accuracy, computational efficiency, and physical scale.
 
-However, the computational scaling of standard Kohn-Sham DFT---typically $\mathcal{O}(N^3)$ with respect to system
-size---renders large or disordered interface simulations intractable without approximation.
-
-Even when feasible, DFT struggles to capture extended features such as long-range strain relaxation, misfit
-dislocations, and spatially diffuse defect states that dominate realistic interface behaviour.
+While often applied in isolation, their complementary regimes suggest the need for hybrid or hierarchical approaches in
+the study of real interfaces\cite{Leung2020-tv}.
 
 % ---------- %
 
-Machine learning potentials (MLPs), such as those based on graph neural networks or equivariant message passing
-architectures, have emerged as promising tools to extend predictive power to larger systems at near-DFT accuracy.
+\textbf{Density Functional Theory (DFT)} is the most widely used \textit{ab initio} method for predicting atomic-scale
+properties at interfaces\cite{Cervantes2025-ze}.
 
-Nonetheless, they too face structural limitations.
+Crucially, DFT is capable of modelling materials across the periodic table and is the backbone of modern electronic
+structure prediction.
 
-MLPs require extensive, representative training datasets, typically derived from DFT calculations, and their performance
-deteriorates when applied to configurations involving unseen chemistries, surface reconstructions, or high strain
-regimes.
-
-Furthermore, many ML models lack rigorous uncertainty quantification, making it difficult to detect failure modes in
-out-of-distribution predictions.
+Its limitations include conventional exchange-correlation functionals (e.g. GGA) systematically underestimate band gaps
+and cannot capture excited-state dynamics without costly extensions such as GW or time-dependent DFT\cite{Butler2019-ws, Khot2025-hh}.
 
 % ---------- %
 
-Both DFT and ML approaches also fall short in capturing emergent interfacial phenomena such as charge transfer,
-interface-induced dipoles, or the formation of new interfacial phases.
+\textbf{Molecular Dynamics (MD)} offers time-resolved access to thermally activated processes and interfacial dynamics.
 
-These effects are often strongly dependent on the local atomic registry and chemical heterogeneity, and cannot be
-inferred from the properties of the isolated constituents alone.
+Classical MD, using empirical or machine-learned interatomic potentials, enables simulation of thousands to millions of
+atoms over nanosecond to microsecond timescales\cite{Khot2025-hh, Batzner2022-fd, Schutt2018-xc}.
 
-Notably, simple models like Anderson's rule have been shown to systematically fail in 2D and 2D|3D heterostructures,
-necessitating corrections such as $\Delta E_\Gamma$ and $\Delta E_\mathrm{IF}$ that explicitly depend on the atomic-scale interface
-structure and electrostatics.
+However, MD inherits limitations from its force field or potential model: empirical potentials may not transfer well
+across bonding environments, while high-fidelity machine-learned potentials require extensive and chemically diverse
+training data.
+
+Furthermore, standard MD remains constrained to accessible timescales, making it ill-suited for capturing rare events
+such as defect migration, reconstruction, or long-term phase evolution\cite{Khot2025-hh}.
 
 % ---------- %
 
-While ML and physics-based models have complementary strengths, neither is sufficient in isolation for the reliable
-prediction of interfacial behaviour.
+\subsection{How are properties like adhesion energy or electron transport predicted?}
 
-Their limitations motivate the development of hybrid workflows, such as embedding physical constraints into ML
-architectures, or coupling MLP-based screening with selective DFT refinement.
+% ---------- %
 
-These approaches aim to achieve a balance between scalability, accuracy, and generalisability---a balance that remains at
-the forefront of interface modelling challenges .
+\textbf{Adhesion energy} is a thermodynamic quantity describing the work required to separate two materials at their
+interface\cite{}.
 
-% ---^ where did this come from? ^--- %
+It is commonly computed from the total energies of the isolated constituents and the relaxed interface configuration.
+
+Within DFT, the adhesion energy $E_\mathrm{adh}$ is given by:
+
+\[ E_\mathrm{adh} = \frac{1}{A} \left( E_\mathrm{slab1} + E_\mathrm{slab2} - E_\mathrm{interface} \right), \]
+
+where $A$ is the interface area, and the energies refer to fully relaxed geometries of the individual slabs and the
+interface supercell\cite{}.
+
+% ---------- %
+
+% todo: add interface energy
+% todo: add surface energy
+% todo: add strain energy
+% todo: add strain: tension, compression, shear
+% todo: add formation energy
+
+% ---------- %
+
+\textbf{Electron transport} across interfaces is more nuanced and often requires evaluation of both band alignment and
+carrier mobility.
+
+Band alignment can be predicted via several approaches.
+
+The simplest, Anderson's rule aligns vacuum levels to estimate offsets from electron affinities or ionisation
+potentials.
+
+However, this often fails to capture interface-specific effects such as charge transfer, built-in fields, or
+hybridisation.
+
+More accurate predictions therefore rely on self-consistent DFT calculations that extract the local electrostatic
+potential across the heterostructure to determine band offsets directly.
+
+% ---------- %
+
+For example, the offset between conduction or valence band edges across an interface can be obtained by aligning the
+macroscopic average electrostatic potentials of the constituent slabs with that of the full interface.
+
+This method accounts for relaxation, dipole formation, and interfacial reconstruction.
+
+In cases where electronic coupling is strong, or the valence states are spatially delocalised across layers (as in
+type-II or type-III band alignment), transport characteristics such as charge separation, carrier confinement, or
+tunnelling probability can change significantly.
+
+% ---------- %
+
+Charge transport properties such as electrical conductivity, Seebeck coefficient, or mobility may be
+approximated from the band dispersion near the Fermi level using Boltzmann transport theory, or more rigorously via
+non-equilibrium Green's function (NEGF) methods, especially for low-dimensional or nanoscale interfaces.
+
+% ^^^ note: Intro
