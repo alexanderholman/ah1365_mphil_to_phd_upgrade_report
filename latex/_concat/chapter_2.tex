@@ -847,6 +847,10 @@ present\nocite{}.
 
 % ---------- %
 
+\subsubsection{Strain Energy}
+
+% ---------- %
+
 Within DFT, the strain energy $E_\mathrm{strain}$ is given by:
 
 % ---------- %
@@ -933,6 +937,10 @@ the elastic energy and the atomic relaxation pathways\nocite{}.
 
 % ---------- %
 
+\subsubsection{Surface Energy}
+
+% ---------- %
+
 \textbf{Surface energy} quantifies the energetic penalty associated with terminating a bulk crystal to expose a surface\nocite{}.
 
 This cost arises from the breaking of atomic bonds and the disruption of periodic bonding environments, and is a key
@@ -987,6 +995,10 @@ In relaxed slab models, surface reconstruction may occur, further modifying the 
 ideal cleavage limit\nocite{}.
 
 The choice of surface termination, atomic registry, and slab thickness all influence the final value.
+
+% ---------- %
+
+\subsubsection{Interface Energy}
 
 % ---------- %
 
@@ -1058,6 +1070,10 @@ interface formation and adhesion\nocite{}.
 
 % ---------- %
 
+\subsubsection{Formation Energy}
+
+% ---------- %
+
 \textbf{Formation energy} quantifies the thermodynamic stability of a structure relative to the sum of its isolated,
 elemental reference phases\nocite{}.
 
@@ -1122,6 +1138,10 @@ handled carefully to ensure consistent interpretation\nocite{}.
 
 % ---------- %
 
+\subsubsection{Adhesion Energy}
+
+% ---------- %
+
 \textbf{Adhesion energy} is a thermodynamic quantity describing the work required to separate two materials at their
 interface\nocite{}.
 
@@ -1133,6 +1153,10 @@ Within DFT, the adhesion energy $E_\mathrm{adh}$ is given by\nocite{}:
 
 where $A$ is the interface area, and the energies refer to fully relaxed geometries of the individual slabs and the
 interface supercell\nocite{}.
+
+% ---------- %
+
+\subsubsection{Electron transport}
 
 % ---------- %
 
@@ -1441,11 +1465,11 @@ Both DFT and ML approaches also fall short in capturing emergent interfacial phe
 interface-induced dipoles, or the formation of new interfacial phases.
 
 These effects are often strongly dependent on the local atomic registry and chemical heterogeneity, and cannot be
-inferred from the properties of the isolated constituents alone.
+inferred from the properties of the isolated constituents alone\cite{Butler2019-ws, Owen2024-wp}.
 
 Notably, simple models like Anderson's rule have been shown to systematically fail in 2D and 2D|3D heterostructures,
 necessitating corrections such as $\Delta E_\Gamma$ and $\Delta E_\mathrm{IF}$ that explicitly depend on the atomic-scale interface
-structure and electrostatics.
+structure and electrostatics\cite{Taylor2023-wh}.
 
 % ---------- %
 
@@ -1455,7 +1479,7 @@ structure and electrostatics.
 
 Despite notable advances in both physics-based and machine learning (ML) approaches to materials modelling, several
 persistent limitations constrain the predictive fidelity, scalability, and generalisability of current methods,
-particularly when applied to realistic interface systems.
+particularly when applied to realistic interface systems\cite{Schutt2019-sz, Batzner2022-fd, Gerber2023-yd}.
 
 This section outlines three critical domains in which these limitations manifest, motivating the hybrid methodologies
 explored later in this report:
@@ -1468,15 +1492,15 @@ explored later in this report:
   with long-range elastic and electrostatic effects.
 
   First-principles approaches such as density functional theory (DFT) offer high accuracy but scale cubically with
-  system size, making them infeasible for large or disordered systems typical of interfaces.
+  system size, making them infeasible for large or disordered systems typical of interfaces\cite{Butler2019-ws, Leung2020-tv}.
 
   Even with machine-learned interatomic potentials (MLPs), exploring configurational space, e.g. over terminations,
   interlayer slips, and misfit reconstructions, requires extensive sampling and often yields flat energy landscapes with
-  many metastable minima.
+  many metastable minima\cite{Batzner2022-fd, Deng2023-tg, Owen2024-wp}.
 
   \item \textbf{Where do both ML and physics-based methods fall short?} \\
   DFT underestimates band gaps and struggles to capture emergent interfacial phenomena such as dipole formation, phase
-  reconstruction, or charge transfer without recourse to hybrid functionals or many-body perturbation theory.
+  reconstruction, or charge transfer without recourse to hybrid functionals or many-body perturbation theory\cite{Rosen2022-pw}.
 
   Conversely, ML models, especially those trained on bulk or idealised configurations, exhibit limited transferability
   to chemically complex, strained, or disordered interfaces.
