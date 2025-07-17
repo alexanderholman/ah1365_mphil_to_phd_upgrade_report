@@ -1,5 +1,7 @@
 \chapter{Background and Literature Review} \label{chapter:background}
 
+% ---------- %
+
 \section{Material Interfaces} \label{section:material_interfaces}
 
 \label{para:interface_section_intro} % ---------- %
@@ -81,7 +83,6 @@ transport, interfacial states, and mechanical stability\cite{Gerber2023-yd, Leun
 Orientation also affects the formation energy and electronic reconstruction at the interface, which can lead to
 phenomena like interface-induced states or altered band alignments\cite{Alam2020-ci, Chagarov2015-ol, Zhang2016-lt}.
 
-
 % ---------- %
 
 \section{Constructing Interfaces: Lattices, Orientations, and Matching Algorithms}\label{sec:constructing_interfaces}
@@ -116,7 +117,7 @@ Silicon (Si), for instance, crystallizes in a diamond-cubic structure and can be
 \begin{itemize}
     \item A primitive cell containing 2 atoms with non-orthogonal basis vectors, or
     \item A conventional cubic cell containing 8 atoms, exhibiting face-centered cubic symmetry and belonging to space
-    \item group \(Fd\bar{3}m\) (Pearson symbol cF8)\cite{vasp_bulk}.
+    \item Group \(Fd\bar{3}m\) (Pearson symbol cF8)\cite{vasp_bulk}.
 \end{itemize}
 
 % ---------- %
@@ -152,7 +153,7 @@ Significant mismatches can also lead to the formation of misfit defects, such as
 elastically accommodated\cite{artemis_paper}.
 % ---------- %
 
-\subsection{Lattice Mismatch and Supercells}
+\subsection{Lattice Mismatch and Supercells}  \label{sec:lattice_mismatching}
 
 % ---------- %
 
@@ -448,6 +449,8 @@ critically determine macroscopic functionality\cite{Leitherer2023-ew, Di_Liberto
 Their predictive modelling, through DFT, machine learning potentials, or interface-specific structure search tools like
 ARTEMIS, remains a central challenge in modern materials design\cite{}.
 
+% ---------- %
+
 \section{Conventional Prediction Methods} \label{section:conventional_methods}
 
 % ---------- %
@@ -501,19 +504,17 @@ This involves aligning compatible Miller planes to minimise strain and identify 
 
 The method introduced by Zur et al.~(1984) laid the groundwork for many subsequent algorithms used in tools such as
 \textsc{METADISE} and \textsc{ARTEMIS}, which systematically enumerate low-strain combinations, slips, terminations, and
-atomic registries\cite{}.
+atomic registries\cite{artemis_paper} (see \secref{sec:lattice_matching}).
+
 
 These approaches assume idealised surfaces and often neglect more complex processes such as surface reconstructions,
 chemical interdiffusion, or local disorder.
-
-% todo: Describe it (lattice matching / geometry-driven interface generation)
-% don't just reference.
 
 % ---------- %
 
 DFT remains the most accurate and widely used quantum mechanical method for predicting interfacial properties.
 
-It solves the Kohn--Sham equations to determine the electronic ground state, providing access to total energies, charge
+It solves the Kohn-Sham equations to determine the electronic ground state, providing access to total energies, charge
 densities, and band edge positions\cite{}.
 
 % ---------- %
@@ -526,6 +527,14 @@ picosecond to nanosecond timescales\cite{Deng2023-tg}.
 % ---------- %
 
 \subsection{Density Functional Theory (DFT)}
+
+% ---------- %
+
+% todo: add Quantum Waveform equation
+
+% ---------- %
+
+% todo: add HK Theorems
 
 % ---------- %
 
@@ -548,14 +557,36 @@ The total Kohn-Sham energy is given by:
 
 % ---------- %
 
+% todo: add more details on KS equation
+
+% ---------- %
+
 Common approximations include the Local Density Approximation (LDA), Generalised Gradient Approximation (GGA), and
 hybrid functionals\cite{Arantes2007-ea}.
 
 While LDA assumes a locally uniform electron gas and often leads to overbinding, GGA incorporates density gradients and
 improves accuracy for molecular and inhomogeneous systems\cite{Rosen2022-pw}.
 
+% ---------- %
+
+% todo: add more details on LDA
+
+% ---------- %
+
+% todo: add more details on GGA/PBE
+
+% ---------- %
+
 Hybrid functionals, such as HSE06, incorporate a portion of exact exchange and offer improved bandgap and localisation
 predictions at significantly greater computational cost\cite{Rosen2022-pw}.
+
+% ---------- %
+
+% todo: add more details on Hybrids in general
+
+% ---------- %
+
+% todo: add more details on HSE06 specifically
 
 % ---------- %
 
@@ -578,6 +609,10 @@ chosen threshold (e.g. 0.01 eV/\AA)\cite{}.
 
 % ---------- %
 
+% todo: add details on VASP relaxation reference FIRE relaxation in 2.4
+
+% ---------- %
+
 Periodic boundary conditions are employed in all three spatial directions, necessitating the introduction of vacuum
 regions for slab models and sufficient supercell dimensions to minimise image-image interactions in interface
 simulations\cite{}.
@@ -585,11 +620,27 @@ simulations\cite{}.
 % ---------- %
 
 The simulation input is controlled via the INCAR, POSCAR, KPOINTS, and POTCAR files, with convergence typically assessed
-by k-point density and energy cutoff tests. Pulay and Broyden mixing schemes are used for charge density convergence,
-and dipole corrections may be employed for asymmetric slab geometries.
+by k-point density and energy cutoff tests.
 
-% todo: add details on how to set up VASP for interface modelling, e.g. INCAR, POSCAR, KPOINTS, POTCAR files.
-% todo: add details on KPOINTS and how to choose them for interface modelling.
+Pulay and Broyden mixing schemes are used for charge density convergence, and dipole corrections may be employed for
+asymmetric slab geometries.
+
+% ---------- %
+
+% todo: add details on KPOINTS
+
+% ---------- %
+
+% todo: add details on INCAR
+
+% ---------- %
+
+% todo: add details on POSCAR
+
+% ---------- %
+
+% todo: add details on POTCAR
+
 % ---------- %
 
 While VASP provides accurate and robust results for interfacial modelling, it remains computationally intensive\cite{Butler2019-ws, Leung2020-tv}.
@@ -688,24 +739,36 @@ such as defect migration, reconstruction, or long-term phase evolution\cite{Khot
 
 % ---------- %
 
-\textbf{Adhesion energy} is a thermodynamic quantity describing the work required to separate two materials at their
-interface\cite{}.
+% todo: add strain energy
 
-It is commonly computed from the total energies of the isolated constituents and the relaxed interface configuration.
+% ---------- %
 
-Within DFT, the adhesion energy $E_\mathrm{adh}$ is given by:
+% todo: add strain: tension, compression, shear
 
-\[ E_\mathrm{adh} = \frac{1}{A} \left( E_\mathrm{slab1} + E_\mathrm{slab2} - E_\mathrm{interface} \right), \]
+% ---------- %
 
-where $A$ is the interface area, and the energies refer to fully relaxed geometries of the individual slabs and the
-interface supercell\cite{}.
+% todo: add surface energy
 
 % ---------- %
 
 % todo: add interface energy
-% todo: add surface energy
-% todo: add strain energy
-% todo: add strain: tension, compression, shear
+
+% ---------- %
+
+\textbf{Adhesion energy} is a thermodynamic quantity describing the work required to separate two materials at their
+interface\nocite{}.
+
+It is commonly computed from the total energies of the isolated constituents and the relaxed interface configuration\nocite{}.
+
+Within DFT, the adhesion energy $E_\mathrm{adh}$ is given by\nocite{}:
+
+\[ E_\mathrm{adh} = \frac{1}{A} \left( E_\mathrm{slab1} + E_\mathrm{slab2} - E_\mathrm{interface} \right), \]
+
+where $A$ is the interface area, and the energies refer to fully relaxed geometries of the individual slabs and the
+interface supercell\nocite{}.
+
+% ---------- %
+
 % todo: add formation energy
 
 % ---------- %
@@ -741,7 +804,9 @@ Charge transport properties such as electrical conductivity, Seebeck coefficient
 approximated from the band dispersion near the Fermi level using Boltzmann transport theory, or more rigorously via
 non-equilibrium Green's function (NEGF) methods, especially for low-dimensional or nanoscale interfaces.
 
-% ^^^ note: Intro
+% todo: handle note "Intro"
+
+% ---------- %
 
 \section{Emergence of Machine Learning in Materials Science} \label{section:machine_learning}
 
@@ -972,6 +1037,10 @@ models such as NequIP and BOTNet.
 
 % ---------- %
 
+% todo: add details on FIRE relaxation reference VASP relaxation in 2.3
+
+% ---------- %
+
 \subsubsection{ChgNet}
 
 % ---------- %
@@ -1012,7 +1081,7 @@ facilitating the generation, screening, and optimisation of candidate interface 
 % ---------- %
 
 % ---- where did this come from? ---- %
-% todo find if i want to keep this!
+% todo: find if i want to keep this!
 Physics-based methods, most notably Density Functional Theory (DFT), provide high accuracy for local bonding
 environments and band structure prediction.
 
@@ -1057,9 +1126,11 @@ Their limitations motivate the development of hybrid workflows, such as embeddin
 architectures, or coupling MLP-based screening with selective DFT refinement.
 
 These approaches aim to achieve a balance between scalability, accuracy, and generalisability---a balance that remains at
-the forefront of interface modelling challenges .
+the forefront of interface modelling challenges.
 
-% ---^ where did this come from? ^--- %
+% todo: figure out if i want to keep this, remnant of chopping and changing %
+
+% ---------- %
 
 \section{Limitations of Current Approaches}
 
@@ -1250,6 +1321,8 @@ improved descriptors attuned to interfacial physics, and integration of uncertai
 Hybrid schemes, where MLPs perform large-scale screening followed by selective DFT refinement, may offer a viable path
 forward.
 
+% ---------- %
+
 \section{State-of-the-Art in Interface Prediction} \label{section:state_of_the_art}
 
 % ---------- %
@@ -1435,3 +1508,5 @@ interpretable modelling of interfaces.
 
 The combination of machine learning with established electronic structure theory is opening a path toward predictive
 frameworks that are sensitive to real-world synthesis constraints and device contexts.
+
+% ---------- %
