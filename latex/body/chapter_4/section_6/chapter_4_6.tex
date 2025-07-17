@@ -1,8 +1,20 @@
 \section{Machine-Learned Interface (MLI) Predictor}
 
-The ultimate goal of this pipeline is to develop a Machine-Learned Interface (MLI) predictor capable of estimating interface favourability directly from slab pair descriptors, without requiring full relaxation or enumeration of stacking shifts. This model will act as an early-stage filter to prioritise promising candidates for structure generation and DFT refinement.
+% ---------- %
+
+The ultimate goal of this pipeline is to develop a Machine-Learned Interface (MLI) predictor capable of estimating
+interface favourability directly from slab pair descriptors, without requiring full relaxation or enumeration of
+stacking shifts.
+
+This model will act as an early-stage filter to prioritise promising candidates for structure generation and DFT
+refinement.
+
+% ---------- %
 
 Input features will include:
+
+% ---------- %
+
 \begin{itemize}
     \item Surface energies
     \item Crystallographic orientation identifiers (Miller indices)
@@ -11,27 +23,50 @@ Input features will include:
     \item Atomic coordination and stoichiometry at the intended interface plane
 \end{itemize}
 
-Initial labels for training will be derived from \( \Delta E_\mathrm{IF} \) values obtained via DFT or MACE (after benchmarking). Where available, these will be linked to structural features extracted from POSCAR files and relaxation trajectories.
+% ---------- %
+
+Initial labels for training will be derived from \( \Delta E_\mathrm{IF} \) values obtained via DFT or MACE (after
+benchmarking).
+
+Where available, these will be linked to structural features extracted from POSCAR files and relaxation trajectories.
+
+% ---------- %
 
 Prediction targets will include:
+
+% ---------- %
+
 \begin{itemize}
     \item Binary classification: favourable vs. unfavourable
     \item Regression: predicted interface energy \( \Delta E_\mathrm{IF} \)
     \item Rank scoring: predicted rank percentile within a batch
 \end{itemize}
 
-Simple models (e.g. decision trees, SVMs) will be used as baselines. If effective, graph-based architectures or equivariant neural networks may be explored to capture spatial features across slab boundaries.
+% ---------- %
+
+Simple models (e.g. decision trees, SVMs) will be used as baselines.
+
+If effective, graph-based architectures or equivariant neural networks may be explored to capture spatial features
+across slab boundaries.
+
+% ---------- %
 
 The MLI predictor will integrate upstream with ARTEMIS and RAFFLE:
 \begin{enumerate}
     \item Given a pair of slabs, the MLI will score interface likelihoods before full stack generation.
-    \item High-scoring pairs will be passed to ARTEMIS for registry-matched stacking and to RAFFLE for disordered sampling.
+    \item High-scoring pairs will be passed to ARTEMIS for registry-matched stacking and to RAFFLE for disordered
+    sampling.
     \item Final relaxed energies will serve to update or retrain the MLI in an active-learning loop.
 \end{enumerate}
 
-This workflow could enable a fully ML-driven interface discovery pipeline; one that uses minimal DFT data to bootstrap structure generation, ranking, and model refinement.
+% ---------- %
 
-% TODO: Add schematic of MLI + ARTEMIS + RAFFLE integration pipeline
+This workflow could enable a fully ML-driven interface discovery pipeline; one that uses minimal DFT data to bootstrap
+structure generation, ranking, and model refinement.
+
+% ---------- %
+
+% todo: add schematic of MLI + ARTEMIS + RAFFLE integration pipeline
 
 % ---------- %
 
@@ -85,3 +120,5 @@ Crucially, the MLI is not meant to replace DFT or full relaxation pipelines, but
 screen candidate structures for further evaluation.
 
 If successful, it will form the decision engine in a closed-loop ML-driven workflow for interfacial discovery.
+
+% ---------- %

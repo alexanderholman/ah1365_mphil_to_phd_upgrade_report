@@ -1,17 +1,39 @@
-\section{Surface Effects on Interface Favourability}
-\label{section:surface_effects}
+\section{Surface Effects on Interface Favourability}\label{section:surface_effects}
 
-A key open question is whether the surface energetics of individual slabs can serve as predictors for the favourability of the resulting heterostructure. If a reliable correlation exists between surface energy and interface formation energy \( \Delta E_\mathrm{IF} \), it could significantly reduce the need for exhaustive interface enumeration.
+% ---------- %
+
+A key open question is whether the surface energetics of individual slabs can serve as predictors for the favourability
+of the resulting heterostructure.
+
+If a reliable correlation exists between surface energy and interface formation energy \( \Delta E_\mathrm{IF} \), it
+could significantly reduce the need for exhaustive interface enumeration.
+
+% ---------- %
 
 Future work will analyse the data in \texttt{surface\_energy\_matrix.csv} to quantify correlations between:
+
+% ---------- %
+
 \begin{itemize}
     \item The average surface energy of the two slabs
     \item The minimum/maximum surface energy of the slab pair
     \item The resulting interface energy \( \Delta E_\mathrm{IF} \) from DFT and MLP evaluations
 \end{itemize}
 
-This analysis will help determine whether high-energy surfaces are more reactive—and therefore more likely to form low-energy interfaces—or whether other factors such as registry and orientation dominate.
+% ---------- %
 
-A figure plotting surface energy combinations against interface energies is planned to visualise this correlation. If strong trends are identified, slab energetics could be used as a lightweight proxy feature in the early stages of MLI pipeline screening.
+This analysis will help determine whether high-energy surfaces are more reactive, and therefore more likely to form
+low-energy interfaces, or whether other factors such as registry and orientation dominate.
 
-% TODO: Add figure showing surface energy (x-axis) vs. ΔE_IF (y-axis)
+% ---------- %
+
+A figure plotting surface energy combinations against interface energies is planned to visualise this correlation.
+
+If strong trends are identified, slab energetics could be used as a lightweight proxy feature in the early stages of MLI
+pipeline screening.
+
+% ---------- %
+
+% todo: add figure showing surface energy (x-axis) vs. ΔE_IF (y-axis)
+
+% ---------- %

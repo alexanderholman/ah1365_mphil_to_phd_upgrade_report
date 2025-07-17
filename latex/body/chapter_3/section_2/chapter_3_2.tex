@@ -1,69 +1,203 @@
 \section{Results and Analysis} \label{section:results_and_analysis}
 
-This section presents the results of comparing unrelaxed DFT and MLP (MACE) energy rankings across 680 valid heterostructures, grain boundaries, and alloyed systems involving the group 14 elements (C, Si, Ge, Sn). The goal is to determine whether MACE, a machine-learned interatomic potential, can replicate DFT-derived rankings on unrelaxed geometries closely enough to serve as a pre-screening tool in the MLI data pipeline.
+% ---------- %
 
-Across all evaluated systems, Spearman’s rank correlation coefficient was extremely high:
+This section presents the results of comparing unrelaxed DFT and MLP (MACE) energy rankings across 680 valid
+heterostructures, grain boundaries, and alloyed systems involving the group 14 elements (C, Si, Ge, Sn).
+
+The goal is to determine whether MACE, a machine-learned interatomic potential, can replicate DFT-derived rankings on
+unrelaxed geometries closely enough to serve as a pre-screening tool in the MLI data pipeline.
+
+% ---------- %
+
+Across all evaluated systems, Spearman's rank correlation coefficient was extremely high:
+
+% ---------- %
+
 \[
 \rho = 0.9954, \qquad \tau = 0.9568
 \]
-This near-perfect alignment demonstrates that MACE preserves the order of interface favourability remarkably well, even without relaxation, suggesting strong potential as a filtering method for DFT candidate selection.
+
+% ---------- %
+
+This near-perfect alignment demonstrates that MACE preserves the order of interface favourability remarkably well, even
+without relaxation, suggesting strong potential as a filtering method for DFT candidate selection.
+
+% ---------- %
 
 However, absolute energy agreement was poor:
+
+% ---------- %
+
 \[
 \text{RMSE} = 188.89~\text{eV}, \qquad \text{MAE} = 30.87~\text{eV}
 \]
-These large discrepancies reflect the fact that while MACE captures relative stability, its raw energy outputs are not quantitatively reliable without further training. Despite this, the Top-10 overlap between DFT and MLP was 8/10, indicating strong alignment in identifying favourable structures.
 
-To understand how interface geometry impacts ranking fidelity, we grouped results into three categories: upper-slab heterostructures, lower-slab heterostructures, and homostructures (grain boundaries). Average metrics across these categories are summarised in Table~\ref{tab:interface-type-stats}.
+% ---------- %
+
+These large discrepancies reflect the fact that while MACE captures relative stability, its raw energy outputs are not
+quantitatively reliable without further training.
+
+Despite this, the Top-10 overlap between DFT and MLP was 8/10, indicating strong alignment in identifying favourable
+structures.
+
+% ---------- %
+
+To understand how interface geometry impacts ranking fidelity, we grouped results into three categories: upper-slab
+heterostructures, lower-slab heterostructures, and homostructures (grain boundaries).
+
+Average metrics across these categories are summarised in Table~\ref{tab:interface-type-stats}.
+
+% ---------- %
 
 \begin{itemize}
-  \item \textbf{Upper interfaces}: MACE achieved the best performance here with $\rho \approx 0.98$ and Top-10 overlap of 8.5/10. Although RMSE remained high (≈120 eV), the rankings were highly reliable.
-  \item \textbf{Lower interfaces}: Rank correlation dropped to $\rho \approx 0.62$, suggesting geometry-related artefacts when certain species (e.g., carbon) appeared in the lower layer.
-  \item \textbf{Grain boundaries}: Strong correlation was retained ($\rho \approx 0.94$, $\tau \approx 0.83$), and energy error was much lower (RMSE ≈ 7.69 eV), making this group especially reliable.
+  \item \textbf{Upper interfaces}: MACE achieved the best performance here with $\rho \approx 0.98$ and Top-10 overlap
+  of 8.5/10.
+
+  Although RMSE remained high (\approx120 eV), the rankings were highly reliable.
+  \item \textbf{Lower interfaces}: Rank correlation dropped to $\rho \approx 0.62$, suggesting geometry-related
+  artefacts when certain species (e.g. carbon) appeared in the lower layer.
+  \item \textbf{Grain boundaries}: Strong correlation was retained ($\rho \approx 0.94$, $\tau \approx 0.83$), and
+  energy error was much lower (RMSE \approx7.69 eV), making this group especially reliable.
 \end{itemize}
 
+% ---------- %
+
 \paragraph{Carbon Systems (C|X)}
-Only three C|Si interfaces were successfully processed with carbon in the lower layer. These results were unreliable, with negative rank correlation ($\rho = -0.5$), and are omitted from conclusions. In contrast, C in the upper slab yielded 79 usable structures with excellent results:
+
+% ---------- %
+
+Only three C|Si interfaces were successfully processed with carbon in the lower layer.
+
+These results were unreliable, with negative rank correlation ($\rho = -0.5$), and are omitted from conclusions.
+
+In contrast, C in the upper slab yielded 79 usable structures with excellent results:
+
+% ---------- %
+
 \[
 \rho = 0.9491, \qquad \tau = 0.8182, \qquad \text{MAE} \approx 0.58~\text{eV}, \qquad \text{Top-10 overlap} = 8
 \]
+
+% ---------- %
+
 This demonstrates that MACE performs well on carbon-containing systems, provided the geometry is physically reasonable.
 
+% ---------- %
+
 \paragraph{Silicon Systems (Si|X)}
-Silicon-rich systems showed consistently weaker performance, especially when Si was in the lower slab. For example, Si|Ge interfaces produced:
+
+% ---------- %
+
+Silicon-rich systems showed consistently weaker performance, especially when Si was in the lower slab.
+
+For example, Si|Ge interfaces produced:
+
+% ---------- %
+
 \[
 \rho = 0.9082, \qquad \tau = 0.8360, \qquad \text{MAE} = 104.74~\text{eV}
 \]
-This indicates good rank alignment but extremely poor energy agreement. In contrast, the reversed Ge|Si systems showed better correlation and lower error:
+
+% ---------- %
+
+This indicates good rank alignment but extremely poor energy agreement.
+
+In contrast, the reversed Ge|Si systems showed better correlation and lower error:
+
+% ---------- %
+
 \[
 \rho = 0.9664, \qquad \tau = 0.8996, \qquad \text{MAE} = 40.37~\text{eV}
 \]
-The asymmetry suggests that silicon's role in defining interfacial bonding may contribute to poor generalisation by MACE, particularly under strain or poor coordination.
+
+% ---------- %
+
+The asymmetry suggests that silicon's role in defining interfacial bonding may contribute to poor generalisation by
+MACE, particularly under strain or poor coordination.
+
+% ---------- %
 
 \paragraph{Germanium and Tin Systems}
+
+% ---------- %
+
 Both Ge and Sn systems showed strong agreement across metrics:
+
+% ---------- %
+
 \[
 \text{Ge: } \rho = 0.9739, \quad \text{Sn: } \rho = 0.9744, \quad \text{Top-10 overlap} \approx 8
 \]
-Sn exhibited slightly higher variability in absolute energy values but did not suffer catastrophic rank inversions. These systems appear well-represented in the MACE training distribution.
+
+% ---------- %
+
+Sn exhibited slightly higher variability in absolute energy values but did not suffer catastrophic rank inversions.
+
+These systems appear well-represented in the MACE training distribution.
+
+% ---------- %
 
 \paragraph{Grain Boundaries (Homostructures)}
+
+% ---------- %
+
 Grain boundary results were strong overall but showed species-specific variation:
+
+% ---------- %
+
 \begin{itemize}
-  \item Ge|Ge: $\rho = 0.9818$, but with higher error (MAE ≈ 3.36 eV)
+  \item Ge|Ge: $\rho = 0.9818$, but with higher error (MAE \approx3.36 eV)
   \item Si|Si: $\rho = 0.9557$
   \item Sn|Sn: $\rho = 0.8779$
 \end{itemize}
-Grain boundaries had the best Top-10 overlap at 9.67/10, and much lower RMSE than heterostructures (≈7.7 eV). Their structural symmetry and stoichiometric balance likely contribute to better predictive consistency.
+
+% ---------- %
+
+Grain boundaries had the best Top-10 overlap at 9.67/10, and much lower RMSE than heterostructures (\approx7.7 eV).
+
+Their structural symmetry and stoichiometric balance likely contribute to better predictive consistency.
+
+% ---------- %
 
 \paragraph{Perfect rank preservation}
 
-Si|Ge alloy systems exhibited near-perfect rank alignment between DFT and MLP evaluations. Both $\rho$ and $\tau$ approached 1.0 across the board, as seen in \texttt{stats\_perfect\_alloys.csv}.
+% ---------- %
+
+Si|Ge alloy systems exhibited near-perfect rank alignment between DFT and MLP evaluations.
+
+Both $\rho$ and $\tau$ approached 1.0 across the board, as seen in \texttt{stats\_perfect\_alloys.csv}.
+
+% ---------- %
 
 \paragraph{Potential Reason}
 
-These systems feature uniform chemical environments with little interfacial disruption, meaning the atomic configurations fall well within the trained domain of the MACE model. The result is highly stable rank preservation.
+% ---------- %
 
-MLP evaluations offered orders-of-magnitude speedups over DFT while retaining acceptable accuracy in most ranking tasks. However, the quality of this speedup is system-dependent and less reliable for Silicon-rich or mixed-coordination interfaces. These observations motivate a need for improved domain coverage, possibly via delta-learning or retraining on interfacial datasets.
+These systems feature uniform chemical environments with little interfacial disruption, meaning the atomic
+configurations fall well within the trained domain of the MACE model.
 
-These results support the use of MACE as a high-throughput screening tool to rank heterostructures prior to DFT evaluation. While energy values are not trustworthy in absolute terms, the consistent rank ordering, especially in systems with low strain and high registry, makes MACE valuable for filtering large structure sets. Poorer results in Si-rich systems highlight the need for retraining or domain-specific correction, which is a core focus of future work (Chapter~\ref{chapter:next_steps}).
+The result is highly stable rank preservation.
+
+% ---------- %
+
+MLP evaluations offered orders-of-magnitude speedups over DFT while retaining acceptable accuracy in most ranking tasks.
+
+However, the quality of this speedup is system-dependent and less reliable for Silicon-rich or mixed-coordination
+interfaces.
+
+These observations motivate a need for improved domain coverage, possibly via delta-learning or retraining on
+interfacial datasets.
+
+% ---------- %
+
+These results support the use of MACE as a high-throughput screening tool to rank heterostructures prior to DFT
+evaluation.
+
+While energy values are not trustworthy in absolute terms, the consistent rank ordering, especially in systems with low
+strain and high registry, makes MACE valuable for filtering large structure sets.
+
+Poorer results in Si-rich systems highlight the need for retraining or domain-specific correction, which is a core focus
+of future work (Chapter~\ref{chapter:next_steps}).
+
+% ---------- %
