@@ -286,24 +286,42 @@ The remainder of this report is structured as follows:
 
 % ---------- %
 
-% todo: update to align with project goals and updated chapters
-
 \begin{itemize}
 
-    \item \textbf{Chapter~\ref{chapter:background}} introduces the theoretical foundations and relevant literature,
-    covering interface energetics, DFT formalism, and the development of MLPs.
+    \item \textbf{Chapter~\ref{chapter:background}} reviews the theoretical and computational background for interface
+    modelling.
 
-    \item \textbf{Chapter~\ref{chapter:computational_investigation}} presents a benchmarking study comparing MLP and DFT
-    predictions of interface favourability, including statistical correlation analysis and system-specific case studies.
+    It defines material interfaces, explores interfacial energetics and physical effects, and surveys applications
+    across electronic, catalytic, and energy systems.
 
-    \item \textbf{Chapter~\ref{chapter:next_steps}} outlines planned extensions to the current methodology, including
-    the development of delta-corrected potentials and predictive models linking surface properties to interface
-    behaviour.
+    The chapter also introduces density functional theory (DFT), machine-learned interatomic potentials (MLPs), and
+    recent algorithmic tools for generating and evaluating heterostructures.
 
-    \item \textbf{Chapter~\ref{chapter:conclusions}} concludes with a discussion of findings, limitations, and broader
-    implications for autonomous materials modelling and the design of functional heterostructures.
+    \item \textbf{Chapter~\ref{chapter:computational_investigation}} evaluates the use of MACE as a surrogate model for
+    efficiently screening interface structures prior to DFT.
+
+    It benchmarks MACE vs DFT energetics across over a roughly 680 heterostructures, analyses rank
+    correlations, and identifies system-specific performance trends that inform future dataset construction for
+    predictive modelling.
+
+    \item \textbf{Chapter~\ref{chapter:next_steps}} outlines the design and evaluation of a Machine-Learned Interface
+    (MLI) model trained to predict interface favourability.
+
+    It compares three training strategies baseline MACE, interface-specific fine-tuning, and delta-learning correction,
+    and introduces ranking metrics to quantify predictive performance.
+
+    The chapter also explores how structural asymmetries, surface orientation, and chemical diversity impact model
+    generalisation.
+
+
+    \item \textbf{Chapter~\ref{chapter:conclusions}} reflects on key findings across materials systems, highlighting the
+    strengths and limitations of current MLPs in replicating DFT interface rankings.
+
+    It emphasises the importance of rank-based metrics over absolute errors and advocates for hybrid workflows combining
+    fast MLP screening with selective DFT correction to guide future materials discovery.
 
 \end{itemize}
+
 
 % ---------- %
 
@@ -432,8 +450,8 @@ machine-learned potentials (MLPs) or density functional theory (DFT)\nocite{}.
 
 \label{para:objectives_mli_pipeline} % ---------- %
 
-The ultimate goal is to accelerate interface discovery by replacing brute-force combinatorial stacking with an
-intelligent generative model\nocite{}.
+\textbf{The ultimate goal is to accelerate interface discovery by replacing brute-force combinatorial stacking with an
+intelligent generative model\nocite{}.}
 
 By learning patterns in crystallography, registry, and bonding across known interfaces, the MLI model will propose
 viable configurations that reduce the need for exhaustive enumeration and manual filtering\nocite{}.

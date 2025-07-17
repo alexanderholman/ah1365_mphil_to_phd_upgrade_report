@@ -268,7 +268,7 @@ addressed before a general-purpose interface prediction model can be considered 
 A key open question is whether the surface energetics of individual slabs can serve as predictors for the favourability
 of the resulting heterostructure.
 
-If a reliable correlation exists between surface energy and interface formation energy \( \Delta E_\mathrm{IF} \), it
+If a reliable correlation exists between surface energy and interface formation energy \( \Delta E_\mathrm{form} \), it
 could significantly reduce the need for exhaustive interface enumeration.
 
 % ---------- %
@@ -280,7 +280,7 @@ Future work will analyse the data in \texttt{surface\_energy\_matrix.csv} to qua
 \begin{itemize}
     \item The average surface energy of the two slabs
     \item The minimum/maximum surface energy of the slab pair
-    \item The resulting interface energy \( \Delta E_\mathrm{IF} \) from DFT and MLP evaluations
+    \item The resulting interface energy \( \Delta E_\mathrm{form} \) from DFT and MLP evaluations
 \end{itemize}
 
 % ---------- %
@@ -419,14 +419,19 @@ Input features will include:
     \item Lattice mismatch metrics (based on in-plane scaling ratios)
     \item Interface registry scores (from ARTEMIS or RAFFLE shifts)
     \item Atomic coordination and stoichiometry at the intended interface plane
+    \item Analytical band alignment features (e.g. Anderson's rule offset and induced field correction)
 \end{itemize}
 
 % ---------- %
 
-Initial labels for training will be derived from \( \Delta E_\mathrm{IF} \) values obtained via DFT or MACE (after
-benchmarking).
+Initial labels for training will be derived from interface formation energies, computed using either DFT or MACE total
+energies (following benchmarking).
 
-Where available, these will be linked to structural features extracted from POSCAR files and relaxation trajectories.
+These energies quantify the relative stability of each structure compared to its bulk constituents, and are normalised
+per atom.
+
+Where available, training labels will be enriched with additional structural descriptors extracted from POSCAR files and
+    relaxation trajectories.
 
 % ---------- %
 
@@ -435,9 +440,9 @@ Prediction targets will include:
 % ---------- %
 
 \begin{itemize}
-    \item Binary classification: favourable vs. unfavourable
-    \item Regression: predicted interface energy \( \Delta E_\mathrm{IF} \)
-    \item Rank scoring: predicted rank percentile within a batch
+    \item Binary classification: favourable vs. unfavourable interfaces
+    \item Regression: predicted interface formation energy \( \Delta E_{\mathrm{int}} \)
+    \item Rank scoring: predicted favourability percentile within a generated batch
 \end{itemize}
 
 % ---------- %
@@ -511,7 +516,7 @@ with JSON or HDF5-based metadata systems, ensuring traceability and reproducibil
 
 Initial experiments may use relatively shallow GNNs with fixed neighbor cutoffs, but later iterations may incorporate
 equivariant tensor representations (e.g. MACE-style angular embeddings) to better capture orientation-dependent effects.
-Training targets will include both regression on \( \Delta E_\mathrm{IF} \) and binary classification
+Training targets will include both regression on \( \Delta E_\mathrm{form} \) and binary classification
 (favourable / unfavourable), optionally extended with uncertainty quantification.
 
 Crucially, the MLI is not meant to replace DFT or full relaxation pipelines, but to act as a high-speed prefilter that

@@ -301,7 +301,7 @@ ARTEMIS automates the construction of chemically realistic interfaces by followi
     \[
     M_A [\mathbf{a}_1^A, \mathbf{a}_2^A] \approx M_B [\mathbf{a}_1^B, \mathbf{a}_2^B],
     \]
-    thereby minimizing lattice mismatch strain\cite{artemis_paper}. Candidate supercells (integer multiples of slab
+    thereby minimizing lattice mismatch strain\cite{artemis_paper, ZurMcGill1984-lattice}. Candidate supercells (integer multiples of slab
     lattice vectors) are generated and compared to find commensurate matches within a small strain tolerance (typically
     \(<5\%\)). Slight rotations can also be explored at this stage to further reduce mismatch.
     \item \textbf{Registry enumeration (in-plane shifts):} Given a commensurate lattice match, ARTEMIS systematically
@@ -415,12 +415,21 @@ orientation, and interfacial disorder all strongly influence the band alignment\
 These factors affect carrier dynamics, optical transitions, and switching behaviour.
 
 Traditional models such as Anderson's rule have proven insufficient; corrections using terms such as $\Delta E_\Gamma$ and
-$\Delta E_{\text{IF}}$ have been developed to capture hybridisation and interface dipole contributions more accurately\cite{Butler2019-ws}.
+$\Delta E_{\text{IF}}$ have been developed to capture hybridisation and interface dipole contributions more accurately\cite{Davies2024-ju, Butler2019-ws}.
 
-% todo: add formula for detla E_\Gamma and delta E_IF
+\begin{equation}
+\Delta E_\Gamma = \chi_{h,B} - \chi_{h,A}
+\end{equation}
+
+\begin{equation}
+\Delta E_{\mathrm{IF}} = \alpha \left( \exp\left[ \beta \left( \chi_{h,B} - \chi_{h,A} \right) \right] - 1 \right)
+\end{equation}
 
 These corrections allow for predictive modelling of heterostructure behaviour and support targeted band offset
 engineering.
+
+Here, $\chi_{h,A}$ and $\chi_{h,B}$ are the hole affinities (ionisation potentials) of materials A and B respectively, and the constants $\alpha = 0.03~\text{eV}$ and $\beta = 1.91~\text{\AA{}}/\text{eV}$ are empirically fitted from simulation data\cite{Davies2024-ju}.
+
 
 \label{para:energy_storage_interface} % ---------- %
 
@@ -504,7 +513,7 @@ A foundational step in many interface modelling workflows is lattice matching be
 
 This involves aligning compatible Miller planes to minimise strain and identify viable supercell geometries.
 
-The method introduced by Zur et al.~(1984) laid the groundwork for many subsequent algorithms used in tools such as
+The method introduced by Zur et al.~(1984) \cite{ZurMcGill1984-lattice} laid the groundwork for many subsequent algorithms used in tools such as
 \textsc{METADISE} and \textsc{ARTEMIS}, which systematically enumerate low-strain combinations, slips, terminations, and
 atomic registries\cite{artemis_paper} (see \secref{sec:lattice_mismatching}).
 
@@ -532,14 +541,6 @@ picosecond to nanosecond timescales\cite{Deng2023-tg}.
 
 % ---------- %
 
-% todo: add Quantum Waveform equation
-
-% ---------- %
-
-% todo: add HK Theorems
-
-% ---------- %
-
 Density Functional Theory (DFT) is a first-principles quantum mechanical method used extensively to model the electronic
 structure of condensed matter systems, including molecules, solids, and, critically, material interfaces\cite{Arantes2007-ea, Leung2020-tv, Di_Liberto2022-gz}.
 
@@ -553,13 +554,94 @@ to an effective potential that captures Coulomb, exchange, and correlation inter
 
 % ---------- %
 
-The total Kohn-Sham energy is given by:
+The theoretical foundation of DFT rests on two key theorems proven by Hohenberg and Kohn in 1964\cite{Hohenberg1964-yh}:
 
-\begin{equation} E_{\mathrm{KS}}[\rho] = T_s[\rho] + \int V_{\mathrm{ext}}(\mathbf{r}) \rho(\mathbf{r}) \, \mathrm{d}\mathbf{r} + \frac{1}{2} \int \int \frac{\rho(\mathbf{r}) \rho(\mathbf{r'})}{|\mathbf{r} - \mathbf{r'}|} \, \mathrm{d}\mathbf{r} \, \mathrm{d}\mathbf{r'} + E_{\mathrm{xc}}[\rho], \end{equation} where $T_s[\rho]$ is the kinetic energy of the non-interacting electrons, $V_{\mathrm{ext}}$ is the external (ionic) potential, and $E_{\mathrm{xc}}[\rho]$ is the exchange-correlation functional, the exact form of which remains unknown.
+\begin{itemize}
+    \item \textbf{First Hohenberg–Kohn Theorem:} The ground-state properties of a many-electron system are uniquely
+    determined by its electron density $\rho(\mathbf{r})$.
+
+    This implies that the external potential $V_{\mathrm{ext}}(\mathbf{r})$ (and hence the full Hamiltonian) is a unique
+    functional of $\rho(\mathbf{r})$.
+
+    \item \textbf{Second Hohenberg–Kohn Theorem:} The true ground-state density minimises the energy functional
+    $E[\rho]$.
+
+    Therefore, the ground-state energy can be obtained by variationally searching over all physically admissible
+    densities.
+\end{itemize}
 
 % ---------- %
 
-% todo: add more details on KS equation
+These theorems allow the many-body problem to be reformulated in terms of a scalar function $\rho(\mathbf{r})$, enabling
+a significant reduction in computational complexity compared to solving the full many-electron wavefunction
+$\Psi(\mathbf{r}_1, \dots, \mathbf{r}_N)$.
+
+% ---------- %
+
+The total Kohn-Sham energy is given by:
+
+\begin{equation}
+    E_{\mathrm{KS}}[\rho] = T_s[\rho] + \int V_{\mathrm{ext}}(\mathbf{r}) \rho(\mathbf{r}) \, \mathrm{d}\mathbf{r} + \frac{1}{2} \int \int \frac{\rho(\mathbf{r}) \rho(\mathbf{r'})}{|\mathbf{r} - \mathbf{r'}|} \, \mathrm{d}\mathbf{r} \, \mathrm{d}\mathbf{r'} + E_{\mathrm{xc}}[\rho],
+\end{equation}
+
+where $T_s[\rho]$ is the kinetic energy of the non-interacting electrons, $V_{\mathrm{ext}}$ is the external (ionic)
+potential, and $E_{\mathrm{xc}}[\rho]$ is the exchange-correlation functional, the exact form of which remains unknown.
+
+% ---------- %
+
+Each term in the Kohn--Sham energy functional plays a distinct role in approximating the true many-body electronic ground state:
+
+% ---------- %
+
+\begin{itemize}
+    \item \textbf{$T_s[\rho]$ — Non-interacting kinetic energy:} \\
+
+    This term represents the kinetic energy of a fictitious system of non-interacting electrons that yield the same ground-state density as the real, interacting system. It is computed explicitly from the Kohn–Sham orbitals $\psi_i$:
+
+    \[
+    T_s[\rho] = -\frac{1}{2} \sum_i \int \psi_i^*(\mathbf{r}) \nabla^2 \psi_i(\mathbf{r}) \, \mathrm{d}\mathbf{r}.
+    \]
+
+    It is not equal to the true kinetic energy of the interacting system but serves as a tractable approximation.
+
+    \item \textbf{$\int V_{\mathrm{ext}}(\mathbf{r}) \rho(\mathbf{r}) \, \mathrm{d}\mathbf{r}$ — External potential energy:} \\
+
+    This is the Coulomb interaction between the electrons and the nuclei.
+
+    The potential $V_{\mathrm{ext}}$ is usually taken to be the sum of nuclear point charges:
+
+    \[
+    V_{\mathrm{ext}}(\mathbf{r}) = -\sum_I \frac{Z_I}{|\mathbf{r} - \mathbf{R}_I|},
+    \]
+
+    where $Z_I$ and $\mathbf{R}_I$ are the charge and position of nucleus $I$.
+
+    \item \textbf{Hartree energy:}
+
+    \[
+    E_{\mathrm{H}}[\rho] = \frac{1}{2} \int \int \frac{\rho(\mathbf{r}) \rho(\mathbf{r'})}{|\mathbf{r} - \mathbf{r'}|} \, \mathrm{d}\mathbf{r} \, \mathrm{d}\mathbf{r'}
+    \]
+
+    This is the classical electrostatic (Coulomb) repulsion energy between electron density clouds.
+
+    It overcounts interaction by including self-interaction, which is ideally cancelled by the exchange-correlation term.
+
+    \item \textbf{$E_{\mathrm{xc}}[\rho]$ — Exchange-correlation energy:} \\
+
+    This term captures all many-body quantum effects missing from the previous three terms. It includes:
+
+    \begin{itemize}
+        \item The difference between the true kinetic energy and $T_s[\rho]$
+        \item Exchange effects due to the antisymmetry of the wavefunction (Pauli exclusion)
+        \item Correlation effects from dynamic electron-electron avoidance
+    \end{itemize}
+
+    It is the only term not known in closed form and must be approximated (e.g., LDA, GGA, hybrid functionals).
+\end{itemize}
+
+% ---------- %
+
+Taken together, this decomposition allows the ground-state energy and density of an interacting electron system to be obtained by solving a system of self-consistent single-particle equations, greatly simplifying the original many-body problem.
 
 % ---------- %
 
@@ -571,24 +653,8 @@ improves accuracy for molecular and inhomogeneous systems\cite{Rosen2022-pw}.
 
 % ---------- %
 
-% todo: add more details on LDA
-
-% ---------- %
-
-% todo: add more details on GGA/PBE
-
-% ---------- %
-
 Hybrid functionals, such as HSE06, incorporate a portion of exact exchange and offer improved bandgap and localisation
 predictions at significantly greater computational cost\cite{Rosen2022-pw}.
-
-% ---------- %
-
-% todo: add more details on Hybrids in general
-
-% ---------- %
-
-% todo: add more details on HSE06 specifically
 
 % ---------- %
 
@@ -597,6 +663,50 @@ geometries, but also derived properties including electronic band structures, ch
 phonon spectra, and interfacial energetics.
 
 Its applications to interface modelling, however, are computationally constrained\cite{Gerber2023-yd, Leung2020-tv}.
+
+% ---------- %
+
+Physics-based methods, most notably Density Functional Theory (DFT), provide high accuracy for local bonding
+environments and band structure prediction\cite{Abdulsattar2012-oz, Leung2020-tv}.
+
+However, the computational scaling of standard Kohn-Sham DFT, typically $\mathcal{O}(N^3)$ with respect to system
+size, renders large or disordered interface simulations intractable without approximation\cite{Batatia2022-xz}.
+
+% ---------- %
+
+This $\mathcal{O}(N^3)$ scaling arises from the solution of the Kohn-Sham equations in each self-consistent field (SCF)
+iteration.
+
+The dominant cost comes from constructing and diagonalising the Hamiltonian matrix, whose dimension scales with the
+number of electrons or basis functions $N$.
+
+The following pseudocode outlines a simplified structure of a typical DFT SCF loop:
+
+% ---------- %
+
+\begin{algorithmic}
+\State \textbf{Input:} Initial electron density $\rho_0$
+\Repeat
+    \State Construct Hamiltonian $H[\rho]$ \hfill // $\mathcal{O}(N^2)$ matrix assembly
+    \State Solve $H[\rho] \psi_i = \epsilon_i \psi_i$ \hfill // $\mathcal{O}(N^3)$ diagonalisation
+    \State Compute new electron density $\rho_{i+1}$ from occupied states
+    \State Check convergence of $\rho$
+\Until{converged}
+\end{algorithmic}
+
+% ---------- %
+
+The $\mathcal{O}(N^2)$ step comes from evaluating pairwise terms in the Hamiltonian, but the diagonalisation step, which
+extracts eigenstates $\psi_i$ and energies $\epsilon_i$, scales as $\mathcal{O}(N^3)$ using standard linear algebra
+routines.
+
+Since diagonalisation is repeated in each SCF cycle, this cubic scaling is the dominant computational bottleneck
+in practical DFT workflows.
+
+% ---------- %
+
+Even when feasible, DFT struggles to capture extended features such as long-range strain relaxation, misfit
+dislocations, and spatially diffuse defect states that dominate realistic interface behaviour\cite{Lorentzon2025-si, Di_Liberto2022-gz}.
 
 % ---------- %
 
@@ -611,10 +721,6 @@ chosen threshold (e.g. 0.01 eV/\AA)\cite{needed}.
 
 % ---------- %
 
-% todo: add details on VASP relaxation reference FIRE relaxation in 2.4
-
-% ---------- %
-
 Periodic boundary conditions are employed in all three spatial directions, necessitating the introduction of vacuum
 regions for slab models and sufficient supercell dimensions to minimise image-image interactions in interface
 simulations\cite{needed}.
@@ -626,22 +732,6 @@ by k-point density and energy cutoff tests.
 
 Pulay and Broyden mixing schemes are used for charge density convergence, and dipole corrections may be employed for
 asymmetric slab geometries.
-
-% ---------- %
-
-% todo: add details on KPOINTS
-
-% ---------- %
-
-% todo: add details on INCAR
-
-% ---------- %
-
-% todo: add details on POSCAR
-
-% ---------- %
-
-% todo: add details on POTCAR
 
 % ---------- %
 
@@ -737,23 +827,298 @@ such as defect migration, reconstruction, or long-term phase evolution\cite{Khot
 
 % ---------- %
 
-\subsection{How are properties like adhesion energy or electron transport predicted?}
+\subsection{How are properties calculated or predicted?}
 
 % ---------- %
 
-% todo: add strain energy
+\textbf{Strain energy} quantifies the elastic energy penalty incurred when a material is deformed from its relaxed bulk
+configuration to match a heterostructure's imposed lattice\nocite{}.
 
 % ---------- %
 
-% todo: add strain: tension, compression, shear
+In interface models, this typically arises when one or both materials are forced to adopt a common in-plane lattice
+constant, leading to tension, compression, or shear\nocite{}.
 
 % ---------- %
 
-% todo: add surface energy
+Assuming the interface uses a uniform lattice derived from the stack, the strain energy for each material can be
+computed by comparing its relaxed bulk to a strained bulk structure with the same lattice but without the other material
+present\nocite{}.
 
 % ---------- %
 
-% todo: add interface energy
+Within DFT, the strain energy $E_\mathrm{strain}$ is given by:
+
+% ---------- %
+
+\[
+E_\mathrm{strain} = \sum_i \left( E_{i,\mathrm{strained}} - E_{i,\mathrm{bulk}} \right),
+\]
+
+% ---------- %
+
+where $E_{i,\mathrm{bulk}}$ is the total energy of the relaxed bulk structure of material $i$, and
+$E_{i,\mathrm{strained}}$ is the energy of the same structure with lattice vectors deformed to match the interface (but
+without interface bonding)\nocite{}.
+
+% ---------- %
+
+If direct coordinates are used, the atomic basis remains invariant, and all deformation is encoded in the lattice
+vectors\nocite{}.
+
+The sign and magnitude of strain for each material can be determined by comparing the interface lattice
+$a_\mathrm{stack}$ with the material's relaxed bulk lattice $a_{i,\mathrm{bulk}}$:
+
+% ---------- %
+
+- If $a_\mathrm{stack} > a_{i,\mathrm{bulk}}$, the material is under \textit{tension};
+- If $a_\mathrm{stack} < a_{i,\mathrm{bulk}}$, the material is under \textit{compression}.
+
+% ---------- %
+
+This decomposition enables strain energy to be treated as a separate thermodynamic contribution, distinct from
+interfacial adhesion or chemical reconstruction\nocite{}.
+
+% ---------- %
+
+\textbf{Strain modes} in crystalline materials describe the type of mechanical deformation experienced when lattice
+parameters are altered to accommodate interface formation\nocite{}.
+
+% ---------- %
+
+At interfaces, three primary strain types can arise:
+
+% ---------- %
+
+\begin{itemize}
+
+    \item \textbf{Tensile strain} occurs when a material is stretched beyond its equilibrium lattice constant
+    (\( \varepsilon > 0 \)). This is typical for materials with smaller relaxed lattice parameters forced to match a
+    larger interface lattice.
+
+    \item \textbf{Compressive strain} occurs when a material is squashed to fit a smaller lattice constant
+    (\( \varepsilon < 0 \)).
+
+    This affects materials with larger relaxed lattice constants.
+
+    \item \textbf{Shear strain} involves angular distortions of the unit cell, where interaxial angles deviate from
+    90\degree, or when off-diagonal components of the strain tensor become nonzero.
+
+    This may arise from lattice rotation, stepped surfaces, or low-symmetry interface matching.
+
+\end{itemize}
+
+% ---------- %
+
+The total strain state can be expressed by the strain tensor \( \boldsymbol{\varepsilon} \), which includes both normal
+and shear components.
+
+For small deformations, the linear strain along a given direction is defined as:
+
+% ---------- %
+
+\[
+\varepsilon = \frac{a_\mathrm{stack} - a_\mathrm{bulk}}{a_\mathrm{bulk}},
+\]
+
+% ---------- %
+
+where \( a_\mathrm{stack} \) is the in-plane lattice constant of the interface, and \( a_\mathrm{bulk} \) is the
+equilibrium bulk lattice constant of the material\nocite{}.
+
+% ---------- %
+
+In complex interfaces, all three strain types may be present simultaneously, and their combined effects influence both
+the elastic energy and the atomic relaxation pathways\nocite{}.
+
+% ---------- %
+
+\textbf{Surface energy} quantifies the energetic penalty associated with terminating a bulk crystal to expose a surface\nocite{}.
+
+This cost arises from the breaking of atomic bonds and the disruption of periodic bonding environments, and is a key
+thermodynamic quantity in surface science, crystal morphology, and thin film growth\nocite{}.
+
+% ---------- %
+
+It is typically computed by comparing the total energy of a slab model with vacuum separation to the energy of an
+equivalent bulk reference\nocite{}.
+
+% ---------- %
+
+Within DFT, the surface energy $E_\mathrm{surf}$ is defined as:
+
+% ---------- %
+
+\[
+E_\mathrm{surf} = \frac{1}{2A} \left( E_\mathrm{slab} - n \cdot E_\mathrm{bulk} \right),
+\]
+
+% ---------- %
+
+where:
+
+% ---------- %
+
+\begin{itemize}
+    \item $E_\mathrm{slab}$ is the total energy of a slab supercell with two exposed surfaces and sufficient vacuum to
+    prevent spurious interactions,
+    \item $E_\mathrm{bulk}$ is the total energy of the corresponding bulk unit cell (relaxed under identical conditions),
+    \item $n$ is the number of bulk units contained within the slab supercell,
+    \item $A$ is the surface area of the slab,
+    \item the factor of 2 accounts for the two surfaces created in the periodic slab.
+\end{itemize}
+
+% ---------- %
+
+The resulting surface energy is reported in units of energy per unit area (e.g., eV/\AA$^2$), and characterises the
+cleavage cost associated with a particular crystallographic termination.
+
+% ---------- %
+
+\textbf{Surface anisotropy} arises because different crystallographic planes expose different bonding environments and
+coordination numbers, resulting in direction-dependent surface energies\nocite{}.
+
+This anisotropy plays a key role in determining equilibrium crystal shapes via the Wulff construction, and strongly
+affects interface formation when specific facets are matched between materials\nocite{}.
+
+% ---------- %
+
+In relaxed slab models, surface reconstruction may occur, further modifying the computed surface energy compared to the
+ideal cleavage limit\nocite{}.
+
+The choice of surface termination, atomic registry, and slab thickness all influence the final value.
+
+% ---------- %
+
+\textbf{Interface energy} quantifies the energetic cost of joining two distinct materials to form a coherent or
+semi-coherent interface\nocite{}.
+
+It reflects the balance between bond formation across the interface and any penalties due to lattice mismatch,
+structural distortion, or chemical incompatibility\nocite{}.
+
+% ---------- %
+
+Within DFT, the interface energy $E_\mathrm{int}$ is calculated by comparing the total energy of the interface
+supercell to the energies of the isolated constituent slabs, each relaxed independently but matched in thickness and
+termination\nocite{}.
+
+% ---------- %
+
+The basic expression is:
+
+% ---------- %
+
+\[
+E_\mathrm{int} = \frac{1}{2A} \left( E_{AB} - E_A - E_B \right),
+\]
+
+% ---------- %
+
+where:
+
+% ---------- %
+
+\begin{itemize}
+    \item $E_{AB}$ is the total energy of the full interface supercell,
+    \item $E_A$ and $E_B$ are the energies of the individual slabs A and B (in isolation, matched in structure),
+    \item $A$ is the cross-sectional area of the interface,
+    \item the factor of 2 accounts for the two interfaces present in a periodic cell (A|B and B|A).
+\end{itemize}
+
+% ---------- %
+
+This formulation captures the net energy change from bringing two surfaces together and allowing relaxation at the
+junction.
+
+It is often used to assess interface stability, compatibility, and bonding quality between dissimilar materials\nocite{}.
+
+% ---------- %
+
+However, when constructing interface supercells by lattice matching, strain is often introduced into one or both
+materials.
+
+This strain contributes elastic energy that is not intrinsic to the interface itself\nocite{}.
+
+To isolate the \textbf{true interfacial contribution}, a corrected interface energy can be defined by removing the strain
+components, as described in the previous section:
+
+% ---------- %
+
+\[
+E^\mathrm{corrected}_\mathrm{int} = E_\mathrm{int} - E_{\mathrm{strain},A} - E_{\mathrm{strain},B}
+\]
+
+% ---------- %
+
+This correction is especially important in lattice-mismatched systems, where elastic distortion may dominate the raw
+interface energy.
+
+By separating strain and interfacial contributions, this approach yields a more accurate thermodynamic descriptor for
+interface formation and adhesion\nocite{}.
+
+% ---------- %
+
+\textbf{Formation energy} quantifies the thermodynamic stability of a structure relative to the sum of its isolated,
+elemental reference phases\nocite{}.
+
+It is widely used in materials modelling to assess the favourability of compounds, alloys, and heterostructures,
+particularly in high-throughput screening and phase stability analysis\nocite{}.
+
+% ---------- %
+
+In bulk systems, the formation energy per atom reflects the energy above or below the convex hull of competing phases
+and is sometimes referred to as the \textit{hull energy}\nocite{}.
+
+A negative formation energy indicates a structure more stable than the linear combination of its elemental constituents,
+while a positive value implies a metastable or unstable configuration.
+
+% ---------- %
+
+In interface models, formation energy provides a normalised metric to compare supercells of varying composition, lattice
+size, and bonding geometry\nocite{}.
+
+It can be computed directly from total DFT energies using one of two equivalent expressions, depending on the number of
+species involved.
+
+% ---------- %
+
+For binary systems containing two species \( A \) and \( B \), the formation energy per atom is:
+
+\[
+E_\mathrm{form} = \frac{E_{AB} - \left( n_{A,AB} \cdot \frac{E_{A,\mathrm{bulk}}}{n_{A,\mathrm{bulk}}} \right) - \left( n_{B,AB} \cdot \frac{E_{B,\mathrm{bulk}}}{n_{B,\mathrm{bulk}}} \right)}{n_{AB}},
+\]
+
+where:
+
+\begin{itemize}
+    \item \( E_{AB} \) is the total energy of the interface or alloy supercell,
+    \item \( n_{A,AB} \) and \( n_{B,AB} \) are the numbers of atoms of each element in the supercell,
+    \item \( E_{A,\mathrm{bulk}} \), \( E_{B,\mathrm{bulk}} \) are the total energies of the bulk reference structures,
+    \item \( n_{A,\mathrm{bulk}} \), \( n_{B,\mathrm{bulk}} \) are the number of atoms in the corresponding bulk
+    reference unit cells,
+    \item \( n_{AB} = n_{A,AB} + n_{B,AB} \) is the total number of atoms in the structure.
+\end{itemize}
+
+% ---------- %
+
+For generalised multi-species systems (e.g. C–Si–Ge–Sn), a compact form is used:
+
+\[
+E_\mathrm{form} = \frac{E_\mathrm{super} - \sum_i \left( n_{i,\mathrm{super}} \cdot \frac{E_{i,\mathrm{bulk}}}{n_{i,\mathrm{bulk}}} \right)}{n_\mathrm{super}},
+\]
+
+where the summation runs over all species \( i \) present in the supercell.
+
+This formulation accommodates arbitrary compositions and is particularly useful when modelling alloyed interfaces or
+complex heterostructures.
+
+% ---------- %
+
+By convention, formation energies are reported in units of energy per atom (e.g., eV/atom) and used to rank relative
+stabilities across a dataset.
+
+However, when comparing structures with different stoichiometries or element counts, normalisation by atom count must be
+handled carefully to ensure consistent interpretation\nocite{}.
 
 % ---------- %
 
@@ -768,10 +1133,6 @@ Within DFT, the adhesion energy $E_\mathrm{adh}$ is given by\nocite{}:
 
 where $A$ is the interface area, and the energies refer to fully relaxed geometries of the individual slabs and the
 interface supercell\nocite{}.
-
-% ---------- %
-
-% todo: add formation energy
 
 % ---------- %
 
@@ -802,29 +1163,21 @@ tunnelling probability can change significantly\cite{Low2025-on}.
 
 % ---------- %
 
-Charge transport properties such as electrical conductivity, Seebeck coefficient, or mobility may be
-approximated from the band dispersion near the Fermi level using Boltzmann transport theory, or more rigorously via
-non-equilibrium Green's function (NEGF) methods, especially for low-dimensional or nanoscale interfaces.
-
-% todo: handle note "Intro"
-
-% ---------- %
-
 \section{Emergence of Machine Learning in Materials Science} \label{section:machine_learning}
 
 % ---------- %
 
 Over the past decade, machine learning (ML) has emerged as a transformative tool in materials modelling, offering a
-route to accelerate predictions and expand accessible system sizes beyond those tractable by first-principles methods.
+route to accelerate predictions and expand accessible system sizes beyond those tractable by first-principles methods\cite{Schutt2018-xc, Schutt2019-sz, Owen2024-wp, Pyzer-Knapp2025-uq}.
 
 Traditional computational techniques, such as DFT and MD, have established themselves as accurate and rigorous, but they
 often scale poorly with system size or configurational complexity.
 
 This limitation becomes particularly acute in the modelling of interfaces, where subtle geometric, chemical, and
-electronic variations can dramatically affect material behaviour.
+electronic variations can dramatically affect material behaviour\cite{Batzner2022-fd, Leung2020-tv, Owen2024-wp}.
 
 ML offers a complementary paradigm, enabling the construction of surrogate models trained on high-fidelity data, which
-can interpolate or even extrapolate to predict key material properties across vast configuration spaces.
+can interpolate or even extrapolate to predict key material properties across vast configuration spaces\cite{Batzner2022-fd, Rosen2022-pw, Schutt2019-sz}.
 
 % ---------- %
 
@@ -851,26 +1204,26 @@ first-principles methods, offering improved scalability, predictive flexibility,
 automation.
 
 Its adoption has been driven by limitations in conventional approaches such as Density Functional Theory (DFT),
-particularly in capturing the structural and chemical complexity of real-world systems such as interfaces.
+particularly in capturing the structural and chemical complexity of real-world systems such as interfaces\cite{Batzner2022-fd, Gerber2023-yd, Wei2021-fi}.
 
 % ---------- %
 
 ML enables efficient exploration of vast configurational landscapes, where brute-force DFT sampling would be infeasible.
 
 This is particularly important in interface modelling, where multiple stacking orders, terminations, and slip
-configurations can exist.
+configurations can exist\cite{Rosen2022-pw}.
 
-ML-driven screening allows researchers to rapidly identify promising candidates for further evaluation.
+ML-driven screening allows researchers to rapidly identify promising candidates for further evaluation\cite{Batzner2022-fd, Gerber2023-yd, Schutt2019-sz}.
 
 % ---------- %
 
-Early ML applications focused on surrogate models trained to replicate DFT-derived energies, forces, or properties.
+Early ML applications focused on surrogate models trained to replicate DFT-derived energies, forces, or properties\cite{Batzner2022-fd, Deng2023-tg, Schutt2019-sz}.
 
 Descriptor-based regression models, using quantities such as coordination numbers, Bader charges, or bond lengths, were
 employed to predict interfacial stability or band alignments.
 
 These approaches have evolved toward end-to-end learning frameworks using physically-informed descriptors or graph-based
-representations.
+representations\cite{Batzner2022-fd, Gerber2023-yd, Schutt2018-xc}.
 
 % ---------- %
 
@@ -879,9 +1232,9 @@ ML is now embedded into iterative prediction--generation--evaluation cycles.
 For example, predicted interface favourability informs structure generation (e.g. stacking vectors or surface
 terminations), which are then evaluated by DFT or ML surrogates.
 
-The results feed back into model training, supporting a self-refining loop.
+The results feed back into model training, supporting a self-refining loop\cite{Batzner2022-fd, Schutt2018-xc, Schutt2019-sz}.
 
-Tools such as ARTEMIS benefit from such integration.
+Tools such as ARTEMIS benefit from such integration\cite{Taylor2020-nl}.
 
 % ---------- %
 
@@ -889,13 +1242,13 @@ More recent work employs graph neural networks (GNNs), such as MACE or NequIP, w
 transformations and thus well-suited for atomistic systems.
 
 These models learn directly from atomic positions and species, avoiding the need for handcrafted features while
-preserving symmetry constraints essential for interface modelling.
+preserving symmetry constraints essential for interface modelling\cite{Batzner2022-fd, Deng2023-tg, Owen2024-wp}.
 
 % ---------- %
 
 Ultimately, ML enables a shift from static modelling pipelines to more autonomous workflows.
 
-When coupled with structure-generation protocols and physical constraints.
+When coupled with structure-generation protocols and physical constraints\cite{}.
 
 % ---------- %
 
@@ -907,46 +1260,45 @@ Models can be broadly categorised into classical learning algorithms and deep le
 
 Classical methods include random forests, gradient boosting, support vector machines (SVMs), and Gaussian process
 regression (GPR), the latter being particularly valuable for small datasets due to its uncertainty estimation
-capability.
+capability\cite{}.
 
 Deep learning architectures include feedforward neural networks and, more notably, graph neural networks (GNNs), which
 are well-suited for materials modelling due to their ability to represent variable-sized atomic graphs with complex
-bonding topologies.
+bonding topologies\cite{Batzner2022-fd, Deng2023-tg, Rosen2022-pw}.
 
 % ---------- %
 
 The input to these models typically consists of numerical representations of atomic configurations known as descriptors.
 
 Geometric descriptors include bond lengths, coordination numbers, angular distributions, $n$-body distribution
-functions, and radial symmetry functions; many of which feature prominently in Behler-Parrinello-type neural networks.
+functions, and radial symmetry functions; many of which feature prominently in Behler-Parrinello-type neural networks\cite{Behler2007-nu, Zuo2019-wo}.
 
 Chemical descriptors such as electronegativity differences and Bader charges capture bonding character and charge
-transfer.
+transfer\cite{Schutt2019-sz, Rosen2022-pw}.
 
 Electronic descriptors like partial density of states (PDOS) and local work functions are relevant for predicting band
-alignment and interfacial transport properties.
+alignment and interfacial transport properties\cite{Gerber2023-yd}.
 
 Interface-specific features, such as interfacial roughness or vacuum level offsets, are particularly crucial in 2D|3D
-and mixed-dimensional heterostructures.
+and mixed-dimensional heterostructures\cite{Taylor2023-wh, Butler2019-ws, Di_Liberto2022-gz}.
 
 % ---------- %
 
-To support learning across such heterogeneous and high-dimensional features, symmetry-invariant and scale-independent
-representations have become increasingly important.
+Learning across high-dimensional and heterogeneous structural features requires symmetry-invariant and scale-independent
+representations, ensuring that physically equivalent systems yield consistent outputs.
 
-These ensure that models generalise across materials with different atom counts or lattice sizes.
+These enable generalisation across materials with different atom counts or lattice sizes\cite{Batzner2022-fd, Bartok2017-tk, Schutt2019-sz}.
 
-Dimensionality reduction methods and learned embeddings (e.g. via autoencoders or message passing) are frequently used
-to compress structural information into a lower-dimensional latent space optimised for prediction.
+To support this, models often use learned embeddings; such as message passing networks or autoencoders, to map complex
+structural data into a lower-dimensional latent space optimised for prediction\cite{Batzner2022-fd, Bartok2017-tk}.
 
-% todo: handle note "word soup"...
 
 % ---------- %
 
 The datasets used to train such models vary in size and fidelity.
 
 They often derive from high-throughput DFT calculations available in public repositories such as the Materials Project
-or AFLOW.
+or AFLOW\cite{}.
 
 % ---------- %
 
@@ -957,21 +1309,21 @@ or AFLOW.
 Machine learning (ML) has emerged as a promising strategy for accelerating materials modelling, particularly in the
 context of complex interfacial systems.
 
-Its strengths lie chiefly in efficiency, scalability, and adaptability.
+Its strengths lie chiefly in efficiency, scalability, and adaptability\cite{Batzner2022-fd, Khot2025-hh, Schutt2018-xc}.
 
 ML models, once trained, can rapidly approximate formation energies, surface reactivities, and stability metrics for
 thousands of configurations, many of which would be prohibitively expensive to assess using first-principles methods
 alone.
 
 This computational efficiency enables exploration of broader configurational and chemical spaces, including systems with
-disorder, stacking faults, or metastable structures that pose challenges for traditional simulations.
+disorder, stacking faults, or metastable structures that pose challenges for traditional simulations\cite{Batzner2022-fd, Rosen2022-pw, Schutt2018-xc}.
 
 % ---------- %
 
-Another key advantage is the capacity of ML to capture subtle, non-linear correlations in high-dimensional datasets.
+Another key advantage is the capacity of ML to capture subtle, non-linear correlations in high-dimensional datasets\cite{Batzner2022-fd, Schutt2018-xc, Wang2024-tn}.
 
 When used in conjunction with tools such as ARTEMIS or RAFFLE, ML can assist not only in predicting energetics, but also
-in prioritising candidate geometries during structure generation.
+in prioritising candidate geometries during structure generation\cite{Taylor2020-nl, raffle_paper}.
 
 % ---------- %
 
@@ -981,17 +1333,17 @@ A foremost concern is their dependence on the training dataset: models typically
 known examples but generalise poorly to unseen chemistries or extreme geometries.
 
 This limits their reliability when extrapolating to novel material classes or interface types, unless training sets are
-curated with care to ensure coverage of relevant chemical and structural motifs.
+curated with care to ensure coverage of relevant chemical and structural motifs\cite{Schutt2017-ge, Schutt2019-sz, Butler2019-ws}.
 
 % ---------- %
 
 Another limitation is interpretability.
 
 While classical models (e.g. those based on density functional theory) yield physically grounded outputs, such as charge
-densities or band structures, many ML models operate as statistical black boxes.
+densities or band structures, many ML models operate as statistical black boxes\cite{Batzner2022-fd, Schutt2017-ge, Schutt2019-sz}.
 
 Though efforts are underway to integrate physically meaningful descriptors (e.g. n-body distribution functions, local
-work function, or Bader charges), ensuring transparency and robustness remains a work in progress.
+work function, or Bader charges), ensuring transparency and robustness remains a work in progress\cite{Batzner2022-fd}.
 
 % ---------- %
 
@@ -1001,7 +1353,7 @@ For systems exhibiting emergent interfacial phases, or electronic reconstruction
 many-body perturbation theory remain necessary for validation and refinement.
 
 As such, a hybrid strategy is often advocated; using ML to pre-screen candidate structures and flag configurations for
-further high-accuracy assessment.
+further high-accuracy assessment\cite{Leung2020-tv, Uhrin2025-ba, Wang2024-tn}.
 
 % ---------- %
 
@@ -1026,7 +1378,7 @@ passing neural networks (MPNNs), tailored for high-accuracy and scalable force f
 
 Unlike earlier MPNNs which rely primarily on two-body invariant messages, MACE employs many-body interactions and
 equivariant tensor contractions to capture angular and chemical complexity with improved expressivity and data
-efficiency.
+efficiency\cite{Batatia2022-xz}.
 
 % ---------- %
 
@@ -1035,11 +1387,7 @@ One notable strength of MACE is its capacity to reach state-of-the-art accuracy 
 
 For instance, in extrapolation tasks involving out-of-distribution molecular geometries or high-temperature
 trajectories, MACE (particularly with $L=2$) has demonstrated superior performance and robustness relative to competing
-models such as NequIP and BOTNet.
-
-% ---------- %
-
-% todo: add details on FIRE relaxation reference VASP relaxation in 2.3
+models such as NequIP and BOTNet\cite{Batatia2022-xz, Batzner2022-fd}.
 
 % ---------- %
 
@@ -1051,7 +1399,7 @@ ChgNet is a neural network potential that incorporates both atomic positions and
 prediction framework, thereby explicitly learning charge transfer phenomena.
 
 This is particularly relevant for interfaces where electrostatics, dipole formation, and local charge accumulation
-significantly affect electronic properties such as band alignment.
+significantly affect electronic properties such as band alignment\cite{Deng2023-tg, Pitfield2025-ah}.
 
 
 % ---------- %
@@ -1063,35 +1411,15 @@ significantly affect electronic properties such as band alignment.
 In the context of this project, MLPs like MACE and ChgNet offer distinct but synergistic advantages.
 
 MACE, with its speed, high accuracy, and symmetry-respecting architecture, is well-suited for structure relaxation and
-force prediction across multi-material junctions.
+force prediction across multi-material junctions\cite{Batatia2022-xz}.
 
 ChgNet, on the other hand, may provide more faithful predictions of electronic interface effects arising from local
-charge redistribution.
+charge redistribution\cite{Deng2023-tg}.
 
 % ---------- %
 
 Therefore, hybrid workflows that use MLPs for broad structural exploration, followed by targeted DFT recalculations for
-ambiguous configurations, are increasingly being adopted.
-
-% ---------- %
-
-The eventual goal is to integrate MLPs into an active learning pipeline alongside tools like RAFFLE or ARTEMIS,
-facilitating the generation, screening, and optimisation of candidate interface structures at scale.
-
-% todo: address note "should be in intro"
-
-% ---------- %
-
-% ---- where did this come from? ---- %
-% todo: find if i want to keep this!
-Physics-based methods, most notably Density Functional Theory (DFT), provide high accuracy for local bonding
-environments and band structure prediction.
-
-However, the computational scaling of standard Kohn-Sham DFT---typically $\mathcal{O}(N^3)$ with respect to system
-size---renders large or disordered interface simulations intractable without approximation.
-
-Even when feasible, DFT struggles to capture extended features such as long-range strain relaxation, misfit
-dislocations, and spatially diffuse defect states that dominate realistic interface behaviour.
+ambiguous configurations, are increasingly being adopted\cite{Gerber2023-yd, Rosen2022-pw, Schutt2019-sz}.
 
 % ---------- %
 
@@ -1102,10 +1430,10 @@ Nonetheless, they too face structural limitations.
 
 MLPs require extensive, representative training datasets, typically derived from DFT calculations, and their performance
 deteriorates when applied to configurations involving unseen chemistries, surface reconstructions, or high strain
-regimes.
+regimes\cite{Batzner2022-fd, Owen2024-wp, Wang2024-tn}.
 
 Furthermore, many ML models lack rigorous uncertainty quantification, making it difficult to detect failure modes in
-out-of-distribution predictions.
+out-of-distribution predictions\cite{Leitherer2023-ew}
 
 % ---------- %
 
@@ -1118,19 +1446,6 @@ inferred from the properties of the isolated constituents alone.
 Notably, simple models like Anderson's rule have been shown to systematically fail in 2D and 2D|3D heterostructures,
 necessitating corrections such as $\Delta E_\Gamma$ and $\Delta E_\mathrm{IF}$ that explicitly depend on the atomic-scale interface
 structure and electrostatics.
-
-% ---------- %
-
-While ML and physics-based models have complementary strengths, neither is sufficient in isolation for the reliable
-prediction of interfacial behaviour.
-
-Their limitations motivate the development of hybrid workflows, such as embedding physical constraints into ML
-architectures, or coupling MLP-based screening with selective DFT refinement.
-
-These approaches aim to achieve a balance between scalability, accuracy, and generalisability---a balance that remains at
-the forefront of interface modelling challenges.
-
-% todo: figure out if i want to keep this, remnant of chopping and changing %
 
 % ---------- %
 
