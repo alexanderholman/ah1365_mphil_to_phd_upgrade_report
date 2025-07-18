@@ -1644,12 +1644,12 @@ supercells or faceted configurations\cite{Batzner2022-fd, Uhrin2025-ba}.
 Finally, inconsistencies in training labels present an often-overlooked source of predictive error.
 
 Energies obtained from high-throughput DFT pipelines can vary depending on pseudopotential choice, relaxation
-tolerances, or convergence thresholds.
+tolerances, or convergence thresholds\cite{Rosen2022-pw, Uhrin2025-ba}.
 
-In interfacial contexts, these uncertainties are magnified by metastability and complex relaxation pathways.
+In interfacial contexts, these uncertainties are magnified by metastability and complex relaxation pathways.\cite{needed}
 
 Some datasets rely on static, unrelaxed geometries or surrogate models, further undermining the reliability of ground
-truth energetics.
+truth energetics\cite{Gerber2023-yd, Uhrin2025-ba}.
 
 % ---------- %
 
@@ -1660,7 +1660,7 @@ Addressing these limitations will require a multi-pronged strategy involving bro
 improved descriptors attuned to interfacial physics, and integration of uncertainty quantification into ML workflows.
 
 Hybrid schemes, where MLPs perform large-scale screening followed by selective DFT refinement, may offer a viable path
-forward.
+forward\cite{needed}.
 
 % ---------- %
 
@@ -1669,10 +1669,10 @@ forward.
 % ---------- %
 
 Recent years have seen rapid developments in the modelling of interface structures, driven both by methodological
-advances and by the growing technological importance of heterostructured materials.
+advances and by the growing technological importance of heterostructured materials\cite{Butler2019-ws, Gerber2023-yd, Khot2025-hh}.
 
 Interface prediction now spans a range of computational approaches, from first-principles calculations and
-high-throughput screening to data-driven and machine learning (ML) methods.
+high-throughput screening to data-driven and machine learning (ML) methods\cite{Pyzer-Knapp2025-uq, Khot2025-hh}.
 
 This section provides an overview of the current state-of-the-art, establishing the context for the subsequent
 discussion of recent studies (Section 2.5.1), the positioning of this project's methodology (Section 2.5.2), and
@@ -1686,17 +1686,17 @@ two crystal structures.
 
 When integrated with rapid energy evaluation, either via density functional theory (DFT) or machine-learned potentials
 (MLPs), these tools allow the configurational space of interface structures to be sampled more broadly and with greater
-fidelity.
+fidelity\cite{artemis_paper, Gerber2023-yd}.
 
 In parallel, studies have increasingly sought to move beyond idealised, coherent interfaces to include semi-coherent,
-faceted, and amorphous boundaries, reflecting the complexity of real materials under fabrication conditions.
+faceted, and amorphous boundaries, reflecting the complexity of real materials under fabrication conditions\cite{Davies2024-ju, Peschel2024-et, Khot2025-hh}.
 
 % ---------- %
 
 Efforts have also been made to improve the prediction of interfacial electronic properties, such as band alignment.
 
 Where traditional rules like Anderson's rule fail, corrective models based on physically grounded terms, such as
-$\Delta E_{\Gamma}$ and $\Delta E_{\mathrm{IF}}$, have been proposed and validated across a range of 2D materials.
+$\Delta E_{\Gamma}$ and $\Delta E_{\mathrm{IF}}$, have been proposed and validated across a range of 2D materials\cite{Davies2024-ju}.
 
 Such corrections are essential for capturing charge transfer and hybridisation effects at interfaces, and form an
 important bridge between local structure and electronic response.
@@ -1712,7 +1712,7 @@ property prediction, setting the stage for a more autonomous and predictive fram
 % ---------- %
 
 Recent years have witnessed a pronounced expansion in methodologies for predicting interface structures, driven by the
-convergence of first-principles modelling, high-throughput screening, and data-driven inference.
+convergence of first-principles modelling, high-throughput screening, and data-driven inference\cite{Gerber2023-yd, Leitherer2023-ew, Pyzer-Knapp2025-uq}.
 
 % ---------- %
 
@@ -1724,18 +1724,18 @@ capturing configurational complexity, long-range strain, and emergent phenomena 
 Hybrid methodologies now dominate the landscape of ab initio interface prediction. Notable among them is the
 \textsc{ARTEMIS} tool developed by Taylor et al., which automates the generation of candidate interface structures by
 identifying lattice-matched slabs, multiple surface terminations, and lateral shifts across a wide range of Miller
-planes.
+planes\cite{artemis_paper}.
 
 % ---------- %
 
 Shortly after, Taylor et al.\ introduced the \textsc{RAFFLE}, with Pitfield et al.\ introducing methodology, combining
 empirical void-filling algorithms with iterative statistical descriptors to model metastable and low-symmetry
-reconstructions.
+reconstructions\cite{raffle_paper}.
 
 % ---------- %
 
 Constrained variants of the Minima-Hopping Method (MHM) allow for controlled exploration of grain boundary
-reconstructions by varying atomic densities and introducing geometric constraints.
+reconstructions by varying atomic densities and introducing geometric constraints\cite{needed}.
 
 These approaches yield more realistic reconstructions than fixed-stoichiometry DFT or classical potentials, especially
 in systems like silicon where interface states are sensitive to atomic arrangement and misfit accommodation.
@@ -1744,9 +1744,11 @@ in systems like silicon where interface states are sensitive to atomic arrangeme
 
 Machine learning (ML) is increasingly embedded into the prediction workflow. Gerber et al.\ developed the
 \textsc{InterMatch} framework, which leverages high-throughput DFT databases to train ML models that guide lattice
-matching and stacking predictions in 2D systems. At the electronic level, Davies et al.\ proposed physically motivated
-corrections to band alignment, namely $\Delta E_\Gamma$ and $\Delta E_{\mathrm{IF}}$, to extend Anderson's rule and
-account for hybridisation and interface dipoles in 2D heterostructures.
+matching and stacking predictions in 2D systems\cite{Gerber2023-yd}.
+
+At the electronic level, Davies et al.\ proposed physically motivated corrections to band alignment, namely
+$\Delta E_\Gamma$ and $\Delta E_{\mathrm{IF}}$, to extend Anderson's rule and account for hybridisation and interface
+dipoles in 2D heterostructures\cite{Davies2024-ju}
 
 % ---------- %
 
@@ -1757,7 +1759,7 @@ Data scarcity for interfacial systems hampers generalisation, and most ML models
 Existing descriptors may fail to capture the broken symmetry, local dipoles, and charge redistribution unique to
 interfaces.
 
-Furthermore, many workflows truncate the configurational space prematurely or rely on geometric heuristics alone.
+Furthermore, many workflows truncate the configurational space prematurely or rely on geometric heuristics alone\cite{Pyzer-Knapp2025-uq, Khot2025-hh, Gerber2023-yd}.
 
 % ---------- %
 
@@ -1765,7 +1767,7 @@ There is increasing recognition that hybrid workflows, combining ML surrogates w
 \textsc{RAFFLE}, and validating critical configurations using DFT, offer a scalable route forward.
 
 This multiresolution strategy enables both efficient exploration and physically grounded evaluation of interfacial
-stability across diverse systems.
+stability across diverse systems\cite{artemis_paper, raffle_paper}.
 
 % ---------- %
 
@@ -1777,7 +1779,7 @@ Contemporary approaches to interface structure prediction combine symmetry-based
 screening, and density functional theory (DFT) relaxation.
 
 Tools such as \textsc{ARTEMIS} enable the systematic generation of interface candidates by identifying lattice
-commensurabilities and constructing multiple terminations and stacking arrangements from parent surfaces.
+commensurabilities and constructing multiple terminations and stacking arrangements from parent surfaces\cite{Taylor2020-nl}.
 
 However, the energetic evaluation of these candidates remains a bottleneck: full relaxation and total energy comparison
 using DFT is prohibitively expensive for systems exceeding a few hundred atoms.
@@ -1789,7 +1791,7 @@ To mitigate this, recent advances have introduced surrogate strategies that bypa
 InterMatch, a high-throughput framework proposed by Gerber \textit{et al.}, guides stacking predictions using
 pre-computed DFT databases and electrostatic heuristics.
 
-Yet such frameworks often lack spatial resolution or generalisability across chemically diverse or defective systems.
+Yet such frameworks often lack spatial resolution or generalisability across chemically diverse or defective systems\cite{Gerber2023-yd, Khot2025-hh}.
 
 % ---------- %
 
@@ -1804,7 +1806,7 @@ Machine-learned potentials (MLPs) such as MACE and E(3)-equivariant networks lik
 evaluation of interfacial configurations across large configurational spaces.
 
 This shift permits relaxation of structures at near-DFT accuracy, allowing researchers to explore interface separations,
-registry shifts, and metastable motifs that would be prohibitively expensive using standard ab initio methods.
+registry shifts, and metastable motifs that would be prohibitively expensive using standard ab initio methods\cite{Batatia2022-xz, Batzner2022-fd, Owen2024-wp}.
 
 % ---------- %
 
