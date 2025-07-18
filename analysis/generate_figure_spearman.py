@@ -95,7 +95,7 @@ def plot_spearman(df, comparison, rank_dft_col, rank_mlp_col, flag_col, broken_c
         # Compute Spearman ρ
         spearman_value, _ = spearmanr(mode_df[rank_dft_col], mode_df[rank_mlp_col])
 
-        ax1.set_title(f"Spearman – {comparison.replace('dft@dft', 'dft').replace('dft_dft', 'dft').replace('dft@mlp', 'mlp').replace('dft_mlp', 'mlp').replace('mlp@dft', 'mlp relaxed dft').replace('mlp_dft', 'mlp relaxed dft').replace('mlp@mlp', 'full mlp').replace('mlp_mlp', 'full mlp')} [{current_mode}]")
+        ax1.set_title(f"Spearman – {comparison.replace('_vs_', ' vs ').replace('dft@dft', 'dft').replace('dft_dft', 'dft').replace('dft@mlp', 'mlp').replace('dft_mlp', 'mlp').replace('mlp@dft', 'mlp relaxed dft').replace('mlp_dft', 'mlp relaxed dft').replace('mlp@mlp', 'full mlp').replace('mlp_mlp', 'full mlp')} [{current_mode}]")
         ax1.set_xlabel("DFT Rank")
         ax1.set_ylabel("MLP Rank")
         used_comparisons = [comparison]
