@@ -100,7 +100,7 @@ def plot_kendall(df, comp_dict, flag_col, broken_col, output_dir, mode, prefix):
         ax.legend(handles=marker_legend([comp_dict]), loc='best')
 
         fig.tight_layout()
-        outpath = output_dir / f"{prefix}_kendall_{comparison}_{current_mode}.png"
+        outpath = output_dir / f"{prefix}_kendall_{comparison.replace('dft@dft', 'unrelaxed_dft').replace('dft_dft', 'unrelaxed_dft').replace('dft@mlp', 'unrelaxed_mlp').replace('dft_mlp', 'unrelaxed_mlp').replace('mlp@dft', 'mlp_relaxed_dft').replace('mlp_dft', 'mlp_relaxed_dft').replace('mlp@mlp', 'full_mlp').replace('mlp_mlp', 'full_mlp')}_{current_mode}.png"
         fig.savefig(outpath, dpi=300)
         plt.close()
         print(f"✅ Saved {outpath}")
@@ -175,7 +175,7 @@ def main():
     ]
 
     for comp in selected:
-        flag_col = f"is_comparable_{comp['comparison'].replace('_vs_', '_').replace('dft@dft', 'unrelaxed_dft').replace('dft_dft', 'unrelaxed_dft').replace('dft@mlp', 'unrelaxed_mlp').replace('dft_mlp', 'unrelaxed_mlp').replace('mlp@dft', 'mlp_relaxed_dft').replace('mlp_dft', 'mlp_relaxed_dft').replace('mlp@mlp', 'full_mlp').replace('mlp_mlp', 'full_mlp')}"
+        flag_col = f"is_comparable_{comp['comparison'].replace('_vs_', '_')}"
         plot_kendall(df, comp, flag_col, args.is_broken_column, args.output_dir, args.mode, prefix)
 
     if args.comparison in (None, 'all'):

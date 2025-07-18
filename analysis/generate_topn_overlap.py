@@ -55,7 +55,8 @@ def plot_topn_overlaps(df, topns, output_dir, prefix):
     ax.set_xlabel("Comparison")
     ax.set_ylim(0, 1.05)
     ax.set_xticks(x)
-    ax.set_xticklabels(comparisons, rotation=15)
+    replaced_comparisons = [c.replace('_vs_', ' vs ').replace('dft@dft', 'dft').replace('dft_dft', 'dft').replace('dft@mlp', 'mlp').replace('dft_mlp', 'mlp').replace('mlp@dft', 'mlp relaxed dft').replace('mlp_dft', 'mlp relaxed dft').replace('mlp@mlp', 'full mlp').replace('mlp_mlp', 'full mlp') for c in comparisons]
+    ax.set_xticklabels(replaced_comparisons, rotation=15)
     ax.set_title("Top-N Agreement Between DFT and MLP Rankings")
     ax.legend(title="N")
 
