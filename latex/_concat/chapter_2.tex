@@ -1500,23 +1500,23 @@ explored later in this report:
 
   \item \textbf{Where do both ML and physics-based methods fall short?} \\
   DFT underestimates band gaps and struggles to capture emergent interfacial phenomena such as dipole formation, phase
-  reconstruction, or charge transfer without recourse to hybrid functionals or many-body perturbation theory\cite{Rosen2022-pw}.
+  reconstruction, or charge transfer without recourse to hybrid functionals or many-body perturbation theory\cite{Butler2019-ws, Leung2020-tv, Rosen2022-pw}.
 
   Conversely, ML models, especially those trained on bulk or idealised configurations, exhibit limited transferability
-  to chemically complex, strained, or disordered interfaces.
+  to chemically complex, strained, or disordered interfaces\cite{Wang2024-tn}.
 
   Without embedded physical constraints or domain-specific descriptors, ML models often fail to resolve interfacial
-  states, misfit dislocations, or partial intermixing.
+  states, misfit dislocations, or partial intermixing\cite{Leitherer2023-ew, Gerber2023-yd}.
 
   \item \textbf{Are there data or generalisation issues?} \\
   Interface-specific datasets are significantly less developed than those for bulk crystals, due in part to the vast
   configurational diversity of junctions and the lack of standardised repositories.
 
   This data sparsity hampers the ability of ML models to generalise across terminations, chemistries, or stacking
-  motifs.
+  motifs\cite{Butler2019-ws, Leung2020-tv}.
 
   Additionally, many early ML workflows lack symmetry-invariant and scale-independent representations, increasing the
-  risk of overfitting to specific atom counts or lattice types.
+  risk of overfitting to specific atom counts or lattice types\cite{Schutt2018-xc, Schutt2019-sz}.
 
 \end{itemize}
 
@@ -1527,7 +1527,7 @@ large-scale screening, DFT for high-fidelity validation, and structure-generatio
 efficient sampling of the configurational landscape.
 
 Such frameworks aim to balance accuracy, efficiency, and transferability in modelling the behaviour of realistic
-interfacial systems.
+interfacial systems\cite{Taylor2020-nl, raffle_paper, Deng2023-tg}.
 
 % ---------- %
 
@@ -1537,7 +1537,7 @@ interfacial systems.
 
 The configurational degrees of freedom, ranging from slip vectors, surface terminations, and intermixing patterns to
 stacking sequences and misfit accommodation, create a vast structural landscape that resists exhaustive exploration via
-conventional methods.
+conventional methods\cite{Schutt2019-sz, Leung2020-tv, Di_Liberto2022-gz}.
 
 % ---------- %
 
@@ -1547,12 +1547,12 @@ terminations, registry shifts, and interlayer relaxations produce an exponential
 The search space rapidly becomes unmanageable, especially in systems requiring large supercells to capture long-range
 strain or disorder.
 
-This renders brute-force density functional theory (DFT) calculations infeasible for comprehensive screening.
+This renders brute-force density functional theory (DFT) calculations infeasible for comprehensive screening\cite{Butler2019-ws, Gerber2023-yd}.
 
 % ---------- %
 
 \paragraph{Transferability of Machine-Learned Potentials.} Machine-learned interatomic potentials (MLPs), such as MACE
-and ChgNet, offer pathways to accelerate structural screening at near-DFT accuracy.
+and ChgNet, offer pathways to accelerate structural screening at near-DFT accuracy\cite{Batatia2022-xz, Deng2023-tg}.
 
 However, their performance is contingent upon the representativeness of the training data.
 
@@ -1566,7 +1566,7 @@ Despite significant progress in both first-principles and machine learning (ML) 
 the predictive modelling of material interfaces.
 
 These limitations arise not only from computational constraints but also from intrinsic mismatches between real
-interfacial complexity and the assumptions underpinning current models.
+interfacial complexity and the assumptions underpinning current models\cite{Gerber2023-yd, Uhrin2025-ba}.
 
 % ---------- %
 
@@ -1574,16 +1574,16 @@ Physics-based methods, most notably Density Functional Theory (DFT), provide hig
 environments and band structure prediction.
 
 Even when feasible, DFT struggles to capture extended features such as long-range strain relaxation, misfit
-dislocations, and spatially diffuse defect states that dominate realistic interface behaviour.
+dislocations, and spatially diffuse defect states that dominate realistic interface behaviour\cite{Batzner2022-fd, Gerber2023-yd}.
 
 % ---------- %
 
 MLPs require extensive, representative training datasets, typically derived from DFT calculations, and their performance
 deteriorates when applied to configurations involving unseen chemistries, surface reconstructions, or high strain
-regimes.
+regimes\cite{Batzner2022-fd, Owen2024-wp}.
 
 Furthermore, many ML models lack rigorous uncertainty quantification, making it difficult to detect failure modes in
-out-of-distribution predictions.
+out-of-distribution predictions\cite{Batzner2022-fd, Deng2023-tg}.
 
 % ---------- %
 
@@ -1595,10 +1595,10 @@ In contrast to bulk crystals, where structured repositories like the Materials P
 coverage, interface-specific datasets remain sparse.
 
 This is due to the combinatorial explosion of viable terminations, slip vectors, and orientations across material pairs,
-especially in mixed-dimensional systems.
+especially in mixed-dimensional systems\cite{Gerber2023-yd, Deng2023-tg, Leitherer2023-ew}.
 
 Existing databases tend to overrepresent a narrow set of lattice-matched, technologically prominent interfaces,
-introducing bias and hindering the model's capacity to generalise across broader chemical or structural classes.
+introducing bias and hindering the model's capacity to generalise across broader chemical or structural classes\cite{Di_Liberto2022-gz, Gerber2023-yd, Davies2024-ju}.
 
 % ---------- %
 
@@ -1607,10 +1607,10 @@ Another critical challenge is the lack of standardisation in how interface data 
 Unlike bulk materials, which can be described relatively easily by a set of structural features such as lattice
 constants and atomic compositions, interfaces require more complex descriptors, including local bond environments,
 atomic coordination numbers, and structural motifs that change drastically depending on orientation, termination, and
-strain.
+strain\cite{Gerber2023-yd, Wang2024-tn}.
 
 As a result, the design of robust and transferable machine learning models for interfaces is further complicated by the
-difficulty in developing universally applicable features that capture the intricate nature of interfacial systems.
+difficulty in developing universally applicable features that capture the intricate nature of interfacial systems\cite{Uhrin2025-ba, Khot2025-hh}.
 
 This problem is compounded by the lack of large, consistent datasets that integrate structural, energetic, and
 electronic data, making it harder for models to learn the subtle interactions that govern interface stability and
@@ -1620,24 +1620,24 @@ properties.
 
 Finally, the sheer diversity of possible interface configurations, especially for systems involving two-dimensional (2D)
 materials, complex oxides, or disordered solids, makes high-throughput DFT calculations or other first-principles
-methods impractical for exhaustive data collection.
+methods impractical for exhaustive data collection\cite{Chagarov2015-ol, Di_Liberto2022-gz}.
 
 To address these issues, there is a pressing need for hybrid data collection strategies that combine high-fidelity,
 physics-based methods with more scalable, data-driven approaches, such as machine learning potential models that can
-rapidly generate large datasets of interfacial configurations.
+rapidly generate large datasets of interfacial configurations\cite{Schutt2017-ge, Batzner2022-fd, Gerber2023-yd}.
 
 Additionally, targeted experimental datasets that validate theoretical predictions are essential for creating reliable
-and comprehensive interfaces databases.
+and comprehensive interfaces databases\cite{Hepplestone2010-vw, Schutt2019-sz, Gerber2023-yd}.
 
 % ---------- %
 
 Generalisation error is further amplified by suboptimal representation of interface-specific physics.
 
 Many descriptor schemes, such as SOAP vectors or radial symmetry functions, are optimised for bulk periodicity and fail
-to capture interfacial asymmetry, vacuum discontinuities, or broken symmetry.
+to capture interfacial asymmetry, vacuum discontinuities, or broken symmetry\cite{Zuo2019-wo}.
 
 Representations that do not enforce scale-invariance or rotational equivariance can also hinder model transferability to
-supercells or faceted configurations.
+supercells or faceted configurations\cite{Batzner2022-fd, Uhrin2025-ba}.
 
 % ---------- %
 
