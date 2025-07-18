@@ -48,7 +48,7 @@ def marker_legend(comps):
     return [
         mlines.Line2D([], [], color='black', marker=MARKERS[c['comparison']], linestyle='None', label=label)
         for c, label in zip(comps, [
-            'dft vs full mlp',
+            'dft vs mlp',
             'dft vs mlp',
             'mlp relaxed dft vs full mlp'
         ]) if c['comparison'] in MARKERS
@@ -94,9 +94,7 @@ def plot_kendall(df, comp_dict, flag_col, broken_col, output_dir, mode, prefix):
 
         ax.set_xlabel("MLP-evaluated Formation Energy (eV/atom)")
         ax.set_ylabel("DFT-evaluated Formation Energy (eV/atom)")
-        ax.set_title(f"Kendall τ = {kendall_tau:.3f} – {comparison} [{current_mode}]")
-        ax.annotate("Kendall τ reflects ordinal consistency,\nnot magnitude agreement",
-                    xy=(0.05, 0.95), xycoords='axes fraction', fontsize=10, ha='left', va='top')
+        ax.set_title(f"Kendall – {comparison.replace('dft@dft', 'dft').replace('dft_dft', 'dft').replace('dft@mlp', 'mlp').replace('dft_mlp', 'mlp').replace('mlp@dft', 'mlp relaxed dft').replace('mlp_dft', 'mlp relaxed dft').replace('mlp@mlp', 'full mlp').replace('mlp_mlp', 'full mlp')} [{current_mode}]")
         ax.legend(handles=marker_legend([comp_dict]), loc='best')
 
         fig.tight_layout()
@@ -146,9 +144,7 @@ def combine_all_comparisons(df, comp_list, broken_col, output_dir, mode, prefix)
 
         ax.set_xlabel("MLP-evaluated Formation Energy (eV/atom)")
         ax.set_ylabel("DFT-evaluated Formation Energy (eV/atom)")
-        ax.set_title(f"Kendall τ = {kendall_tau:.3f} – All Comparisons [{current_mode}]")
-        ax.annotate("Kendall τ reflects ordinal consistency,\nnot magnitude agreement",
-                    xy=(0.05, 0.95), xycoords='axes fraction', fontsize=10, ha='left', va='top')
+        ax.set_title(f"Kendall – All Comparisons [{current_mode}]")
         ax.legend(handles=marker_legend(comp_list), loc='best')
 
         fig.tight_layout()

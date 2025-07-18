@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 import matplotlib.colors as mcolors
 import matplotlib.patches as mpatches
 import matplotlib.lines as mlines
+from scipy.stats import spearmanr
 
 MARKERS = {
     'dft@dft_vs_mlp@mlp': 'o',
@@ -90,7 +91,11 @@ def plot_spearman(df, comparison, rank_dft_col, rank_mlp_col, flag_col, broken_c
                 ax2.plot([minv, maxv], [minv, maxv], 'k--', lw=1, label='y = x (invalid)')
 
         ax1.plot([minv, maxv], [minv, maxv], 'k--', lw=1, label='y = x')
-        ax1.set_title(f"Spearman Rank – {comparison} [{current_mode}]")
+
+        # Compute Spearman ρ
+        spearman_value, _ = spearmanr(mode_df[rank_dft_col], mode_df[rank_mlp_col])
+
+        ax1.set_title(f"Spearman – {comparison.replace('dft@dft', 'dft').replace('dft_dft', 'dft').replace('dft@mlp', 'mlp').replace('dft_mlp', 'mlp').replace('mlp@dft', 'mlp relaxed dft').replace('mlp_dft', 'mlp relaxed dft').replace('mlp@mlp', 'full mlp').replace('mlp_mlp', 'full mlp')} [{current_mode}]")
         ax1.set_xlabel("DFT Rank")
         ax1.set_ylabel("MLP Rank")
         used_comparisons = [comparison]
@@ -159,7 +164,7 @@ def combine_all_comparisons(df, comparisons, output_dir, mode, broken_col, prefi
                 ax2.plot([minv, maxv], [minv, maxv], 'k--', lw=1, label='y = x (invalid)')
 
         ax1.plot([minv, maxv], [minv, maxv], 'k--', lw=1, label='y = x')
-        ax1.set_title(f"Spearman Rank – All Comparisons [{current_mode}]")
+        ax1.set_title(f"Spearman – All Comparisons [{current_mode}]")
         ax1.set_xlabel("DFT Rank")
         ax1.set_ylabel("MLP Rank")
         ax1.legend(handles=marker_legend(used_comparisons) + [ax1.lines[0]], loc='best')
