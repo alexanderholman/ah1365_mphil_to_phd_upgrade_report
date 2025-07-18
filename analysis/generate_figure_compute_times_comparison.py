@@ -44,8 +44,8 @@ def plot_compute_times(df, output_dir, prefix):
     ax.plot(x_vals, dft_trend, linestyle="--", color="blue", label=f"DFT Trend ({dft_trend_formula})")
     ax.plot(x_vals, mlp_trend, linestyle="--", color="orange", label=f"MLP Trend ({mlp_trend_formula})")
 
-    ax.set_xlabel("Number of Electrons (interface_electron_n)")
-    ax.set_ylabel("Compute Time per Electron (s)")
+    ax.set_xlabel("Number of Electrons")
+    ax.set_ylabel("Compute Time per Electron")
     ax.set_title("Average Compute Time per Electron vs. Electron Count")
     ax.legend()
     ax.grid(True)
