@@ -95,13 +95,14 @@ evaluation.
 
 % ---------- %
 
-Interfaces were generated using the ARTEMIS toolkit.
+Interfaces were generated using the ARTEMIS toolkit (see \secref{sec:constructing_interfaces} for background on
+interface construction and lattice matching).
 
 For each pair of materials, up to 64 surface orientations (Miller planes) were explored to find possible ways the two
 materials could be stacked together.
 
 ARTEMIS searched for matching supercells by expanding the unit cells of both materials up to 8 times along the in-plane
-directions, looking for configurations with similar lattice vectors and angles.
+directions, looking for configurations with similar lattice vectors and angles (detailed in \secref{sec:lattice_mismatching}).
 
 This helps distribute mismatch over more atoms and reduce the per-cell strain.
 
@@ -120,7 +121,7 @@ stable and experimentally realisable.
 
 One strategy for achieving this is through supercell scaling: we try to match lattice constants $a$ and $a'$ of two
 materials by finding integers $n$ and $m$ such that $n \cdot a \approx m \cdot a'$, distributing the residual mismatch over multiple
-unit cells.
+unit cells (see discussion of supercell mismatch reduction in \secref{sec:lattice_mismatching}).
 
 For example, silicon and germanium have lattice constants of 5.45\,\AA{} and 5.66\,\AA{}, respectively.
 
@@ -150,8 +151,8 @@ Each increase in supercell size decreases the mismatch per unit cell by roughly 
 
 % ---------- %
 
-In addition to supercell scaling, the choice of interface orientation, described by Miller indices, can significantly
-influence atomic registry across the interface.
+In addition to supercell scaling, the choice of interface orientation, described by Miller indices (explained in
+\secref{sec:orientation_matching}), can significantly influence atomic registry across the interface.
 
 Each Miller plane represents a unique slice through the crystal lattice that exposes a specific atomic arrangement.
 
@@ -165,7 +166,8 @@ across the interface is maximised and valence electrons are not left unpaired.
 
 Each matched interface was constructed from two slabs, each 6 atomic layers thick, separated by a small vacuum gap.
 
-ARTEMIS then applied systematic shifts in the $a$ and $b$ directions to explore stacking offsets between the slabs.
+ARTEMIS then applied systematic shifts in the $a$ and $b$ directions to explore stacking offsets between the slabs
+(details of which are discussed in \secref{sec:artemis_algorithm}).
 
 Initially, zero-shift configurations were allowed, but these sometimes produced unphysical atomic overlaps along
 the $c$-axis.
