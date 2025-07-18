@@ -139,7 +139,12 @@ screening.
 
 % ---------- %
 
-% todo: add figure showing energy error vs. atom count or interface size.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{Upgrade_Report/analysis/plots/error_vs_electron_count.png}
+    \caption{Caption needed}
+    \label{fig:error_scaling}
+\end{figure}
 
 % ---------- %
 
@@ -297,7 +302,12 @@ pipeline screening.
 
 % ---------- %
 
-% todo: add figure showing surface energy (x-axis) vs. ΔE_IF (y-axis)
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{Upgrade_Report/analysis/plots/surface_vs_formation_energy.png}
+    \caption{Caption needed}
+    \label{fig:surface_to_formation_energy_correlation}
+\end{figure}
 
 % ---------- %
 
@@ -350,6 +360,15 @@ relevant interfaces.
 
 % ---------- %
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{Upgrade_Report/analysis/plots/raffle_workflow.jpg}
+    \caption{Used with permission from Taylor et al.\cite{raffle_paper, Pitfield2024-ra}.}
+    \label{fig:raffle_workflow}
+\end{figure}
+
+% ---------- %
+
 RAFFLE addresses this limitation by introducing stochastic perturbations within the interfacial zone.
 
 Using the \texttt{raffle\_generator} module, RAFFLE will:
@@ -389,10 +408,6 @@ By broadening the configurational diversity, RAFFLE aims to:
 Comparative relaxation studies will be conducted using both DFT and MLP pipelines to assess the energetic spread and
 ranking fidelity introduced by RAFFLE. A schematic comparing ARTEMIS-only versus RAFFLE-augmented structure sets is
 planned to visualise the expansion of configurational space.
-
-% ---------- %
-
-% todo: add schematic or figure comparing ARTEMIS vs. RAFFLE structure sets
 
 % ---------- %
 
@@ -466,10 +481,6 @@ The MLI predictor will integrate upstream with ARTEMIS and RAFFLE:
 
 This workflow could enable a fully ML-driven interface discovery pipeline; one that uses minimal DFT data to bootstrap
 structure generation, ranking, and model refinement.
-
-% ---------- %
-
-% todo: add schematic of MLI + ARTEMIS + RAFFLE integration pipeline
 
 % ---------- %
 

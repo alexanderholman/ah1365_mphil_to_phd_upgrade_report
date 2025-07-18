@@ -396,7 +396,48 @@ Average metrics across these categories are summarised in Table~\ref{tab:interfa
 
 % ---------- %
 
-% todo: add table with average metrics for each interface type
+\begin{table}
+\centering
+\caption{Average metrics for each interface type.}
+\label{tab:interface_metrics}
+\begin{tabular}{lrrrrrr}
+\toprule
+    Interface Type &   N &  Spearman $\rho$ &  Kendall $\tau$ &  RMSE (eV) &  MAE (eV) &  Top-10 Overlap \\
+\midrule
+\ce{C}|\ce{X} or \ce{X}|\ce{C} & 82 & 0.954 & 0.830 & 4.484 & 1.346 & 8 \\
+\ce{C}|\ce{X} & 3 & -0.500 & -0.333 & 21.575 & 21.575 & 3 \\
+\ce{C}|\ce{Si} & 3 & -0.500 & -0.333 & 21.575 & 21.575 & 3 \\
+\ce{X}|\ce{C} & 79 & 0.949 & 0.818 & 1.787 & 0.578 & 8 \\
+\ce{Si}|\ce{C} & 79 & 0.949 & 0.818 & 1.787 & 0.578 & 8 \\
+\ce{Si}|\ce{X} or \ce{X}|\ce{Si} & 450 & 0.990 & 0.941 & 232.067 & 45.848 & 8 \\
+\ce{Si}|\ce{X} & 350 & 0.991 & 0.947 & 238.896 & 45.297 & 8 \\
+\ce{Si}|\ce{C} & 79 & 0.949 & 0.818 & 1.787 & 0.578 & 8 \\
+\ce{Si}|\ce{Ge} & 150 & 0.908 & 0.836 & 364.914 & 104.743 & 8 \\
+\ce{Si}|\ce{Sn} & 105 & 0.988 & 0.920 & 1.807 & 0.748 & 8 \\
+\ce{X}|\ce{Si} & 100 & 0.989 & 0.931 & 206.397 & 47.779 & 10 \\
+\ce{C}|\ce{Si} & 3 & -0.500 & -0.333 & 21.575 & 21.575 & 3 \\
+\ce{Ge}|\ce{Si} & 58 & 0.966 & 0.900 & 170.898 & 40.365 & 10 \\
+\ce{Sn}|\ce{Si} & 23 & 0.978 & 0.897 & 333.921 & 102.330 & 10 \\
+\ce{Si}|\ce{Si} & 16 & 0.956 & 0.846 & 1.251 & 1.147 & 10 \\
+\ce{Ge}|\ce{X} or \ce{X}|\ce{Ge} & 506 & 0.990 & 0.936 & 207.183 & 36.806 & 4 \\
+\ce{Ge}|\ce{X} & 229 & 0.994 & 0.952 & 86.663 & 11.583 & 10 \\
+\ce{Ge}|\ce{Si} & 58 & 0.966 & 0.900 & 170.898 & 40.365 & 10 \\
+\ce{Ge}|\ce{Sn} & 104 & 0.991 & 0.952 & 1.539 & 0.828 & 9 \\
+\ce{X}|\ce{Ge} & 277 & 0.982 & 0.927 & 268.705 & 57.659 & 8 \\
+\ce{Si}|\ce{Ge} & 150 & 0.908 & 0.836 & 364.914 & 104.743 & 8 \\
+\ce{Sn}|\ce{Ge} & 60 & 0.977 & 0.911 & 0.904 & 0.582 & 5 \\
+\ce{Ge}|\ce{Ge} & 67 & 0.982 & 0.929 & 19.584 & 3.361 & 10 \\
+\ce{Sn}|\ce{X} or \ce{X}|\ce{Sn} & 322 & 0.996 & 0.958 & 89.258 & 8.130 & 8 \\
+\ce{Sn}|\ce{X} & 98 & 0.990 & 0.936 & 161.773 & 24.702 & 10 \\
+\ce{Sn}|\ce{Si} & 23 & 0.978 & 0.897 & 333.921 & 102.330 & 10 \\
+\ce{Sn}|\ce{Ge} & 60 & 0.977 & 0.911 & 0.904 & 0.582 & 5 \\
+\ce{X}|\ce{Sn} & 224 & 0.997 & 0.962 & 1.722 & 0.879 & 8 \\
+\ce{Si}|\ce{Sn} & 105 & 0.988 & 0.920 & 1.807 & 0.748 & 8 \\
+\ce{Ge}|\ce{Sn} & 104 & 0.991 & 0.952 & 1.539 & 0.828 & 9 \\
+\ce{Sn}|\ce{Sn} & 15 & 0.878 & 0.725 & 2.241 & 2.154 & 9 \\
+\bottomrule
+\end{tabular}
+\end{table}
 
 % ---------- %
 
@@ -587,12 +628,11 @@ under-coordinated bonding environments.
 
 % ---------- %
 
-% todo: check if i want to keep the figure below
-%\begin{figure}[h]
-%    \centering
-%    \includegraphics[width=0.7\textwidth]{analysis/plots/results_lower_Si_spearman_all_comparisons_valid.png}
-%    \caption{Spearman rank correlation for Si interfaces, showing weak rank preservation in lower-Si systems due to geometric artefacts and interfacial strain.}
-%\end{figure}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.7\textwidth]{analysis/plots/results_lower_Si_spearman_all_comparisons_valid.png}
+    \caption{Spearman rank correlation for Si interfaces, showing weak rank preservation in lower-Si systems due to geometric artefacts and interfacial strain.}
+\end{figure}
 
 % ---------- %
 
@@ -607,26 +647,25 @@ Germanium and tin systems showed robust rank preservation and strong Top-N scree
 
 % ---------- %
 
-% todo: check if i want to keep the figure below
-%\begin{table}[h]
-%    \centering
-%    \caption{Performance metrics for Si interfaces (Si in upper slab) from \texttt{analysis/stats_upper_Si.csv}. Lower-slab Si configurations exhibited even poorer rank correlation (not shown), highlighting geometry sensitivity.}
-%    \begin{tabular}{lcccccc}
-%        Comparison & Spearman & Kendall & RMSE & MAE & Top-10 Overlap \\
-%        \hline
-%        DFT@DFT vs MLP@MLP & 0.46 & 0.31 & 7.48 & 3.36 & 3 \\
-%    \end{tabular}
-%\end{table}
+\begin{table}[h]
+    \centering
+    \caption{Performance metrics for Si interfaces (Si in upper slab). Lower-slab Si configurations exhibited even poorer rank correlation (not shown), highlighting geometry sensitivity.}
+    \begin{tabular}{lccccc}
+        Comparison & Spearman & Kendall & RMSE (eV) & MAE (eV) & Top-10 Overlap \\
+        \hline
+        \ce{X}|\ce{Si} 100 & 0.989 & 0.931 & 206.397 & 47.779 & 10 \\
+        \ce{C}|\ce{Si} 3 & -0.500 & -0.333 & 21.575 & 21.575 & 3 \\
+        \ce{Ge}|\ce{Si} 58 & 0.966 & 0.900 & 170.898 & 40.365 & 10 \\
+        \ce{Sn}|\ce{Si} 23 & 0.978 & 0.897 & 333.921 & 102.330 & 10 \\
+        \ce{Si}|\ce{Si} 16 & 0.956 & 0.846 & 1.251 & 1.147 & 10 \\
+    \end{tabular}
+\end{table}
 
 % ---------- %
 
-Although direct MLP-on-DFT-relaxed structure evaluations (MLP@DFT) were not included due to computational cost, the
-study revealed that relaxation, evaluation consistency (e.g. MLP@MLP vs DFT@DFT) influences error, and future
+Although direct MLP-on-DFT-relaxed structure evaluations (DFT relacex MLP) were not included due to computational cost, the
+study revealed that relaxation, evaluation consistency (e.g. full MLP vs full DFT) influences error, and future
 cross-evaluation may further clarify error sources.
-
-% ---------- %
-
-% todo: [placeholder, for: future figure showing relaxation-evaluation matrix comparisons]
 
 % ---------- %
 
@@ -668,6 +707,8 @@ DFT relaxation.
 
 % ---------- %
 
+\subsection{Generalisation and Limitations}
+
 MLPs offer significant computational speed advantages and can be reliably used for preliminary screening in systems with
 well-represented local bonding environments, such as Ge, Sn, and some C|X combinations.
 
@@ -678,6 +719,11 @@ Without targeted retraining or domain-specific corrections, MLP-based prediction
 
 % ---------- %
 
-% todo: add Equation suggestion: O(n) comparison of DFT vs MLP computational cost per electron.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{Upgrade_Report/analysis/plots/results_compute_time_comparison.png}
+    \caption{Caption needed}
+    \label{fig:electron_compute_time}
+\end{figure}
 
 % ---------- %

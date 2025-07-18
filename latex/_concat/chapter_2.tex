@@ -293,27 +293,65 @@ ARTEMIS automates the construction of chemically realistic interfaces by followi
 \begin{enumerate}
     \item \textbf{Surface selection:} The user specifies Miller indices \((hkl)_A, (h'k'l')_B\) for surfaces of
     materials A and B, typically choosing low-energy or experimentally relevant facets.
+
     \item \textbf{Slab generation:} Each bulk crystal is cleaved along the chosen Miller planes, producing slabs with
     sufficient vacuum to avoid interactions between periodic images and ensuring stoichiometric and chemically
-    reasonable terminations. Multiple possible surface terminations can be considered if relevant.
+    reasonable terminations.
+
+    Multiple possible surface terminations can be considered if relevant.
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.85\textwidth]{Upgrade_Report/analysis/plots/artemis_surface_identification_workflow.jpg}
+        \caption{caption needed. Used with permission from Taylor et al.\cite{artemis_paper}.}
+        \label{fig:artemis_surface_identification}
+    \end{figure}
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.85\textwidth]{Upgrade_Report/analysis/plots/artemis_lattice_rotations_terminations.jpg}
+        \caption{caption needed. Used with permission from Taylor et al.\cite{artemis_paper}.}
+        \label{fig:artemis_rotations_and_terminations}
+    \end{figure}
+
     \item \textbf{2D lattice matching:} ARTEMIS employs a lattice-matching algorithm based on the Zur-McGill method,
     seeking integer matrices \(M_A\) and \(M_B\) that closely approximate the two materials' lattice vectors:
     \[
     M_A [\mathbf{a}_1^A, \mathbf{a}_2^A] \approx M_B [\mathbf{a}_1^B, \mathbf{a}_2^B],
     \]
-    thereby minimizing lattice mismatch strain\cite{artemis_paper, ZurMcGill1984-lattice}. Candidate supercells (integer multiples of slab
-    lattice vectors) are generated and compared to find commensurate matches within a small strain tolerance (typically
-    \(<5\%\)). Slight rotations can also be explored at this stage to further reduce mismatch.
+    thereby minimizing lattice mismatch strain\cite{artemis_paper, ZurMcGill1984-lattice}.
+
+    Candidate supercells (integer multiples of slab lattice vectors) are generated and compared to find commensurate
+    matches within a small strain tolerance (typically \(<5\%\)).
+
+    Slight rotations can also be explored at this stage to further reduce mismatch.
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.85\textwidth]{Upgrade_Report/analysis/plots/artemis_lattice_matching_workflow.jpg}
+        \caption{caption needed. Used with permission from Taylor et al.\cite{artemis_paper}.}
+        \label{fig:artemis_lattice_matching}
+    \end{figure}
+
     \item \textbf{Registry enumeration (in-plane shifts):} Given a commensurate lattice match, ARTEMIS systematically
     explores multiple lateral translations (\(\mathbf{d}_{\parallel}\)) of one slab relative to the other.
 
     Fractional offsets (grid sampling) ensure that all high-symmetry and distinct stacking configurations are sampled,
     significantly influencing the resulting atomic registry and bonding environment.
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.85\textwidth]{Upgrade_Report/analysis/plots/artemis_shifts_and_swaps.jpg}
+        \caption{The top and bottom crystal slabs are laterally displaced relative to each other to sample different in-plane ($\Delta a$, $\Delta b$) and out-of-plane ($\Delta c$) alignments. Top right shows shifts applied in the interface plane; bottom right shows shifts along the stacking direction. (b) \textit{Swaps}: Atomic layers near the interface are interchanged across the boundary to introduce intermixing. The left shows the initial unmixed interface. The right shows three distinct swap configurations (top, middle, bottom), separated by bold horizontal lines. Vertical black lines indicate periodic unit cell boundaries; atoms on a boundary are mirrored across the opposite edge. Used with permission from Taylor et al.\cite{artemis_paper}.}
+        \label{fig:artemis_shifts_and_swaps}
+    \end{figure}
+
     \item \textbf{Vertical optimization (out-of-plane separation):} For each in-plane shifted configuration, the
     perpendicular slab separation (\(\mathbf{d}_{\perp}\)) is adjusted to ensure realistic bonding distances.
 
     Slabs are moved toward each other until physically meaningful interatomic distances or bonding criteria are
     satisfied, avoiding atomic overlaps or excessive gaps.
+
     \item \textbf{Filtering candidates:} To manage computational complexity, ARTEMIS filters interface candidates based
     on:
         \begin{itemize}
@@ -321,6 +359,7 @@ ARTEMIS automates the construction of chemically realistic interfaces by followi
             \item Maximum strain thresholds (usually below 5\%) to ensure structural plausibility.
             \item Chemical feasibility, such as minimizing dangling or unsatisfied bonds at the interface.
         \end{itemize}
+
     \item \textbf{Output generation:} Finally, ARTEMIS outputs the most feasible interface candidates as initial
     structures for further relaxation and analysis via density functional theory (DFT) or machine-learned potentials
     (MLPs).
@@ -331,13 +370,10 @@ ARTEMIS automates the construction of chemically realistic interfaces by followi
 
 % ---------- %
 
-% todo: add figure of ARTEMIS algorithm
-
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.85\textwidth]{figures/artemis_algorithm.png}
-    \caption{UML-style flowchart detailing ARTEMIS algorithm stages: slab generation, Miller-plane matching, supercell
-    optimization, registry sampling, and filtering. Adapted from Taylor et al.\cite{artemis_paper}.}
+    \includegraphics[width=0.85\textwidth]{Upgrade_Report/analysis/plots/artemis_workflow.jpg}
+    \caption{UML-style flowchart detailing ARTEMIS workflow. Used with permission from Taylor et al.\cite{artemis_paper}.}
     \label{fig:artemis_uml}
 \end{figure}
 
