@@ -29,20 +29,10 @@ rigorous characterisation and predictive modelling of interfaces indispensable f
 
 \label{para:material_interface_definition} % ---------- %
 
-A material interface is the region where two distinct solids meet and form a junction, commonly arising in
-heterostructures, grain boundaries, or thin film systems.
-
-The local structure at the interface can include strain fields, atomic reconstruction, and intermixing of constituent
-elements, all of which can significantly influence the behaviour of the composite system.
-
 In this research, material interfaces are studied predominantly through \textit{ab initio} methods, particularly Density
-Functional Theory (DFT), with a focus on predicting and analysing the structural and energetic properties of 2D|2D and
-2D|3D junctions.
+Functional Theory (DFT) and new machine-learned interatomic potentials (MLPs).
 
 Interfaces are modelled as systems with finite thickness that bridge two crystalline lattices.
-
-Depending on their geometric orientation, interfaces are categorised as either \emph{stacked}, where a 2D layer rests
-atop a substrate, or \emph{lateral}, where edge-on growth leads to in-plane bonding between dissimilar materials.
 
 Band offsets at interfaces, often deviating from predictions by simple models like Anderson's rule, are governed by
 local charge redistribution, dipole formation, and interface-specific states.
@@ -119,14 +109,6 @@ electronegativity, band gaps, and ionic/covalent character.
 Heterojunctions are central to semiconductor devices, solar cells, and catalysis, often giving rise to emergent
 interfacial dipoles, states, or reconstructed bonding motifs.
 
-\label{para:interface_classifications_continued} % ---------- %
-
-These classifications are not mutually exclusive; real interfaces may be simultaneously lateral and semi-coherent, or
-stacked but chemically graded.
-
-Understanding these distinctions is essential when generating or interpreting simulation results for both idealised and
-realistic interfacial systems.
-
 \label{para:interface_effects_2D_oxides} % ---------- %
 
 Material interfaces influence a wide array of physical and electronic properties, often determining the functional
@@ -138,10 +120,12 @@ electron systems.
 \label{para:band_alignment_interfaces} % ---------- %
 
 Perhaps the most critical electronic property influenced by interfaces is the band alignment between materials.
+
 Misalignment of conduction and valence band edges creates energy barriers or wells that determine whether an interface
 behaves as a Schottky barrier, Ohmic contact, or heterojunction.
 
 These alignments are crucial for device operation in field-effect transistors, diodes, and photovoltaics.
+
 Interfacial dipoles, charge transfer, and electronic reconstruction can shift the effective band edges, often
 invalidating simple rules like Anderson's model.
 
@@ -217,7 +201,7 @@ environment, functional regions that frequently control and even dominate the ph
 
 As materials and devices are engineered at ever smaller scales, the role of interfaces becomes more pronounced.
 
-In conventional bulk systems, interfaces may be limited to grain boundaries or inter-phase regions.
+In conventional bulk systems, interfaces may be limited to grain boundaries or interphase regions.
 
 In nanomaterials, layered heterostructures, and device-scale systems, interfacial regions can constitute a
 non-negligible fraction of the total volume or surface area.
@@ -231,7 +215,7 @@ Yet despite their importance, predicting which interfaces are energetically favo
 Interface stability is not solely determined by bulk lattice matching, but also by local bonding, chemical
 inhomogeneity, and atomic-scale reconstruction.
 
-The structural space is vast: each pair of surfaces can be stacked with arbitrary lateral shifts,terminations, and
+The structural space is vast: each pair of surfaces can be stacked with arbitrary lateral shifts, terminations, and
 alignments, resulting in a combinatorial explosion of configurations.
 
 Strain relaxation, interlayer interactions, and charge transfer further complicate the energy landscape.
@@ -248,7 +232,7 @@ However, their high computational cost, scaling cubically with system size, rend
 realistic sizes structures, such as a $22 \times Si$ to $21 \times Ge$ latticed matched supercell, which often comprise
 hundreds of atoms.
 
-This bottleneck precludes broad screening efforts, especially when exploring multiple chemistries,orientations, and
+This bottleneck precludes broad screening efforts, especially when exploring multiple chemistries, orientations, and
 stacking arrangements.
 
 As such, DFT might be better suited to final validation and a confirmation of datasets evaluated in a less
@@ -256,8 +240,7 @@ computationally expensive manner.
 
 \label{para:mlp_screening} % ---------- %
 
-To address this, the present project explores the use of machine-learned interatomic potentials (MLPs) for scalable
-interface screening.
+The present project explores the use of machine-learned interatomic potentials (MLPs) for scalable interface screening.
 
 MLPs are data-driven models trained to reproduce DFT-level energies and forces, but at orders of magnitude lower cost.
 
@@ -272,10 +255,10 @@ predicted stability and prioritise low energetic configurations for subsequent D
 This approach supports a hierarchical modelling workflow in which DFT and MLPs are used in tandem: MLPs for breadth, and
 DFT for depth.
 
-It enables rigorous testing of whether MLPs can replicate DFT-derived favourability rankings across a diverse set of
-semiconductor systems, including phase boundaries (e.g. Si|Si) and heterostructures (e.g. Si|Ge, Ge|C).
+It enables rigorous testing of whether MLPs can replicate DFT-derived favourability rankings across a range of
+systems, including phase boundaries (e.g. Si|Si) and heterostructures (e.g. Si|Ge, Si|C).
 
-For the context of this study, I ignore the semicontuctor requirement in its definition.
+For the context of this study, I ignore the semicontuctor requirement in the definition of heterostructure.
 
 Moreover, it lays the foundation for further improvements through techniques such as delta-learning, structure-based
 prediction models, and surface-to-interface generalisation.
@@ -313,7 +296,6 @@ The remainder of this report is structured as follows:
     The chapter also explores how structural asymmetries, surface orientation, and chemical diversity impact model
     generalisation.
 
-
     \item \textbf{Chapter~\ref{chapter:conclusions}} reflects on key findings across materials systems, highlighting the
     strengths and limitations of current MLPs in replicating DFT interface rankings.
 
@@ -321,9 +303,6 @@ The remainder of this report is structured as follows:
     fast MLP screening with selective DFT correction to guide future materials discovery.
 
 \end{itemize}
-
-
-% ---------- %
 
 \label{para:framework_objective} % ---------- %
 
@@ -348,40 +327,30 @@ Such complexity challenges efforts to model interface behaviour using convention
 
 \label{para:dft_scaling_limitations} % ---------- %
 
-While DFT provides a reliable route to total energy prediction and structural relaxation,
-its unfavourable scaling with system size ($\mathcal{O}(N^3)$ in electron count) severely limits its use in
-high-throughput workflows.
+While DFT provides a reliable route to total energy prediction and structural relaxation, its unfavourable scaling with
+system size ($\mathcal{O}(N^3)$ in electron count) severely limits its use in high-throughput workflows.
 
 In particular, DFT becomes prohibitive when applied to interface structures exceeding a few hundred atoms, as required
 to capture long-range strain, multi-layer reconstruction, or compositional variation.
 
-Moreover, standard DFT approximations, such as semi-local exchange–correlation functionals, often struggle to predict key
+Moreover, standard DFT approximations, such as LDA exchange-correlation functionals, often struggle to predict key
 interfacial phenomena in layered systems.
 
 For example, accurate band-alignment at a heterojunction determines charge-injection barriers and device turn-on
-voltages; polarization effects at oxide or ferroelectric interfaces give rise to internal electric fields and
-screening that strongly modulate carrier densities; and weak van der Waals interactions between two-dimensional
-layers govern adhesion, interlayer spacing, and moiré-driven electronic reconstructions.
+voltages; and weak van der Waals interactions between two-dimensional layers govern adhesion, interlayer spacing, and
+electronic reconstructions.
 
 Failure to capture these effects can lead to qualitatively incorrect predictions of interface stability and function.
-
-MLP-based approaches can in principle overcome many of these challenges by incorporating
-long-range interactions and nonlocal correlations learned from data.
-
-However, since MLPs are trained on DFT outputs, their accuracy is fundamentally limited by the fidelity of the
-underlying DFT dataset: any systematic errors in band alignments, polarization responses, or dispersion forces will be
-inherited by the potential.
-
-Thus, while MLPs enable vastly more efficient sampling of configurational space, their predictive power remains
-contingent on high-quality reference data.
 
 \label{para:mlp_overview} % ---------- %
 
 Machine-learned interatomic potentials (MLPs) offer a promising route to overcoming these limitations.
 
 By learning to emulate DFT-level energies and forces, MLPs like MACE provide a means to conduct large-scale structure
-relaxations and energy evaluations at dramatically reduced cost. This enables exploration of broader configurational
-spaces, including low-symmetry systems and extended defects, that would otherwise remain intractable.
+relaxations and energy evaluations at dramatically reduced cost.
+
+This enables exploration of broader configurational spaces, including low-symmetry systems and extended defects; that
+would otherwise remain intractable.
 
 However, this advantage is only realised if the models generalise well across diverse interfacial environments.
 
@@ -393,7 +362,6 @@ extended defects, that would be intractable with DFT alone.
 Crucially, however, achieving DFT-comparable accuracy across diverse interfacial environments demands a representative,
 high-fidelity training set: any gaps or systematic biases in the reference data will be reflected in the potential's
 predictions.
-
 
 \label{para:motivation_mlp_dft} % ---------- %
 
@@ -408,19 +376,8 @@ Chapter~\ref{chapter:computational_investigation} shows that MLPs often preserve
 particularly within chemically similar systems, with a few edge cases like pure-Si interfaces (grain boundaries).
 
 These discrepancies underscore the need for targeted refinement, motivating the delta-learning approaches presented in
-Chapter~\ref{chapter:next_steps}, which correct systematic MLP–DFT residuals via supervised learning on
+Chapter~\ref{chapter:next_steps}, which correct systematic MLP-DFT residuals via supervised learning on
 interface-specific error distributions.
-
-\label{para:feature_based_interface_prediction} % ---------- %
-
-In addition to correcting prediction accuracy, this research investigates whether interface favourability can be
-inferred directly from structural or surface-level features.
-
-Chapter~\ref{chapter:next_steps} proposes the use of learned models that map surface properties to interfacial energies,
-potentially bypassing the need for full supercell construction.
-
-This complements the structure-generation pipelines, based on ARTEMIS, that systematically enumerate viable interface
-candidates across various stacking shifts and Miller plane pairings.
 
 \label{para:project_motivation} % ---------- %
 
@@ -432,8 +389,7 @@ structure-based heuristics, it becomes possible to bridge the gap between physic
 tractability.
 
 In doing so, this research contributes to the broader aim of enabling scalable, data-driven exploration of complex
-interfacial systems; particularly in regimes where conventional symmetry-based rules or bulk-derived heuristics break
-down.
+interfacial systems; particularly in regimes where bulk-derived heuristics break down.
 
 % ---------- %
 
@@ -476,8 +432,8 @@ replicate DFT-derived rankings of interface favourability\cite{Batatia2022-xz}.
 If MLPs can reliably identify promising structures, even without full relaxation, they can serve as a low-cost screening
 tool to filter candidate interfaces for inclusion in the training set\nocite{}.
 
-This enables the creation of a scalable data pipeline where realistic interfaces are generated via tools like ARTEMIS,
-screened using MLPs, and selectively validated with DFT\cite{Taylor2020-nl}.
+This enables the creation of a scalable data pipeline where realistic interfaces are generated via tools like ARTEMIS\cite{Taylor2020-nl},
+screened using MLPs, and selectively validated with DFT\nocite{}.
 
 \label{para:objectives_dft_validation} % ---------- %
 
@@ -526,7 +482,7 @@ relaxations on MLI-generated structures, something only feasible with additional
 
 \label{para:objectives_mlp_refinement} % ---------- %
 
-To improve the accuracy of interface energy predictions, particularly for systems where MACE performs poorly (e.g.,
+To improve the accuracy of interface energy predictions, particularly for systems where MACE performs poorly (e.g.
 strained silicon-rich structures or cross-material environments), this project will explore refinement strategies for
 the MLP itself\nocite{}.
 
@@ -538,8 +494,8 @@ DFT, using DFT-relaxed structures as a reference. \cite{Pitfield2025-ah}
 Another strategy is direct fine-tuning or retraining of MACE on an expanded dataset that includes interface-specific
 configurations, such as strained slabs, low-symmetry orientations, or cross-material bonding.
 
-This is motivated by known failure modes in MLIPs, including "PES softening", poor generalisation to novel bonding
-environments, and underprediction of surface and interface energies. \cite{needed}
+This is motivated by known failure modes in MLIPs, including poor generalisation to novel bonding environments, and
+underprediction of surface and interface energies\cite{needed}.
 
 These efforts will aim to mitigate known risks; such as extrapolation errors, by enriching the training distribution
 with interfacial scenarios that challenge model stability.
