@@ -64,7 +64,6 @@ python generate_figure_spearman.py --results=results_lower_Sn_upper_Si.csv --mod
 python generate_figure_spearman.py --results=results_lower_Sn_upper_Ge.csv --mode=all
 python generate_figure_spearman.py --results=results_lower_Sn_upper_Sn.csv --mode=all
 python generate_figure_spearman.py --results=results_upper_Sn.csv --mode=all
-python generate_figure_spearman.py --results=results_perfect_alloys.csv --mode=all
 
 python generate_figure_kendall.py --results=results.csv --mode=all
 python generate_figure_kendall.py --results=results_lower_C.csv --mode=all
@@ -86,7 +85,6 @@ python generate_figure_kendall.py --results=results_lower_Sn_upper_Si.csv --mode
 python generate_figure_kendall.py --results=results_lower_Sn_upper_Ge.csv --mode=all
 python generate_figure_kendall.py --results=results_lower_Sn_upper_Sn.csv --mode=all
 python generate_figure_kendall.py --results=results_upper_Sn.csv --mode=all
-python generate_figure_kendall.py --results=results_perfect_alloys.csv --mode=all
 
 python generate_topn_overlap.py --results=results.csv --topns 5 10 25
 python generate_topn_overlap.py --results=results_lower_C.csv --topns 5 10 25
@@ -108,4 +106,7 @@ python generate_topn_overlap.py --results=results_lower_Sn_upper_Si.csv --topns 
 python generate_topn_overlap.py --results=results_lower_Sn_upper_Ge.csv --topns 5 10 25
 python generate_topn_overlap.py --results=results_lower_Sn_upper_Sn.csv --topns 5 10 25
 python generate_topn_overlap.py --results=results_upper_Sn.csv --topns 5 10 25
+
+python generate_figure_spearman.py --results=results_perfect_alloys.csv --mode=all
+python generate_figure_kendall.py --results=results_perfect_alloys.csv --mode=all
 python generate_topn_overlap.py --results=results_perfect_alloys.csv --topns 5 10 25

@@ -35,7 +35,7 @@ def get_filtered_data(df, flag_col, broken_col):
 
 def marker_legend(used_comparisons):
     return [mlines.Line2D([], [], color='black', marker=MARKERS[cmp], linestyle='None', label=label)
-            for cmp, label in zip(COMPARISONS, ['dft@dft vs mlp@mlp', 'dft@dft vs dft@mlp', 'mlp@dft vs mlp@mlp'])
+            for cmp, label in zip(COMPARISONS, ['dft vs full mlp', 'dft vs mlp', 'mlp relaxed dft vs full mlp'])
             if cmp in used_comparisons]
 
 def plot_spearman(df, comparison, rank_dft_col, rank_mlp_col, flag_col, broken_col, output_dir, mode, prefix):
@@ -97,7 +97,7 @@ def plot_spearman(df, comparison, rank_dft_col, rank_mlp_col, flag_col, broken_c
         ax1.legend(handles=marker_legend(used_comparisons) + [ax1.lines[0]], loc='best')
 
         fig.tight_layout()
-        outname = f"{prefix}_spearman_{comparison.replace('@', '_')}_{current_mode}.png"
+        outname = f"{prefix}_spearman_{comparison.replace('@', '_').replace('dft@dft', 'unrelaxed_dft').replace('dft_dft', 'unrelaxed_dft').replace('dft@mlp', 'unrelaxed_mlp').replace('dft_mlp', 'unrelaxed_mlp').replace('mlp@dft', 'mlp_relaxed_dft').replace('mlp_dft', 'mlp_relaxed_dft').replace('mlp@mlp', 'full_mlp').replace('mlp_mlp', 'full_mlp')}_{current_mode}.png"
         outpath = output_dir / outname
         fig.savefig(outpath, dpi=300)
         plt.close()

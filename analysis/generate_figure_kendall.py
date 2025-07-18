@@ -46,8 +46,12 @@ def get_filtered_data(df, flag_col, broken_col):
 
 def marker_legend(comps):
     return [
-        mlines.Line2D([], [], color='black', marker=MARKERS[c['comparison']], linestyle='None', label=c['comparison'])
-        for c in comps
+        mlines.Line2D([], [], color='black', marker=MARKERS[c['comparison']], linestyle='None', label=label)
+        for c, label in zip(comps, [
+            'dft vs full mlp',
+            'dft vs mlp',
+            'mlp relaxed dft vs full mlp'
+        ]) if c['comparison'] in MARKERS
     ]
 
 def plot_kendall(df, comp_dict, flag_col, broken_col, output_dir, mode, prefix):
@@ -171,7 +175,7 @@ def main():
     ]
 
     for comp in selected:
-        flag_col = f"is_comparable_{comp['comparison'].replace('_vs_', '_')}"
+        flag_col = f"is_comparable_{comp['comparison'].replace('_vs_', '_').replace('dft@dft', 'unrelaxed_dft').replace('dft_dft', 'unrelaxed_dft').replace('dft@mlp', 'unrelaxed_mlp').replace('dft_mlp', 'unrelaxed_mlp').replace('mlp@dft', 'mlp_relaxed_dft').replace('mlp_dft', 'mlp_relaxed_dft').replace('mlp@mlp', 'full_mlp').replace('mlp_mlp', 'full_mlp')}"
         plot_kendall(df, comp, flag_col, args.is_broken_column, args.output_dir, args.mode, prefix)
 
     if args.comparison in (None, 'all'):
