@@ -2,74 +2,56 @@
 
 % ---------- %
 
-\section*{Material Interfaces} \label{section:material_interfaces}
+\section{Material Interfaces} \label{section:material_interfaces}
 
-\label{interface_section_intro} % ---------- %
+\label{interface_section_intro} Building on our foundational definitions, we now explore the key functional regions of a material interface, the engineering properties that govern strength, adhesion, and stability, and the principal physical effects arising at these junctions, electronic phenomena and energy-transport processes~\nocite{}.
+We then discuss design parameters for tailoring interfacial behaviour, the role of crystallographic orientation and polymorph-driven reconstruction, and the generation and prediction of interfacial defects~\nocite{}.
+% Finally, we highlight representative applications, from gate dielectric layers and transition metal dichalcogenides (TMDC) heterojunctions to energy-storage interfaces, thermoelectric contacts, and optoelectronic devices, and conclude with current active modelling challenges~\nocite{}.
 
-Building on our foundational definitions, we now explore the key functional regions of a material interface, the engineering properties that govern strength, adhesion, and stability, and the principal physical effects arising at these junctions, electronic phenomena and energy-transport processes.
-We then discuss design parameters for tailoring interfacial behaviour, the role of crystallographic orientation and polymorph-driven reconstruction, and the generation and prediction of interfacial defects.
-Finally, we highlight representative applications, from gate dielectric layers and transition metal dichalcogenides (TMDC) heterojunctions to energy-storage interfaces, thermoelectric contacts, and optoelectronic devices, and conclude with current active modelling challenges.
 \label{interfacial_engineering_properties} % ---------- %
 
 In materials engineering, interfaces govern a wide array of properties including adhesion, corrosion resistance, mechanical strength, and diffusion kinetics~\cite{Leitherer2023-ew, Butler2019-ws}.
 The strength and ductility of composite systems or coatings often depend on interfacial bonding and lattice compatibility~\cite{Lorentzon2025-si, Raabe2020-ra}.
 Tailoring interfacial chemistry or morphology, through methods such as surface functionalisation, alloying, or atomic layer deposition, is often essential for achieving desired macroscopic performance metrics~\cite{Chagarov2015-ol, Leitherer2023-ew, Butler2019-ws}.
-\label{electronic_interface_effects} % ---------- %
 
-In electronic devices, interfaces critically influence charge transport, band alignment, and contact resistance~\cite{Schusteritsch2015-lw, Leung2020-tv, Low2025-on}.
+\label{electronic_interface_effects} % In electronic devices, interfaces critically influence charge transport, band alignment, and contact resistance~\cite{Schusteritsch2015-lw, Leung2020-tv, Low2025-on}.
 Semiconductor heterojunctions, metal-semiconductor contacts, and dielectric boundaries are fundamental to the operation of transistors, diodes, and capacitors~\cite{Low2025-on, Khot2025-hh}.
 Localised changes in atomic registry, roughness, or defect density at the interface can significantly alter tunnelling behaviour, barrier heights, and mobility~\cite{Gerber2023-yd, Khot2025-hh}.
 Where interfacial dipoles, charge redistribution, and electrostatic reconstruction result in complex electronic responses not captured by bulk models~\cite{Alam2020-ci}.
-\label{energy_interfaces} % ---------- %
 
-Energy systems are similarly interface-dominated.
+\label{energy_interfaces} Energy systems are similarly interface-dominated. % todo: move to chapter 1.3?
 In lithium-ion batteries, for example, the solid-electrolyte interphase (SEI) acts as a metastable interfacial layer that dictates both stability and charge transport~\cite{Butler2019-ws}.
 The performance and longevity of solid-state batteries, fuel cells, and thermoelectric devices can depend on the engineered properties of interfaces, which affect ionic conductivity, catalytic activity, thermal transport, and electronic insulation~\cite{Leitherer2023-ew}.
 In photovoltaics, interfacial band offsets between donor and acceptor layers, or between absorber materials and charge transport layers, govern charge separation efficiency and open-circuit voltage~\cite{Low2025-on}.
-\label{interface_design_parameters} % ---------- %
 
-Overall, interfaces are not incidental features but active design parameters.
-They serve as sites of emergent phenomena, such as interfacial polarisation, bandgap renormalisation, and phonon scattering, that cannot be predicted from bulk properties alone.
-As such, mastering interfacial science is a gateway to developing high-performance materials and devices.
-\label{interface_definition} % ---------- %
+\label{interface_design_parameters} Overall, interfaces are not incidental features but active design parameters~\nocite{}. % todo: move to chapter 1.3?
+%They serve as sites of emergent phenomena, such as interfacial polarisation, bandgap renormalisation, and phonon scattering, that cannot be predicted from bulk properties alone~\nocite{}.
+As such, mastering interfacial science is a gateway to developing high-performance materials and devices~\nocite{}.
 
-The structural features that influence interface behaviour include crystallographic orientation, the nature of the phase boundary, and the presence of defects~\cite{Zhang2016-lt}.
-\label{orientation_effects} % ---------- %
+\label{interface_definition} The structural features that influence interface behaviour include crystallographic orientation, the nature of the phase boundary, and the presence of defects~\cite{Zhang2016-lt}.
 
-The relative orientation of crystals on either side of an interface can significantly affect the atomic coordination, bond continuity, and symmetry properties across the interface~\cite{Kuhbach2021-gz, Zhang2016-lt}.
+\label{orientation_effects} The relative orientation of crystals on either side of an interface can significantly affect the atomic coordination, bond continuity, and symmetry properties across the interface~\cite{Kuhbach2021-gz, Zhang2016-lt}.
 Epitaxial alignment, where lattice planes across the interface maintain a well-defined relationship, typically results in low-strain, coherent interfaces~\cite{needed}.
 In contrast, a mismatch in orientation can lead to misfit dislocations or interfacial strain, influencing charge carrier transport, interfacial states, and mechanical stability~\cite{Gerber2023-yd, Leung2020-tv, Leitherer2023-ew}.
 Orientation also affects the formation energy and electronic reconstruction at the interface, which can lead to phenomena like interface-induced states or altered band alignments~\cite{Alam2020-ci, Chagarov2015-ol, Zhang2016-lt}.
 
-% ---------- %
+\section{Constructing Interfaces: Lattices, Orientations, and Matching Algorithms}\label{sec:constructing_interfaces}
 
-\section*{Constructing Interfaces: Lattices, Orientations, and Matching Algorithms}\label{sec:constructing_interfaces}
+\subsection{Lattices and Unit Cells}
 
-% ---------- %
+In crystalline solids, a \textbf{lattice} is defined as a periodic array of points generated by integer translations of three fundamental vectors, known as lattice vectors (\(\mathbf{a}_1, \mathbf{a}_2, \mathbf{a}_3\)). Mathematically, any lattice point \(\mathbf{R}\) is expressed as~\cite{vasp_bulk}:
 
-\subsection*{Lattices and Unit Cells}
-
-% ---------- %
-
-In crystalline solids, a \textbf{lattice} is defined as a periodic array of points generated by integer translations of three fundamental vectors, known as basis vectors (\(\mathbf{a}_1, \mathbf{a}_2, \mathbf{a}_3\)). Mathematically, any lattice point \(\mathbf{R}\) is expressed as~\cite{vasp_bulk}:
-
-% ---------- %
-
-\[
+\begin{equation}
 \mathbf{R} = n_1 \mathbf{a}_1 + n_2 \mathbf{a}_2 + n_3 \mathbf{a}_3, \quad n_i \in \mathbb{Z}.
-\]
+\end{equation}
 
-% ---------- %
-
-The choice of lattice vectors (which need not be orthogonal) defines the geometry and symmetry of the \textit{unit cell}, the smallest repeating structural unit of the crystal.
-A given crystal structure can often be described by multiple equivalent representations.
-Silicon (Si), for instance, crystallizes in a diamond-cubic structure and can be represented either as:
-
-% ---------- %
+The choice of lattice vectors (which need not be orthogonal) defines the geometry and symmetry of the \textit{unit cell}, the smallest repeating structural unit of the crystal~\nocite{}.
+A given crystal structure can often be described by multiple equivalent representations~\nocite{}.
+Silicon (Si), for instance, crystallizes in a diamond-cubic structure and can be represented either as~\nocite{}:
 
 \begin{itemize}
-    \item A primitive cell containing 2 atoms with non-orthogonal basis vectors.
-    \item A conventional cubic cell containing 8 atoms, exhibiting face-centered cubic symmetry and belonging to space.
+    \item A primitive cell containing 2 atoms with non-orthogonal basis vectors~\nocite{}.
+    \item A conventional cubic cell containing 8 atoms, exhibiting face-centered cubic symmetry and belonging to space~\nocite{}.
     \item Group \(Fd\bar{3}m\) (Pearson symbol cF8)~\cite{vasp_bulk}.
 \end{itemize}
 
@@ -93,7 +75,7 @@ These differences create intrinsic lattice mismatches at heterointerfaces, such 
 meaning germanium's lattice is about \(4.2\%\) larger than silicon's.
 Bonding these crystals directly forces one side to stretch (under tension) or compress, inducing strain and consequently increasing the total energy due to lattice misfit.
 Significant mismatches can also lead to the formation of misfit defects, such as dislocations, if the strain is not elastically accommodated~\cite{artemis_paper}.
-\subsection*{Lattice Mismatch and Supercells} \label{sec:lattice_mismatching}
+\subsection{Lattice Mismatch and Supercells} \label{sec:lattice_mismatching}
 
 % ---------- %
 
@@ -138,7 +120,7 @@ As the supercell size grows, the interfacial energy (per area) will converge to 
 
 % ---------- %
 
-\subsection*{Orientation and Planar Matching}\label{sec:orientation_matching}
+\subsection{Orientation and Planar Matching}\label{sec:orientation_matching}
 
 % ---------- %
 
@@ -177,7 +159,7 @@ Together, these parameters fully define the interfacial configuration space, req
 
 % ---------- %
 
-\subsection*{Automated Interface Construction (ARTEMIS)}\label{sec:artemis_algorithm}
+\subsection{Automated Interface Construction (ARTEMIS)}\label{sec:artemis_algorithm}
 
 % ---------- %
 
@@ -308,7 +290,7 @@ Their predictive modelling, through DFT, machine learning potentials, or interfa
 
 % ---------- %
 
-\section*{Conventional Prediction Methods} \label{section:conventional_methods}
+\section{Conventional Prediction Methods} \label{section:conventional_methods}
 
 % ---------- %
 
@@ -355,7 +337,7 @@ Classical MD is well-suited to studying thermal processes such as diffusion, def
 
 % ---------- %
 
-\subsection*{Density Functional Theory (DFT)}
+\subsection{Density Functional Theory (DFT)}
 
 % ---------- %
 
@@ -506,7 +488,7 @@ For extended or complex interfacial systems, this motivates the introduction of 
 
 % ---------- %
 
-\subsection*{Other Modelling Methods}
+\subsection{Other Modelling Methods}
 
 % ---------- %
 
@@ -537,7 +519,7 @@ As such, hybrid approaches are increasingly common, with DFT used to parameteris
 
 % ---------- %
 
-\subsection*{What are the advantages and limitations of DFT and MD?}
+\subsection{What are the advantages and limitations of DFT and MD?}
 
 % ---------- %
 
@@ -559,7 +541,7 @@ Furthermore, standard MD remains constrained to accessible timescales, making it
 
 % ---------- %
 
-\subsection*{How are properties calculated or predicted?}
+\subsection{How are properties calculated or predicted?}
 
 % ---------- %
 
@@ -840,7 +822,7 @@ In cases where electronic coupling is strong, or the valence states are spatiall
 
 % ---------- %
 
-\section*{Emergence of Machine Learning in Materials Science} \label{section:machine_learning}
+\section{Emergence of Machine Learning in Materials Science} \label{section:machine_learning}
 
 % ---------- %
 
@@ -858,7 +840,7 @@ Finally, we reflect on the benefits and ongoing limitations of ML methods in mat
 
 % ---------- %
 
-\subsection*{How has machine learning been introduced into materials prediction?}
+\subsection{How has machine learning been introduced into materials prediction?}
 
 % ---------- %
 
@@ -896,7 +878,7 @@ When coupled with structure-generation protocols and physical constraints~\cite{
 
 % ---------- %
 
-\subsection*{What types of models and data are being used?}
+\subsection{What types of models and data are being used?}
 
 % ---------- %
 
@@ -925,7 +907,7 @@ They often derive from high-throughput DFT calculations available in public repo
 
 % ---------- %
 
-\subsection*{What are the strengths and limitations of ML in this field?}
+\subsection{What are the strengths and limitations of ML in this field?}
 
 % ---------- %
 
@@ -964,7 +946,7 @@ Yet its performance remains contingent on data quality and physical context, and
 
 % ---------- %
 
-\subsection*{Machine-Learned Interatomic Potentials (MLPs)}
+\subsection{Machine-Learned Interatomic Potentials (MLPs)}
 
 % ---------- %
 
@@ -1018,7 +1000,7 @@ Notably, simple models like Anderson's rule have been shown to systematically fa
 
 % ---------- %
 
-\section*{Limitations of Current Approaches}
+\section{Limitations of Current Approaches}
 
 % ---------- %
 
@@ -1049,7 +1031,7 @@ Such frameworks aim to balance accuracy, efficiency, and transferability in mode
 
 % ---------- %
 
-\subsection*{What are the current bottlenecks in interface prediction?}
+\subsection{What are the current bottlenecks in interface prediction?}
 
 % ---------- %
 
@@ -1068,7 +1050,7 @@ However, their performance is contingent upon the representativeness of the trai
 
 % ---------- %
 
-\subsection*{Where do both ML and physics-based methods fall short?}
+\subsection{Where do both ML and physics-based methods fall short?}
 
 % ---------- %
 
@@ -1087,7 +1069,7 @@ Furthermore, many ML models lack rigorous uncertainty quantification, making it 
 
 % ---------- %
 
-\subsection*{Are there data or generalisation issues?}
+\subsection{Are there data or generalisation issues?}
 
 % ---------- %
 
@@ -1130,7 +1112,7 @@ Hybrid schemes, where MLPs perform large-scale screening followed by selective D
 
 % ---------- %
 
-\section*{State-of-the-Art in Interface Prediction} \label{section:state_of_the_art}
+\section{State-of-the-Art in Interface Prediction} \label{section:state_of_the_art}
 
 % ---------- %
 
@@ -1195,7 +1177,7 @@ This multiresolution strategy enables both efficient exploration and physically 
 
 % ---------- %
 
-\subsection*{How does my proposed approach compare and build upon it?}
+\subsection{How does my proposed approach compare and build upon it?}
 
 % ---------- %
 
@@ -1211,7 +1193,7 @@ Yet such frameworks often lack spatial resolution or generalisability across che
 
 % ---------- %
 
-\subsection*{Emerging trends}
+\subsection{Emerging trends}
 
 % ---------- %
 

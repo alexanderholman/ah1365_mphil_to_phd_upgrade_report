@@ -129,7 +129,7 @@ Moreover, it lays the foundation for further improvements through techniques suc
 
 \label{framework_objective} Through this integrated modelling framework, the project seeks to reduce the cost and uncertainty of interface prediction while preserving the fidelity needed for scientific insight and technological relevance~\nocite{}.
 
-\newpage\section*{Motivation for the Research}\label{section:motivation}
+\newpage\section{Motivation for the Research}\label{section:motivation}
 
 \label{nonideal_interface_formation} Interfaces rarely form under ideal conditions~\nocite{}.
 Instead, they emerge through complex, often non-equilibrium processes such as high-temperature annealing, epitaxial growth, and chemically driven surface reconstructions~\nocite{}.
@@ -157,7 +157,7 @@ These discrepancies underscore the need for targeted refinement, motivating the 
 By embedding MLPs within automated screening workflows and augmenting them with delta-learning corrections and structure-based heuristics, it becomes possible to bridge the gap between physical realism and computational tractability~\nocite{}.
 In doing so, this research contributes to the broader aim of enabling scalable, data-driven exploration of complex interfacial systems; particularly in regimes where bulk-derived heuristics break down~\nocite{}.
 
-\newpage\section*{Research Objectives} \label{section:research_objectives}
+\newpage\section{Research Objectives} \label{section:research_objectives}
 
 \label{objectives_mli_goal} This PhD aims to develop a Machine-Learned Interface (MLI) model that, given two input materials; whether slabs, bulks, or combinations, can generate realistic and physically plausible interface structures between them~\nocite{}.
 The purpose of this model is not to directly predict interfacial energies or properties, but to output candidate geometries that are likely to be realisable and energetically reasonable, enabling downstream evaluation via existing MLPs or DFT~\nocite{}.
@@ -177,7 +177,7 @@ If MLPs can reliably identify promising structures, even without full relaxation
 This enables the creation of a scalable data pipeline where realistic interfaces are generated via tools like ARTEMIS~\cite{Taylor2020-nl},
 screened using MLPs, and selectively validated with DFT~\nocite{}.
 
-\label{objectives_dft_validation} Once promising interfaces are identified, a subset will be fully relaxed using DFT to provide high-fidelity data for MLI training~\nocite{}.
+\newpage\label{objectives_dft_validation} Once promising interfaces are identified, a subset will be fully relaxed using DFT to provide high-fidelity data for MLI training~\nocite{}.
 These DFT-relaxed structures will serve as the reference for extracting physically meaningful descriptors, such as surface orientation, lattice mismatch, interfacial strain, atomic registry, and coordination environments, that can be used as features for the MLI model~\cite{Gouveia2025-fpml}.
 
 \label{objectives_dft_mlp_comparison} Although initial results show strong rank correlation between MLP and DFT energies (e.g., $\rho \approx 0.98$ for Sn|Ge), this agreement may degrade in more complex systems or larger interface models.
@@ -195,7 +195,7 @@ Rather than proposing interfaces from input slabs alone, this model would take t
 \label{objectives_inverse_limitations} Such a tool could support experimental design by guiding researchers toward synthesizable interfaces that meet functional requirements~\nocite{}.
 However, training such a model would require a much broader dataset, including properties computed from full DFT relaxations on MLI-generated structures, something only feasible with additional funding and computational time~\nocite{}.
 
-\label{objectives_mlp_refinement} To improve the accuracy of interface energy predictions, particularly for systems where MACE performs poorly (e.g. strained silicon-rich structures or cross-material environments), this project will explore refinement strategies for the MLP itself~\nocite{}.
+\newpage\label{objectives_mlp_refinement} To improve the accuracy of interface energy predictions, particularly for systems where MACE performs poorly (e.g. strained silicon-rich structures or cross-material environments), this project will explore refinement strategies for the MLP itself~\nocite{}.
 One approach is delta-learning: training a secondary model to correct systematic energy differences between MACE and DFT, using DFT-relaxed structures as a reference ~\cite{Pitfield2025-ah}.
 
 \label{objectives_mlp_tuning} Another strategy is direct fine-tuning or retraining of MACE on an expanded dataset that includes interface-specific configurations, such as strained slabs, low-symmetry orientations, or cross-material bonding~\nocite{}.
@@ -207,12 +207,12 @@ By explicitly introducing diverse bonding motifs and strain conditions, the mode
 
 Despite strong average performance, modern MLIPs such as MACE exhibit known limitations, including potential energy surface (PES) softening, poor extrapolation to strained or defective configurations, and underprediction of surface energies~\cite{Batzner2022-fd}.
 
-\label{objectives_failure_diagnostics} This work will systematically assess when and why these failures occur, starting with Group IV interfaces as test cases.
+\newpage\label{objectives_failure_diagnostics} This work will systematically assess when and why these failures occur, starting with Group IV interfaces as test cases.
 Specific attention will be paid to bonding asymmetries, coordination anomalies, and cases where poor generalisation leads to incorrect rank ordering or unrealistic relaxations.
 Where needed, refinement strategies such as delta-learning, fine-tuning, and active learning will be deployed to correct these behaviours~\cite{needed}.
 The goal is not only to improve model accuracy, but also to build a deeper understanding of where and why MLPs break down when applied to out-of-distribution geometries; informing the development of more robust, uncertainty-aware workflows for interface prediction~\nocite{}.
 
-\newpage\label{objectives_structure_insight} In parallel with predictive modelling, the project seeks to uncover the structural and chemical features that determine interfacial stability~\nocite{}.
+\label{objectives_structure_insight} In parallel with predictive modelling, the project seeks to uncover the structural and chemical features that determine interfacial stability~\nocite{}.
 One key line of enquiry is whether surface favourability correlates with interface favourability; for example, whether low-energy surfaces tend to form stable interfaces, or whether compensating effects between unfavourable surfaces can yield unexpectedly favourable interfaces~\nocite{}.
 
 \label{objectives_structure_analysis} Further investigations will explore how stability varies across crystal types (e.g. fcc, hexagonal, tetragonal), material classes (e.g. semiconductors, metals, insulators), and bonding mechanisms (e.g. covalent, ionic, metallic)~\nocite{}.
@@ -225,7 +225,7 @@ The project aims not only to reduce the computational cost of interface explorat
 
 % ---------- %
 
-\newpage\section*{Scientific and Practical Significance} \label{section:scientific_and_practical_significance}
+\newpage\section{Scientific and Practical Significance} \label{section:scientific_and_practical_significance}
 
 \label{interfaces_nanoscale_behaviour} Material interfaces are central to the behaviour of functional solids, especially at the nanoscale where surface and interfacial effects dominate bulk properties~\cite{Chagarov2015-ol, Leitherer2023-ew, Khot2025-hh, Cervantes2025-ze}.
 In semiconductors, they define charge transport pathways by setting potential barriers and band offsets~\cite{Low2025-on}.
