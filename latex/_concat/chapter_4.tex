@@ -7,12 +7,12 @@
 % ---------- %
 
 The ability to preserve DFT-calculated interface rankings is critical for efficient high-throughput screening of
-material systems.
+material systems\cite{Gerber2023-yd, Nykiel2023-jf, Di_Liberto2022-gz}.
 
 Absolute interface energies are less relevant in isolation if the relative favourability of competing configurations is
 misrepresented.
 
-This motivates the need for improving rank fidelity in machine-learned models such as MACE.
+This motivates the need for improving rank fidelity in machine-learned models such as MACE\cite{Chagarov2015-ol, Leung2020-tv, Gerber2023-yd}.
 
 % ---------- %
 
@@ -32,7 +32,7 @@ systems and mixed-coordination interfaces, future work will compare three MLP tr
     This aims to reduce domain mismatch and improve ranking accuracy in chemically or structurally diverse cases.
     \item \textbf{Delta-learning correction} Learns the residual difference between MLP and DFT energy outputs
     (\( \Delta E = E_\mathrm{DFT} - E_\mathrm{MLP} \)). This approach enables low-cost calibration without full
-    retraining, making it attractive for incremental improvements.
+    retraining, making it attractive for incremental improvements\cite{Batatia2022-xz}.
 \end{enumerate}
 
 % ---------- %
@@ -44,18 +44,18 @@ benchmarking metrics:
 
 \begin{itemize}
     \item \textbf{Spearman's rank correlation coefficient} (\( \rho \)): Measures how well the global ranking of
-    structures is preserved between methods.
+    structures is preserved between methods\cite{needed}.
 
     Chapter~\ref{chapter:computational_investigation} reports near-perfect Spearman values (e.g., \( \rho = 0.9954 \))
     in many systems.
     \item \textbf{Kendall's rank correlation coefficient} (\( \tau \)): Assesses the proportion of concordant versus
     discordant ranking pairs. It is more sensitive to small local swaps in ranking than Spearman's \( \rho \).
     \item \textbf{Top-N Overlap}: Evaluates how many of the top-ranked structures under DFT are also present in the MLP
-    top-\( N \) list.
+    top-\( N \) list\cite{needed}.
 
     This provides a practical indicator for screening performance.
     \item \textbf{Mean Absolute Error (MAE)} and \textbf{Root Mean Square Error (RMSE)}: These absolute error metrics
-    quantify the average and variance-weighted energy deviation, even when rank preservation is strong.
+    quantify the average and variance-weighted energy deviation, even when rank preservation is strong\cite{needed}.
 \end{itemize}
 
 % ---------- %
@@ -93,7 +93,7 @@ nuances across system subsets.
 Performance will be assessed using statistical correlation coefficients and overlap in Top-N rankings between DFT and
 MLP predictions.
 
-These metrics will provide fine-grained diagnostics of rank preservation.
+These metrics will provide fine-grained diagnostics of rank preservation\cite{needed}.
 
 % ---------- %
 
@@ -197,7 +197,7 @@ building and benchmarking MACE-based predictors.
 
 % ---------- %
 
-A robust MLIP depends critically on the diversity, quantity, and physical relevance of its training set.
+A robust MLIP depends critically on the diversity, quantity, and physical relevance of its training set\cite{Wang2024-tn, Deng2023-tg, Batzner2022-fd}.
 
 Our dataset, while spanning 680 heterostructures across four group 14 elements and 29 surfaces, may not fully capture
 the high-strain, defective, or chemically mixed environments found at real interfaces.
@@ -211,13 +211,13 @@ generalisation.
 % ---------- %
 
 Interfaces are inherently out-of-distribution cases, often involving strain, registry shifts, and mixed bonding
-environments not present in the training data.
+environments not present in the training data\cite{Khot2025-hh, Gerber2023-yd, Batzner2022-fd, Saidi2017-ab}.
 
 Even small extrapolations, such as a Si atom bonded to metallic \(\beta\)-Sn, can cause large errors if the MLIP has not
-seen similar local environments.
+seen similar local environments\cite{Khot2025-hh, Batzner2022-fd, Schutt2019-sz}.
 
 Moreover, if multiple interface configurations are close in energy, even minor inaccuracies can lead to rank inversions,
-undermining screening workflows.
+undermining screening workflows\cite{Leung2020-tv, Di_Liberto2022-gz, Gerber2023-yd}.
 
 % ---------- %
 
@@ -225,25 +225,25 @@ Extending the model to handle semiconductors, metals, and insulators introduces 
 covalent, metallic, ionic, and hybrid regimes.
 
 A single MLIP may struggle to capture directional bonding in Si and delocalised metallic bonding in Sn, let alone polar
-surfaces or long-range interactions in ionic oxides.
+surfaces or long-range interactions in ionic oxides\cite{Owen2024-wp, Butler2019-ws}.
 
 Many universal potentials underperform when stretched across these regimes, especially in predicting interfacial
-stability or reconstruction.
+stability or reconstruction\cite{Leung2020-tv, Deng2023-tg}.
 
 % ---------- %
 
-MLIPs inherit the limitations of the DFT calculations they are trained on.
+MLIPs inherit the limitations of the DFT calculations they are trained on\cite{Schutt2019-sz, Deng2023-tg, Wang2024-tn}.
 
 If hybrid functionals or relativistic corrections are omitted, the MLIP may learn inaccurate bonding energies, phase
 stabilities, or surface reconstructions, particularly for heavy elements like Pb or Au. Similarly, neglecting van der
 Waals forces can impair accuracy in weakly bonded or physisorbed interfaces.
 
 These issues limit transferability, especially in cross-class systems (e.g. semiconductor/metal or 2D/3D hybrid
-interfaces).
+interfaces)\cite{Schutt2019-sz, Leung2020-tv, Rosen2022-pw, Deng2023-tg}.
 
 % ---------- %
 
-State-of-the-art models like MACE, M3GNet, and CHGNet have been shown to exhibit systematic underestimation of surface
+State-of-the-art models like MACE, M3GNet\cite{needed}, and CHGNet have been shown to exhibit systematic underestimation of surface
 and defect energies, sometimes referred to as PES softening.
 
 This leads to overpredicted interface stability and can mislead ranking.
@@ -251,7 +251,7 @@ This leads to overpredicted interface stability and can mislead ranking.
 Other known issues include poor uncertainty quantification, overfitting due to high model complexity, and numerical
 instability for large systems or heavy elements.
 
-Without mechanisms to detect extrapolation or assess prediction confidence, the model may silently fail.
+Without mechanisms to detect extrapolation or assess prediction confidence, the model may silently fail\cite{Batatia2022-xz, Deng2023-tg, Pitfield2025-ah}.
 
 % ---------- %
 
@@ -274,7 +274,7 @@ A key open question is whether the surface energetics of individual slabs can se
 of the resulting heterostructure.
 
 If a reliable correlation exists between surface energy and interface formation energy \( \Delta E_\mathrm{form} \), it
-could significantly reduce the need for exhaustive interface enumeration.
+could significantly reduce the need for exhaustive interface enumeration\cite{Arantes2007-ea, Zhang2016-lt, Zotti2018-nv, Butler2019-ws}.
 
 % ---------- %
 
@@ -316,7 +316,7 @@ pipeline screening.
 % ---------- %
 
 Interface orientation and underlying crystal symmetry strongly influence both the physical plausibility and ranking
-fidelity of heterostructures.
+fidelity of heterostructures\cite{Davies2024-ju}.
 
 Chapter~\ref{chapter:computational_investigation} demonstrates that coherent interfaces with well-aligned Miller planes
 tend to exhibit better MLP-DFT rank agreement, particularly in systems with low strain and high registry.
@@ -356,7 +356,7 @@ While ARTEMIS enables systematic construction of aligned interface stacks with c
 registry shifts, its deterministic approach limits structural diversity.
 
 This can lead to overrepresentation of high-symmetry configurations and under-sampling of disordered or experimentally
-relevant interfaces.
+relevant interfaces\cite{needed}.
 
 % ---------- %
 
@@ -507,7 +507,7 @@ Through message-passing and feature aggregation, each atom aggregates informatio
 descriptors, allowing the model to learn both local bonding patterns and emergent long-range effects.
 
 These properties are essential for predicting interfacial phenomena, which often arise from geometric asymmetry,
-registry mismatch, and complex bonding environments.
+registry mismatch, and complex bonding environments\cite{Schutt2017-ge, Schutt2019-sz, Batzner2022-fd, Deng2023-tg}.
 
 % ---------- %
 
