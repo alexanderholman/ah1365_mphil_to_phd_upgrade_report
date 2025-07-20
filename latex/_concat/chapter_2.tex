@@ -221,7 +221,7 @@ Interface-induced phonon scattering suppresses thermal conductivity while preser
 Layered TMDCs and heterostructures with nanostructured interfaces exploit this mechanism to improve thermal management~\cite{Low2025-on}.
 
 \label{interfaces_active_modelling_challenge} Across these examples, it is evident that interfaces are not passive boundaries, but active, tunable regions that critically determine macroscopic functionality~\cite{Leitherer2023-ew, Di_Liberto2022-gz}.
-Their predictive modelling, through DFT, MLPs, or interface-specific structure search tools like ARTEMIS, remains a central challenge in modern materials design~\cite{needed}.
+Their predictive modelling, through DFT, MLPs, or interface-specific structure search tools like ARTEMIS, remains a central challenge in modern materials design~\nocite{}.
 
 \newpage \section{Conventional Prediction Methods} \label{section:conventional_methods}
 
@@ -248,7 +248,7 @@ The method introduced by Zur et al.~(1984) ~\cite{ZurMcGill1984-lattice} laid th
 These approaches assume idealised surfaces and often neglect more complex processes such as surface reconstructions, chemical interdiffusion, or local disorder~\nocite{}.
 
 DFT remains the most accurate and widely used quantum mechanical method for predicting interfacial properties~\nocite{}.
-It solves the Kohn-Sham equations to determine the electronic ground state, providing access to total energies, charge densities, and band edge positions~\cite{needed}.
+It solves the Kohn-Sham equations to determine the electronic ground state, providing access to total energies, charge densities, and band edge positions~\cite{vasp_bulk}.
 
 MD simulates the atomic trajectories under classical Newtonian mechanics, governed by interatomic potentials~\nocite{}.
 Classical MD is well-suited to studying thermal processes such as diffusion, defect migration, and strain relaxation on picosecond to nanosecond timescales~\cite{Deng2023-tg}.
@@ -343,9 +343,9 @@ Even when feasible, DFT struggles to capture extended features such as long-rang
 
 All DFT simulations in this project are conducted using the Vienna Ab initio Simulation Package (VASP), a widely used plane-wave-based implementation of Kohn-Sham DFT~\nocite{}.
 VASP employs the projector-augmented wave (PAW) method to model core-valence interactions, and supports a variety of exchange-correlation functionals including GGA-PBE and hybrid HSE06~\cite{Leung2020-tv}.
-Structural relaxations are typically performed with conjugate gradient algorithms until residual forces fall below a chosen threshold (e.g. $0.01 \text{eV/\AA{}}$)~\cite{needed}.
+Structural relaxations are typically performed with conjugate gradient algorithms until residual forces fall below a chosen threshold (e.g. $0.01 \text{eV/\AA{}}$)~\cite{conquest_relax}.
 
-Periodic boundary conditions are employed in all three spatial directions, necessitating the introduction of vacuum regions for slab models and sufficient supercell dimensions to minimise image-image interactions in interface simulations~\cite{needed}.
+Periodic boundary conditions are employed in all three spatial directions, necessitating the introduction of vacuum regions for slab models and sufficient supercell dimensions to minimise image-image interactions in interface simulations~\cite{militzer2016_supercell}.
 
 The simulation input is controlled via the INCAR, POSCAR, KPOINTS, and POTCAR files, with convergence typically assessed by k-point density and energy cutoff tests~\nocite{}.
 Pulay and Broyden mixing schemes are used for charge density convergence, and dipole corrections may be employed for asymmetric slab geometries~\nocite{}.
@@ -577,12 +577,12 @@ More recent work employs graph neural networks (GNNs), such as MACE or NequIP, w
 These models learn directly from atomic positions and species, avoiding the need for handcrafted features while preserving symmetry constraints essential for interface modelling~\cite{Batzner2022-fd, Deng2023-tg, Owen2024-wp}.
 
 Ultimately, ML enables a shift from static modelling pipelines to more autonomous workflows~\nocite{}.
-When coupled with structure-generation protocols and physical constraints~\cite{needed}.
+% When coupled with structure-generation protocols and physical constraints~\nocite{}.
 
 \newpage \subsection*{What types of models and data are being used?}
 
 Models can be broadly categorised into classical learning algorithms and deep learning approaches~\nocite{}.
-Classical methods include random forests, gradient boosting, support vector machines (SVMs), and Gaussian process regression (GPR), the latter being particularly valuable for small datasets due to its uncertainty estimation capability~\cite{needed}.
+Classical methods include random forests, gradient boosting, support vector machines (SVMs), and Gaussian process regression (GPR), the latter being particularly valuable for small datasets due to its uncertainty estimation capability~\cite{hoffmann2025_groupcontribution}.
 Deep learning architectures include feedforward neural networks and, more notably, graph neural networks (GNNs), which are well-suited for materials modelling due to their ability to represent variable-sized atomic graphs with complex bonding topologies~\cite{Batzner2022-fd, Deng2023-tg, Rosen2022-pw}.
 
 The input to these models typically consists of numerical representations of atomic configurations known as descriptors~\nocite{}.
@@ -596,7 +596,7 @@ These enable generalisation across materials with different atom counts or latti
 To support this, models often use learned embeddings; such as message passing networks or autoencoders, to map complex structural data into a lower-dimensional latent space optimised for prediction~\cite{Batzner2022-fd, Bartok2017-tk}.
 
 The datasets used to train such models vary in size and fidelity~\nocite{}.
-They often derive from high-throughput DFT calculations available in public repositories such as the Materials Project or AFLOW~\cite{needed}.
+They often derive from high-throughput DFT calculations available in public repositories such as the Materials Project or AFLOW~\cite{materials_project_nextgen, aflowlib}.
 
 \newpage \subsection*{What are the strengths and limitations of ML in this field?}
 
@@ -719,13 +719,13 @@ Representations that do not enforce scale-invariance or rotational equivariance 
 
 \newpage Finally, inconsistencies in training labels present an often-overlooked source of predictive error~\nocite{}.
 Energies obtained from high-throughput DFT pipelines can vary depending on pseudopotential choice, relaxation tolerances, or convergence thresholds~\cite{Rosen2022-pw, Uhrin2025-ba}.
-In interfacial contexts, these uncertainties are magnified by metastability and complex relaxation pathways.~\cite{needed}
+In interfacial contexts, these uncertainties are magnified by metastability and complex relaxation pathways.~\nocite{}.
 
 Some datasets rely on static, unrelaxed geometries or surrogate models, further undermining the reliability of ground truth energetics~\cite{Gerber2023-yd, Uhrin2025-ba}.
 
 While ML offers substantial speed-ups over DFT, its utility in interface prediction is presently constrained by data bottlenecks, representational mismatch, and transferability failures~\nocite{}.
 Addressing these limitations will require a multi-pronged strategy involving broader and more diverse training datasets, improved descriptors attuned to interfacial physics, and integration of uncertainty quantification into ML workflows~\nocite{}.
-Hybrid schemes, where MLPs perform large-scale screening followed by selective DFT refinement, may offer a viable path forward~\cite{needed}.
+Hybrid schemes, where MLPs perform large-scale screening followed by selective DFT refinement, may offer a viable path forward~\nocite{}.
 
 \newpage \section{State-of-the-Art in Interface Prediction} \label{section:state_of_the_art}
 
@@ -753,7 +753,7 @@ Notable among them is the ARTEMIS tool developed by Taylor et al., which automat
 
 Shortly after, Taylor et al.\ introduced the RAFFLE, with Pitfield et al.\ introducing methodology, combining empirical void-filling algorithms with iterative statistical descriptors to model metastable and low-symmetry reconstructions~\cite{raffle_paper}.
 
-Constrained variants of the Minima-Hopping Method (MHM) allow for controlled exploration of grain boundary reconstructions by varying atomic densities and introducing geometric constraints~\cite{needed}.
+Constrained variants of the Minima-Hopping Method (MHM) allow for controlled exploration of grain boundary reconstructions by varying atomic densities and introducing geometric constraints~\cite{Sun2021_interface}.
 These approaches yield more realistic reconstructions than fixed-stoichiometry DFT or classical potentials, especially in systems like silicon where interface states are sensitive to atomic arrangement and misfit accommodation~\nocite{}.
 
 ML is increasingly embedded into the prediction workflow. Gerber et al.\ developed the InterMatch framework, which leverages high-throughput DFT databases to train ML models that guide lattice matching and stacking predictions in 2D systems~\cite{Gerber2023-yd}.
@@ -774,7 +774,7 @@ Tools such as ARTEMIS enable the systematic generation of interface candidates b
 However, the energetic evaluation of these candidates remains a bottleneck: full relaxation and total energy comparison using DFT is prohibitively expensive for systems exceeding a few hundred atoms~\nocite{}.
 
 To mitigate this, recent advances have introduced surrogate strategies that bypass exhaustive DFT sampling~\nocite{}.
-InterMatch, a high-throughput framework proposed by Gerber et al., guides stacking predictions using pre-computed DFT databases and electrostatic heuristics~\nocite{}.
+InterMatch, a high-throughput framework proposed by Gerber et al., guides stacking predictions using pre-computed DFT databases and electrostatic heuristics~\cite{Gerber2023-yd}.
 Yet such frameworks often lack spatial resolution or generalisability across chemically diverse or defective systems~\cite{Gerber2023-yd, Khot2025-hh}.
 
 \newpage \subsection*{Emerging trends}
