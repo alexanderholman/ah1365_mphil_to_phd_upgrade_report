@@ -22,15 +22,15 @@ These configurations involved uniform chemical environments and minimal interfac
         System & Spearman & Kendall & Top-10 Overlap \\
         \hline
         Perfect Alloys & 1.00 & 1.00 & 6 \\
-        Ge|Si Heterostructure & 0.73 & 0.55 & 6 \\
+        $Ge|Si$ Heterostructure & 0.73 & 0.55 & 6 \\
     \end{tabular}
 \end{table}
 
 \section{Broader Lessons and Limitations} \label{section:broader_lessons_and_limitations}
 
 MLPs appear reliable for ranking interfacial candidates when the bonding environments and geometries fall within the training domain~\nocite{}.
-Screening workflows benefit most from MLPs in systems involving Ge, Sn, and well-registered C|X structures, where rank preservation is consistently strong~\nocite{}.
-In contrast, strained or covalently dominated systems like Si|Ge or Si|C exhibit erratic performance, especially when interfacial bonding is asymmetric or poorly coordinated~\nocite{}.
+Screening workflows benefit most from MLPs in systems involving $Ge$, $Sn$, and well-registered $C|X$ structures, where rank preservation is consistently strong~\nocite{}.
+In contrast, strained or covalently dominated systems like $Si|Ge$ or $Si|C$ exhibit erratic performance, especially when interfacial bonding is asymmetric or poorly coordinated~\nocite{}.
 
 These results highlight the need for delta-correction strategies or domain-specific retraining, particularly for silicon-rich or mixed-interface systems~\nocite{}.
 Hybrid workflows that combine MLP-based pre-screening with selective DFT confirmation offer a scalable and pragmatic approach to large-scale interface discovery~\nocite{}.
@@ -51,4 +51,4 @@ Future work should continue to refine these approaches, using rank-preservation 
 Despite the promising results in rank preservation for certain systems, this study has also highlighted substantial challenges in building a truly generalisable machine-learned potential for interface prediction~\nocite{}.
 Limitations such as incomplete training coverage, extrapolation to novel configurations, and model underperformance in strained or covalently bonded systems underscore the need for further refinement~\nocite{}.
 These risks are being actively addressed through targeted retraining, delta-learning corrections, and expanded benchmark testing, as outlined in Chapter~\ref{chapter:next_steps}.
-While strong performance was observed in Ge, Sn, and alloy systems, achieving consistent accuracy across a broader range of interfaces will require careful design of training data and model architecture~\nocite{}.
+While strong performance was observed in $Ge$, $Sn$, and alloy systems, achieving consistent accuracy across a broader range of interfaces will require careful design of training data and model architecture~\nocite{}.
