@@ -10,7 +10,7 @@ These exhibit unique atomic, electronic, and thermal characteristics that set th
 Local features such as strain fields, atomic reconstruction, and elemental intermixing create modified bonding environments and electronic states, profoundly influencing the mechanical, transport, and optical behaviour of the composite~\cite{Khot2025-hh, Leitherer2023-ew, Maji2021-kc}.
 In micro- and nanoscale systems, interfaces largely determine electronic and mechanical performance~\cite{Leung2020-tv}.
 
-\newpage\label{material_interface_definition} In this research, material interfaces are studied predominantly through ab initio methods, particularly density functional theory (DFT) and new machine-learned interatomic potentials (MLPs)~\nocite{}.
+\newpage \label{material_interface_definition} In this research, material interfaces are studied predominantly through ab initio methods, particularly density functional theory (DFT) and new machine-learned interatomic potentials (MLPs)~\nocite{}.
 
 Band offsets at interfaces, often deviating from predictions by simple models like Anderson's rule, are governed by local charge redistribution, dipole formation, and interface-specific states~\nocite{}.
 The emergence of new electronic phases at interfaces, such as Ohmic contact formation or different band alignments, necessitates accurate modelling beyond bulk considerations~\nocite{}.
@@ -25,7 +25,7 @@ Interfacial scattering, acoustic impedance mismatch, and atomic-scale disorder a
 Thus, in the context of this research, a material interface is not merely a geometric boundary but an emergent, functionally distinct region~\nocite{}.
 It governs critical physical properties, demands precise structural modelling, and enables advances in material innovation and device engineering~\nocite{}.
 
-\newpage\label{interface_classification} Material interfaces can be broadly categorised by their crystallographic orientation, dimensionality, and degree of lattice coherence~\nocite{}.
+\newpage \label{interface_classification} Material interfaces can be broadly categorised by their crystallographic orientation, dimensionality, and degree of lattice coherence~\nocite{}.
 These classifications are instrumental in understanding interfacial phenomena and in designing simulation protocols that are physically realistic and computationally tractable~\cite{Leung2020-tv, Di_Liberto2022-gz, Gerber2023-yd}.
 
 \label{interface_coherence} Interfaces can also be distinguished by the degree of lattice match across the boundary:~\nocite{} % perhaps this would be a better place to cite Davies2024-ju?
@@ -64,20 +64,20 @@ These effects are particularly pronounced in systems involving 2D materials, com
 These can act as traps or recombination centres, significantly affecting carrier's lifetimes and mobility~\cite{Hepplestone2010-vw, Maji2021-kc, Davies2024-ju}.
 
 \label{dielectric_interface_permittivity} The dielectric properties of materials can be strongly altered at interfaces~\nocite{}.
-In systems like $\ce{CaCu3Ti4O12}$, colossal permittivity arises not from the bulk crystal but from insulating grain boundaries and a semiconducting interior, exemplifying the Maxwell-Wagner effect~\cite{needed}.
+In systems like $\ce{CaCu3Ti4O12}$, colossal permittivity arises not from the bulk crystal but from insulating grain boundaries and a semiconducting interior, exemplifying the Maxwell-Wagner effect~\cite{Taylor2019-cpmech}.
 Interface-induced polarisation, charge accumulation, and ionic displacements all contribute to enhanced dielectric responses~\cite{Leung2020-tv, Low2025-on}.
 
-\label{thermal_transport_interfaces} Thermal transport across interfaces is typically suppressed due to phonon scattering, mass disorder, and acoustic impedance mismatch~\cite{needed}.
+\label{thermal_transport_interfaces} Thermal transport across interfaces is typically suppressed due to phonon scattering, mass disorder, and acoustic impedance mismatch~\cite{Liu2025-phonon}.
 This results in thermal boundary resistance (Kapitza resistance), which strongly influences heat flow in thermoelectric and microelectronic devices~\cite{Hepplestone2010-vw, Leung2020-tv, Khot2025-hh}.
 In heterostructures, the interface can significantly scatter phonons, reducing thermal conductivity below that of either constituent~\cite{Di_Liberto2022-gz, Davies2024-ju}.
 
-\label{interface_stabilise_metastable_phases} Interfaces can stabilise new or metastable phases not accessible in bulk~\cite{needed}. % hepplestone 2010 i think?
-For instance, the interface between $\ce{BaTiO3}$ and $\ce{SiO2}$ has been shown to promote the spontaneous formation of the fresnoite phase $\ce{Ba2TiSi2O8}$, altering both electronic and mechanical response~\cite{needed}. % hepplestone and ned's student paper
-A more nuanced example is the $graphene|\ce{MgO}$ interface: while monolayer MgO confined between graphene layers often adopts a rocksalt-like structure, this is not simply a case of one phase being energetically favoured~\nocite{}. % hepplestone and ned's student paper
-Instead, the local environment, including charge transfer and encapsulation, stabilises the rocksalt phase relative to the expected hexagonal phase in unsupported monolayers~\nocite{}. % hepplestone and ned's student paper
-However, experimental and theoretical studies suggest that a mixed or hybrid phase may also emerge with phase stability dependent on thickness and interface strain~\cite{needed}. % hepplestone and ned's student paper
+\label{interface_stabilise_metastable_phases} Interfaces can stabilise new or metastable phases not accessible in bulk~\cite{raffle_paper, Schusteritsch2015-lw}.
+For instance, the interface between $\ce{BaTiO3}$ and $\ce{SiO2}$ has been shown to promote the spontaneous formation of the fresnoite phase $\ce{Ba2TiSi2O8}$, altering both electronic and mechanical response.
+A more nuanced example is the $graphene|\ce{MgO}$ interface: while monolayer MgO confined between graphene layers often adopts a rocksalt-like structure, this is not simply a case of one phase being energetically favoured.
+Instead, the local environment, including charge transfer and encapsulation, stabilises the rocksalt phase relative to the expected hexagonal phase in unsupported monolayers.
+However, experimental and theoretical studies suggest that a mixed or hybrid phase may also emerge with phase stability dependent on thickness and interface strain~\cite{Pitfield2024-ra}.
 
-\newpage\label{interface_mechanical_properties} Mechanical properties such as bulk modulus, shear strength, and adhesion energy are modified at interfaces due to altered bonding environments and lattice mismatch~\nocite{}.
+\newpage \label{interface_mechanical_properties} Mechanical properties such as bulk modulus, shear strength, and adhesion energy are modified at interfaces due to altered bonding environments and lattice mismatch~\nocite{}.
 These variations are important in the design of composite materials, flexible electronics, and nanoindentation studies~\cite{Zhang2016-lt, Leung2020-tv, Davies2024-ju}.
 
 \label{interface_optical_effects} Interfaces affect the optical absorption spectrum by introducing new electronic states and modifying the joint density of states~\nocite{}.
@@ -102,7 +102,7 @@ However, their high computational cost, scaling cubically $O(n^3)$ with system s
 This bottleneck precludes broad screening efforts, especially when exploring multiple chemistries, orientations, and stacking arrangements~\nocite{}.
 As such, DFT might be better suited to final validation and a confirmation of datasets evaluated in a less computationally expensive manner~\nocite{}.
 
-\newpage\label{:mlp_screening} The present project explores the use of MLPs for scalable interface screening~\nocite{}.
+\newpage \label{:mlp_screening} The present project explores the use of MLPs for scalable interface screening~\nocite{}.
 MLPs are data-driven models trained to reproduce DFT-level energies and forces, but at orders of magnitude lower cost~\cite{Wang2024-tn}.
 In particular, this work focuses on the MACE framework; an equivariant message-passing architecture that preserves rotational symmetries and captures local atomic interactions with high fidelity~\nocite{}.
 By using MACE to rapidly evaluate large numbers of candidate interfaces, it becomes possible to rank structures by predicted stability and prioritise low energetic configurations for subsequent DFT validation~\cite{Batatia2022-xz}.
@@ -120,7 +120,7 @@ Moreover, it lays the foundation for further improvements through techniques suc
     The chapter also introduces DFT, MLPs, and recent algorithmic tools for generating and evaluating heterostructures~\nocite{}.
     \item \textbf{Chapter~\ref{chapter:computational_investigation}} evaluates the use of MACE as a surrogate model for efficiently screening interface structures prior to DFT~\nocite{}.
     It benchmarks MACE vs DFT energetics across over roughly 680 heterostructures, analyses rank correlations, and identifies system-specific performance trends that inform future dataset construction for predictive modelling~\nocite{}.
-    \newpage\item \textbf{Chapter~\ref{chapter:next_steps}} outlines the design and evaluation of a Machine-Learned Interface (MLI) model trained to predict interface favourability~\nocite{}.
+    \newpage \item \textbf{Chapter~\ref{chapter:next_steps}} outlines the design and evaluation of a Machine-Learned Interface (MLI) model trained to predict interface favourability~\nocite{}.
     It compares three training strategies baseline MACE, interface-specific fine-tuning, and delta-learning correction, and introduces ranking metrics to quantify predictive performance~\nocite{}.
     The chapter also explores how structural asymmetries, surface orientation, and chemical diversity impact model generalisation~\nocite{}.
     \item \textbf{Chapter~\ref{chapter:conclusions}} reflects on key findings across materials systems, highlighting the strengths and limitations of current MLPs in replicating DFT interface rankings~\nocite{}.
@@ -129,7 +129,7 @@ Moreover, it lays the foundation for further improvements through techniques suc
 
 \label{framework_objective} Through this integrated modelling framework, the project seeks to reduce the cost and uncertainty of interface prediction while preserving the fidelity needed for scientific insight and technological relevance~\nocite{}.
 
-\newpage\section{Motivation for the Research}\label{section:motivation}
+\newpage \section{Motivation for the Research}\label{section:motivation}
 
 \label{nonideal_interface_formation} Interfaces rarely form under ideal conditions~\nocite{}.
 Instead, they emerge through complex, often non-equilibrium processes such as high-temperature annealing, epitaxial growth, and chemically driven surface reconstructions~\nocite{}.
@@ -157,7 +157,7 @@ These discrepancies underscore the need for targeted refinement, motivating the 
 By embedding MLPs within automated screening workflows and augmenting them with delta-learning corrections and structure-based heuristics, it becomes possible to bridge the gap between physical realism and computational tractability~\nocite{}.
 In doing so, this research contributes to the broader aim of enabling scalable, data-driven exploration of complex interfacial systems; particularly in regimes where bulk-derived heuristics break down~\nocite{}.
 
-\newpage\section{Research Objectives} \label{section:research_objectives}
+\newpage \section{Research Objectives} \label{section:research_objectives}
 
 \label{objectives_mli_goal} This PhD aims to develop a Machine-Learned Interface (MLI) model that, given two input materials; whether slabs, bulks, or combinations, can generate realistic and physically plausible interface structures between them~\nocite{}.
 The purpose of this model is not to directly predict interfacial energies or properties, but to output candidate geometries that are likely to be realisable and energetically reasonable, enabling downstream evaluation via existing MLPs or DFT~\nocite{}.
@@ -177,7 +177,7 @@ If MLPs can reliably identify promising structures, even without full relaxation
 This enables the creation of a scalable data pipeline where realistic interfaces are generated via tools like ARTEMIS~\cite{Taylor2020-nl},
 screened using MLPs, and selectively validated with DFT~\nocite{}.
 
-\newpage\label{objectives_dft_validation} Once promising interfaces are identified, a subset will be fully relaxed using DFT to provide high-fidelity data for MLI training~\nocite{}.
+\newpage \label{objectives_dft_validation} Once promising interfaces are identified, a subset will be fully relaxed using DFT to provide high-fidelity data for MLI training~\nocite{}.
 These DFT-relaxed structures will serve as the reference for extracting physically meaningful descriptors, such as surface orientation, lattice mismatch, interfacial strain, atomic registry, and coordination environments, that can be used as features for the MLI model~\cite{Gouveia2025-fpml}.
 
 \label{objectives_dft_mlp_comparison} Although initial results show strong rank correlation between MLP and DFT energies (e.g., $\rho \approx 0.98$ for Sn|Ge), this agreement may degrade in more complex systems or larger interface models.
@@ -195,7 +195,7 @@ Rather than proposing interfaces from input slabs alone, this model would take t
 \label{objectives_inverse_limitations} Such a tool could support experimental design by guiding researchers toward synthesizable interfaces that meet functional requirements~\nocite{}.
 However, training such a model would require a much broader dataset, including properties computed from full DFT relaxations on MLI-generated structures, something only feasible with additional funding and computational time~\nocite{}.
 
-\newpage\label{objectives_mlp_refinement} To improve the accuracy of interface energy predictions, particularly for systems where MACE performs poorly (e.g. strained silicon-rich structures or cross-material environments), this project will explore refinement strategies for the MLP itself~\nocite{}.
+\newpage \label{objectives_mlp_refinement} To improve the accuracy of interface energy predictions, particularly for systems where MACE performs poorly (e.g. strained silicon-rich structures or cross-material environments), this project will explore refinement strategies for the MLP itself~\nocite{}.
 One approach is delta-learning: training a secondary model to correct systematic energy differences between MACE and DFT, using DFT-relaxed structures as a reference ~\cite{Pitfield2025-ah}.
 
 \label{objectives_mlp_tuning} Another strategy is direct fine-tuning or retraining of MACE on an expanded dataset that includes interface-specific configurations, such as strained slabs, low-symmetry orientations, or cross-material bonding~\nocite{}.
@@ -207,9 +207,9 @@ By explicitly introducing diverse bonding motifs and strain conditions, the mode
 
 Despite strong average performance, modern MLIPs such as MACE exhibit known limitations, including potential energy surface (PES) softening, poor extrapolation to strained or defective configurations, and underprediction of surface energies~\cite{Batzner2022-fd}.
 
-\newpage\label{objectives_failure_diagnostics} This work will systematically assess when and why these failures occur, starting with Group IV interfaces as test cases.
+\newpage \label{objectives_failure_diagnostics} This work will systematically assess when and why these failures occur, starting with Group IV interfaces as test cases.
 Specific attention will be paid to bonding asymmetries, coordination anomalies, and cases where poor generalisation leads to incorrect rank ordering or unrealistic relaxations.
-Where needed, refinement strategies such as delta-learning, fine-tuning, and active learning will be deployed to correct these behaviours~\cite{needed}.
+Where needed, refinement strategies such as delta-learning, fine-tuning, and active learning will be deployed to correct these behaviours~\cite{Pitfield2025-ah}.
 The goal is not only to improve model accuracy, but also to build a deeper understanding of where and why MLPs break down when applied to out-of-distribution geometries; informing the development of more robust, uncertainty-aware workflows for interface prediction~\nocite{}.
 
 \label{objectives_structure_insight} In parallel with predictive modelling, the project seeks to uncover the structural and chemical features that determine interfacial stability~\nocite{}.
@@ -221,11 +221,11 @@ The influence of valence orbitals; such as $s$ versus $p$ dominance, will also b
 \label{objectives_summary} Together, these objectives form a cohesive research trajectory: from benchmarking machine-learned potentials and constructing curated datasets, to training a generative interface model (MLI) and exploring its extension toward inverse design~\nocite{}.
 The project aims not only to reduce the computational cost of interface exploration, but also to uncover structural principles and predictive strategies that generalise across materials systems~\nocite{}.
 
-\label{objectives_impact} By integrating machine learning with crystallographic modelling and ab initio validation, this work supports the development of practical tools for scalable, data-driven interface discovery in electronic, optoelectronic, and catalytic materials~\nocite{}.
+\label{objectives_impact} By integrating machine learning (ML) with crystallographic modelling and ab initio validation, this work supports the development of practical tools for scalable, data-driven interface discovery in electronic, optoelectronic, and catalytic materials~\nocite{}.
 
 % ---------- %
 
-\newpage\section{Scientific and Practical Significance} \label{section:scientific_and_practical_significance}
+\newpage \section{Scientific and Practical Significance} \label{section:scientific_and_practical_significance}
 
 \label{interfaces_nanoscale_behaviour} Material interfaces are central to the behaviour of functional solids, especially at the nanoscale where surface and interfacial effects dominate bulk properties~\cite{Chagarov2015-ol, Leitherer2023-ew, Khot2025-hh, Cervantes2025-ze}.
 In semiconductors, they define charge transport pathways by setting potential barriers and band offsets~\cite{Low2025-on}.
@@ -240,11 +240,11 @@ As such, predicting interface stability and functionality from atomic configurat
 Realistic supercells, often comprising hundreds of atoms, are therefore difficult to study in large numbers~\nocite{}.
 DFT is well-suited to final validation, but ill-suited to exhaustive exploration across configurational space~\nocite{}.
 
-\label{mlp_workflow_integration} Machine learning (ML) models, particularly MLPs, provide a way forward~\nocite{}.
+\label{mlp_workflow_integration} Machine learning models, particularly MLPs, provide a way forward~\nocite{}.
 When trained on DFT data, MLPs can reproduce formation energies and atomic forces at orders-of-magnitude lower cost, making them suitable for broad screening applications~\nocite{}.
 Their integration into automated workflows, using tools such as ARTEMIS and RAFFLE, enables systematic generation and evaluation of interface candidates across crystallographic orientations, stacking shifts, and chemical combinations~\cite{artemis_paper, raffle_paper}.
 
-\newpage\label{ml_interface_dynamics} Importantly, the utility of ML does not stop at static energetics~\nocite{}.
+\newpage \label{ml_interface_dynamics} Importantly, the utility of ML does not stop at static energetics~\nocite{}.
 Many applications require insight into how interfaces behave under external stimuli; electric fields, temperature gradients, or chemical exposure~\cite{Chagarov2015-ol, Butler2019-ws, Leung2020-tv, Khot2025-hh}.
 More adaptive and scalable modelling approaches are required for emerging interfacial phases, such as field-tunable dielectric layers or metastable heterostructures~\nocite{}.
 
