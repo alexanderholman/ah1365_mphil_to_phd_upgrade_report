@@ -44,18 +44,18 @@ benchmarking metrics:
 
 \begin{itemize}
     \item \textbf{Spearman's rank correlation coefficient} (\( \rho \)): Measures how well the global ranking of
-    structures is preserved between methods\cite{needed}.
+    structures is preserved between methods\cite{Spearman1904-proofassociation}.
 
-    Chapter~\ref{chapter:computational_investigation} reports near-perfect Spearman values (e.g., \( \rho = 0.9954 \))
+    Chapter~\ref{chapter:computational_investigation} reports near-perfect Spearman values (e.g. \( \rho = 0.9954 \))
     in many systems.
     \item \textbf{Kendall's rank correlation coefficient} (\( \tau \)): Assesses the proportion of concordant versus
     discordant ranking pairs. It is more sensitive to small local swaps in ranking than Spearman's \( \rho \).
     \item \textbf{Top-N Overlap}: Evaluates how many of the top-ranked structures under DFT are also present in the MLP
-    top-\( N \) list\cite{needed}.
+    top-\( N \) list\cite{Kendall1938-rankcorr}.
 
     This provides a practical indicator for screening performance.
     \item \textbf{Mean Absolute Error (MAE)} and \textbf{Root Mean Square Error (RMSE)}: These absolute error metrics
-    quantify the average and variance-weighted energy deviation, even when rank preservation is strong\cite{needed}.
+    quantify the average and variance-weighted energy deviation, even when rank preservation is strong\cite{Batatia2022-xz}.
 \end{itemize}
 
 % ---------- %
@@ -93,7 +93,7 @@ nuances across system subsets.
 Performance will be assessed using statistical correlation coefficients and overlap in Top-N rankings between DFT and
 MLP predictions.
 
-These metrics will provide fine-grained diagnostics of rank preservation\cite{needed}.
+These metrics will provide fine-grained diagnostics of rank preservation~\nocite{}.
 
 % ---------- %
 
@@ -141,8 +141,8 @@ screening.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.85\textwidth]{Upgrade_Report/analysis/plots/error_vs_electron_count.png}
-    \caption{Caption needed}
+    \includegraphics[width=0.85\textwidth]{Upgrade_Report/analysis/plots/error_vs_electron_trend_equation.png}
+    \caption{Mean absolute formation energy error between MLP and DFT predictions as a function of electron count for each interface structure. Each red bar represents the absolute error for a single structure, with a $±250$-electron rolling average trend (dashed red line) showing the overall error growth with system size. The fitted linear trend has a slope of $−1.21 \times 10^{-1}$, indicating that despite fluctuations and a few outliers, the average error does not systematically increase with electron count. This suggests that MLP accuracy remains stable across a wide range of system sizes.}
     \label{fig:error_scaling}
 \end{figure}
 
@@ -243,7 +243,7 @@ interfaces)\cite{Schutt2019-sz, Leung2020-tv, Rosen2022-pw, Deng2023-tg}.
 
 % ---------- %
 
-State-of-the-art models like MACE, M3GNet\cite{needed}, and CHGNet have been shown to exhibit systematic underestimation of surface
+State-of-the-art models like MACE, M3GNet\cite{brlec2023_interfaceML}, and CHGNet have been shown to exhibit systematic underestimation of surface
 and defect energies, sometimes referred to as PES softening.
 
 This leads to overpredicted interface stability and can mislead ranking.
@@ -304,8 +304,8 @@ pipeline screening.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1\textwidth]{Upgrade_Report/analysis/plots/surface_vs_formation_energy.png}
-    \caption{Caption needed}
+    \includegraphics[width=1\textwidth]{Upgrade_Report/analysis/plots/surface_vs_formation_energy_bar.png}
+    \caption{Mean interface formation energy ($\Delta E$) by surface orientation and element, comparing DFT (blue) and MLP (orange) predictions. Each bar represents the average formation energy across all interfaces involving the specified surface (e.g. $Si(001)$, $Ge(111)$). While overall trends are consistent across methods, certain surfaces—such as $Si(011)$ and $Ge(114)$—show large discrepancies, highlighting cases where MLP overestimates formation energy relative to DFT. Orientations such as $Si(112)$ and $Ge(122)$ exhibit strong agreement. This analysis underscores the role of surface geometry in influencing interfacial stability and method-dependent deviations.}
     \label{fig:surface_to_formation_energy_correlation}
 \end{figure}
 
@@ -356,14 +356,14 @@ While ARTEMIS enables systematic construction of aligned interface stacks with c
 registry shifts, its deterministic approach limits structural diversity.
 
 This can lead to overrepresentation of high-symmetry configurations and under-sampling of disordered or experimentally
-relevant interfaces\cite{needed}.
+relevant interfaces\cite{artemis_paper}.
 
 % ---------- %
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.85\textwidth]{Upgrade_Report/analysis/plots/raffle_workflow.jpg}
-    \caption{Used with permission from Taylor et al.\cite{raffle_paper, Pitfield2024-ra}.}
+    \caption{Overview of the RAFFLE workflow for interface structure prediction using active learning. The process begins with three user-defined inputs: a host structure, a target stoichiometry for atomic placement, and a reference database of previously evaluated systems. RAFFLE generates system-specific distribution functions, from which it learns generalised descriptors to guide atom placement within the host. Following structural relaxation, systems are ranked by energy. If multiple lowest-energy configurations are identified, the process converges. Otherwise, newly ranked systems are used to refine the descriptors and update placement strategies iteratively. Used with permission from Taylor et al.\cite{raffle_paper, Pitfield2024-ra}.}
     \label{fig:raffle_workflow}
 \end{figure}
 

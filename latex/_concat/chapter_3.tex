@@ -3,10 +3,10 @@
 % ---------- %
 
 A key step in training a Machine-Learned Interface (MLI) model is building a dataset of physically plausible and
-energetically reasonable heterostructures.
+energetically reasonable heterostructures\cite{Di_Liberto2022-gz, Batzner2022-fd}.
 
 Ideally, such a dataset would be generated entirely using density functional theory (DFT), but the cost of relaxing and
-evaluating thousands of configurations makes this impractical.
+evaluating thousands of configurations makes this impractical\cite{Rosen2022-pw, Schutt2018-xc, Rosen2022-pw}.
 
 Instead, this chapter investigates whether a machine-learned potential (MLP), specifically the MACE model, can assist in
 rapidly generating and assessing interface structures before applying DFT.
@@ -104,22 +104,22 @@ materials could be stacked together.
 ARTEMIS searched for matching supercells by expanding the unit cells of both materials up to 8 times along the in-plane
 directions, looking for configurations with similar lattice vectors and angles (detailed in \secref{sec:lattice_mismatching}).
 
-This helps distribute mismatch over more atoms and reduce the per-cell strain.
+This helps distribute mismatch over more atoms and reduce the per-cell strain\cite{artemis_paper}.
 
 % ---------- %
 
 A key goal in finding physically favourable interfaces is to minimise the energy penalties introduced by strain and
-unbonded valence electrons.
+unbonded valence electrons\cite{Gerber2023-yd, Butler2019-ws}.
 
 Interfaces with large lattice mismatch or poor atomic registry often exhibit elevated formation energies due to elastic
-distortions or chemically unstable bonding environments.
+distortions or chemically unstable bonding environments\cite{Hepplestone2010-vw, Chagarov2015-ol, Zhang2016-lt}.
 
 By contrast, coherent interfaces that exhibit low strain and high atomic registry are more likely to be energetically
-stable and experimentally realisable.
+stable and experimentally realisable\cite{Gerber2023-yd, Davies2024-ju, Chagarov2015-ol}.
 
 % ---------- %
 
-One strategy for achieving this is through supercell scaling: we try to match lattice constants $a$ and $a'$ of two
+One strategy for achieving this is through supercell scaling\cite{artemis_paper}: we try to match lattice constants $a$ and $a'$ of two
 materials by finding integers $n$ and $m$ such that $n \cdot a \approx m \cdot a'$, distributing the residual mismatch over multiple
 unit cells (see discussion of supercell mismatch reduction in \secref{sec:lattice_mismatching}).
 
@@ -154,13 +154,13 @@ Each increase in supercell size decreases the mismatch per unit cell by roughly 
 In addition to supercell scaling, the choice of interface orientation, described by Miller indices (explained in
 \secref{sec:orientation_matching}), can significantly influence atomic registry across the interface.
 
-Each Miller plane represents a unique slice through the crystal lattice that exposes a specific atomic arrangement.
+Each Miller plane represents a unique slice through the crystal lattice that exposes a specific atomic arrangement\cite{artemis_paper}.
 
 By rotating, stacking, and aligning these planes between two different materials, one can search for surface
 combinations where atoms naturally align into coherent patterns.
 
 ARTEMIS uses these surface alignments to explore many candidate configurations, seeking high registry where bonding
-across the interface is maximised and valence electrons are not left unpaired.
+across the interface is maximised and valence electrons are not left unpaired\cite{artemis_paper}.
 
 % ---------- %
 
@@ -179,7 +179,7 @@ separations from nearby stable interfaces.
 
 % ---------- %
 
-Although ARTEMIS supports atomic swaps at the interface to explore alloy-like or disordered bonding environments, this
+Although ARTEMIS supports atomic swaps at the interface to explore alloy-like or disordered bonding environments\cite{artemis_paper}, this
 feature was not available in the version used for this study.
 
 Such configurations will be generated in future iterations using the RAFFLE tool.
@@ -300,8 +300,8 @@ This is another way of showing how different the energies are, giving more weigh
 
 % ---------- %
 
-These metrics help us judge whether the MLP is giving similar energy rankings and values to DFT, so we can decide
-whether it is useful for selecting structures for further study.
+These metrics help to determine whether the MLP is giving similar energy rankings and values to DFT, so it can be established
+whether it is useful for selecting structures for further study\nocite{}
 
 % ---------- %
 
@@ -309,11 +309,11 @@ whether it is useful for selecting structures for further study.
 
 % ---------- %
 
-In this study, we did not relax the interface structures before comparing energies.
+In this study, the interface structures were not relaxed before comparing energies.
 
 Instead, the same unrelaxed geometries were evaluated using both DFT and MLP to keep the comparison fair.
 
-This helps isolate differences in energy prediction from differences caused by structural relaxation.
+This helps isolate differences in energy prediction from differences caused by structural relaxation\cite{artemis_paper}.
 
 % ---------- %
 
@@ -338,7 +338,7 @@ No fine-tuning or delta-correction was applied.
 While MLP-based relaxation was tested on some structures later in the workflow, those results were not used for ranking
 comparison in this section.
 
-The goal here is to test how well MLP can predict relative stability based on geometry alone.
+The goal is to test how well MLP can predict relative stability based on geometry alone.
 
 DFT relaxations are planned for future datasets.
 
@@ -389,7 +389,7 @@ structures.
 
 % ---------- %
 
-To understand how interface geometry impacts ranking fidelity, we grouped results into three categories: upper-slab
+To understand how interface geometry impacts ranking fidelity, results were grouped into three categories: upper-slab
 heterostructures, lower-slab heterostructures, and homostructures (grain boundaries).
 
 Average metrics across these categories are summarised in Table~\ref{tab:interface-type-stats}.
@@ -505,7 +505,7 @@ In contrast, the reversed Ge|Si systems showed better correlation and lower erro
 % ---------- %
 
 The asymmetry suggests that silicon's role in defining interfacial bonding may contribute to poor generalisation by
-MACE, particularly under strain or poor coordination.
+% MACE, particularly under strain or poor coordination. $ remove?
 
 % ---------- %
 
@@ -722,7 +722,7 @@ Without targeted retraining or domain-specific corrections, MLP-based prediction
 \begin{figure}[H]
     \centering
     \includegraphics[width=1\textwidth]{Upgrade_Report/analysis/plots/results_compute_time_comparison.png}
-    \caption{Caption needed}
+    \caption{Average compute time per electron versus total electron count for interface structures, comparing DFT (blue) and MLP (orange) energy evaluations. Compute time was measured in walltime seconds on equivalent hardware. DFT exhibits a significantly steeper increase in cost with system size, with a linear trend slope of $1.51 \times 10^{-2}$, compared to just $2.05 \times 10^{-3}$ for MLP—a roughly $7 \times$ slower growth rate. This illustrates the much better scalability of machine-learned potentials for large-scale or high-throughput interface screening.}
     \label{fig:electron_compute_time}
 \end{figure}
 
