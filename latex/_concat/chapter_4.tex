@@ -1,101 +1,53 @@
 \chapter{Next Steps} \label{chapter:next_steps}
 
-% ---------- %
-
 \section{Further Steps Towards Rank Preservation} \label{section:rank_preservation}
 
-% ---------- %
-
-The ability to preserve DFT-calculated interface rankings is critical for efficient high-throughput screening of
-material systems\cite{Gerber2023-yd, Nykiel2023-jf, Di_Liberto2022-gz}.
-
-Absolute interface energies are less relevant in isolation if the relative favourability of competing configurations is
-misrepresented.
-
+The ability to preserve DFT-calculated interface rankings is critical for efficient high-throughput screening of material systems\cite{Gerber2023-yd, Nykiel2023-jf, Di_Liberto2022-gz}.
+Absolute interface energies are less relevant in isolation if the relative favourability of competing configurations is misrepresented.
 This motivates the need for improving rank fidelity in machine-learned models such as MACE\cite{Chagarov2015-ol, Leung2020-tv, Gerber2023-yd}.
 
-% ---------- %
-
-To address the limitations identified in Chapter~\ref{chapter:computational_investigation}, particularly in silicon-rich
-systems and mixed-coordination interfaces, future work will compare three MLP training strategies:
-
-% ---------- %
+To address the limitations identified in Chapter~\ref{chapter:computational_investigation}, particularly in silicon-rich systems and mixed-coordination interfaces, future work will compare three MLP training strategies:
 
 \begin{enumerate}
-    \item \textbf{Baseline MACE model} Trained primarily on bulk configurations.
-
-    It offers good rank preservation in many systems but struggles in Si-rich or strained interfaces, where structural
-    features deviate from the training distribution.
-    \item \textbf{Interface-specific fine-tuning} Enhances the baseline model using additional interfacial
-    configurations.
-
+    \item \textbf{Baseline MACE model} Trained primarily on bulk configurations. \\
+    It offers good rank preservation in many systems but struggles in Si-rich or strained interfaces, where structural features deviate from the training distribution.
+    \item \textbf{Interface-specific fine-tuning} Enhances the baseline model using additional interfacial configurations. \\
     This aims to reduce domain mismatch and improve ranking accuracy in chemically or structurally diverse cases.
-    \item \textbf{Delta-learning correction} Learns the residual difference between MLP and DFT energy outputs
-    (\( \Delta E = E_\mathrm{DFT} - E_\mathrm{MLP} \)). This approach enables low-cost calibration without full
-    retraining, making it attractive for incremental improvements\cite{Batatia2022-xz}.
+    \item \textbf{Delta-learning correction} Learns the residual difference between MLP and DFT energy outputs ($\Delta E = E_\mathrm{DFT} - E_\mathrm{MLP}$). This approach enables low-cost calibration without full retraining, making it attractive for incremental improvements\cite{Batatia2022-xz}.
 \end{enumerate}
 
-% ---------- %
-
-To quantify the degree of rank preservation between MLP and DFT energy evaluations, we will use the following
-benchmarking metrics:
-
-% ---------- %
+To quantify the degree of rank preservation between MLP and DFT energy evaluations, we will use the following benchmarking metrics:
 
 \begin{itemize}
-    \item \textbf{Spearman's rank correlation coefficient} (\( \rho \)): Measures how well the global ranking of
-    structures is preserved between methods\cite{Spearman1904-proofassociation}.
-
-    Chapter~\ref{chapter:computational_investigation} reports near-perfect Spearman values (e.g. \( \rho = 0.9954 \))
-    in many systems.
-    \item \textbf{Kendall's rank correlation coefficient} (\( \tau \)): Assesses the proportion of concordant versus
-    discordant ranking pairs. It is more sensitive to small local swaps in ranking than Spearman's \( \rho \).
-    \item \textbf{Top-N Overlap}: Evaluates how many of the top-ranked structures under DFT are also present in the MLP
-    top-\( N \) list\cite{Kendall1938-rankcorr}.
-
+    \item \textbf{Spearman's rank correlation coefficient} ($\rho$): Measures how well the global ranking of structures is preserved between methods\cite{Spearman1904-proofassociation}. \\
+    Chapter~\ref{chapter:computational_investigation} reports near-perfect Spearman values (e.g. $\rho = 0.9954$) in many systems.
+    \item Kendall's rank correlation coefficient ($\tau$): Assesses the proportion of concordant versus discordant ranking pairs. It is more sensitive to small local swaps in ranking than Spearman's $\rho$.
+    \item Top-N Overlap: Evaluates how many of the top-ranked structures under DFT are also present in the MLP top-$N$ list\cite{Kendall1938-rankcorr}. \\
     This provides a practical indicator for screening performance.
-    \item \textbf{Mean Absolute Error (MAE)} and \textbf{Root Mean Square Error (RMSE)}: These absolute error metrics
-    quantify the average and variance-weighted energy deviation, even when rank preservation is strong\cite{Batatia2022-xz}.
+    \item Mean Absolute Error (MAE) and Root Mean Square Error (RMSE): These absolute error metrics quantify the average and variance-weighted energy deviation, even when rank preservation is strong\cite{Batatia2022-xz}.
 \end{itemize}
 
-% ---------- %
-
-These metrics will be applied across chemically diverse systems (C, Si, Ge, Sn), and varied geometries including
-different Miller planes and stacking shifts.
-
+These metrics will be applied across chemically diverse systems ($C$, $Si$, $Ge$, $Sn$), and varied geometries including different Miller planes and stacking shifts.
 Structural asymmetry and slab orientation (upper vs lower slab) will also be included in the benchmarking matrix.
 
-% ---------- %
-
-Figures such as \figref{fig:Ge_Si_spearman_valid} and \figref{fig:Ge_Sn_kendall_invalid} will illustrate performance
-nuances across system subsets.
-
-% ---------- %
+Figures such as \figref{fig:Ge_Si_spearman_valid} and \figref{fig:Ge_Sn_kendall_invalid} will illustrate performance nuances across system subsets.
 
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.85\textwidth]{Upgrade_Report/02_Main_Body/04_Next_Steps/results_lower_Ge_upper_Sn_kendall_dft@dft_vs_dft@mlp_invalid.png}
-    \caption{Example of rank degradation near a phase boundary: Kendall correlation for lower Ge / upper Sn interfaces. High deviation may indicate inversion.}
+    \caption{Example of rank degradation near a phase boundary: Kendall correlation for lower $Ge$ / upper $Sn$ interfaces. High deviation may indicate inversion.}
     \label{fig:Ge_Sn_kendall_invalid}
 \end{figure}
-
-% ---------- %
 
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.9\textwidth]{Upgrade_Report/02_Main_Body/04_Next_Steps/results_lower_Ge_upper_Si_spearman_dft_dft_vs_dft_mlp_valid.png}
-    \caption{Grouped rank correlation performance by system and slab orientation. Example shown: Spearman \( \rho \) for Si in upper slab.}
+    \caption{Grouped rank correlation performance by system and slab orientation. Example shown: Spearman $\rho$ for $Si$ in upper slab.}
     \label{fig:Ge_Si_spearman_valid}
 \end{figure}
 
-% ---------- %
-
-Performance will be assessed using statistical correlation coefficients and overlap in Top-N rankings between DFT and
-MLP predictions.
-
+Performance will be assessed using statistical correlation coefficients and overlap in Top-N rankings between DFT and MLP predictions.
 These metrics will provide fine-grained diagnostics of rank preservation~\nocite{}.
-
-% ---------- %
 
 \begin{table}[h]
 \centering
@@ -104,8 +56,8 @@ These metrics will provide fine-grained diagnostics of rank preservation~\nocite
 \begin{tabular}{@{}lll@{}}
 \toprule
 \textbf{Metric} & \textbf{Symbol} & \textbf{Interpretation} \\ \midrule
-Spearman Rank Correlation & \( \rho \) & Preserves overall order of interface rankings \\
-Kendall Rank Correlation & \( \tau \) & Sensitive to local rank swaps; pairwise comparison \\
+Spearman Rank Correlation & $\rho$ & Preserves overall order of interface rankings \\
+Kendall Rank Correlation & $\tau$ & Sensitive to local rank swaps; pairwise comparison \\
 Top-N Overlap & -- & Measures agreement in top-ranked structures \\
 Mean Absolute Error & MAE & Average magnitude of energy deviation (eV) \\
 Root Mean Square Error & RMSE & Penalises large deviations more heavily than MAE \\
@@ -113,31 +65,15 @@ Root Mean Square Error & RMSE & Penalises large deviations more heavily than MAE
 \end{tabular}
 \end{table}
 
-% ---------- %
-
-\paragraph{Error Scaling with System Size}
-
-% ---------- %
+\subsection*{Error Scaling with System Size}
 
 Preliminary results suggest that energy errors may scale with system size, particularly in Sn-rich heterostructures.
-
-For example, systems involving tin exhibited high RMSE values despite strong rank correlation
-(\( \rho \approx 0.9744 \)).
-
-This may be due to larger atomic volumes, heavier elements, or deeper potential wells that amplify energy deviations in
-absolute terms.
-
+For example, systems involving tin exhibited high RMSE values despite strong rank correlation ($\rho \approx 0.9744$).
+This may be due to larger atomic volumes, heavier elements, or deeper potential wells that amplify energy deviations in absolute terms.
 However, no systematic analysis of this scaling effect has yet been performed.
 
-% ---------- %
-
-A robustness study will be conducted to quantify how MAE and RMSE evolve as a function of total atom count or interface
-area.
-
-If a clear trend emerges, this could motivate size-normalised corrections or domain-specific energy thresholds for MLP
-screening.
-
-% ---------- %
+A robustness study will be conducted to quantify how MAE and RMSE evolve as a function of total atom count or interface area.
+If a clear trend emerges, this could motivate size-normalised corrections or domain-specific energy thresholds for MLP screening.
 
 \begin{figure}[H]
     \centering
@@ -146,161 +82,72 @@ screening.
     \label{fig:error_scaling}
 \end{figure}
 
-% ---------- %
+\subsection*{Tracking Failed Calculations and Dataset Completeness}
 
-\paragraph{Tracking Failed Calculations and Dataset Completeness}
-
-% ---------- %
-
-Some interface evaluations, especially in large or unrealistic systems, failed due to relaxation non-convergence, broken
-geometries, or invalid energy outputs (e.g., NaNs).
-
-These were marked as \texttt{is\_broken} and excluded from ranking analyses (see
-Chapter~\ref{chapter:computational_investigation}).
-
-However, no central mechanism currently exists to summarise failure rates or track completeness across chemical systems,
-orientations, or slab types.
-
-% ---------- %
+Some interface evaluations, especially in large or unrealistic systems, failed due to relaxation non-convergence, broken geometries, or invalid energy outputs (e.g. $NaNs$).
+These were marked as \texttt{is\_broken} and excluded from ranking analyses (see Chapter~\ref{chapter:computational_investigation}).
+However, no central mechanism currently exists to summarise failure rates or track completeness across chemical systems, orientations, or slab types.
 
 Future iterations will include a completeness tracker that records:
 
-% ---------- %
-
 \begin{itemize}
-    \item The number of generated vs successfully evaluated structures
-    \item Breakdown by chemical system (e.g. Si|Ge, C|Sn)
-    \item Breakdown by slab orientation and stacking direction
-    \item Statistics on failure causes (e.g. relaxation timeout, unphysical overlaps)
+    \item The number of generated vs successfully evaluated structures.
+    \item Breakdown by chemical system (e.g. $Si|Ge$, $C|Sn$).
+    \item Breakdown by slab orientation and stacking direction.
+    \item Statistics on failure causes (e.g. relaxation timeout, unphysical overlaps).
 \end{itemize}
 
-% ---------- %
-
-This diagnostic layer will help identify whether certain systems are systematically excluded, potentially biasing the
-dataset or skewing model evaluation.
-
-% ---------- %
+This diagnostic layer will help identify whether certain systems are systematically excluded, potentially biasing the dataset or skewing model evaluation.
 
 \section{Challenges in Building an Accurate Interface Prediction Model}\label{section:model_challenges}
 
-% ---------- %
-
-Despite the promising results demonstrated in Chapter~\ref{chapter:computational_investigation}, developing a
-machine-learned interatomic potential (MLIP) capable of reliably predicting interface stability remains a formidable
-challenge.
-
-Many failure modes arise from limitations in the training data, extrapolation behavior, bonding diversity, DFT reference
-fidelity, and intrinsic model architecture.
-
-This section outlines the key reasons why such models may fail, drawing on current literature and our own experience
-building and benchmarking MACE-based predictors.
-
-% ---------- %
+Despite the promising results demonstrated in Chapter~\ref{chapter:computational_investigation}, developing a machine-learned interatomic potential (MLIP) capable of reliably predicting interface stability remains a formidable challenge.
+Many failure modes arise from limitations in the training data, extrapolation behavior, bonding diversity, DFT reference fidelity, and intrinsic model architecture.
+This section outlines the key reasons why such models may fail, drawing on current literature and our own experience building and benchmarking MACE-based predictors.
 
 A robust MLIP depends critically on the diversity, quantity, and physical relevance of its training set\cite{Wang2024-tn, Deng2023-tg, Batzner2022-fd}.
+Our dataset, while spanning 680 heterostructures across four group $14$ elements and $29$ surfaces, may not fully capture the high-strain, defective, or chemically mixed environments found at real interfaces.
+Without configurations containing defects, alloy bonds (e.g. $Si|Sn$), or off-equilibrium geometries, the model risks systematic errors when encountering novel atomic arrangements.
+Moreover, data imbalance, such as overrepresentation of Si surfaces, can bias the model's predictions away from accurate generalisation.
 
-Our dataset, while spanning 680 heterostructures across four group 14 elements and 29 surfaces, may not fully capture
-the high-strain, defective, or chemically mixed environments found at real interfaces.
+Interfaces are inherently out-of-distribution cases, often involving strain, registry shifts, and mixed bonding environments not present in the training data\cite{Khot2025-hh, Gerber2023-yd, Batzner2022-fd, Saidi2017-ab}.
+Even small extrapolations, such as a Si atom bonded to metallic $\beta-Sn$, can cause large errors if the MLIP has not seen similar local environments\cite{Khot2025-hh, Batzner2022-fd, Schutt2019-sz}.
+Moreover, if multiple interface configurations are close in energy, even minor inaccuracies can lead to rank inversions, undermining screening workflows\cite{Leung2020-tv, Di_Liberto2022-gz, Gerber2023-yd}.
 
-Without configurations containing defects, alloy bonds (e.g. Si|Sn), or off-equilibrium geometries, the model risks
-systematic errors when encountering novel atomic arrangements.
-
-Moreover, data imbalance, such as overrepresentation of Si surfaces, can bias the model's predictions away from accurate
-generalisation.
-
-% ---------- %
-
-Interfaces are inherently out-of-distribution cases, often involving strain, registry shifts, and mixed bonding
-environments not present in the training data\cite{Khot2025-hh, Gerber2023-yd, Batzner2022-fd, Saidi2017-ab}.
-
-Even small extrapolations, such as a Si atom bonded to metallic \(\beta\)-Sn, can cause large errors if the MLIP has not
-seen similar local environments\cite{Khot2025-hh, Batzner2022-fd, Schutt2019-sz}.
-
-Moreover, if multiple interface configurations are close in energy, even minor inaccuracies can lead to rank inversions,
-undermining screening workflows\cite{Leung2020-tv, Di_Liberto2022-gz, Gerber2023-yd}.
-
-% ---------- %
-
-Extending the model to handle semiconductors, metals, and insulators introduces qualitative differences in bonding:
-covalent, metallic, ionic, and hybrid regimes.
-
-A single MLIP may struggle to capture directional bonding in Si and delocalised metallic bonding in Sn, let alone polar
-surfaces or long-range interactions in ionic oxides\cite{Owen2024-wp, Butler2019-ws}.
-
-Many universal potentials underperform when stretched across these regimes, especially in predicting interfacial
-stability or reconstruction\cite{Leung2020-tv, Deng2023-tg}.
-
-% ---------- %
+Extending the model to handle semiconductors, metals, and insulators introduces qualitative differences in bonding: covalent, metallic, ionic, and hybrid regimes.
+A single MLIP may struggle to capture directional bonding in Si and delocalised metallic bonding in Sn, let alone polar surfaces or long-range interactions in ionic oxides\cite{Owen2024-wp, Butler2019-ws}.
+Many universal potentials underperform when stretched across these regimes, especially in predicting interfacial stability or reconstruction\cite{Leung2020-tv, Deng2023-tg}.
 
 MLIPs inherit the limitations of the DFT calculations they are trained on\cite{Schutt2019-sz, Deng2023-tg, Wang2024-tn}.
+If hybrid functionals or relativistic corrections are omitted, the MLIP may learn inaccurate bonding energies, phase stabilities, or surface reconstructions, particularly for heavy elements like Pb or Au. Similarly, neglecting van der Waals forces can impair accuracy in weakly bonded or physisorbed interfaces.
+These issues limit transferability, especially in cross-class systems (e.g. semiconductor/metal or $2D$/$3D$ hybrid interfaces)\cite{Schutt2019-sz, Leung2020-tv, Rosen2022-pw, Deng2023-tg}.
 
-If hybrid functionals or relativistic corrections are omitted, the MLIP may learn inaccurate bonding energies, phase
-stabilities, or surface reconstructions, particularly for heavy elements like Pb or Au. Similarly, neglecting van der
-Waals forces can impair accuracy in weakly bonded or physisorbed interfaces.
-
-These issues limit transferability, especially in cross-class systems (e.g. semiconductor/metal or 2D/3D hybrid
-interfaces)\cite{Schutt2019-sz, Leung2020-tv, Rosen2022-pw, Deng2023-tg}.
-
-% ---------- %
-
-State-of-the-art models like MACE, M3GNet\cite{brlec2023_interfaceML}, and CHGNet have been shown to exhibit systematic underestimation of surface
-and defect energies, sometimes referred to as PES softening.
-
+State-of-the-art models like MACE, M3GNet\cite{brlec2023_interfaceML}, and CHGNet have been shown to exhibit systematic underestimation of surface and defect energies, sometimes referred to as PES softening.
 This leads to overpredicted interface stability and can mislead ranking.
-
-Other known issues include poor uncertainty quantification, overfitting due to high model complexity, and numerical
-instability for large systems or heavy elements.
-
+Other known issues include poor uncertainty quantification, overfitting due to high model complexity, and numerical instability for large systems or heavy elements.
 Without mechanisms to detect extrapolation or assess prediction confidence, the model may silently fail\cite{Batatia2022-xz, Deng2023-tg, Pitfield2025-ah}.
 
-% ---------- %
-
 Each of these failure modes represents a critical risk to model fidelity.
-
-Recognising them early provides guidance for mitigating strategies: expanding and diversifying training data, using
-active learning to discover critical configurations, incorporating physics-based corrections into the reference data,
-and applying uncertainty-aware predictions.
-
-While our current work demonstrates strong ranking performance in many systems, these broader challenges must be
-addressed before a general-purpose interface prediction model can be considered reliable.
-
-% ---------- %
+Recognising them early provides guidance for mitigating strategies: expanding and diversifying training data, using active learning to discover critical configurations, incorporating physics-based corrections into the reference data, and applying uncertainty-aware predictions.
+While our current work demonstrates strong ranking performance in many systems, these broader challenges must be addressed before a general-purpose interface prediction model can be considered reliable.
 
 \section{Surface Effects on Interface Favourability}\label{section:surface_effects}
 
-% ---------- %
-
-A key open question is whether the surface energetics of individual slabs can serve as predictors for the favourability
-of the resulting heterostructure.
-
-If a reliable correlation exists between surface energy and interface formation energy \( \Delta E_\mathrm{form} \), it
-could significantly reduce the need for exhaustive interface enumeration\cite{Arantes2007-ea, Zhang2016-lt, Zotti2018-nv, Butler2019-ws}.
-
-% ---------- %
+A key open question is whether the surface energetics of individual slabs can serve as predictors for the favourability of the resulting heterostructure.
+If a reliable correlation exists between surface energy and interface formation energy $\Delta E_\mathrm{form}$, it could significantly reduce the need for exhaustive interface enumeration\cite{Arantes2007-ea, Zhang2016-lt, Zotti2018-nv, Butler2019-ws}.
 
 Future work will analyse the data in surface energies to quantify correlations between:
-
-% ---------- %
 
 \begin{itemize}
     \item The average surface energy of the two slabs.
     \item The minimum/maximum surface energy of the slab pair.
-    \item The resulting interface energy \( \Delta E_\mathrm{form} \) from DFT and MLP evaluations.
+    \item The resulting interface energy $\Delta E_\mathrm{form}$ from DFT and MLP evaluations.
 \end{itemize}
 
-% ---------- %
-
-This analysis will help determine whether high-energy surfaces are more reactive, and therefore more likely to form
-low-energy interfaces, or whether other factors such as registry and orientation dominate.
-
-% ---------- %
+This analysis will help determine whether high-energy surfaces are more reactive, and therefore more likely to form low-energy interfaces, or whether other factors such as registry and orientation dominate.
 
 A figure plotting surface energy combinations against interface energies is planned to visualise this correlation.
-
-If strong trends are identified, slab energetics could be used as a lightweight proxy feature in the early stages of MLI
-pipeline screening.
-
-% ---------- %
+If strong trends are identified, slab energetics could be used as a lightweight proxy feature in the early stages of MLI pipeline screening.
 
 \begin{figure}[H]
     \centering
@@ -309,56 +156,28 @@ pipeline screening.
     \label{fig:surface_to_formation_energy_correlation}
 \end{figure}
 
-% ---------- %
-
 \section{Crystallographic Structure and Interface Behaviour}
 
-% ---------- %
-
-Interface orientation and underlying crystal symmetry strongly influence both the physical plausibility and ranking
-fidelity of heterostructures\cite{Davies2024-ju}.
-
-Chapter~\ref{chapter:computational_investigation} demonstrates that coherent interfaces with well-aligned Miller planes
-tend to exhibit better MLP-DFT rank agreement, particularly in systems with low strain and high registry.
-
-% ---------- %
+Interface orientation and underlying crystal symmetry strongly influence both the physical plausibility and ranking fidelity of heterostructures\cite{Davies2024-ju}.
+Chapter~\ref{chapter:computational_investigation} demonstrates that coherent interfaces with well-aligned Miller planes tend to exhibit better MLP-DFT rank agreement, particularly in systems with low strain and high registry.
 
 Future work will group interfaces by:
 
-% ---------- %
-
 \begin{itemize}
-    \item Parent symmetry (e.g., diamond vs. zincblende structures)
-    \item Orientation combinations (e.g., \{100\}|\{100\}, \{100\}|\{111\})
-    \item Slab asymmetry (e.g., Ge over Sn vs. Sn over Ge)
+    \item Parent symmetry (e.g. diamond vs. hexagonal structures)
+    \item Orientation combinations (e.g. $\{100\}|\{100\}$, $\{100\}|\{111\}$)
+    \item Slab asymmetry (e.g. $Ge$ over $Sn$ vs. $Sn$ over $Ge$)
 \end{itemize}
 
-% ---------- %
+Metrics such as $\rho$, $\tau$, and Top-$N$ overlap will be aggregated for each group to identify structural contexts that promote or degrade predictive performance.
+For example, early results suggest that silicon in the lower slab often reduces rank fidelity compared to reversed configurations.
 
-Metrics such as \( \rho \), \( \tau \), and Top-N overlap will be aggregated for each group to identify structural
-contexts that promote or degrade predictive performance.
-
-For example, early results suggest that silicon in the lower slab often reduces rank fidelity compared to reversed
-configurations.
-
-% ---------- %
-
-If resources permit, this analysis could be extended to other lattice types (e.g. bcc or hcp) to evaluate whether the
-observed trends generalise beyond diamond-structured group 14 systems.
-
-% ---------- %
+If resources permit, this analysis could be extended to other lattice types (e.g. bcc or hcp) to evaluate whether the observed trends generalise beyond diamond-structured group 14 systems.
 
 \section{Integration of RAFFLE}
 
-% ---------- %
-
-While ARTEMIS enables systematic construction of aligned interface stacks with controlled Miller plane matching and
-registry shifts, its deterministic approach limits structural diversity.
-
-This can lead to overrepresentation of high-symmetry configurations and under-sampling of disordered or experimentally
-relevant interfaces\cite{artemis_paper}.
-
-% ---------- %
+While ARTEMIS enables systematic construction of aligned interface stacks with controlled Miller plane matching and registry shifts, its deterministic approach limits structural diversity.
+This can lead to overrepresentation of high-symmetry configurations and under-sampling of disordered or experimentally relevant interfaces\cite{artemis_paper}.
 
 \begin{figure}[H]
     \centering
@@ -367,66 +186,35 @@ relevant interfaces\cite{artemis_paper}.
     \label{fig:raffle_workflow}
 \end{figure}
 
-% ---------- %
-
 RAFFLE addresses this limitation by introducing stochastic perturbations within the interfacial zone.
-
 Using the \texttt{raffle\_generator} module, RAFFLE will:
 
-% ---------- %
-
 \begin{itemize}
-    \item Vary atomic positions, stacking offsets, and coordination environments
-    \item Generate alloy-like bonding motifs and partial intermixing at the interface
-    \item Sample non-aligned registry patterns to mimic more realistic boundary configurations
+    \item Vary atomic positions, stacking offsets, and coordination environments.
+    \item Generate alloy-like bonding motifs and partial intermixing at the interface.
+    \item Sample non-aligned registry patterns to mimic more realistic boundary configurations.
 \end{itemize}
-
-% ---------- %
 
 Initial slab structures and surface orientations will still be defined via ARTEMIS to ensure lattice coherence.
+RAFFLE will then apply controlled configurational noise or interpolation within the interface region, expanding the training space beyond aligned stacks.
 
-RAFFLE will then apply controlled configurational noise or interpolation within the interface region, expanding the
-training space beyond aligned stacks.
-
-% ---------- %
-
-This approach is especially useful for challenging systems such as Si|Sn and Ge|Sn, where perfect alignment is hard to
-achieve due to large lattice mismatch and differing atomic sizes.
-
+This approach is especially useful for challenging systems such as Si|Sn and Ge|Sn, where perfect alignment is hard to achieve due to large lattice mismatch and differing atomic sizes.
 By broadening the configurational diversity, RAFFLE aims to:
 
-% ---------- %
-
 \begin{itemize}
-    \item Improve generalisation of MLPs trained on interface data
-    \item Reveal edge cases where rank preservation fails due to disorder
-    \item Increase coverage of physically relevant but hard-to-discover interface motifs
+    \item Improve generalisation of MLPs trained on interface data.
+    \item Reveal edge cases where rank preservation fails due to disorder.
+    \item Increase coverage of physically relevant but hard-to-discover interface motifs.
 \end{itemize}
 
-% ---------- %
-
-Comparative relaxation studies will be conducted using both DFT and MLP pipelines to assess the energetic spread and
-ranking fidelity introduced by RAFFLE. A schematic comparing ARTEMIS-only versus RAFFLE-augmented structure sets is
-planned to visualise the expansion of configurational space.
-
-% ---------- %
+Comparative relaxation studies will be conducted using both DFT and MLP pipelines to assess the energetic spread and ranking fidelity introduced by RAFFLE. A schematic comparing ARTEMIS-only versus RAFFLE-augmented structure sets is planned to visualise the expansion of configurational space.
 
 \section{Machine-Learned Interface (MLI) Predictor}
 
-% ---------- %
-
-The ultimate goal of this pipeline is to develop a Machine-Learned Interface (MLI) predictor capable of estimating
-interface favourability directly from slab pair descriptors, without requiring full relaxation or enumeration of
-stacking shifts.
-
-This model will act as an early-stage filter to prioritise promising candidates for structure generation and DFT
-refinement.
-
-% ---------- %
+The ultimate goal of this pipeline is to develop a Machine-Learned Interface (MLI) predictor capable of estimating interface favourability directly from slab pair descriptors, without requiring full relaxation or enumeration of stacking shifts.
+This model will act as an early-stage filter to prioritise promising candidates for structure generation and DFT refinement.
 
 Input features will include:
-
-% ---------- %
 
 \begin{itemize}
     \item Surface energies
@@ -437,102 +225,48 @@ Input features will include:
     \item Analytical band alignment features (e.g. Anderson's rule offset and induced field correction)
 \end{itemize}
 
-% ---------- %
-
-Initial labels for training will be derived from interface formation energies, computed using either DFT or MACE total
-energies (following benchmarking).
-
-These energies quantify the relative stability of each structure compared to its bulk constituents, and are normalised
-per atom.
-
-Where available, training labels will be enriched with additional structural descriptors extracted from POSCAR files and
-    relaxation trajectories.
-
-% ---------- %
+Initial labels for training will be derived from interface formation energies, computed using either DFT or MACE total energies (following benchmarking).
+These energies quantify the relative stability of each structure compared to its bulk constituents, and are normalised per atom.
+Where available, training labels will be enriched with additional structural descriptors extracted from POSCAR files and relaxation trajectories.
 
 Prediction targets will include:
 
-% ---------- %
-
 \begin{itemize}
-    \item Binary classification: favourable vs. unfavourable interfaces
-    \item Regression: predicted interface formation energy \( \Delta E_{\mathrm{int}} \)
-    \item Rank scoring: predicted favourability percentile within a generated batch
+    \item Binary classification: favourable vs. unfavourable interfaces.
+    \item Regression: predicted interface formation energy $\Delta E_{\mathrm{int}}$.
+    \item Rank scoring: predicted favourability percentile within a generated batch.
 \end{itemize}
 
-% ---------- %
-
 Simple models (e.g. decision trees, SVMs) will be used as baselines.
-
-If effective, graph-based architectures or equivariant neural networks may be explored to capture spatial features
-across slab boundaries.
-
-% ---------- %
+If effective, graph-based architectures or equivariant neural networks may be explored to capture spatial features across slab boundaries.
 
 The MLI predictor will integrate upstream with ARTEMIS and RAFFLE:
 \begin{enumerate}
     \item Given a pair of slabs, the MLI will score interface likelihoods before full stack generation.
-    \item High-scoring pairs will be passed to ARTEMIS for registry-matched stacking and to RAFFLE for disordered
-    sampling.
+    \item High-scoring pairs will be passed to ARTEMIS for registry-matched stacking and to RAFFLE for disordered sampling.
     \item Final relaxed energies will serve to update or retrain the MLI in an active-learning loop.
 \end{enumerate}
 
-% ---------- %
+This workflow could enable a fully ML-driven interface discovery pipeline; one that uses minimal DFT data to bootstrap structure generation, ranking, and model refinement.
 
-This workflow could enable a fully ML-driven interface discovery pipeline; one that uses minimal DFT data to bootstrap
-structure generation, ranking, and model refinement.
+\subsection*{MLI Model Architecture and Software Perspective}
 
-% ---------- %
+The proposed Machine-Learned Interface (MLI) model will adopt a graph neural network (GNN) architecture, which is particularly well-suited to atomic-scale prediction tasks.
+In this formulation, atoms are represented as nodes, and edges encode interatomic relationships such as distance, bond type, or spatial proximity.
+Node features may include atomic number, electronegativity, or coordination number, while edge features capture pairwise distances, bond angles, or periodic adjacency.
+This graph-based abstraction mirrors the geometry and locality of real materials, enabling the model to learn chemically and physically meaningful patterns across interface structures.
 
-\paragraph{MLI Model Architecture and Software Perspective}
+GNNs are especially appropriate for this task because they respect the symmetries of atomistic systems; they are invariant or equivariant to translation, rotation, and permutation of atoms, depending on their architecture.
+Through message-passing and feature aggregation, each atom aggregates information from its neighbors to refine local descriptors, allowing the model to learn both local bonding patterns and emergent long-range effects.
+These properties are essential for predicting interfacial phenomena, which often arise from geometric asymmetry, registry mismatch, and complex bonding environments\cite{Schutt2017-ge, Schutt2019-sz, Batzner2022-fd, Deng2023-tg}.
 
-The proposed Machine-Learned Interface (MLI) model will adopt a graph neural network (GNN) architecture, which is
-particularly well-suited to atomic-scale prediction tasks.
+\subsection*{Implementation Pipeline and Integration}
 
-In this formulation, atoms are represented as nodes, and edges encode interatomic relationships such as distance, bond
-type, or spatial proximity.
+From a software engineering standpoint, the MLI model will be implemented as a modular, callable component in the interface discovery pipeline.
+It will accept structured slab-pair data; either parsed directly from POSCARs or preprocessed descriptor arrays, and produce predictions of interface favourability.
+The model will be constructed using scalable graph learning libraries such as PyTorch Geometric, DGL, or JAX-based GNN frameworks, and will provide a clean API for downstream tools such as ARTEMIS and RAFFLE. Outputs will be compatible with JSON or HDF5-based metadata systems, ensuring traceability and reproducibility.
 
-Node features may include atomic number, electronegativity, or coordination number, while edge features capture pairwise
-distances, bond angles, or periodic adjacency.
-
-This graph-based abstraction mirrors the geometry and locality of real materials, enabling the model to learn chemically
-and physically meaningful patterns across interface structures.
-
-% ---------- %
-
-GNNs are especially appropriate for this task because they respect the symmetries of atomistic systems; they are
-invariant or equivariant to translation, rotation, and permutation of atoms, depending on their architecture.
-
-Through message-passing and feature aggregation, each atom aggregates information from its neighbors to refine local
-descriptors, allowing the model to learn both local bonding patterns and emergent long-range effects.
-
-These properties are essential for predicting interfacial phenomena, which often arise from geometric asymmetry,
-registry mismatch, and complex bonding environments\cite{Schutt2017-ge, Schutt2019-sz, Batzner2022-fd, Deng2023-tg}.
-
-% ---------- %
-
-\paragraph{Implementation Pipeline and Integration}
-
-From a software engineering standpoint, the MLI model will be implemented as a modular, callable component in the
-interface discovery pipeline.
-
-It will accept structured slab-pair data; either parsed directly from POSCARs or preprocessed descriptor arrays, and
-produce predictions of interface favourability.
-
-The model will be constructed using scalable graph learning libraries such as PyTorch Geometric, DGL, or JAX-based GNN
-frameworks, and will provide a clean API for downstream tools such as ARTEMIS and RAFFLE. Outputs will be compatible
-with JSON or HDF5-based metadata systems, ensuring traceability and reproducibility.
-
-% ---------- %
-
-Initial experiments may use relatively shallow GNNs with fixed neighbor cutoffs, but later iterations may incorporate
-equivariant tensor representations (e.g. MACE-style angular embeddings) to better capture orientation-dependent effects.
-Training targets will include both regression on \( \Delta E_\mathrm{form} \) and binary classification
-(favourable / unfavourable), optionally extended with uncertainty quantification.
-
-Crucially, the MLI is not meant to replace DFT or full relaxation pipelines, but to act as a high-speed prefilter that
-screen candidate structures for further evaluation.
-
+Initial experiments may use relatively shallow GNNs with fixed neighbor cutoffs, but later iterations may incorporate equivariant tensor representations (e.g. MACE-style angular embeddings) to better capture orientation-dependent effects.
+Training targets will include both regression on $\Delta E_\mathrm{form}$ and binary classification (favourable / unfavourable), optionally extended with uncertainty quantification.
+Crucially, the MLI is not meant to replace DFT or full relaxation pipelines, but to act as a high-speed prefilter that screen candidate structures for further evaluation.
 If successful, it will form the decision engine in a closed-loop ML-driven workflow for interfacial discovery.
-
-% ---------- %
