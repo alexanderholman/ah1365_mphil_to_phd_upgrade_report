@@ -47,7 +47,7 @@ By contrast, coherent interfaces that exhibit low strain and high atomic registr
 
 One strategy for achieving this is through supercell scaling\cite{artemis_paper}: we try to match lattice constants $a$ and $a'$ of two materials by finding integers $n$ and $m$ such that $n \cdot a \approx m \cdot a'$, distributing the residual mismatch over multiple unit cells (see discussion of supercell mismatch reduction in \secref{sec:lattice_mismatching}).
 For example, silicon and germanium have lattice constants of $5.45\,\text{\AA{}}$ and $5.66\,\text{\AA{}}$, respectively.
-Matching 22 unit cells of Si to 21 of Ge gives:
+\newpage Matching 22 unit cells of Si to 21 of Ge gives:
 \begin{equation}
     |22 \cdot 5.45 - 21 \cdot 5.66| = 1.04~\text{\AA}
 \end{equation}
@@ -72,7 +72,7 @@ Future datasets will attempt to reintroduce shift-zero configurations in $a$ and
 Although ARTEMIS supports atomic swaps at the interface to explore alloy-like or disordered bonding environments\cite{artemis_paper}, this feature was not available in the version used for this study.
 Such configurations will be generated in future iterations using the RAFFLE tool.
 
-While ARTEMIS considered many potential surface combinations, only $29$ unique surfaces were ultimately included in the final dataset.
+\newpage While ARTEMIS considered many potential surface combinations, only $29$ unique surfaces were ultimately included in the final dataset.
 This reflects both the geometric constraints of lattice matching and the filtering applied to ensure physical plausibility of the generated structures.
 
 All parts of the workflow, from building interfaces to reading the results, were automated using Python scripts.
@@ -120,7 +120,7 @@ It also ranges from $-1$ to $1$:
 \end{equation}
 These metrics help to determine whether the MLP is giving similar energy rankings and values to DFT, so it can be established whether it is useful for selecting structures for further study\nocite{}.
 
-\subsection{Relaxation and Energy Evaluation}
+\newpage \subsection{Relaxation and Energy Evaluation}
 
 In this study, the interface structures were not relaxed before comparing energies.
 Instead, the same unrelaxed geometries were evaluated using both DFT and MLP to keep the comparison fair.
@@ -144,7 +144,7 @@ DFT relaxations are planned for future datasets.
 This section presents the results of comparing unrelaxed DFT and MLP (MACE) energy rankings across $680$ valid heterostructures, grain boundaries, and alloyed systems involving the group 14 elements ($C$, $Si$, $Ge$, $Sn$).
 The goal is to determine whether MACE, a machine-learned interatomic potential, can replicate DFT-derived rankings on unrelaxed geometries closely enough to serve as a pre-screening tool in the MLI data pipeline.
 
-Across all evaluated systems, Spearman's rank correlation coefficient was extremely high:
+\newpage Across all evaluated systems, Spearman's rank correlation coefficient was extremely high:
 \begin{equation}
     \rho = 0.9954, \qquad \tau = 0.9568
 \end{equation}
@@ -159,7 +159,8 @@ Despite this, the Top-$10$ overlap between DFT and MLP was $8/10$, indicating st
 
 To understand how interface geometry impacts ranking fidelity, results were grouped into three categories: upper-slab heterostructures, lower-slab heterostructures, and homostructures (grain boundaries).
 Average metrics across these categories are summarised in Table~\ref{tab:interface_metrics}.
-\begin{table}
+\begin{table}[H]
+\tiny
 \centering
 \caption{Average metrics for each interface type.}
 \label{tab:interface_metrics}
@@ -216,7 +217,7 @@ Only three $C|Si$ interfaces were successfully processed with carbon in the lowe
 These yielded poor results, including a negative rank correlation ($\rho = -0.5$), high error (MAE $\approx 21.6$ eV), and a Top-$10$ overlap of just $3$.
 These structures are excluded from further analysis.
 
-\begin{table}[h]
+\begin{table}[H]
 \centering
 \begin{tabular}{lcccccc}
 \toprule
@@ -239,11 +240,11 @@ In contrast, when carbon occupied the upper slab (e.g. $C|Si$), the model perfor
 \end{equation}
 This suggests that MACE can accurately rank and evaluate carbon-containing interfaces when the geometry is physically sensible, particularly when carbon forms the terminating layer rather than the substrate.
 
-\subsection*{Silicon Systems $(Si|X)$}
+\newpage \subsection*{Silicon Systems $(Si|X)$}
 
 Silicon-rich systems exhibited strongly asymmetric performance depending on whether $Si$ occupied the lower or upper slab.
 
-\begin{table}[h]
+\begin{table}[H]
 \centering
 \begin{tabular}{lcccccc}
 \toprule
@@ -277,11 +278,11 @@ In contrast, the reversed configuration with silicon in the upper slab ($Ge|Si$)
 This asymmetry suggests that silicon's role in anchoring the interfacial bonding network may contribute to model breakdown, especially when acting as a strained or undercoordinated substrate.
 The MACE model likely struggles to generalise across such distortions.
 
-\subsection*{Germanium Systems}
+\newpage \subsection*{Germanium Systems}
 
 Germanium interfaces showed weaker overall performance compared to other group IV elements:
 
-\begin{table}[h]
+\begin{table}[H]
 \centering
 \begin{tabular}{lcccccc}
 \toprule
@@ -308,9 +309,9 @@ Despite moderate rank preservation, the low Top-$10$ overlap and relatively high
 This may reflect greater structural variability or limited training representation for germanium-containing slabs.
 Nonetheless, no catastrophic inversions were observed, and the rank correlation is still usable in large-scale screening contexts.
 
-\paragraph{Tin Systems} $Sn$ systems performed significantly better across all metrics:
+\newpage \paragraph{Tin Systems} $Sn$ systems performed significantly better across all metrics:
 
-\begin{table}[h]
+\begin{table}[H]
 \centering
 \begin{tabular}{lcccccc}
 \toprule
@@ -337,7 +338,7 @@ These results indicate strong rank preservation and moderate energy agreement.
 Tin-containing interfaces appear well-represented in the MACE training set and are consistently evaluated with low error, especially in top-ranked configurations.
 MLP predictions are therefore considered reliable for Sn-based systems across most tested geometries.
 
-\subsection*{Grain Boundaries (Homostructures)}
+\newpage \subsection*{Grain Boundaries (Homostructures)}
 
 Grain boundary results were strong overall but showed species-specific variation.
 Rank correlation was consistently high across all homostructures, though errors varied by material:
@@ -349,7 +350,7 @@ Rank correlation was consistently high across all homostructures, though errors 
 
 Grain boundaries also achieved the highest Top-$10$ overlap ($mean = 9.67/10$) and substantially lower RMSE ($\approx 7.7\ \text{eV}$) compared to heterostructures.
 This likely reflects their structural symmetry and stoichiometric balance, which reduce both configurational variability and extrapolation error.
-\begin{table}[h]
+\begin{table}[H]
 \centering
 \begin{tabular}{cccccc}
 \toprule
@@ -364,11 +365,11 @@ $n$ & $\rho$ (Spearman) & $\tau$ (Kendall) & RMSE (eV) & MAE (eV) & Top-10 Overl
 \label{tab:grain_boundaries}
 \end{table}
 
-\subsection*{Perfect rank preservation}
-$Si|Ge$ alloy systems exhibited near-perfect rank alignment between DFT and MLP evaluations~\nocite{}.
+\newpage \subsection*{Perfect rank preservation}
+Perfectly intermixed alloy systems exhibited near-perfect rank alignment between DFT and MLP evaluations~\nocite{}.
 Both $\rho$ and $\tau$ approached 1.0 across the board, as seen in the table below~\nocite{}:
 
-\begin{table}[h]
+\begin{table}[H]
     \centering
     \caption{Comparison of unrelaxed formation energies between DFT and MLP for perfect alloys. Despite large absolute energy errors, rank correlation is perfect.}
     \label{tab:perfect_alloy_comparison}
@@ -394,7 +395,7 @@ This suggests that while MACE can correctly rank configurations in some silicon-
 These findings support the use of MACE as a high-throughput prefilter for ranking heterostructures prior to DFT refinement.
 Although absolute energy predictions remain unreliable in some asymmetric or strained systems, particularly when silicon occupies the lower slab, the model consistently preserves rank in chemically ordered, well-coordinated interfaces.
 
-These observations highlight the importance of geometric configuration in model reliability.
+\newpage These observations highlight the importance of geometric configuration in model reliability.
 Rather than a general failure in $Si$-rich systems, the errors appear linked to bonding environment and slab orientation, motivating future efforts to refine model generalisation through delta-learning or targeted retraining (Chapter~\ref{chapter:next_steps}).
 
 \section{Summary of Findings} \label{section:summary_of_findings}
@@ -415,10 +416,10 @@ These discrepancies appeared systematic rather than statistical, indicating that
     \caption{Spearman rank correlation for $Si$ interfaces, showing strong rank preservation even in lower-$Si$ systems, despite energy disagreement due to geometric artefacts and interfacial strain.}
 \end{figure}
 
-Carbon results were geometry-dependent: only three valid $C|Si$ structures with carbon in the lower slab were obtained, and these yielded unreliable results ($\rho = -0.5$), leading to their exclusion from analysis.
-However, when carbon appeared in the upper slab ($C|X$), rank correlation was excellent ($\rho = 0.95$), and MAE dropped below $1$ eV. Silicon systems, particularly Si|Ge, showed strong rank correlation but extremely poor energy agreement, while $Ge|Si$ demonstrated improved alignment.
+\newpage Carbon results were geometry-dependent: only three valid $C|Si$ structures with carbon in the lower slab were obtained, and these yielded unreliable results ($\rho = -0.5$), leading to their exclusion from analysis.
+However, when carbon appeared in the upper slab ($C|X$), rank correlation was excellent ($\rho = 0.95$), and MAE dropped below $1$ eV. Silicon systems, particularly $Si|Ge$, showed strong rank correlation but extremely poor energy agreement, while $Ge|Si$ demonstrated improved alignment.
 Germanium and tin systems showed robust rank preservation and strong Top-$N$ screening performance across the board.
-\begin{table}[h]
+\begin{table}[H]
     \centering
     \caption{Performance metrics for Si interfaces ($Si$ in upper slab). Lower-slab Si configurations exhibited large energy errors but still maintained reasonable rank correlation (not shown), highlighting geometry sensitivity.}
     \begin{tabular}{lccccc}
