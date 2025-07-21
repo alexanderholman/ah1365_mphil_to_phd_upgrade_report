@@ -242,7 +242,7 @@ These conventional approaches provide the groundwork for predicting critical int
 They remain indispensable despite their limitations, particularly when used in tandem~\nocite{}.
 This section surveys these methods in turn, addressing their theoretical underpinnings, practical implementations, and their relative advantages and constraints in the context of interface science~\nocite{}.
 
-A foundational step in many interface modelling workflows is lattice matching between two crystalline materials~\cite{Gerber2023-yd, Di_Liberto2022-gz}.
+\newpage A foundational step in many interface modelling workflows is lattice matching between two crystalline materials~\cite{Gerber2023-yd, Di_Liberto2022-gz}.
 This involves aligning compatible Miller planes to minimise strain and identify viable supercell geometries~\nocite{}.
 The method introduced by Zur et al.~(1984) ~\cite{ZurMcGill1984-lattice} laid the groundwork for many subsequent algorithms used in tools such as METADISE and ARTEMIS, which systematically enumerate low-strain combinations, slips, terminations, and atomic registries~\cite{artemis_paper} (see \secref{sec:lattice_mismatching}).
 These approaches assume idealised surfaces and often neglect more complex processes such as surface reconstructions, chemical interdiffusion, or local disorder~\nocite{}.
@@ -260,7 +260,7 @@ DFT is a first-principles quantum mechanical method used extensively to model th
 It provides a variational framework in which the ground-state properties of a many-electron system can be obtained from a functional of the electron density $\rho(\mathbf{r})$, rather than from the many-body wavefunction $\Psi(\mathbf{r}_1, \dots, \mathbf{r}_N)$~\nocite{}.
 This simplification, formalised through the Hohenberg-Kohn theorems, underpins the modern implementation of DFT via the Kohn-Sham approach, where the interacting system is replaced by an auxiliary system of non-interacting electrons subject to an effective potential that captures Coulomb, exchange, and correlation interactions~\cite{Leung2020-tv}.
 
-The theoretical foundation of DFT rests on two key theorems proven by Hohenberg and Kohn in 1964~\cite{Hohenberg1964-yh}:
+\newpage The theoretical foundation of DFT rests on two key theorems proven by Hohenberg and Kohn in 1964~\cite{Hohenberg1964-yh}:
 \begin{itemize}
     \item First Hohenberg-Kohn Theorem: The ground-state properties of a many-electron system are uniquely determined by its electron density $\rho(\mathbf{r})$~\nocite{}.
     This implies that the external potential $V_{\mathrm{ext}}(\mathbf{r})$ (and hence the full Hamiltonian) is a unique functional of $\rho(\mathbf{r})$~\nocite{}.
@@ -353,7 +353,7 @@ Pulay and Broyden mixing schemes are used for charge density convergence, and di
 While VASP provides accurate and robust results for interfacial modelling, it remains computationally intensive~\cite{Butler2019-ws, Leung2020-tv}.
 For extended or complex interfacial systems, this motivates the introduction of MLPs, which aim to reproduce DFT accuracy~\cite{Batzner2022-fd, Owen2024-wp}.
 
-\subsection*{Other Modelling Methods}
+\newpage \subsection*{Other Modelling Methods}
 
 In addition to DFT, other classes of atomistic modelling, such as MD, has proven valuable for exploring material interfaces, particularly when temporal evolution or thermal effects are of interest~\cite{Khot2025-hh}.
 
@@ -390,7 +390,7 @@ Furthermore, standard MD remains constrained to accessible timescales, making it
 
 Strain energy quantifies the elastic energy penalty incurred when a material is deformed from its relaxed bulk configuration to match a heterostructure's imposed lattice~\nocite{}.
 
-In interface models, this typically arises when one or both materials are forced to adopt a common in-plane lattice constant, leading to tension, compression, or shear~\nocite{}.
+\newpage In interface models, this typically arises when one or both materials are forced to adopt a common in-plane lattice constant, leading to tension, compression, or shear~\nocite{}.
 
 Assuming the interface uses a uniform lattice derived from the stack, the strain energy for each material can be computed by comparing its relaxed bulk to a strained bulk structure with the same lattice but without the other material present~\nocite{}.
 
@@ -413,12 +413,12 @@ This decomposition enables strain energy to be treated as a separate thermodynam
 
 Strain modes in crystalline materials describe the type of mechanical deformation experienced when lattice parameters are altered to accommodate interface formation~\nocite{}.
 
-At interfaces, three primary strain types can arise~\nocite{}:
+\newpage At interfaces, three primary strain types can arise~\nocite{}:
 \begin{itemize}
     \item Tensile strain occurs when a material is stretched beyond its equilibrium lattice constant ($\varepsilon > 0$). This is typical for materials with smaller relaxed lattice parameters forced to match a larger interface lattice~\nocite{}.
     \item Compressive strain occurs when a material is squashed to fit a smaller lattice constant ($\varepsilon < 0$)~\nocite{}.
     This affects materials with larger relaxed lattice constants~\nocite{}.
-    \item Shear strain involves angular distortions of the unit cell, where interaxial angles deviate from $90\degree$, or when off-diagonal components of the strain tensor become nonzero~\nocite{}.
+    \item Shear strain involves angular distortions of the unit cell, where interaxial angles deviate from $90^{\circ}$, or when off-diagonal components of the strain tensor become non-zero~\nocite{}.
     This may arise from lattice rotation, stepped surfaces, or low-symmetry interface matching~\nocite{}.
 \end{itemize}
 The total strain state can be expressed by the strain tensor $\boldsymbol{\varepsilon}$, which includes both normal and shear components~\nocite{}.
@@ -511,7 +511,7 @@ where:
     \item $n_{A,\mathrm{bulk}}$, $n_{B,\mathrm{bulk}}$ are the number of atoms in the corresponding bulk reference unit cells~\nocite{}.
     \item $n_{AB} = n_{A,AB} + n_{B,AB}$ is the total number of atoms in the structure~\nocite{}.
 \end{itemize}
-For generalised multi-species systems (e.g. $C$–$Si$–$Ge$–$Sn$), a compact form is used~\nocite{}:
+\newpage For generalised multi-species systems (e.g. $C$–$Si$–$Ge$–$Sn$), a compact form is used~\nocite{}:
 \begin{equation}
     E_\mathrm{form} = \frac{E_\mathrm{super} - \sum_i \left( n_{i,\mathrm{super}} \cdot \frac{E_{i,\mathrm{bulk}}}{n_{i,\mathrm{bulk}}} \right)}{n_\mathrm{super}},
 \end{equation}
@@ -531,7 +531,7 @@ Within DFT, the adhesion energy $E_\mathrm{adh}$ is given by~\nocite{}:
 \end{equation}
 where $A$ is the interface area, and the energies refer to fully relaxed geometries of the individual slabs and the interface supercell~\nocite{}.
 
-\newpage \subsubsection*{Electron transport}
+\subsubsection*{Electron transport}
 
 Electron transport across interfaces is more nuanced and often requires evaluation of both band alignment and carrier mobility~\cite{Schusteritsch2015-lw, Leung2020-tv}.
 Band alignment can be predicted via several approaches~\nocite{}.
@@ -623,7 +623,7 @@ As such, a hybrid strategy is often advocated; using ML to pre-screen candidate 
 ML constitutes a valuable addition to the materials modelling toolkit, particularly for screening and guiding interface prediction~\nocite{}.
 Yet its performance remains contingent on data quality and physical context, and it is best deployed in tandem with more rigorous electronic structure methods~\nocite{}.
 
-\newpage \subsection*{MLPs}
+\subsection*{MLPs}
 
 \subsubsection*{MACE}
 
@@ -638,7 +638,7 @@ For instance, in extrapolation tasks involving out-of-distribution molecular geo
 ChgNet is a neural network potential that incorporates both atomic positions and charge distributions into its prediction framework, thereby explicitly learning charge transfer phenomena~\nocite{}.
 This is particularly relevant for interfaces where electrostatics, dipole formation, and local charge accumulation significantly affect electronic properties such as band alignment~\cite{Deng2023-tg, Pitfield2025-ah}.
 
-\newpage \subsubsection*{Use in Interface Modelling}
+\subsubsection*{Use in Interface Modelling}
 
 In the context of this project, MLPs like MACE and ChgNet offer distinct but synergistic advantages~\nocite{}.
 MACE, with its speed, high accuracy, and symmetry-respecting architecture, is well-suited for structure relaxation and force prediction across multi-material junctions~\cite{Batatia2022-xz}.
@@ -651,7 +651,7 @@ Nonetheless, they too face structural limitations~\nocite{}.
 MLPs require extensive, representative training datasets, typically derived from DFT calculations, and their performance deteriorates when applied to configurations involving unseen chemistries, surface reconstructions, or high strain regimes~\cite{Batzner2022-fd, Owen2024-wp, Wang2024-tn}.
 Furthermore, many ML models lack rigorous uncertainty quantification, making it difficult to detect failure modes in out-of-distribution predictions~\cite{Leitherer2023-ew}
 
-Both DFT and ML approaches also fall short in capturing emergent interfacial phenomena such as charge transfer, interface-induced dipoles, or the formation of new interfacial phases~\nocite{}.
+\newpage Both DFT and ML approaches also fall short in capturing emergent interfacial phenomena such as charge transfer, interface-induced dipoles, or the formation of new interfacial phases~\nocite{}.
 These effects are often strongly dependent on the local atomic registry and chemical heterogeneity, and cannot be inferred from the properties of the isolated constituents alone~\cite{Butler2019-ws, Owen2024-wp}.
 Notably, simple models like Anderson's rule have been shown to systematically fail in 2D and 2D|3D heterostructures, necessitating corrections such as $\Delta E_\Gamma$ and $\Delta E_\mathrm{IF}$ that explicitly depend on the atomic-scale interface structure and electrostatics~\cite{Taylor2023-wh}.
 
@@ -777,7 +777,7 @@ To mitigate this, recent advances have introduced surrogate strategies that bypa
 InterMatch, a high-throughput framework proposed by Gerber et al., guides stacking predictions using pre-computed DFT databases and electrostatic heuristics~\cite{Gerber2023-yd}.
 Yet such frameworks often lack spatial resolution or generalisability across chemically diverse or defective systems~\cite{Gerber2023-yd, Khot2025-hh}.
 
-\newpage \subsection*{Emerging trends}
+\subsection*{Emerging trends}
 
 Recent advances in interface prediction have increasingly centred on integrating data-driven approaches with atomistic modelling frameworks~\nocite{}.
 MLPs such as MACE and E(3)-equivariant networks like NequIP are now enabling the efficient evaluation of interfacial configurations across large configurational spaces~\nocite{}.

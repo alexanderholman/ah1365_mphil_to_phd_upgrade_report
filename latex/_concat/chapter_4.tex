@@ -9,17 +9,19 @@ This motivates the need for improving rank fidelity in machine-learned models su
 To address the limitations identified in Chapter~\ref{chapter:computational_investigation}, particularly in silicon-rich systems and mixed-coordination interfaces, future work will compare three MLP training strategies:
 
 \begin{enumerate}
-    \item \textbf{Baseline MACE model} Trained primarily on bulk configurations. \\
+    \item Baseline MACE model Trained primarily on bulk configurations.
+
     It offers good rank preservation in many systems but struggles in Si-rich or strained interfaces, where structural features deviate from the training distribution.
-    \item \textbf{Interface-specific fine-tuning} Enhances the baseline model using additional interfacial configurations. \\
+    \item Interface-specific fine-tuning Enhances the baseline model using additional interfacial configurations.
+
     This aims to reduce domain mismatch and improve ranking accuracy in chemically or structurally diverse cases.
-    \item \textbf{Delta-learning correction} Learns the residual difference between MLP and DFT energy outputs ($\Delta E = E_\mathrm{DFT} - E_\mathrm{MLP}$). This approach enables low-cost calibration without full retraining, making it attractive for incremental improvements\cite{Batatia2022-xz}.
+    \newpage \item Delta-learning correction Learns the residual difference between MLP and DFT energy outputs ($\Delta E = E_\mathrm{DFT} - E_\mathrm{MLP}$). This approach enables low-cost calibration without full retraining, making it attractive for incremental improvements\cite{Batatia2022-xz}.
 \end{enumerate}
 
 To quantify the degree of rank preservation between MLP and DFT energy evaluations, we will use the following benchmarking metrics:
 
 \begin{itemize}
-    \item \textbf{Spearman's rank correlation coefficient} ($\rho$): Measures how well the global ranking of structures is preserved between methods\cite{Spearman1904-proofassociation}. \\
+    \item Spearman's rank correlation coefficient ($\rho$): Measures how well the global ranking of structures is preserved between methods\cite{Spearman1904-proofassociation}. \\
     Chapter~\ref{chapter:computational_investigation} reports near-perfect Spearman values (e.g. $\rho = 0.9954$) in many systems.
     \item Kendall's rank correlation coefficient ($\tau$): Assesses the proportion of concordant versus discordant ranking pairs. It is more sensitive to small local swaps in ranking than Spearman's $\rho$.
     \item Top-N Overlap: Evaluates how many of the top-ranked structures under DFT are also present in the MLP top-$N$ list\cite{Kendall1938-rankcorr}. \\
@@ -50,6 +52,7 @@ Performance will be assessed using statistical correlation coefficients and over
 These metrics will provide fine-grained diagnostics of rank preservation~\nocite{}.
 
 \begin{table}[h]
+\tiny
 \centering
 \caption{Summary of benchmarking metrics used to compare MLP and DFT interface predictions.}
 \label{tab:benchmark_metrics}
@@ -260,7 +263,7 @@ GNNs are especially appropriate for this task because they respect the symmetrie
 Through message-passing and feature aggregation, each atom aggregates information from its neighbors to refine local descriptors, allowing the model to learn both local bonding patterns and emergent long-range effects.
 These properties are essential for predicting interfacial phenomena, which often arise from geometric asymmetry, registry mismatch, and complex bonding environments\cite{Schutt2017-ge, Schutt2019-sz, Batzner2022-fd, Deng2023-tg}.
 
-\subsection*{Implementation Pipeline and Integration}
+\newpage \subsection*{Implementation Pipeline and Integration}
 
 From a software engineering standpoint, the MLI model will be implemented as a modular, callable component in the interface discovery pipeline.
 It will accept structured slab-pair data; either parsed directly from POSCARs or preprocessed descriptor arrays, and produce predictions of interface favourability.
